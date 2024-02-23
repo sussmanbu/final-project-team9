@@ -35,7 +35,10 @@ https://github.com/esuh29
 ## Wang, Muxi
 
 mwang85@bu.edu
-	
+https://github.com/muxwang
+
+Hi, my name is Muxi Wang and I am a bioinformatics student at BU.
+
 ## Wei, Xin
 
 ricwei@bu.edu
