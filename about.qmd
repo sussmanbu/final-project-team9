@@ -28,7 +28,9 @@ kevguo@bu.edu
 
 ## Suh, Edwin, Jiho
 
+Hello, my name is Edwin Suh. I am currently a Senior studying Data Science.
 esuh29@bu.edu
+https://github.com/esuh29
 	
 ## Wang, Muxi
 
