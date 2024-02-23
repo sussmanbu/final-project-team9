@@ -23,8 +23,9 @@ This is a website for the final project for MA[46]15 Data Science with R by Team
 The members of this team are below.
 
 ## Guo, Dingyu
-
 kevguo@bu.edu
+My name is Dingyu Guo, I'm a senior studnet major in Econ and Math. I'm from Beijing, China
+my github link: https://github.com/kevguo123
 
 ## Suh, Edwin, Jiho
 
