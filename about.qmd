@@ -19,16 +19,34 @@ about:
 
 This comes from the file `about.qmd`.
 
-This is a website for the final project for MA[46]15 Data Science with R by Team TEAMNAME.
+This is a website for the final project for MA[46]15 Data Science with R by Team 9.
 The members of this team are below.
 
-## Chang Liu
+## Guo, Dingyu
 
-Luis is a Ph.D. student in Stats and is the Teaching Fellow for the course.
+kevguo@bu.edu
 
-## Dan Sussman
+## Suh, Edwin, Jiho
 
-Dan is a professor in the Math/Stat department and is the instructor for the course.
+esuh29@bu.edu
+	
+## Wang, Muxi
+
+mwang85@bu.edu
+	
+## Wei, Xin
+
+ricwei@bu.edu
+	
+## Zhu, Yating
+
+ytzhu@bu.edu
+	
+
+
+
+
+
 
 <!-- Please leave in the information below -->
 
