@@ -1,1 +1,1 @@
-Sitemap: https://github.com/sussmanbu/final-project-team9/sitemap.xml
+Sitemap: https://sussmanbu.github.io/final-project-team9/sitemap.xml
