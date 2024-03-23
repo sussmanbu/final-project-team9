@@ -31,7 +31,8 @@ Research conducted by the U.S. Census Bureau from 2019 to 2021 indicates a wides
 The Harvard report also highlights this critical issue in the housing sector, revealing a substantial increase in rental burden across the United States using 2022 census data and draws similar concern as the study of U.S. Census Bureau. It found that an unprecedented 22.4 million households now allocate over 30% of their income to rent, with 12.1 million of U.S. households spending more than half of their income on this expense. This situation underscores the growing challenge of affordable housing, affecting renters' financial stability and quality of life.
 
 ## Reference:
-Kaysen, R. (2024, January 25). More renters than ever before are burdened by the rent they pay. The New York Times. https://www.nytimes.com/2024/01/25/realestate/rent-prices-housing.html#
+Kaysen, R. (2024, January 25). More renters than ever before are burdened by the rent they pay. The New York Times. https://www.nytimes.com/2024/01/25/realestate/rent-prices-housing.html
+
 Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to pay rent increased the most for low-income households from 2019 to 2021. Census.gov. https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html 
 
 ## Data Loading and Cleaning
