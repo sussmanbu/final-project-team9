@@ -75,6 +75,30 @@ Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to 
 | **RACED**     | Race [detailed version]       |                                                      |
 | **POVERTY**   | Poverty status                | 000 = N/A                                            |
 
+```{r}
+library(tidyverse)
+library(here)
+data_path <- here("dataset-ignore", "rent.csv")
+library(readr)
+rent_data <- read_csv(data_path,show_col_types = FALSE)
+
+codes_to_remove_gas_water <- c("0000", "0002", "9992", "9993", "9994", "9995", "9996", "9997", "9998")
+codes_to_exclude_water <- c("0000", "0002", "9993", "9995", "9997", "9998")
+
+# Clean the data
+rent_data_clean <- rent_data %>%
+  filter(RENTGRS != 0) %>%
+  filter(!is.na(RENTGRS)) %>%
+ filter(!(COSTGAS %in% codes_to_remove_gas_water), # Apply combined gas filtering
+         !(COSTWATR %in% codes_to_exclude_water), # Apply combined water filtering
+         KITCHEN != "0", # Filter out rows where Kitchen is "0"
+         ROOMS != "00", # Filter out rows where Rooms is "00"
+         !(INCTOT %in% c(1, 9999999, 9999998)), # Filter based on INCTOT criteria
+         !(FTOTINC %in% c(9999998, 9999999)), # Filter based on FTOTINC criteria
+         POVERTY != 000) # Filter based on POVERTY criteria
+write_csv(rent_data_clean, file = here("dataset", "rent_income.csv"))
+saveRDS(rent_data_clean, file = here("dataset", "rent_income.RData"))
+```
 
 
 We exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes.  Furthermore, for our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing. Given the original dataset comprises millions of samples, the exclusion of these data points still leaves us with a sufficiently large dataset for robust analysis.
