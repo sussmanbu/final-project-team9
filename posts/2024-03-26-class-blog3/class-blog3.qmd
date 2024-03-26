@@ -1,0 +1,62 @@
+---
+title: "Class blog3"
+subtitle: "Dataset and Description 2"
+author: "Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi"
+date: "2024-03-26"
+date-modified: "2024-03-26"
+draft: FALSE
+---
+## Data Equity 
+
+
+## Problems and Challenges 
+1. code convertion: the dataset we have have such variables that the specific code represnts a set of or a group of people, we need to make it clear while we analysis it.
+The following table concludes all the variables have this feature:
+
+| Variable   | Description                                | Notes                                                             |
+|------------|--------------------------------------------|-------------------------------------------------------------------|
+| **INCTOT**     | Total personal income                      | Specific codes detailed below:                                    |
+|            |                                            | -009995 = -$9,900 (1980)                                           |
+|            |                                            | -000001 = Net loss (1950)                                          |
+|            |                                            | FTOTINC-000001 = Net loss (1950)                                   |
+| **KITCHEN**    | Kitchen facilities                         | 0 = N/A                                                            |
+|            |                                            | 1 = No                                                            |
+|            |                                            | 2 = No, or shared use                                              |
+|            |                                            | 3 = Yes, shared use                                                |
+|            |                                            | 4 = Yes (shared or exclusive use)                                  |
+|            |                                            | 5 = Yes, exclusive use                                             |
+| **MARST**      | Marital status                             | 1 = Married, spouse present                                        |
+|            |                                            | 2 = Married, spouse absent                                         |
+|            |                                            | 3 = Separated                                                      |
+|            |                                            | 4 = Divorced                                                       |
+|            |                                            | 5 = Widowed                                                        |
+|            |                                            | 6 = Never married/single                                           |
+|            |                                            | 9 = Blank, missing                                                 |
+| **RACE**       | Race                                       | 1 = White                                                          |
+|            |                                            | 2 = Black/African American                                         |
+|            |                                            | 3 = American Indian or Alaska Native                               |
+|            |                                            | 4 = Chinese                                                        |
+|            |                                            | 5 = Japanese                                                       |
+|            |                                            | 6 = Other Asian or Pacific Islander                                |
+|            |                                            | 7 = Other race, nec                                                |
+|            |                                            | 8 = Two major races                                                |
+|            |                                            | 9 = Three or more major races                                      |
+| **RACED**      | Detailed Race                              | 1 = White                                                          |
+|            |                                            | 2 = Black/African American                                         |
+|            |                                            | 3 = American Indian or Alaska Native                               |
+|            |                                            | 4 = Chinese                                                        |
+|            |                                            | 5 = Japanese                                                       |
+|            |                                            | 6 = Other Asian or Pacific Islander                                |
+|            |                                            | 7 = Other race, nec                                                |
+|            |                                            | 8 = Two major races                                                |
+|            |                                            | 9 = Three or more major races                                      |
+| **POVERTY**    | Poverty levels                             | 001 = 1 percent or less of poverty threshold (including 0 or negative income) |
+|            |                                            | 501 = 501 percent or more of poverty threshold                     |
+
+
+## Data processing 
+
+
+## Research result used 
+
+
