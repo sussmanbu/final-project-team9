@@ -10,8 +10,11 @@ draft: FALSE
 
 
 ## Problems and Challenges 
-1. code convertion: the dataset we have have such variables that the specific code represnts a set of or a group of people, we need to make it clear while we analysis it.
-The following table concludes all the variables have this feature:
+1. We ran into a problem that the data wasn't available for every year. So, we decided to focus on the data from 2022 since that was complete and the most up-to-date for our needs. For comparing how things have changed or stayed the same, we used data from the other years after we draw the conclusion based on 2022 dataset and do the comparsion based on it. This way, we could still make some good guesses about trends over time, using the best information we had.
+
+2. Code Conversion: Our dataset contains variables with specific codes that represent distinct groups or sets of individuals. For clarity in our analysis, it is essential to accurately interpret these codes. 
+
+The table below summarizes all variables that possess this characteristic:
 
 | Variable   | Description                                | Notes                                                             |
 |------------|--------------------------------------------|-------------------------------------------------------------------|
@@ -55,7 +58,75 @@ The following table concludes all the variables have this feature:
 
 
 ## Data processing 
+```{r}
+# Load the cleaned data in class_blog 2
+library(dplyr)
+library(forcats)
+library(here)
+data_path <- here("dataset", "rent_income.csv")
+library(readr)
+rent_data <- read_csv(data_path,show_col_types = FALSE)
+rent_data_original <- rent_data
+```
 
+
+```{r}
+#INCTOT
+rent_data <- rent_data %>%
+  mutate(INCTOT = case_when(
+    INCTOT == "-009995" ~ "-$9,900 (1980)",
+    INCTOT == "-000001" ~ "Net loss (1950)",
+    INCTOT == "FTOTINC-000001" ~ "Net loss (1950) FTOT",
+    TRUE ~ as.character(INCTOT)
+  ))
+rent_data$INCTOT <- as.factor(rent_data$INCTOT)
+```
+```{r}
+#KITCHEN
+rent_data <- rent_data %>%
+  mutate(KITCHEN = case_when(
+    KITCHEN == "0" ~ "N/A",
+    KITCHEN == "1" ~ "No",
+    KITCHEN == "2" ~ "No, or shared use",
+    KITCHEN == "3" ~ "Yes, shared use",
+    KITCHEN == "4" ~ "Yes (shared or exclusive use)",
+    KITCHEN == "5" ~ "Yes, exclusive use",
+    TRUE ~ as.character(KITCHEN)
+  ))
+rent_data$KITCHEN <- as.factor(rent_data$KITCHEN)
+```
+```{r}
+#MARST
+rent_data <- rent_data %>%
+  mutate(MARST = case_when(
+    MARST == "1" ~ "Married, spouse present",
+    MARST == "2" ~ "Married, spouse absent",
+    MARST == "3" ~ "Separated",
+    MARST == "4" ~ "Divorced",
+    MARST == "5" ~ "Widowed",
+    MARST == "6" ~ "Never married/single",
+    MARST == "9" ~ "Blank, missing",
+    TRUE ~ as.character(MARST)
+  ))
+rent_data$MARST <- as.factor(rent_data$MARST)
+```
+```{r}
+#RACE
+rent_data <- rent_data %>%
+  mutate(RACE = case_when(
+    RACE == "1" ~ "White",
+    RACE == "2" ~ "Black/African American",
+    RACE == "3" ~ "American Indian or Alaska Native",
+    RACE == "4" ~ "Chinese",
+    RACE == "5" ~ "Japanese",
+    RACE == "6" ~ "Other Asian or Pacific Islander",
+    RACE == "7" ~ "Other race, nec",
+    RACE == "8" ~ "Two major races",
+    RACE == "9" ~ "Three or more major races",
+    TRUE ~ as.character(RACED) 
+  ))
+rent_data$RACE <- as.factor(rent_data$RACE)
+```
 
 ## Research result used 
 
