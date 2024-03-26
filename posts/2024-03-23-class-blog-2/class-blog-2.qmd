@@ -15,7 +15,7 @@ Our research aims to utilize 2022 U.S. data to determine whether income influenc
 
 The data comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).
 
-The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website because this site facilitates transformative research, education, and policy-making by aggregating data across times and places. It streamlines our analysis of changes, data merging, and comparative research.
+The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website because this website contains datasets that are large, valid and complex, containing detailed microdata. This site aims to facilitate transformative research, education, and policy-making by aggregating data across times and places, which makes the datasets on this website very appropriate for our research while streamlining our analysis of changes, data merging, and comparative research.
 
 ## Other Research on Similar Topics
 ### A U.S. Census Bureau reasearch: "Share of Income Needed to Pay Rent Increased the Most for Low-Income Households From 2019 to 2021"
@@ -80,6 +80,7 @@ Data cleanning code:
 ```{r}
 library(tidyverse)
 library(here)
+library(dplyr)
 data_path <- here("dataset-ignore", "rent.csv")
 library(readr)
 rent_data <- read_csv(data_path,show_col_types = FALSE)
