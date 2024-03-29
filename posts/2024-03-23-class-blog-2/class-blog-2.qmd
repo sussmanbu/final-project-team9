@@ -18,6 +18,7 @@ The data comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).
 The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website because this website contains datasets that are large, valid and complex, containing detailed microdata. This site aims to facilitate transformative research, education, and policy-making by aggregating data across times and places, which makes the datasets on this website very appropriate for our research while streamlining our analysis of changes, data merging, and comparative research.
 
 ## Other Research on Similar Topics
+
 ### A U.S. Census Bureau reasearch: "Share of Income Needed to Pay Rent Increased the Most for Low-Income Households From 2019 to 2021"
 
 #### From [Census.Gov](https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html)
@@ -31,52 +32,57 @@ Research conducted by the U.S. Census Bureau from 2019 to 2021 indicates a wides
 The Harvard report also highlights this critical issue in the housing sector, revealing a substantial increase in rental burden across the United States using 2022 census data and draws similar concern as the study of U.S. Census Bureau. It found that an unprecedented 22.4 million households now allocate over 30% of their income to rent, with 12.1 million of U.S. households spending more than half of their income on this expense. This situation underscores the growing challenge of affordable housing, affecting renters' financial stability and quality of life.
 
 ## Reference:
+
 Kaysen, R. (2024, January 25). More renters than ever before are burdened by the rent they pay. The New York Times. https://www.nytimes.com/2024/01/25/realestate/rent-prices-housing.html
 
-Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to pay rent increased the most for low-income households from 2019 to 2021. Census.gov. https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html 
+Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to pay rent increased the most for low-income households from 2019 to 2021. Census.gov. https://www.census.gov/library/stories/2023/03/low-income-renters-spent-larger-share-of-income-on-rent.html
 
 ## Data Loading and Cleaning
+
 ### Variables we have
-| Variable  | Description                   | Notes                                                |
-|-----------|-------------------------------|------------------------------------------------------|
-| **RENTGRS**   | Monthly gross rent            |                                                      |
-| **INCTOT**    | Total personal income         | Specific codes detailed below:                       |
-|           |                               | 0000001 = $1 or break even (2000, 2005-onward ACS and PRCS) |
-|           |                               | 9999999 = N/A                                         |
-|           |                               | 9999998 = Unknown                                     |
-| **FTOTINC**   | Total family income           | Specific codes detailed below:                       |
-|           |                               | -000001 = Net loss (1950)                            |
-|           |                               | 9999998 = Not ascertained (1950)                      |
-|           |                               | 9999999 = N/A                                         |
-| **COSTGAS**   | Annual gas cost               | Specific codes detailed below:                       |
-|           |                               | 0000 = N/A                                            |
-|           |                               | 0002 = $1 or $2 (2000)                                |
-|           |                               | 9992 = Included in electricity payment (2003-onward ACS/PRCS) |
-|           |                               | 9993 = No charge or no gas used (1990, 2000, 2003-onward ACS/PRCS) |
-|           |                               | 9994 = Gas not used (1970, 1980)                      |
-|           |                               | 9995 = Gas included in rent or no charge (1980)       |
-|           |                               | 9996 = Gas included in rent (1970)                    |
-|           |                               | 9997 = Gas included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS) |
-|           |                               | 9998 = No charge, none used, or gas included in rent, condo fee, or electricity payment (2000-2002 ACS) |
-| **COSTWATR**  | Annual water cost             | Specific codes detailed below:                       |
-|           |                               | 0000 = N/A                                           |
-|           |                               | 0002 = $1 or $2 (2000)                               |
-|           |                               | 9993 = No charge or no used (1990, 2000, 2003-onward ACS/PRCS) |
-|           |                               | 9995 = Water included in rent or no charge (1970, 1980) |
-|           |                               | 9997 = Water included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS) |
-|           |                               | 9998 = No charge, none used, or water included in rent or condo fee (2000-2002 ACS) |
-| **HHINCOME**  | Total household income        |                                                      |
-| **KITCHEN**   | Kitchen or cooking facilities | 0 = N/A                                               |
-| **ROOMS**     | Number of rooms               | 00 = N/A                                              |
-| **BEDROOMS**  | Number of bedrooms            |                                                      |
-| **NFAMS**     | Number of families in household|                                                     |
-| **AGE**       | Age                           |                                                      |
-| **MARST**     | Marital status                |                                                      |
-| **RACED**     | Race [detailed version]       |                                                      |
-| **POVERTY**   | Poverty status                | 000 = N/A                                            |
+
+| Variable     | Description                     | Notes                                                                                                   |
+|---------------|--------------------|-------------------------------------|
+| **RENTGRS**  | Monthly gross rent              |                                                                                                         |
+| **INCTOT**   | Total personal income           | Specific codes detailed below:                                                                          |
+|              |                                 | 0000001 = \$1 or break even (2000, 2005-onward ACS and PRCS)                                            |
+|              |                                 | 9999999 = N/A                                                                                           |
+|              |                                 | 9999998 = Unknown                                                                                       |
+| **FTOTINC**  | Total family income             | Specific codes detailed below:                                                                          |
+|              |                                 | -000001 = Net loss (1950)                                                                               |
+|              |                                 | 9999998 = Not ascertained (1950)                                                                        |
+|              |                                 | 9999999 = N/A                                                                                           |
+| **COSTGAS**  | Annual gas cost                 | Specific codes detailed below:                                                                          |
+|              |                                 | 0000 = N/A                                                                                              |
+|              |                                 | 0002 = \$1 or \$2 (2000)                                                                                |
+|              |                                 | 9992 = Included in electricity payment (2003-onward ACS/PRCS)                                           |
+|              |                                 | 9993 = No charge or no gas used (1990, 2000, 2003-onward ACS/PRCS)                                      |
+|              |                                 | 9994 = Gas not used (1970, 1980)                                                                        |
+|              |                                 | 9995 = Gas included in rent or no charge (1980)                                                         |
+|              |                                 | 9996 = Gas included in rent (1970)                                                                      |
+|              |                                 | 9997 = Gas included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)                          |
+|              |                                 | 9998 = No charge, none used, or gas included in rent, condo fee, or electricity payment (2000-2002 ACS) |
+| **COSTWATR** | Annual water cost               | Specific codes detailed below:                                                                          |
+|              |                                 | 0000 = N/A                                                                                              |
+|              |                                 | 0002 = \$1 or \$2 (2000)                                                                                |
+|              |                                 | 9993 = No charge or no used (1990, 2000, 2003-onward ACS/PRCS)                                          |
+|              |                                 | 9995 = Water included in rent or no charge (1970, 1980)                                                 |
+|              |                                 | 9997 = Water included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)                        |
+|              |                                 | 9998 = No charge, none used, or water included in rent or condo fee (2000-2002 ACS)                     |
+| **HHINCOME** | Total household income          |                                                                                                         |
+| **KITCHEN**  | Kitchen or cooking facilities   | 0 = N/A                                                                                                 |
+| **ROOMS**    | Number of rooms                 | 00 = N/A                                                                                                |
+| **BEDROOMS** | Number of bedrooms              |                                                                                                         |
+| **NFAMS**    | Number of families in household |                                                                                                         |
+| **AGE**      | Age                             |                                                                                                         |
+| **MARST**    | Marital status                  |                                                                                                         |
+| **RACED**    | Race \[detailed version\]       |                                                                                                         |
+| **POVERTY**  | Poverty status                  | 000 = N/A                                                                                               |
+
 The original uncleaned dataset is large, if you want to download the original dataset, please go this [link](https://drive.google.com/file/d/1HpxqRRIalJV40J96IOzvNZ8NXXeMzLMx/view?usp=sharing).
 
 Data cleanning code:
+
 ```{r}
 library(tidyverse)
 library(here)
@@ -101,8 +107,7 @@ rent_data_clean <- rent_data %>%
          POVERTY != 000) # Filter based on POVERTY criteria
 write_csv(rent_data_clean, file = here("dataset", "rent_income.csv"))
 saveRDS(rent_data_clean, file = here("dataset", "rent_income.RData"))
+saveRDS(rent_data_clean, file = here("dataset", "rent_income.rds"))
 ```
 
-We exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes.  Furthermore, for our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing. Given the original dataset comprises millions of samples, the exclusion of these data points still leaves us with the sufficiently cleaned large dataset for robust analysis.
-
-
+We exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. Furthermore, for our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing. Given the original dataset comprises millions of samples, the exclusion of these data points still leaves us with the sufficiently cleaned large dataset for robust analysis.
