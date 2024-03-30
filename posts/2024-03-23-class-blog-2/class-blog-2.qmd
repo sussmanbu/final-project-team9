@@ -8,7 +8,6 @@ draft: FALSE
 ---
 
 ## Our Topic
-
 Our research aims to utilize 2022 U.S. data to determine whether income influences Americans' rental choices and to explore the impact of race, age, and other factors.
 
 ## Source
@@ -30,6 +29,8 @@ Research conducted by the U.S. Census Bureau from 2019 to 2021 indicates a wides
 #### From [NEW YORK TIMES](https://www.nytimes.com/2024/01/25/realestate/rent-prices-housing.html#)
 
 The Harvard report also highlights this critical issue in the housing sector, revealing a substantial increase in rental burden across the United States using 2022 census data and draws similar concern as the study of U.S. Census Bureau. It found that an unprecedented 22.4 million households now allocate over 30% of their income to rent, with 12.1 million of U.S. households spending more than half of their income on this expense. This situation underscores the growing challenge of affordable housing, affecting renters' financial stability and quality of life.
+
+These studies reveal that low-income renters face a significant rent burden, guiding the creation of targeted affordable housing initiatives, for example like rental assistance programs tailored to prevent excessive rent spending, and housing policy reforms like rent control and incentives for low-income housing development. Underpinning the vital research on rent and income relationships effectively combat the housing affordability crisis. It underscores the commitment to ensuring everyone has access to safe, affordable housing and bolsters the economic resilience of low-income families by mitigating their rent-related financial pressures.
 
 ## Reference:
 
