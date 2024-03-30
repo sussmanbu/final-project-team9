@@ -4,91 +4,122 @@ description: We describe the sources of our data and the cleaning process.
 toc: true
 draft: false
 ---
-
-![](images/data-import-cheatsheet-thumbs.png)
-
-This comes from the file `data.qmd`.
-
-Your first steps in this project will be to find data to work on.
-
-I recommend trying to find data that interests you and that you are knowledgeable about. A bad example would be if you have no interest in video games but your data set is about video games. I also recommend finding data that is related to current events, social justice, and other areas that have an impact.
-
-Initially, you will study *one dataset* but later you will need to combine that data with another dataset. For this reason, I recommend finding data that has some date and/or location components. These types of data are conducive to interesting visualizations and analysis and you can also combine this data with other data that also has a date or location variable. Data from the census, weather data, economic data, are all relatively easy to combine with other data with time/location components.
-
-## What makes a good data set?
-
--   Data you are interested in and care about.
--   Data where there are a lot of potential questions that you can explore.
--   A data set that isn't completely cleaned already.
--   Multiple sources for data that you can combine.
--   Some type of time and/or location component.
-
-## Where to keep data?
-
-Below 50mb: In `dataset` folder
-
-Above 50mb: In `dataset_ignore` folder. This folder will be ignored by `git` so you'll have to manually sync these files across your team.
-
-### Sharing your data
-
-For small datasets (\<50mb), you can use the `dataset` folder that is tracked by github. Add the files just like you would any other file.
-
-If you create a folder named `data` this will cause problems.
-
-For larger datasets, you'll need to create a new folder in the project root directory named `dataset-ignore`. This will be ignored by git (based off the `.gitignore` file in the project root directory) which will help you avoid issues with Github's size limits. Your team will have to manually make sure the data files in `dataset-ignore` are synced across team members.
-
-Your [load_and_clean_data.R](/scripts/load_and_clean_data.R) file is how you will load and clean your data. Here is a an example of a very simple one.
-
-```{r}
-source(
-  "scripts/load_and_clean_data.R",
-  echo = TRUE # Use echo=FALSE or omit it to avoid code output  
-)
-```
-
-You should never use absolute paths (eg. `/Users/danielsussman/path/to/project/` or `C:\MA415\\Final_Project\`).
-
-You might consider using the `here` function from the [`here` package](https://here.r-lib.org/articles/here.html) to avoid path problems.
-
-### Load and clean data script
-
-The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them. This file might create a derivative data set that you then use for your subsequent analysis. Note that you don't need to run this script from every post/page. Instead, you can load in the results of this script, which could be plain text files or `.RData` files. In your data page you'll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes. To link to this file, you can use `[cleaning script](/scripts/load_and_clean_data.R)` wich appears as [cleaning script](/scripts/load_and_clean_data.R).
-
-------------------------------------------------------------------------
-
-## Rubric: On this page
-
-###Describe where/how to find data. 
-Our dataset comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).
+## Describe where/how to find data.
+Our dataset comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).  
 
 The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research.
+  
+  
+## Describe the different data files used and what each variable means.
 
--   You must include a link to the original data source(s). Make sure to provide attribution to those who collected the data.
--   Why was the data collected/curated? Who put it together? (This is important, if you don't know why it was collected then that might not be a good dataset to look at.
+### Table contains all the variables we have
+We have highlighted all key dependent variables (RENTGRS) and independent variables (INCTOT) in bold.
+
+| Variable | Description                       |
+|----------|-----------------------------------|
+| PROPINSR | Annual property insurance cost    |
+| **RENTGRS** | Monthly gross rent                |
+| COSTGAS   | Annual gas cost                   |
+| COSTWATR  | Annual water cost                 |
+| HHINCOME  | Total household income            |
+| KITCHEN   | Kitchen or cooking facilities     |
+| ROOMS     | Number of rooms                   |
+| BEDROOMS  | Number of bedrooms                |
+| NFAMS     | Number of families in household   |
+| AGE       | Age                               |
+| MARST     | Marital status                    |
+| RACE      | Race           |
+|**INCTOT** | Total personal income             |
+| FTOTINC   | Total family income               |
+| POVERTY   | Poverty status                    |
+
+###Summary of variables
 
 
-###Describe where/how to find data.
-There is one table contains all the variables we have, and what it means:
+    
+## Describe any cleaning you had to do for your data.
+- For our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.
 
+- Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. The following table shows the variables we processed:
 
-Here is the link to our cleaned data file: 
-```{r}
+| Variable     | Description                     | Notes                                                                                                   |
+|---------------|--------------------|-------------------------------------|
+| **INCTOT**   | Total personal income           | Specific codes detailed below:                                                                          |
+|              |                                 | 0000001 = \$1 or break even (2000, 2005-onward ACS and PRCS)                                            |
+|              |                                 | 9999999 = N/A                                                                                           |
+|              |                                 | 9999998 = Unknown                                                                                       |
+| **FTOTINC**  | Total family income             | Specific codes detailed below:                                                                          |
+|              |                                 | -000001 = Net loss (1950)                                                                               |
+|              |                                 | 9999998 = Not ascertained (1950)                                                                        |
+|              |                                 | 9999999 = N/A                                                                                           |
+| **COSTGAS**  | Annual gas cost                 | Specific codes detailed below:                                                                          |
+|              |                                 | 0000 = N/A                                                                                              |
+|              |                                 | 0002 = \$1 or \$2 (2000)                                                                                |
+|              |                                 | 9992 = Included in electricity payment (2003-onward ACS/PRCS)                                           |
+|              |                                 | 9993 = No charge or no gas used (1990, 2000, 2003-onward ACS/PRCS)                                      |
+|              |                                 | 9994 = Gas not used (1970, 1980)                                                                        |
+|              |                                 | 9995 = Gas included in rent or no charge (1980)                                                         |
+|              |                                 | 9996 = Gas included in rent (1970)                                                                      |
+|              |                                 | 9997 = Gas included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)                          |
+|              |                                 | 9998 = No charge, none used, or gas included in rent, condo fee, or electricity payment (2000-2002 ACS) |
+| **COSTWATR** | Annual water cost               | Specific codes detailed below:                                                                          |
+|              |                                 | 0000 = N/A                                                                                              |
+|              |                                 | 0002 = \$1 or \$2 (2000)                                                                                |
+|              |                                 | 9993 = No charge or no used (1990, 2000, 2003-onward ACS/PRCS)                                          |
+|              |                                 | 9995 = Water included in rent or no charge (1970, 1980)                                                 |
+|              |                                 | 9997 = Water included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)                        |
+|              |                                 | 9998 = No charge, none used, or water included in rent or condo fee (2000-2002 ACS)                     |
+| **KITCHEN**  | Kitchen or cooking facilities   | 0 = N/A                                                                                                 |
+| **ROOMS**    | Number of rooms                 | 00 = N/A                                                                                                |                                                            |
+| **POVERTY**  | Poverty status                  | 000 = N/A                                                                                               |
+* Given the vast size of the original dataset, which includes millions of records, we opted to remove these entries directly. This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.
 
-```
+- Recode certain variables. We modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values.
+The following table:
+The table below summarizes all variables that possess this characteristic:
 
+| Variable   | Description                                | Notes                                                             |
+|------------|--------------------------------------------|-------------------------------------------------------------------|
+| **INCTOT**     | Total personal income                      | Specific codes detailed below:                                    |
+|            |                                            | -009995 = -$9,900 (1980)                                           |
+|            |                                            | -000001 = Net loss (1950)                                          |
+|            |                                            | FTOTINC-000001 = Net loss (1950)                                   |
+| **KITCHEN**    | Kitchen facilities                         | 0 = N/A                                                            |
+|            |                                            | 1 = No                                                            |
+|            |                                            | 2 = No, or shared use                                              |
+|            |                                            | 3 = Yes, shared use                                                |
+|            |                                            | 4 = Yes (shared or exclusive use)                                  |
+|            |                                            | 5 = Yes, exclusive use                                             |
+| **MARST**      | Marital status                             | 1 = Married, spouse present                                        |
+|            |                                            | 2 = Married, spouse absent                                         |
+|            |                                            | 3 = Separated                                                      |
+|            |                                            | 4 = Divorced                                                       |
+|            |                                            | 5 = Widowed                                                        |
+|            |                                            | 6 = Never married/single                                           |
+|            |                                            | 9 = Blank, missing                                                 |
+| **RACE**       | Race                                       | 1 = White                                                          |
+|            |                                            | 2 = Black/African American                                         |
+|            |                                            | 3 = American Indian or Alaska Native                               |
+|            |                                            | 4 = Chinese                                                        |
+|            |                                            | 5 = Japanese                                                       |
+|            |                                            | 6 = Other Asian or Pacific Islander                                |
+|            |                                            | 7 = Other race, nec                                                |
+|            |                                            | 8 = Two major races                                                |
+|            |                                            | 9 = Three or more major races                                      |
+| **RACED**      | Detailed Race                              | 1 = White                                                          |
+|            |                                            | 2 = Black/African American                                         |
+|            |                                            | 3 = American Indian or Alaska Native                               |
+|            |                                            | 4 = Chinese                                                        |
+|            |                                            | 5 = Japanese                                                       |
+|            |                                            | 6 = Other Asian or Pacific Islander                                |
+|            |                                            | 7 = Other race, nec                                                |
+|            |                                            | 8 = Two major races                                                |
+|            |                                            | 9 = Three or more major races                                      |
+| **POVERTY**    | Poverty levels                             | 001 = 1 percent or less of poverty threshold (including 0 or negative income) |
+|            |                                            | 501 = 501 percent or more of poverty threshold                     |
 
-```
+- Here is the link to our cleaned dataset [cleaned dataset.](./dataset//rent_income.rds) 
 
+- The original data source provided datasets for specific years, not in a continuous sequence. Our primary focus was on the latest data from 2022 for initial research. However, we plan to expand our analysis by incorporating data from 2019 and other years, allowing for comparative studies across different years.
 
-### Describe the different data files used and what each variable means.
-
-    -   If you have many variables then only describe the most relevant ones and summarize the rest.
--   Describe any cleaning you had to do for your data.
-    -   You *must* include a link to your `load_and_clean_data.R` file.
-    -   Rrename variables and recode factors to make data more clear.
-    -   Also, describe any additional R packages you used outside of those covered in class.
-    -   Describe and show code for how you combined multiple data files and any cleaning that was necessary for that.
-    -   Some repetition of what you do in your `load_and_clean_data.R` file is fine and encouraged if it helps explain what you did.
--   Organization, clarity, cleanliness of the page
-    -   Make sure to remove excessive warnings, use clean easy-to-read code (without side scrolling), organize with sections, use bullets and other organization tools, etc.
-    -   This page should be self-contained.
+  
