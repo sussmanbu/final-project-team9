@@ -128,6 +128,6 @@ rent_data <- rent_data %>%
 rent_data$RACE <- as.factor(rent_data$RACE)
 ```
 
-## Research result used 
+
 
 
