@@ -154,7 +154,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#sharing-your-data" id="toc-sharing-your-data" class="nav-link" data-scroll-target="#sharing-your-data">Sharing your data</a></li>
   <li><a href="#load-and-clean-data-script" id="toc-load-and-clean-data-script" class="nav-link" data-scroll-target="#load-and-clean-data-script">Load and clean data script</a></li>
   </ul></li>
-  <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
+  <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a>
+  <ul class="collapse">
+  <li><a href="#describe-the-different-data-files-used-and-what-each-variable-means." id="toc-describe-the-different-data-files-used-and-what-each-variable-means." class="nav-link" data-scroll-target="#describe-the-different-data-files-used-and-what-each-variable-means.">Describe the different data files used and what each variable means.</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -263,17 +266,19 @@ dbl (13): RENTGRS, COSTGAS, COSTWATR, KITCHEN, ROOMS, NFAMS, AGE, MARST, RAC...
 </section>
 <section id="rubric-on-this-page" class="level2">
 <h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
-<p>You will</p>
-<ul>
-<li>Describe where/how to find data.
+<p>###Describe where/how to find data. Our dataset comes from <a href="https://usa.ipums.org/usa/index.shtml">IPUMS USA</a>.</p>
+<p>The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research.</p>
 <ul>
 <li>You must include a link to the original data source(s). Make sure to provide attribution to those who collected the data.</li>
 <li>Why was the data collected/curated? Who put it together? (This is important, if you don’t know why it was collected then that might not be a good dataset to look at.</li>
-</ul></li>
-<li>Describe the different data files used and what each variable means.
+</ul>
+<p>###Describe where/how to find data. There is one table contains all the variables we have, and what it means:</p>
+<p>Here is the link to our cleaned data file:</p>
+<p>```</p>
+<section id="describe-the-different-data-files-used-and-what-each-variable-means." class="level3">
+<h3 class="anchored" data-anchor-id="describe-the-different-data-files-used-and-what-each-variable-means.">Describe the different data files used and what each variable means.</h3>
+<pre><code>-   If you have many variables then only describe the most relevant ones and summarize the rest.</code></pre>
 <ul>
-<li>If you have many variables then only describe the most relevant ones and summarize the rest.</li>
-</ul></li>
 <li>Describe any cleaning you had to do for your data.
 <ul>
 <li>You <em>must</em> include a link to your <code>load_and_clean_data.R</code> file.</li>
@@ -290,6 +295,7 @@ dbl (13): RENTGRS, COSTGAS, COSTWATR, KITCHEN, ROOMS, NFAMS, AGE, MARST, RAC...
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

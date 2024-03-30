@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi">
+<meta name="author" content="Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi, Xin Wei">
 <meta name="dcterms.date" content="2024-03-23">
 
 <title>MA [46]15 Final Project by Team 9 - Class Blog 2</title>
@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi </p>
+               <p>Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi, Xin Wei </p>
             </div>
     </div>
       
@@ -209,6 +209,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="from-new-york-times" class="level4">
 <h4 class="anchored" data-anchor-id="from-new-york-times">From <a href="https://www.nytimes.com/2024/01/25/realestate/rent-prices-housing.html#">NEW YORK TIMES</a></h4>
 <p>The Harvard report also highlights this critical issue in the housing sector, revealing a substantial increase in rental burden across the United States using 2022 census data and draws similar concern as the study of U.S. Census Bureau. It found that an unprecedented 22.4 million households now allocate over 30% of their income to rent, with 12.1 million of U.S. households spending more than half of their income on this expense. This situation underscores the growing challenge of affordable housing, affecting renters’ financial stability and quality of life.</p>
+<p>These studies reveal that low-income renters face a significant rent burden, guiding the creation of targeted affordable housing initiatives, for example like rental assistance programs tailored to prevent excessive rent spending, and housing policy reforms like rent control and incentives for low-income housing development. Underpinning the vital research on rent and income relationships effectively combat the housing affordability crisis. It underscores the commitment to ensuring everyone has access to safe, affordable housing and bolsters the economic resilience of low-income families by mitigating their rent-related financial pressures.</p>
 </section>
 </section>
 </section>
@@ -223,9 +224,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="variables-we-have">Variables we have</h3>
 <table class="table">
 <colgroup>
-<col style="width: 11%">
-<col style="width: 32%">
-<col style="width: 56%">
+<col style="width: 20%">
+<col style="width: 27%">
+<col style="width: 51%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -452,7 +453,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>(FTOTINC <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9999998</span>, <span class="dv">9999999</span>)), <span class="co"># Filter based on FTOTINC criteria</span></span>
 <span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>         POVERTY <span class="sc">!=</span> <span class="dv">000</span>) <span class="co"># Filter based on POVERTY criteria</span></span>
 <span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.csv"</span>))</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.RData"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.RData"</span>))</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. Furthermore, for our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing. Given the original dataset comprises millions of samples, the exclusion of these data points still leaves us with the sufficiently cleaned large dataset for robust analysis.</p>
 
