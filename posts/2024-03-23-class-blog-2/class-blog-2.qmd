@@ -53,23 +53,6 @@ Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to 
 |              |                                 | -000001 = Net loss (1950)                                                                               |
 |              |                                 | 9999998 = Not ascertained (1950)                                                                        |
 |              |                                 | 9999999 = N/A                                                                                           |
-| **COSTGAS**  | Annual gas cost                 | Specific codes detailed below:                                                                          |
-|              |                                 | 0000 = N/A                                                                                              |
-|              |                                 | 0002 = \$1 or \$2 (2000)                                                                                |
-|              |                                 | 9992 = Included in electricity payment (2003-onward ACS/PRCS)                                           |
-|              |                                 | 9993 = No charge or no gas used (1990, 2000, 2003-onward ACS/PRCS)                                      |
-|              |                                 | 9994 = Gas not used (1970, 1980)                                                                        |
-|              |                                 | 9995 = Gas included in rent or no charge (1980)                                                         |
-|              |                                 | 9996 = Gas included in rent (1970)                                                                      |
-|              |                                 | 9997 = Gas included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)                          |
-|              |                                 | 9998 = No charge, none used, or gas included in rent, condo fee, or electricity payment (2000-2002 ACS) |
-| **COSTWATR** | Annual water cost               | Specific codes detailed below:                                                                          |
-|              |                                 | 0000 = N/A                                                                                              |
-|              |                                 | 0002 = \$1 or \$2 (2000)                                                                                |
-|              |                                 | 9993 = No charge or no used (1990, 2000, 2003-onward ACS/PRCS)                                          |
-|              |                                 | 9995 = Water included in rent or no charge (1970, 1980)                                                 |
-|              |                                 | 9997 = Water included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)                        |
-|              |                                 | 9998 = No charge, none used, or water included in rent or condo fee (2000-2002 ACS)                     |
 | **HHINCOME** | Total household income          |                                                                                                         |
 | **KITCHEN**  | Kitchen or cooking facilities   | 0 = N/A                                                                                                 |
 | **ROOMS**    | Number of rooms                 | 00 = N/A                                                                                                |
@@ -77,7 +60,7 @@ Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to 
 | **NFAMS**    | Number of families in household |                                                                                                         |
 | **AGE**      | Age                             |                                                                                                         |
 | **MARST**    | Marital status                  |                                                                                                         |
-| **RACED**    | Race \[detailed version\]       |                                                                                                         |
+| **EMPSTAT**    | Employment status             |     0=N/A                                                                                                    |
 | **POVERTY**  | Poverty status                  | 000 = N/A                                                                                               |
 
 The original uncleaned dataset is large, if you want to download the original dataset, please go this [link](https://drive.google.com/file/d/1HpxqRRIalJV40J96IOzvNZ8NXXeMzLMx/view?usp=sharing).
@@ -91,21 +74,22 @@ library(dplyr)
 data_path <- here("dataset-ignore", "rent.csv")
 library(readr)
 rent_data <- read_csv(data_path,show_col_types = FALSE)
-
-codes_to_remove_gas_water <- c("0000", "0002", "9992", "9993", "9994", "9995", "9996", "9997", "9998")
-codes_to_exclude_water <- c("0000", "0002", "9993", "9995", "9997", "9998")
-
+print(head(rent_data))
+```
+```{r}
 # Clean the data
-rent_data_clean <- rent_data %>%
+rent_data_clean <- rent_data  %>%
+  select(-EMPSTATD,-RACED) %>%
   filter(RENTGRS != 0) %>%
   filter(!is.na(RENTGRS)) %>%
- filter(!(COSTGAS %in% codes_to_remove_gas_water), # Apply combined gas filtering
-         !(COSTWATR %in% codes_to_exclude_water), # Apply combined water filtering
+ filter(select(-EMPSTATD),
+        select(-RACED),
          KITCHEN != "0", # Filter out rows where Kitchen is "0"
          ROOMS != "00", # Filter out rows where Rooms is "00"
-         !(INCTOT %in% c(1, 9999999, 9999998)), # Filter based on INCTOT criteria
+        !(INCTOT %in% c(1, 9999999, 9999998, -000001, "FTOTINC-000001")),# Filter based on INCTOT criteria
          !(FTOTINC %in% c(9999998, 9999999)), # Filter based on FTOTINC criteria
-         POVERTY != 000) # Filter based on POVERTY criteria
+         POVERTY != 000)# Filter based on POVERTY criteria
+         
 write_csv(rent_data_clean, file = here("dataset", "rent_income.csv"))
 saveRDS(rent_data_clean, file = here("dataset", "rent_income.RData"))
 saveRDS(rent_data_clean, file = here("dataset", "rent_income.rds"))

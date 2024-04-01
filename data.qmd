@@ -19,8 +19,7 @@ We have highlighted all key dependent variables (RENTGRS) and independent variab
 |----------|-----------------------------------|
 | PROPINSR | Annual property insurance cost    |
 | **RENTGRS** | Monthly gross rent                |
-| COSTGAS   | Annual gas cost                   |
-| COSTWATR  | Annual water cost                 |
+| EMPSTATD   | Whether the respondent was a part of the labor force or was currently unemployed.                  |
 | HHINCOME  | Total household income            |
 | KITCHEN   | Kitchen or cooking facilities     |
 | ROOMS     | Number of rooms                   |
