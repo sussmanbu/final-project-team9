@@ -493,6 +493,71 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  ))</span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>RACE <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>RACE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>RENTGRS_summary <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">Mean_RENTGRS =</span> <span class="fu">mean</span>(RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">Median_RENTGRS =</span> <span class="fu">median</span>(RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">Min_RENTGRS =</span> <span class="fu">min</span>(RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">Max_RENTGRS =</span> <span class="fu">max</span>(RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>COSTGAS_summary <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">Mean_COSTGAS =</span> <span class="fu">mean</span>(COSTGAS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">Median_COSTGAS =</span> <span class="fu">median</span>(COSTGAS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">Min_COSTGAS =</span> <span class="fu">min</span>(COSTGAS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">Max_COSTGAS =</span> <span class="fu">max</span>(COSTGAS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>COSTWATR_summary <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>     <span class="at">Mean_COSTWATR =</span> <span class="fu">mean</span>(COSTWATR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>     <span class="at">Median_COSTWATR =</span> <span class="fu">median</span>(COSTWATR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>     <span class="at">Min_COSTWATR =</span> <span class="fu">min</span>(COSTWATR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>     <span class="at">Max_COSTWATR =</span> <span class="fu">max</span>(COSTWATR, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>ROOMS_summary <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>     <span class="at">Mean_ROOMS =</span> <span class="fu">mean</span>(ROOMS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>     <span class="at">Median_ROOMS =</span> <span class="fu">median</span>(ROOMS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>     <span class="at">Min_ROOMS =</span> <span class="fu">min</span>(ROOMS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>     <span class="at">Max_ROOMS =</span> <span class="fu">max</span>(ROOMS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>AGE_summary <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>     <span class="at">Mean_AGE =</span> <span class="fu">mean</span>(AGE, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>     <span class="at">Median_AGE =</span> <span class="fu">median</span>(AGE, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>     <span class="at">Min_AGE =</span> <span class="fu">min</span>(AGE, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>     <span class="at">Max_AGE =</span> <span class="fu">max</span>(AGE, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>FTOTINC_summary <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>     <span class="at">Mean_FTOTINC =</span> <span class="fu">mean</span>(FTOTINC, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>     <span class="at">Median_FTOTINC =</span> <span class="fu">median</span>(FTOTINC, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>     <span class="at">Min_FTOTINC =</span> <span class="fu">min</span>(FTOTINC, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>     <span class="at">Max_FTOTINC =</span> <span class="fu">max</span>(FTOTINC, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>POVERTY_summary <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>     <span class="at">Mean_POVERTY =</span> <span class="fu">mean</span>(POVERTY, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>     <span class="at">Median_POVERTY =</span> <span class="fu">median</span>(POVERTY, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>     <span class="at">Min_POVERTY =</span> <span class="fu">min</span>(POVERTY, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>     <span class="at">Max_POVERTY =</span> <span class="fu">max</span>(POVERTY, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(POVERTY_summary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  Mean_POVERTY Median_POVERTY Min_POVERTY Max_POVERTY
+         &lt;dbl&gt;          &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;
+1         287.            274           1         501</code></pre>
+</div>
+</div>
 
 
 </section>
