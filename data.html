@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -148,16 +114,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#what-makes-a-good-data-set" id="toc-what-makes-a-good-data-set" class="nav-link active" data-scroll-target="#what-makes-a-good-data-set">What makes a good data set?</a></li>
-  <li><a href="#where-to-keep-data" id="toc-where-to-keep-data" class="nav-link" data-scroll-target="#where-to-keep-data">Where to keep data?</a>
+  <li><a href="#describe-wherehow-to-find-data." id="toc-describe-wherehow-to-find-data." class="nav-link active" data-scroll-target="#describe-wherehow-to-find-data.">Describe where/how to find data.</a></li>
+  <li><a href="#describe-the-different-data-files-used-and-what-each-variable-means." id="toc-describe-the-different-data-files-used-and-what-each-variable-means." class="nav-link" data-scroll-target="#describe-the-different-data-files-used-and-what-each-variable-means.">Describe the different data files used and what each variable means.</a>
   <ul class="collapse">
-  <li><a href="#sharing-your-data" id="toc-sharing-your-data" class="nav-link" data-scroll-target="#sharing-your-data">Sharing your data</a></li>
-  <li><a href="#load-and-clean-data-script" id="toc-load-and-clean-data-script" class="nav-link" data-scroll-target="#load-and-clean-data-script">Load and clean data script</a></li>
+  <li><a href="#table-contains-all-the-variables-we-have" id="toc-table-contains-all-the-variables-we-have" class="nav-link" data-scroll-target="#table-contains-all-the-variables-we-have">Table contains all the variables we have</a></li>
   </ul></li>
-  <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a>
-  <ul class="collapse">
-  <li><a href="#describe-the-different-data-files-used-and-what-each-variable-means." id="toc-describe-the-different-data-files-used-and-what-each-variable-means." class="nav-link" data-scroll-target="#describe-the-different-data-files-used-and-what-each-variable-means.">Describe the different data files used and what each variable means.</a></li>
-  </ul></li>
+  <li><a href="#describe-any-cleaning-you-had-to-do-for-your-data." id="toc-describe-any-cleaning-you-had-to-do-for-your-data." class="nav-link" data-scroll-target="#describe-any-cleaning-you-had-to-do-for-your-data.">Describe any cleaning you had to do for your data.</a></li>
   </ul>
 </nav>
     </div>
@@ -186,116 +148,461 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><img src="images/data-import-cheatsheet-thumbs.png" class="img-fluid"></p>
-<p>This comes from the file <code>data.qmd</code>.</p>
-<p>Your first steps in this project will be to find data to work on.</p>
-<p>I recommend trying to find data that interests you and that you are knowledgeable about. A bad example would be if you have no interest in video games but your data set is about video games. I also recommend finding data that is related to current events, social justice, and other areas that have an impact.</p>
-<p>Initially, you will study <em>one dataset</em> but later you will need to combine that data with another dataset. For this reason, I recommend finding data that has some date and/or location components. These types of data are conducive to interesting visualizations and analysis and you can also combine this data with other data that also has a date or location variable. Data from the census, weather data, economic data, are all relatively easy to combine with other data with time/location components.</p>
-<section id="what-makes-a-good-data-set" class="level2">
-<h2 class="anchored" data-anchor-id="what-makes-a-good-data-set">What makes a good data set?</h2>
-<ul>
-<li>Data you are interested in and care about.</li>
-<li>Data where there are a lot of potential questions that you can explore.</li>
-<li>A data set that isn’t completely cleaned already.</li>
-<li>Multiple sources for data that you can combine.</li>
-<li>Some type of time and/or location component.</li>
-</ul>
-</section>
-<section id="where-to-keep-data" class="level2">
-<h2 class="anchored" data-anchor-id="where-to-keep-data">Where to keep data?</h2>
-<p>Below 50mb: In <code>dataset</code> folder</p>
-<p>Above 50mb: In <code>dataset_ignore</code> folder. This folder will be ignored by <code>git</code> so you’ll have to manually sync these files across your team.</p>
-<section id="sharing-your-data" class="level3">
-<h3 class="anchored" data-anchor-id="sharing-your-data">Sharing your data</h3>
-<p>For small datasets (&lt;50mb), you can use the <code>dataset</code> folder that is tracked by github. Add the files just like you would any other file.</p>
-<p>If you create a folder named <code>data</code> this will cause problems.</p>
-<p>For larger datasets, you’ll need to create a new folder in the project root directory named <code>dataset-ignore</code>. This will be ignored by git (based off the <code>.gitignore</code> file in the project root directory) which will help you avoid issues with Github’s size limits. Your team will have to manually make sure the data files in <code>dataset-ignore</code> are synced across team members.</p>
-<p>Your <a href="./scripts/load_and_clean_data.R">load_and_clean_data.R</a> file is how you will load and clean your data. Here is a an example of a very simple one.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/load_and_clean_data.R"</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span> <span class="co"># Use echo=FALSE or omit it to avoid code output  </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-&gt; library(tidyverse)</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.0     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-&gt; rent_data &lt;- read_csv(here::here("dataset", "rent_income.csv"))</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 134092 Columns: 13
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-dbl (13): RENTGRS, COSTGAS, COSTWATR, KITCHEN, ROOMS, NFAMS, AGE, MARST, RAC...
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-&gt; rent_data_clean &lt;- rent_data
-
-&gt; write_csv(rent_data_clean, file = here::here("dataset", 
-+     "rent_income.csv"))
-
-&gt; save(rent_data_clean, file = here::here("dataset/rent_income.csv.RData"))</code></pre>
-</div>
-</div>
-<p>You should never use absolute paths (eg. <code>/Users/danielsussman/path/to/project/</code> or <code>C:\MA415\\Final_Project\</code>).</p>
-<p>You might consider using the <code>here</code> function from the <a href="https://here.r-lib.org/articles/here.html"><code>here</code> package</a> to avoid path problems.</p>
-</section>
-<section id="load-and-clean-data-script" class="level3">
-<h3 class="anchored" data-anchor-id="load-and-clean-data-script">Load and clean data script</h3>
-<p>The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them. This file might create a derivative data set that you then use for your subsequent analysis. Note that you don’t need to run this script from every post/page. Instead, you can load in the results of this script, which could be plain text files or <code>.RData</code> files. In your data page you’ll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes. To link to this file, you can use <code>[cleaning script](/scripts/load_and_clean_data.R)</code> wich appears as <a href="./scripts/load_and_clean_data.R">cleaning script</a>.</p>
-<hr>
-</section>
-</section>
-<section id="rubric-on-this-page" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
-<p>###Describe where/how to find data. Our dataset comes from <a href="https://usa.ipums.org/usa/index.shtml">IPUMS USA</a>.</p>
+<section id="describe-wherehow-to-find-data." class="level2">
+<h2 class="anchored" data-anchor-id="describe-wherehow-to-find-data.">Describe where/how to find data.</h2>
+<p>Our dataset comes from <a href="https://usa.ipums.org/usa/index.shtml">IPUMS USA</a>.</p>
 <p>The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research.</p>
-<ul>
-<li>You must include a link to the original data source(s). Make sure to provide attribution to those who collected the data.</li>
-<li>Why was the data collected/curated? Who put it together? (This is important, if you don’t know why it was collected then that might not be a good dataset to look at.</li>
-</ul>
-<p>###Describe where/how to find data. There is one table contains all the variables we have, and what it means:</p>
-<p>Here is the link to our cleaned data file:</p>
-<p>```</p>
-<section id="describe-the-different-data-files-used-and-what-each-variable-means." class="level3">
-<h3 class="anchored" data-anchor-id="describe-the-different-data-files-used-and-what-each-variable-means.">Describe the different data files used and what each variable means.</h3>
-<pre><code>-   If you have many variables then only describe the most relevant ones and summarize the rest.</code></pre>
-<ul>
-<li>Describe any cleaning you had to do for your data.
-<ul>
-<li>You <em>must</em> include a link to your <code>load_and_clean_data.R</code> file.</li>
-<li>Rrename variables and recode factors to make data more clear.</li>
-<li>Also, describe any additional R packages you used outside of those covered in class.</li>
-<li>Describe and show code for how you combined multiple data files and any cleaning that was necessary for that.</li>
-<li>Some repetition of what you do in your <code>load_and_clean_data.R</code> file is fine and encouraged if it helps explain what you did.</li>
-</ul></li>
-<li>Organization, clarity, cleanliness of the page
-<ul>
-<li>Make sure to remove excessive warnings, use clean easy-to-read code (without side scrolling), organize with sections, use bullets and other organization tools, etc.</li>
-<li>This page should be self-contained.</li>
-</ul></li>
-</ul>
-
-
 </section>
+<section id="describe-the-different-data-files-used-and-what-each-variable-means." class="level2">
+<h2 class="anchored" data-anchor-id="describe-the-different-data-files-used-and-what-each-variable-means.">Describe the different data files used and what each variable means.</h2>
+<section id="table-contains-all-the-variables-we-have" class="level3">
+<h3 class="anchored" data-anchor-id="table-contains-all-the-variables-we-have">Table contains all the variables we have</h3>
+<p>We have highlighted all key dependent variables (RENTGRS) and independent variables (INCTOT) in bold.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>PROPINSR</td>
+<td>Annual property insurance cost</td>
+</tr>
+<tr class="even">
+<td><strong>RENTGRS</strong></td>
+<td>Monthly gross rent</td>
+</tr>
+<tr class="odd">
+<td>COSTGAS</td>
+<td>Annual gas cost</td>
+</tr>
+<tr class="even">
+<td>COSTWATR</td>
+<td>Annual water cost</td>
+</tr>
+<tr class="odd">
+<td>HHINCOME</td>
+<td>Total household income</td>
+</tr>
+<tr class="even">
+<td>KITCHEN</td>
+<td>Kitchen or cooking facilities</td>
+</tr>
+<tr class="odd">
+<td>ROOMS</td>
+<td>Number of rooms</td>
+</tr>
+<tr class="even">
+<td>BEDROOMS</td>
+<td>Number of bedrooms</td>
+</tr>
+<tr class="odd">
+<td>NFAMS</td>
+<td>Number of families in household</td>
+</tr>
+<tr class="even">
+<td>AGE</td>
+<td>Age</td>
+</tr>
+<tr class="odd">
+<td>MARST</td>
+<td>Marital status</td>
+</tr>
+<tr class="even">
+<td>RACE</td>
+<td>Race</td>
+</tr>
+<tr class="odd">
+<td><strong>INCTOT</strong></td>
+<td>Total personal income</td>
+</tr>
+<tr class="even">
+<td>FTOTINC</td>
+<td>Total family income</td>
+</tr>
+<tr class="odd">
+<td>POVERTY</td>
+<td>Poverty status</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="describe-any-cleaning-you-had-to-do-for-your-data." class="level2">
+<h2 class="anchored" data-anchor-id="describe-any-cleaning-you-had-to-do-for-your-data.">Describe any cleaning you had to do for your data.</h2>
+<ul>
+<li><p>Here is the link to our cleaned dataset <a href="./dataset//rent_income.rds">cleaned dataset.</a></p></li>
+<li><p>For our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.</p></li>
+<li><p>Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. The following table shows the variables we processed:</p></li>
+<li><p>Given the vast size of the original dataset, which includes millions of records, we opted to remove these entries directly. This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.</p></li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 27%">
+<col style="width: 51%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>INCTOT</strong></td>
+<td>Total personal income</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>0000001 = $1 or break even (2000, 2005-onward ACS and PRCS)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9999999 = N/A</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9999998 = Unknown</td>
+</tr>
+<tr class="odd">
+<td><strong>FTOTINC</strong></td>
+<td>Total family income</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>-000001 = Net loss (1950)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9999998 = Not ascertained (1950)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9999999 = N/A</td>
+</tr>
+<tr class="odd">
+<td><strong>COSTGAS</strong></td>
+<td>Annual gas cost</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>0000 = N/A</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>0002 = $1 or $2 (2000)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9992 = Included in electricity payment (2003-onward ACS/PRCS)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9993 = No charge or no gas used (1990, 2000, 2003-onward ACS/PRCS)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9994 = Gas not used (1970, 1980)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9995 = Gas included in rent or no charge (1980)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9996 = Gas included in rent (1970)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9997 = Gas included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9998 = No charge, none used, or gas included in rent, condo fee, or electricity payment (2000-2002 ACS)</td>
+</tr>
+<tr class="odd">
+<td><strong>COSTWATR</strong></td>
+<td>Annual water cost</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>0000 = N/A</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>0002 = $1 or $2 (2000)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9993 = No charge or no used (1990, 2000, 2003-onward ACS/PRCS)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9995 = Water included in rent or no charge (1970, 1980)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9997 = Water included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9998 = No charge, none used, or water included in rent or condo fee (2000-2002 ACS)</td>
+</tr>
+<tr class="even">
+<td><strong>KITCHEN</strong></td>
+<td>Kitchen or cooking facilities</td>
+<td>0 = N/A</td>
+</tr>
+<tr class="odd">
+<td><strong>ROOMS</strong></td>
+<td>Number of rooms</td>
+<td>00 = N/A</td>
+</tr>
+<tr class="even">
+<td><strong>POVERTY</strong></td>
+<td>Poverty status</td>
+<td>000 = N/A</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Recode certain variables. We modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values. The following table: The table below summarizes all variables that possess this characteristic:</li>
+</ul>
+<table class="table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 35%">
+<col style="width: 54%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>INCTOT</strong></td>
+<td>Total personal income</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>-009995 = -$9,900 (1980)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>-000001 = Net loss (1950)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>FTOTINC-000001 = Net loss (1950)</td>
+</tr>
+<tr class="odd">
+<td><strong>KITCHEN</strong></td>
+<td>Kitchen facilities</td>
+<td>0 = N/A</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>1 = No</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>2 = No, or shared use</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>3 = Yes, shared use</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>4 = Yes (shared or exclusive use)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>5 = Yes, exclusive use</td>
+</tr>
+<tr class="odd">
+<td><strong>MARST</strong></td>
+<td>Marital status</td>
+<td>1 = Married, spouse present</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>2 = Married, spouse absent</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>3 = Separated</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>4 = Divorced</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>5 = Widowed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>6 = Never married/single</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9 = Blank, missing</td>
+</tr>
+<tr class="even">
+<td><strong>RACE</strong></td>
+<td>Race</td>
+<td>1 = White</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>2 = Black/African American</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>3 = American Indian or Alaska Native</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>4 = Chinese</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>5 = Japanese</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>6 = Other Asian or Pacific Islander</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>7 = Other race, nec</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>8 = Two major races</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9 = Three or more major races</td>
+</tr>
+<tr class="odd">
+<td><strong>RACED</strong></td>
+<td>Detailed Race</td>
+<td>1 = White</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>2 = Black/African American</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>3 = American Indian or Alaska Native</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>4 = Chinese</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>5 = Japanese</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>6 = Other Asian or Pacific Islander</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>7 = Other race, nec</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>8 = Two major races</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9 = Three or more major races</td>
+</tr>
+<tr class="even">
+<td><strong>POVERTY</strong></td>
+<td>Poverty levels</td>
+<td>001 = 1 percent or less of poverty threshold (including 0 or negative income)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>501 = 501 percent or more of poverty threshold</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The original data source provided datasets for specific years, not in a continuous sequence. Our primary focus was on the latest data from 2022 for initial research. However, we plan to expand our analysis by incorporating data from 2019 and other years, allowing for comparative studies across different years.</li>
+</ul>
+
+
 </section>
 
 </main> <!-- /main -->
