@@ -134,7 +134,7 @@ rent_data <- rent_data %>%
 rent_data$RACE <- as.factor(rent_data$RACE)
 ```
 
-## Summary of our variables 
+## Summary of numerical variables we have right now 
 ```{r}
 library(dplyr)
 library(tidyr)
