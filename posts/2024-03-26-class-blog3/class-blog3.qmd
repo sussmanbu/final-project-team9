@@ -128,6 +128,69 @@ rent_data <- rent_data %>%
 rent_data$RACE <- as.factor(rent_data$RACE)
 ```
 
+
+```{r}
+RENTGRS_summary <- rent_data %>%
+  summarize(
+     Mean_RENTGRS = mean(RENTGRS, na.rm = TRUE),
+     Median_RENTGRS = median(RENTGRS, na.rm = TRUE),
+     Min_RENTGRS = min(RENTGRS, na.rm = TRUE),
+     Max_RENTGRS = max(RENTGRS, na.rm = TRUE)
+  )
+
+COSTGAS_summary <- rent_data %>%
+  summarize(
+     Mean_COSTGAS = mean(COSTGAS, na.rm = TRUE),
+     Median_COSTGAS = median(COSTGAS, na.rm = TRUE),
+     Min_COSTGAS = min(COSTGAS, na.rm = TRUE),
+     Max_COSTGAS = max(COSTGAS, na.rm = TRUE)
+  )
+
+COSTWATR_summary <- rent_data %>%
+  summarize(
+     Mean_COSTWATR = mean(COSTWATR, na.rm = TRUE),
+     Median_COSTWATR = median(COSTWATR, na.rm = TRUE),
+     Min_COSTWATR = min(COSTWATR, na.rm = TRUE),
+     Max_COSTWATR = max(COSTWATR, na.rm = TRUE)
+  )
+
+ROOMS_summary <- rent_data %>%
+  summarize(
+     Mean_ROOMS = mean(ROOMS, na.rm = TRUE),
+     Median_ROOMS = median(ROOMS, na.rm = TRUE),
+     Min_ROOMS = min(ROOMS, na.rm = TRUE),
+     Max_ROOMS = max(ROOMS, na.rm = TRUE)
+  )
+
+AGE_summary <- rent_data %>%
+  summarize(
+     Mean_AGE = mean(AGE, na.rm = TRUE),
+     Median_AGE = median(AGE, na.rm = TRUE),
+     Min_AGE = min(AGE, na.rm = TRUE),
+     Max_AGE = max(AGE, na.rm = TRUE)
+  )
+
+FTOTINC_summary <- rent_data %>%
+  summarize(
+     Mean_FTOTINC = mean(FTOTINC, na.rm = TRUE),
+     Median_FTOTINC = median(FTOTINC, na.rm = TRUE),
+     Min_FTOTINC = min(FTOTINC, na.rm = TRUE),
+     Max_FTOTINC = max(FTOTINC, na.rm = TRUE)
+  )
+
+POVERTY_summary <- rent_data %>%
+  summarize(
+     Mean_POVERTY = mean(POVERTY, na.rm = TRUE),
+     Median_POVERTY = median(POVERTY, na.rm = TRUE),
+     Min_POVERTY = min(POVERTY, na.rm = TRUE),
+     Max_POVERTY = max(POVERTY, na.rm = TRUE)
+  )
+
+print(POVERTY_summary)
+```
+
+
+
 ## Research result used 
 
 
