@@ -1,7 +1,7 @@
 ---
 title: "Class Blog 2"
 subtitle: "Dataset and Description "
-author: "Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi, Xin Wei"
+author: "Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi"
 date: "2024-03-23"
 date-modified: "2024-03-23"
 draft: FALSE

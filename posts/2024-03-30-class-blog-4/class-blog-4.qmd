@@ -9,6 +9,16 @@ draft: FALSE
 ```{r}
 library(broom)
 library(dplyr)
-
+library(here)
+data_path <- here("dataset", "rent_income.csv")
+library(readr)
+rent_data <- read_csv(data_path,show_col_types = FALSE) 
+model <- lm(RENTGRS ~ INCTOT, data = rent_data)
+model_tidy <- tidy(model)
+print(model_tidy)
+model_augmented <- augment(model)
+print(model_augmented)
+model_glance <- glance(model)
+print(model_glance)
 ```
 
