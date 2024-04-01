@@ -61,6 +61,7 @@ Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to 
 | **AGE**      | Age                             |                                                                                                         |
 | **MARST**    | Marital status                  |                                                                                                         |
 | **EMPSTAT**    | Employment status             |     0=N/A                                                                                                    |
+|              |                                 | 9 = Unknown/Illegible                                                                              |
 | **POVERTY**  | Poverty status                  | 000 = N/A                                                                                               |
 
 The original uncleaned dataset is large, if you want to download the original dataset, please go this [link](https://drive.google.com/file/d/1HpxqRRIalJV40J96IOzvNZ8NXXeMzLMx/view?usp=sharing).
@@ -96,7 +97,6 @@ rent_data_clean <- rent_data %>%
 
 write_csv(rent_data_clean, file = here("dataset", "rent_income_clean.csv"))
 saveRDS(rent_data_clean, file = here("dataset", "rent_income_clean.RData"))
-
 saveRDS(rent_data_clean, file = here("dataset", "rent_income.rds"))
 ```
 
