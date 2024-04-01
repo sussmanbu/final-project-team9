@@ -123,6 +123,10 @@ The table below summarizes all variables that possess this characteristic:
 ```{r}
 library(dplyr)
 library(tidyr)
+library(here)
+data_path <- here("dataset", "rent_income.csv")
+library(readr)
+rent_data <- read_csv(data_path,show_col_types = FALSE)
 summary_data <- rent_data %>%
   summarise(across(c(RENTGRS, COSTGAS, COSTWATR, ROOMS, AGE, FTOTINC, POVERTY),
                    list(Mean = ~mean(.x),
