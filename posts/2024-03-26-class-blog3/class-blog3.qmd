@@ -64,6 +64,9 @@ The table below summarizes all variables that possess this characteristic:
 |            |                                            | 9 = Three or more major races                                      |
 | **POVERTY**    | Poverty levels                             | 001 = 1 percent or less of poverty threshold (including 0 or negative income) |
 |            |                                            | 501 = 501 percent or more of poverty threshold                     |
+| **EMPSTAT**       | Employment status                                      | 1 = Employed                                                        |
+|            |                                            | 2 = Unemployed                                        |
+|            |                                            | 3 = Not in labor force 
 
 
 ## Data processing 
@@ -144,7 +147,7 @@ rent_data$EMPSTAT <- as.factor(rent_data$EMPSTAT)
 library(dplyr)
 library(tidyr)
 summary_data <- rent_data %>%
-  summarise(across(c(RENTGRS, COSTGAS, COSTWATR, ROOMS, AGE, FTOTINC, POVERTY,INCTOT),
+  summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT),
                    list(Mean = ~mean(.x),
                         Median = ~median(.x),
                         Min = ~min(.x),

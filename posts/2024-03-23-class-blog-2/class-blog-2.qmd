@@ -78,20 +78,25 @@ print(head(rent_data))
 ```
 ```{r}
 # Clean the data
-rent_data_clean <- rent_data  %>%
-  select(-EMPSTATD,-RACED) %>%
-  filter(RENTGRS != 0) %>%
-  filter(!is.na(RENTGRS)) %>%
- filter(select(-EMPSTATD),
-        select(-RACED),
+library(tidyverse)
+library(here)
+data_path <- here("dataset", "rent_income.csv")
+rent_data <- read_csv(data_path, show_col_types = FALSE)
+print(rent_data)
+
+rent_data_clean <- rent_data %>%
+  filter(RENTGRS != 0,
+         !is.na(RENTGRS),
+         EMPSTAT != "0" & EMPSTAT != "9",
          KITCHEN != "0", # Filter out rows where Kitchen is "0"
          ROOMS != "00", # Filter out rows where Rooms is "00"
-        !(INCTOT %in% c(1, 9999999, 9999998, -000001, "FTOTINC-000001")),# Filter based on INCTOT criteria
-         !(FTOTINC %in% c(9999998, 9999999)), # Filter based on FTOTINC criteria
-         POVERTY != 000)# Filter based on POVERTY criteria
-         
-write_csv(rent_data_clean, file = here("dataset", "rent_income.csv"))
-saveRDS(rent_data_clean, file = here("dataset", "rent_income.RData"))
+         !INCTOT %in% c(1, 9999999, 9999998, -000001, "FTOTINC-000001"), # Filter based on INCTOT criteria
+         !FTOTINC %in% c(9999998, 9999999), # Filter based on FTOTINC criteria
+         POVERTY != 000) # Filter based on POVERTY criteria
+
+write_csv(rent_data_clean, file = here("dataset", "rent_income_clean.csv"))
+saveRDS(rent_data_clean, file = here("dataset", "rent_income_clean.RData"))
+
 saveRDS(rent_data_clean, file = here("dataset", "rent_income.rds"))
 ```
 
