@@ -282,129 +282,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>9999999 = N/A</td>
 </tr>
 <tr class="even">
-<td><strong>COSTGAS</strong></td>
-<td>Annual gas cost</td>
-<td>Specific codes detailed below:</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>0000 = N/A</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>0002 = $1 or $2 (2000)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9992 = Included in electricity payment (2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9993 = No charge or no gas used (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9994 = Gas not used (1970, 1980)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9995 = Gas included in rent or no charge (1980)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9996 = Gas included in rent (1970)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9997 = Gas included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9998 = No charge, none used, or gas included in rent, condo fee, or electricity payment (2000-2002 ACS)</td>
-</tr>
-<tr class="even">
-<td><strong>COSTWATR</strong></td>
-<td>Annual water cost</td>
-<td>Specific codes detailed below:</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>0000 = N/A</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>0002 = $1 or $2 (2000)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9993 = No charge or no used (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9995 = Water included in rent or no charge (1970, 1980)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9997 = Water included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9998 = No charge, none used, or water included in rent or condo fee (2000-2002 ACS)</td>
-</tr>
-<tr class="odd">
 <td><strong>HHINCOME</strong></td>
 <td>Total household income</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>KITCHEN</strong></td>
 <td>Kitchen or cooking facilities</td>
 <td>0 = N/A</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>ROOMS</strong></td>
 <td>Number of rooms</td>
 <td>00 = N/A</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>BEDROOMS</strong></td>
 <td>Number of bedrooms</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>NFAMS</strong></td>
 <td>Number of families in household</td>
 <td></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>AGE</strong></td>
 <td>Age</td>
 <td></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>MARST</strong></td>
 <td>Marital status</td>
 <td></td>
 </tr>
+<tr class="odd">
+<td><strong>EMPSTAT</strong></td>
+<td>Employment status</td>
+<td>0=N/A</td>
+</tr>
 <tr class="even">
-<td><strong>RACED</strong></td>
-<td>Race [detailed version]</td>
 <td></td>
+<td></td>
+<td>9 = Unknown/Illegible</td>
 </tr>
 <tr class="odd">
 <td><strong>POVERTY</strong></td>
@@ -431,30 +351,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /Users/yating/Desktop/final project</code></pre>
+<pre><code>here() starts at /Users/yating/Desktop/Final Project MA415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"dataset-ignore"</span>, <span class="st">"rent.csv"</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>rent_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_path,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>codes_to_remove_gas_water <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0000"</span>, <span class="st">"0002"</span>, <span class="st">"9992"</span>, <span class="st">"9993"</span>, <span class="st">"9994"</span>, <span class="st">"9995"</span>, <span class="st">"9996"</span>, <span class="st">"9997"</span>, <span class="st">"9998"</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>codes_to_exclude_water <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"0000"</span>, <span class="st">"0002"</span>, <span class="st">"9993"</span>, <span class="st">"9995"</span>, <span class="st">"9997"</span>, <span class="st">"9998"</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the data</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>rent_data_clean <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RENTGRS <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(RENTGRS)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(<span class="sc">!</span>(COSTGAS <span class="sc">%in%</span> codes_to_remove_gas_water), <span class="co"># Apply combined gas filtering</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>(COSTWATR <span class="sc">%in%</span> codes_to_exclude_water), <span class="co"># Apply combined water filtering</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>         KITCHEN <span class="sc">!=</span> <span class="st">"0"</span>, <span class="co"># Filter out rows where Kitchen is "0"</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>         ROOMS <span class="sc">!=</span> <span class="st">"00"</span>, <span class="co"># Filter out rows where Rooms is "00"</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>(INCTOT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">9999999</span>, <span class="dv">9999998</span>)), <span class="co"># Filter based on INCTOT criteria</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>(FTOTINC <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9999998</span>, <span class="dv">9999999</span>)), <span class="co"># Filter based on FTOTINC criteria</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>         POVERTY <span class="sc">!=</span> <span class="dv">000</span>) <span class="co"># Filter based on POVERTY criteria</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.csv"</span>))</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.RData"</span>))</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(rent_data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 13
+  RENTGRS KITCHEN ROOMS NFAMS   AGE MARST  RACE RACED EMPSTAT EMPSTATD INCTOT
+    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;
+1       0       0     0     1    85     5     8   801       3       30  18800
+2       0       0     0     1    51     5     1   100       3       30  12500
+3       0       0     0     1    36     6     2   200       3       30  16400
+4       0       0     0     1    74     6     2   200       3       30   8600
+5       0       0     0     1    49     4     1   100       3       30   5000
+6       0       0     0     1    31     6     2   200       3       30  12300
+# ℹ 2 more variables: FTOTINC &lt;dbl&gt;, POVERTY &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean the data</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.csv"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>rent_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_path, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(rent_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 599,745 × 11
+   RENTGRS KITCHEN ROOMS NFAMS   AGE MARST  RACE EMPSTAT INCTOT FTOTINC POVERTY
+     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1     913       4     5     1    24     1     1       1  46000   66000     351
+ 2     913       4     5     1    22     1     1       1  20000   66000     351
+ 3     630       4     4     1    27     6     1       1  15000   15000     103
+ 4     300       4     4     1    59     6     1       3  16400   16400     112
+ 5    1430       4     4     1    37     6     2       1  88000   88000     501
+ 6    1652       4     4     3    21     6     1       1   6000    6000      41
+ 7    1652       4     4     3    21     6     1       1   3000    3000      21
+ 8    1652       4     4     3    20     6     1       3   4000    4000      27
+ 9    2113       4     6     1    35     2     1       1 120300  120300     501
+10     813       4     6     1    30     1     1       3      0   32000     170
+# ℹ 599,735 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>rent_data_clean <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(RENTGRS <span class="sc">!=</span> <span class="dv">0</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span><span class="fu">is.na</span>(RENTGRS),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>         EMPSTAT <span class="sc">!=</span> <span class="st">"0"</span> <span class="sc">&amp;</span> EMPSTAT <span class="sc">!=</span> <span class="st">"9"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>         KITCHEN <span class="sc">!=</span> <span class="st">"0"</span>, <span class="co"># Filter out rows where Kitchen is "0"</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>         ROOMS <span class="sc">!=</span> <span class="st">"00"</span>, <span class="co"># Filter out rows where Rooms is "00"</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>INCTOT <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">9999999</span>, <span class="dv">9999998</span>, <span class="sc">-</span><span class="dv">000001</span>, <span class="st">"FTOTINC-000001"</span>), <span class="co"># Filter based on INCTOT criteria</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>FTOTINC <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">9999998</span>, <span class="dv">9999999</span>), <span class="co"># Filter based on FTOTINC criteria</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>         POVERTY <span class="sc">!=</span> <span class="dv">000</span>) <span class="co"># Filter based on POVERTY criteria</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income_clean.csv"</span>))</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income_clean.RData"</span>))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(rent_data_clean, <span class="at">file =</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. Furthermore, for our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing. Given the original dataset comprises millions of samples, the exclusion of these data points still leaves us with the sufficiently cleaned large dataset for robust analysis.</p>
 

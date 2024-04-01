@@ -204,20 +204,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>PROPINSR</td>
-<td>Annual property insurance cost</td>
-</tr>
-<tr class="even">
 <td><strong>RENTGRS</strong></td>
 <td>Monthly gross rent</td>
 </tr>
-<tr class="odd">
-<td>COSTGAS</td>
-<td>Annual gas cost</td>
-</tr>
 <tr class="even">
-<td>COSTWATR</td>
-<td>Annual water cost</td>
+<td>EMPSTAT</td>
+<td>Employment status</td>
 </tr>
 <tr class="odd">
 <td>HHINCOME</td>
@@ -330,104 +322,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>9999999 = N/A</td>
 </tr>
 <tr class="odd">
-<td><strong>COSTGAS</strong></td>
-<td>Annual gas cost</td>
-<td>Specific codes detailed below:</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>0000 = N/A</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>0002 = $1 or $2 (2000)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9992 = Included in electricity payment (2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9993 = No charge or no gas used (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9994 = Gas not used (1970, 1980)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9995 = Gas included in rent or no charge (1980)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9996 = Gas included in rent (1970)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9997 = Gas included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9998 = No charge, none used, or gas included in rent, condo fee, or electricity payment (2000-2002 ACS)</td>
-</tr>
-<tr class="odd">
-<td><strong>COSTWATR</strong></td>
-<td>Annual water cost</td>
-<td>Specific codes detailed below:</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>0000 = N/A</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>0002 = $1 or $2 (2000)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9993 = No charge or no used (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9995 = Water included in rent or no charge (1970, 1980)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>9997 = Water included in rent or in condo fee (1990, 2000, 2003-onward ACS/PRCS)</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9998 = No charge, none used, or water included in rent or condo fee (2000-2002 ACS)</td>
-</tr>
-<tr class="even">
 <td><strong>KITCHEN</strong></td>
 <td>Kitchen or cooking facilities</td>
 <td>0 = N/A</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><strong>ROOMS</strong></td>
 <td>Number of rooms</td>
 <td>00 = N/A</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><strong>POVERTY</strong></td>
 <td>Poverty status</td>
 <td>000 = N/A</td>
+</tr>
+<tr class="even">
+<td><strong>EMPSTATA</strong></td>
+<td>Employment status</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>0 = Missing value</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>9 = Unknown/Illegible</td>
 </tr>
 </tbody>
 </table>
@@ -579,59 +501,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>9 = Three or more major races</td>
 </tr>
 <tr class="odd">
-<td><strong>RACED</strong></td>
-<td>Detailed Race</td>
-<td>1 = White</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>2 = Black/African American</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>3 = American Indian or Alaska Native</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>4 = Chinese</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>5 = Japanese</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>6 = Other Asian or Pacific Islander</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>7 = Other race, nec</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>8 = Two major races</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9 = Three or more major races</td>
-</tr>
-<tr class="even">
 <td><strong>POVERTY</strong></td>
 <td>Poverty levels</td>
 <td>001 = 1 percent or less of poverty threshold (including 0 or negative income)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td></td>
 <td>501 = 501 percent or more of poverty threshold</td>
+</tr>
+<tr class="odd">
+<td><strong>EMPSTAT</strong></td>
+<td>Employment status</td>
+<td>1 = Employed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>2 = Unemployed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>3 = Not in the labor force</td>
 </tr>
 </tbody>
 </table>
@@ -659,13 +551,13 @@ Attaching package: 'dplyr'</code></pre>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>here() starts at /Users/yating/Desktop/final project</code></pre>
+<pre><code>here() starts at /Users/yating/Desktop/Final Project MA415</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income.csv"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>rent_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_path,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(RENTGRS, COSTGAS, COSTWATR, ROOMS, AGE, FTOTINC, POVERTY),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY, NFAMS),</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">Mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x),</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Median =</span> <span class="sc">~</span><span class="fu">median</span>(.x),</span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Min =</span> <span class="sc">~</span><span class="fu">min</span>(.x),</span>
@@ -679,16 +571,15 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(variable, Mean, Median, Min, Max)</span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 5
+<pre><code># A tibble: 6 × 5
   variable     Mean Median   Min     Max
   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-1 RENTGRS   1830.     1608     8   10700
-2 COSTGAS   1168.      840    48    9990
-3 COSTWATR   642.      440     4    6100
-4 ROOMS        5.55      5     1      20
-5 AGE         41.1      38    15      95
-6 FTOTINC  83541.    62400 -7300 1902300
-7 POVERTY    287.      274     1     501</code></pre>
+1 RENTGRS   1577.     1390     4   10700
+2 ROOMS        4.68      4     1      20
+3 AGE         42.6      38    16      97
+4 FTOTINC  71601.    52000 -9300 1966000
+5 POVERTY    269.      249     1     501
+6 NFAMS        1.21      1     1      20</code></pre>
 </div>
 </div>
 

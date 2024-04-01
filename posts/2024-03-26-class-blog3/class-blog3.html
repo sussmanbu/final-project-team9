@@ -189,6 +189,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="data-equity" class="level2">
 <h2 class="anchored" data-anchor-id="data-equity">Data Equity</h2>
 <p>Incorporating the principles of data equity into our research on income and rent using IPUMS data enhances the study’s integrity and societal impact. The application of these principles ensures that our analysis is not only methodologically sound but also ethically conscious, especially in the context of housing affordability and equity.</p>
+<p>How we present our data could influence: Racial equity (data involves race) Poverty equity (data involves poverty definition)</p>
 <section id="transparency" class="level4">
 <h4 class="anchored" data-anchor-id="transparency">Transparency</h4>
 <p>Our research openly discusses the dataset’s scope, including its geographic coverage and time period, provided by the IPUMS. We detail how the data were collected, acknowledging the reliance on census and ACS, which might include self-reported income or housing expenses. This acknowledgment is crucial as it allows us to identify potential biases or inaccuracies inherent in the data. For example, certain groups may be underrepresented due to the methodology of data collection, or there might be inaccuracies in self-reported income or expenses that could affect the analysis of income and rent relationships.Furthermore, by being transparent about the dataset’s limitations, we aim to preemptively address any questions regarding the reliability and applicability of our findings.</p>
@@ -196,6 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="beneficence-and-addressing-disparities" class="level4">
 <h4 class="anchored" data-anchor-id="beneficence-and-addressing-disparities">Beneficence and Addressing Disparities</h4>
 <p>Our research utilizes the IPUMS data and aim to figure out disparities in housing affordability, particularly among marginalized communities. Through our analysis, we aim to identify areas, race groups where rent-to-income ratios are disproportionately different, where housing conditions may be inadequate, or where residents face significant utility burdens. Our intention is not merely to document disparities but to inform policy and intervention strategies that could alleviate such inequities. This means conducting our analysis with a clear purpose: to contribute to the discourse on housing equity and affordability in a way that is constructive and aimed at bringing about positive change. This approach aligns with the ethical obligation to use data in ways that can positively impact communities, especially those that are most vulnerable.</p>
+<p>What aspect our data and analysis could possibly influence: Possible social context for housing data Possible policy context for housing data Policy decisions on the housing market Financial decisions among different housing owner/buyers Public perception of proverty</p>
 </section>
 </section>
 <section id="problems-and-challenges" class="level2">
@@ -350,59 +352,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>9 = Three or more major races</td>
 </tr>
 <tr class="odd">
-<td><strong>RACED</strong></td>
-<td>Detailed Race</td>
-<td>1 = White</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>2 = Black/African American</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>3 = American Indian or Alaska Native</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>4 = Chinese</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>5 = Japanese</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>6 = Other Asian or Pacific Islander</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>7 = Other race, nec</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>8 = Two major races</td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>9 = Three or more major races</td>
-</tr>
-<tr class="even">
 <td><strong>POVERTY</strong></td>
 <td>Poverty levels</td>
 <td>001 = 1 percent or less of poverty threshold (including 0 or negative income)</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td></td>
 <td></td>
 <td>501 = 501 percent or more of poverty threshold</td>
+</tr>
+<tr class="odd">
+<td><strong>EMPSTAT</strong></td>
+<td>Employment status</td>
+<td>1 = Employed</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>2 = Unemployed</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>3 = Not in labor force</td>
 </tr>
 </tbody>
 </table>
@@ -437,61 +409,62 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>rent_data_original <span class="ot">&lt;-</span> rent_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#INCTOT</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#KITCHEN</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>rent_data <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">INCTOT =</span> <span class="fu">case_when</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    INCTOT <span class="sc">==</span> <span class="st">"-009995"</span> <span class="sc">~</span> <span class="st">"-$9,900 (1980)"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    INCTOT <span class="sc">==</span> <span class="st">"-000001"</span> <span class="sc">~</span> <span class="st">"Net loss (1950)"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    INCTOT <span class="sc">==</span> <span class="st">"FTOTINC-000001"</span> <span class="sc">~</span> <span class="st">"Net loss (1950) FTOT"</span>,</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(INCTOT)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>INCTOT <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>INCTOT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">KITCHEN =</span> <span class="fu">case_when</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"0"</span> <span class="sc">~</span> <span class="st">"N/A"</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"No"</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"No, or shared use"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"Yes, shared use"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"4"</span> <span class="sc">~</span> <span class="st">"Yes (shared or exclusive use)"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Yes, exclusive use"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(KITCHEN)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>KITCHEN <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>KITCHEN)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#KITCHEN</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#MARST</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>rent_data <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">KITCHEN =</span> <span class="fu">case_when</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"0"</span> <span class="sc">~</span> <span class="st">"N/A"</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"No"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"No, or shared use"</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"Yes, shared use"</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"4"</span> <span class="sc">~</span> <span class="st">"Yes (shared or exclusive use)"</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    KITCHEN <span class="sc">==</span> <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Yes, exclusive use"</span>,</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(KITCHEN)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>KITCHEN <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>KITCHEN)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MARST =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Married, spouse present"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Married, spouse absent"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"Separated"</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"4"</span> <span class="sc">~</span> <span class="st">"Divorced"</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Widowed"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"6"</span> <span class="sc">~</span> <span class="st">"Never married/single"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"9"</span> <span class="sc">~</span> <span class="st">"Blank, missing"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(MARST)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>MARST <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>MARST)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#MARST</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RACE</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>rent_data <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">MARST =</span> <span class="fu">case_when</span>(</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Married, spouse present"</span>,</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Married, spouse absent"</span>,</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"Separated"</span>,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"4"</span> <span class="sc">~</span> <span class="st">"Divorced"</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Widowed"</span>,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"6"</span> <span class="sc">~</span> <span class="st">"Never married/single"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    MARST <span class="sc">==</span> <span class="st">"9"</span> <span class="sc">~</span> <span class="st">"Blank, missing"</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(MARST)</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>MARST <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>MARST)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RACE =</span> <span class="fu">case_when</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"White"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Black/African American"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"American Indian or Alaska Native"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"4"</span> <span class="sc">~</span> <span class="st">"Chinese"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Japanese"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"6"</span> <span class="sc">~</span> <span class="st">"Other Asian or Pacific Islander"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"7"</span> <span class="sc">~</span> <span class="st">"Other race, nec"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"8"</span> <span class="sc">~</span> <span class="st">"Two major races"</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"9"</span> <span class="sc">~</span> <span class="st">"Three or more major races"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(RACE) </span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>RACE <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>RACE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RACE</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#EMPSTAT</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>rent_data <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">RACE =</span> <span class="fu">case_when</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"White"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Black/African American"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"American Indian or Alaska Native"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"4"</span> <span class="sc">~</span> <span class="st">"Chinese"</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"5"</span> <span class="sc">~</span> <span class="st">"Japanese"</span>,</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"6"</span> <span class="sc">~</span> <span class="st">"Other Asian or Pacific Islander"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"7"</span> <span class="sc">~</span> <span class="st">"Other race, nec"</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"8"</span> <span class="sc">~</span> <span class="st">"Two major races"</span>,</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    RACE <span class="sc">==</span> <span class="st">"9"</span> <span class="sc">~</span> <span class="st">"Three or more major races"</span>,</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(RACED) </span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>RACE <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>RACE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">EMPSTAT =</span> <span class="fu">case_when</span>(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    EMPSTAT <span class="sc">==</span> <span class="st">"1"</span> <span class="sc">~</span> <span class="st">"Employed"</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    EMPSTAT <span class="sc">==</span> <span class="st">"2"</span> <span class="sc">~</span> <span class="st">"Unemployed"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    EMPSTAT <span class="sc">==</span> <span class="st">"3"</span> <span class="sc">~</span> <span class="st">"Not in labour force"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="fu">as.character</span>(EMPSTAT) <span class="co"># This line should return the existing value of EMPSTAT</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>rent_data<span class="sc">$</span>EMPSTAT <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(rent_data<span class="sc">$</span>EMPSTAT)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="summary-of-numerical-variables-we-have-right-now" class="level2">
@@ -500,7 +473,7 @@ Attaching package: 'dplyr'</code></pre>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> rent_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(RENTGRS, COSTGAS, COSTWATR, ROOMS, AGE, FTOTINC, POVERTY),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT),</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">Mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x),</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Median =</span> <span class="sc">~</span><span class="fu">median</span>(.x),</span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Min =</span> <span class="sc">~</span><span class="fu">min</span>(.x),</span>
@@ -514,16 +487,15 @@ Attaching package: 'dplyr'</code></pre>
 <span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(variable, Mean, Median, Min, Max)</span>
 <span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(summary_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 5
+<pre><code># A tibble: 6 × 5
   variable     Mean Median   Min     Max
   &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
-1 RENTGRS   1830.     1608     8   10700
-2 COSTGAS   1168.      840    48    9990
-3 COSTWATR   642.      440     4    6100
-4 ROOMS        5.55      5     1      20
-5 AGE         41.1      38    15      95
-6 FTOTINC  83541.    62400 -7300 1902300
-7 POVERTY    287.      274     1     501</code></pre>
+1 RENTGRS   1577.     1390     4   10700
+2 ROOMS        4.68      4     1      20
+3 AGE         42.6      38    16      97
+4 FTOTINC  71601.    52000 -9300 1966000
+5 POVERTY    269.      249     1     501
+6 INCTOT   38071.    25000 -9380 1423200</code></pre>
 </div>
 </div>
 
