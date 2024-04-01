@@ -35,6 +35,8 @@ We have highlighted all key dependent variables (RENTGRS) and independent variab
 ## Describe any cleaning you had to do for your data.
 - Here is the link to our cleaned dataset [cleaned dataset.](./dataset//rent_income.rds)
 
+- The code for cleaning and recoding the datasets, please see class blog 2 and 3. 
+
 - For our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.
 
 - Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. The following table shows the variables we processed:
