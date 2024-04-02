@@ -235,9 +235,9 @@ p <- ggplot(rent_data_clean, aes(x = POVERTY)) +
        y = "Frequency")
 
 p <- p + 
-  geom_vline(xintercept = 1, color = "blue", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = 1, color = "blue", linetype = "dashed", linewidth = 1) +
   annotate("text", x = 1, y = Inf, label = "001 = ≤1% of poverty threshold", angle = 90, hjust = 1, vjust = 2, color = "blue") +
-  geom_vline(xintercept = 501, color = "red", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = 501, color = "red", linetype = "dashed", linewidth = 1) +
   annotate("text", x = 501, y = Inf, label = "501 = ≥501% of poverty threshold", angle = 90, hjust = 1, vjust = 2, color = "red")
 
 print(p)
