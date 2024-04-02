@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Here we provide a detailed analysis using more sophisticated statistics techniques.">
 
-<title>MA [46]15 Final Project by Team 9 - MA [46]15 Final Project</title>
+<title>MA [46]15 Final Project by Team 9 - Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +65,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -61,38 +94,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-subtitle','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -123,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Big Picture</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./analysis.html" rel="" target="">
+    <a class="nav-link active" href="./analysis.html" rel="" target="" aria-current="page">
  <span class="menu-text">Analysis</span></a>
   </li>  
   <li class="nav-item">
@@ -138,285 +140,142 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">MA [46]15 Final Project</h1>
-                      </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#example-of-loading-data" id="toc-example-of-loading-data" class="nav-link active" data-scroll-target="#example-of-loading-data">Example of loading data</a></li>
+  <li><a href="#note-on-attribution" id="toc-note-on-attribution" class="nav-link" data-scroll-target="#note-on-attribution">Note on Attribution</a></li>
+  <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analysis</h1>
+</div>
+
+<div>
+  <div class="description">
+    Here we provide a detailed analysis using more sophisticated statistics techniques.
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
 
+    
+  
+    
+  </div>
+  
 
-<p><img src="images/data-science.png" class="img-fluid"></p>
-<section id="final-project-due-may-7-2024-at-1159pm." class="level1">
-<h1>Final Project due May 7, 2024 at 11:59pm.</h1>
+</header>
 
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg" class="img-fluid"></p>
+<p>This comes from the file <code>analysis.qmd</code>.</p>
+<p>We describe here our detailed data analysis. This page will provide an overview of what questions you addressed, illustrations of relevant aspects of the data with tables and figures, and a statistical model that attempts to answer part of the question. You’ll also reflect on next steps and further analysis.</p>
+<p>The audience for this page is someone like your class mates, so you can expect that they have some level of statistical and quantitative sophistication and understand ideas like linear and logistic regression, coefficients, confidence intervals, overfitting, etc.</p>
+<p>While the exact number of figures and tables will vary and depend on your analysis, you should target around 5 to 6. An overly long analysis could lead to losing points. If you want you can link back to your blog posts or create separate pages with more details.</p>
+<p>The style of this paper should aim to be that of an academic paper. I don’t expect this to be of publication quality but you should keep that aim in mind. Avoid using “we” too frequently, for example “We also found that …”. Describe your methodology and your findings but don’t describe your whole process.</p>
+<section id="example-of-loading-data" class="level3">
+<h3 class="anchored" data-anchor-id="example-of-loading-data">Example of loading data</h3>
+<p>The code below shows an example of loading the loan refusal data set (which you should delete at some point).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.0     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">getwd</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/Users/yating/Desktop/Final Project MA415"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/loan_refusal_clean.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 20 Columns: 5
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr (1): bank
+dbl (4): min, white, himin, hiwhite
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/loan_refusal.RData"</span>))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data"            "has_annotations" "loan_data_clean"</code></pre>
+</div>
+</div>
+</section>
+<section id="note-on-attribution" class="level2">
+<h2 class="anchored" data-anchor-id="note-on-attribution">Note on Attribution</h2>
+<p>In general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.</p>
+<p>If you are directly quoting from a source, please make that clear. You can show quotes using <code>&gt;</code> like this</p>
+<pre><code>&gt; To be or not to be.</code></pre>
+<blockquote class="blockquote">
+<p>To be or not to be.</p>
+</blockquote>
+<hr>
+</section>
+<section id="rubric-on-this-page" class="level2">
+<h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
+<p>You will</p>
+<ul>
+<li>Introduce what motivates your Data Analysis (DA)
+<ul>
+<li>Which variables and relationships are you most interested in?</li>
+<li>What questions are you interested in answering?</li>
+<li>Provide context for the rest of the page. This will include figures/tables that illustrate aspects of the data of your question.</li>
+</ul></li>
+<li>Modeling and Inference
+<ul>
+<li>The page will include some kind of formal statistical model. This could be a linear regression, logistic regression, or another modeling framework.</li>
+<li>Explain the ideas and techniques you used to choose the predictors for your model. (Think about including interaction terms and other transformations of your variables.)</li>
+<li>Describe the results of your modelling and make sure to give a sense of the uncertainty in your estimates and conclusions.</li>
+</ul></li>
+<li>Explain the flaws and limitations of your analysis
+<ul>
+<li>Are there some assumptions that you needed to make that might not hold? Is there other data that would help to answer your questions?</li>
+</ul></li>
+<li>Clarity Figures
+<ul>
+<li>Are your figures/tables/results easy to read, informative, without problems like overplotting, hard-to-read labels, etc?</li>
+<li>Each figure should provide a key insight. Too many figures or other data summaries can detract from this. (While not a hard limit, around 5 total figures is probably a good target.)</li>
+<li>Default <code>lm</code> output and plots are typically not acceptable.</li>
+</ul></li>
+<li>Clarity of Explanations
+<ul>
+<li>How well do you explain each figure/result?</li>
+<li>Do you provide interpretations that suggest further analysis or explanations for observed phenomenon?</li>
+</ul></li>
+<li>Organization and cleanliness.
+<ul>
+<li>Make sure to remove excessive warnings, hide most or all code, organize with sections or multiple pages, use bullets, etc.</li>
+<li>This page should be self-contained, i.e.&nbsp;provide a description of the relevant data.</li>
+</ul></li>
+</ul>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1711771200000" data-listing-file-modified-sort="1712000683108" data-listing-date-modified-sort="1711771200000" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/2024-03-30-class-blog-4/class-blog-4.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2024-03-30-class-blog-4/class-blog-4.html">
-<h3 class="no-anchor listing-title">
-Class blog 4
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2024-03-30-class-blog-4/class-blog-4.html">
-<div class="listing-date">
-Mar 30, 2024
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1711425600000" data-listing-file-modified-sort="1712098289612" data-listing-date-modified-sort="1711425600000" data-listing-reading-time-sort="27">
-<div class="thumbnail">
-<p><a href="./posts/2024-03-26-class-blog3/class-blog3.html"> <p class="card-img-top"><img src="posts/2024-03-26-class-blog3/class-blog3_files/figure-html/unnamed-chunk-7-1.png"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2024-03-26-class-blog3/class-blog3.html">
-<h3 class="no-anchor listing-title">
-Class blog3
-</h3>
-<div class="listing-subtitle">
-Dataset and Description 2
-</div>
-<div class="listing-description">
-Incorporating the principles of data equity into our research on income and rent using IPUMS data enhances the study’s integrity and societal impact. The…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2024-03-26-class-blog3/class-blog3.html">
-<div class="listing-date">
-Mar 26, 2024
-</div>
-<div class="listing-author">
-Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1711166400000" data-listing-file-modified-sort="1712001427671" data-listing-date-modified-sort="1711166400000" data-listing-reading-time-sort="16">
-<div class="thumbnail">
-<p><a href="./posts/2024-03-23-class-blog-2/class-blog-2.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2024-03-23-class-blog-2/class-blog-2.html">
-<h3 class="no-anchor listing-title">
-Class Blog 2
-</h3>
-<div class="listing-subtitle">
-Dataset and Description
-</div>
-<div class="listing-description">
-Our research aims to utilize 2022 U.S. data to determine whether income influences Americans’ rental choices and to explore the impact of race, age, and other factors.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2024-03-23-class-blog-2/class-blog-2.html">
-<div class="listing-date">
-Mar 23, 2024
-</div>
-<div class="listing-author">
-Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1709442000000" data-listing-file-modified-sort="1712000683107" data-listing-date-modified-sort="1709442000000" data-listing-reading-time-sort="4">
-<div class="thumbnail">
-<p><a href="./posts/2024-03-03-class-blog-1/class-blog-1.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2024-03-03-class-blog-1/class-blog-1.html">
-<h3 class="no-anchor listing-title">
-Class Blog 1
-</h3>
-<div class="listing-subtitle">
-Three datasets proposed for final project
-</div>
-<div class="listing-description">
-The primary objective is to explore the relationship between rent and personal total income. And other questions can also be answered like: Are there…
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2024-03-03-class-blog-1/class-blog-1.html">
-<div class="listing-date">
-Mar 3, 2024
-</div>
-<div class="listing-author">
-Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="" data-listing-date-sort="1708923600000" data-listing-file-modified-sort="1712000683107" data-listing-date-modified-sort="1708923600000" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/2023-12-20-examples/examples.html"> <p class="card-img-top"><img src="posts/2023-12-20-examples/examples_files/figure-html/unnamed-chunk-1-1.png"  class="thumbnail-image card-img"/></p> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-12-20-examples/examples.html">
-<h3 class="no-anchor listing-title">
-Examples
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-
-</div>
-<a href="./posts/2023-12-20-examples/examples.html">
-<div class="listing-description">
-Here are some examples of changing the size of a figure.
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-12-20-examples/examples.html">
-<div class="listing-date">
-Feb 26, 2024
-</div>
-<div class="listing-author">
-Daniel Sussman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="" data-listing-date-sort="1708664400000" data-listing-file-modified-sort="1712000683107" data-listing-date-modified-sort="1708664400000" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./posts/2023-10-15-getting-started/getting-started.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-10-15-getting-started/getting-started.html">
-<h3 class="no-anchor listing-title">
-Getting started
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-
-</div>
-<a href="./posts/2023-10-15-getting-started/getting-started.html">
-<div class="listing-description">
-<p>Directions to set up your website and create your first post.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-10-15-getting-started/getting-started.html">
-<div class="listing-date">
-Feb 23, 2024
-</div>
-<div class="listing-author">
-Daniel Sussman
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1708664400000" data-listing-file-modified-sort="1712000683107" data-listing-date-modified-sort="1708664400000" data-listing-reading-time-sort="1">
-<div class="thumbnail">
-<p><a href="./posts/2024-02-23-first-post-/first-post-.html"> <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2024-02-23-first-post-/first-post-.html">
-<h3 class="no-anchor listing-title">
-first post
-</h3>
-<div class="listing-subtitle">
-first post
-</div>
-<div class="listing-description">
-<p>Hello, world</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2024-02-23-first-post-/first-post-.html">
-<div class="listing-date">
-Feb 23, 2024
-</div>
-<div class="listing-author">
-Yating Zhu, Suh Edwin Jiho, Guo Xinyu, Wang Muxi,
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="" data-listing-date-sort="1708491600000" data-listing-file-modified-sort="1712000683106" data-listing-date-modified-sort="1708491600000" data-listing-reading-time-sort="3">
-<div class="thumbnail">
-<p><a href="./posts/2023-10-13-first-team-meeting/first-team-meeting.html"> <img src="./posts/2023-10-13-first-team-meeting/a-business-team-giving-fist-bump-in-agreement.jpg" class="thumbnail-image"> </a></p>
-</div>
-<div class="body">
-<a href="./posts/2023-10-13-first-team-meeting/first-team-meeting.html">
-<h3 class="no-anchor listing-title">
-First Team Meeting
-</h3>
-<div class="listing-subtitle">
-
-</div>
-</a>
-<div class="listing-categories">
-
-</div>
-<a href="./posts/2023-10-13-first-team-meeting/first-team-meeting.html">
-<div class="listing-description">
-<p>This post details the steps you’ll take for your first team meeting.</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./posts/2023-10-13-first-team-meeting/first-team-meeting.html">
-<div class="listing-date">
-Feb 21, 2024
-</div>
-<div class="listing-author">
-Daniel Sussman
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
