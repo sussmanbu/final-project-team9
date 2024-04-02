@@ -5,7 +5,11 @@ toc: true
 draft: false
 ---
 ## Describe where/how to find data.
-Our dataset comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).  
+Our dataset comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml). 
+
+Reference:
+Steven Ruggles, Sarah Flood, Matthew Sobek, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Renae Rodgers, and Megan Schouweiler. IPUMS USA: Version 15.0 [dataset]. Minneapolis, MN: IPUMS, 2024.
+https://doi.org/10.18128/D010.V15.0
 
 The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research.
   
