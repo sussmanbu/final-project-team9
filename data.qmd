@@ -14,22 +14,19 @@ The original data of this website came from censuses as well as the American Com
 
 ### Table contains all the variables we have
 We have highlighted all key dependent variables (RENTGRS) and independent variables (INCTOT) in bold.
-
-| Variable | Description                       |
-|----------|-----------------------------------|
-| **RENTGRS** | Monthly gross rent                |
-| EMPSTAT   | Employment status                 |
-| HHINCOME  | Total household income            |
-| KITCHEN   | Kitchen or cooking facilities     |
-| ROOMS     | Number of rooms                   |
-| BEDROOMS  | Number of bedrooms                |
-| NFAMS     | Number of families in household   |
-| AGE       | Age                               |
-| MARST     | Marital status                    |
-| RACE      | Race           |
-|**INCTOT** | Total personal income             |
-| FTOTINC   | Total family income               |
-| POVERTY   | Poverty status                    |
+| Variable | Description                           |
+|----------|---------------------------------------|
+| **RENTGRS**  | Monthly gross rent                    |
+| KITCHEN  | Kitchen or cooking facilities         |
+| ROOMS    | Number of rooms                       |
+| NFAMS    | Number of families in household       |
+| AGE      | Age                                   |
+| MARST    | Marital status                        |
+| RACE     | Race                                  |
+| EMPSTAT  | Employment status                     |
+| **INCTOT**   | Total personal income                 |
+| FTOTINC  | Total family income                   |
+| POVERTY  | Poverty status                        |
 
 
 ## Describe any cleaning you had to do for your data.
@@ -103,12 +100,13 @@ The table below summarizes all variables that possess this characteristic:
 ```{r}
 library(dplyr)
 library(tidyr)
+library(forcats)
 library(here)
-data_path <- here("dataset", "rent_income.csv")
 library(readr)
-rent_data <- read_csv(data_path,show_col_types = FALSE)
-summary_data <- rent_data %>%
-  summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY, NFAMS),
+data_path <- here("dataset", "rent_income_clean.csv")
+rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
+summary_data <- rent_data_clean %>%
+  summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
                    list(Mean = ~mean(.x),
                         Median = ~median(.x),
                         Min = ~min(.x),
@@ -122,6 +120,5 @@ summary_data <- rent_data %>%
   select(variable, Mean, Median, Min, Max)
 print(summary_data)
 ```
-
-
+More detailed inforamtion about each variable, please go this [link](./posts/2024-03-26-class-blog3)
   
