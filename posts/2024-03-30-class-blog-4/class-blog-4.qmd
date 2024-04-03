@@ -11,15 +11,74 @@ draft: FALSE
 library(broom)
 library(dplyr)
 library(here)
-data_path <- here("dataset", "rent_income.csv")
+data_path <- here("dataset", "rent_income_clean.csv")
 library(readr)
-rent_data <- read_csv(data_path,show_col_types = FALSE) 
-model <- lm(RENTGRS ~ INCTOT, data = rent_data)
-model_tidy <- tidy(model)
-print(model_tidy)
-model_augmented <- augment(model)
-print(model_augmented)
-model_glance <- glance(model)
-print(model_glance)
+rent_clean_data <- read_csv(data_path,show_col_types = FALSE) 
 ```
+```{r}
+library(ggplot2)
+```
+```{r}
+ggplot(rent_clean_data, aes(x = INCTOT, y = RENTGRS)) +
+  geom_point(color = 'blue', alpha = 0.5)
+```
+
+This diagram indicates that the spread of residuals appears to increase as the fitted values increase. This pattern indicates heteroscedasticity, which means that the variability of the residuals is not constant across levels of the predictor variable. In an ideal scenario, you'd want to see a consistent spread of residuals across all levels of fitted values, suggesting homoscedasticity.
+
+
+## solution: take log? --- logistic regression, add control variables, see change
+distribution rent inocme 
+```{r}
+ggplot(rent_data_clean, aes(x = log(RENTGRS))) +
+  geom_histogram(binwidth = 0.1, fill = "blue", color = "black") + # Adjust binwidth as needed
+  labs(title = "Distribution of Log of Monthly Gross Rent",
+       x = "Log of Monthly Gross Rent",
+       y = "Count") +
+  theme_minimal()
+```
+# distribution after log income 
+```{r}
+ggplot(rent_clean_data, aes(x = log(INCTOT))) +
+  geom_histogram(bins = 100, fill = "blue", color = "black") + # Keep the number of bins or adjust as needed
+  theme_minimal() +
+  labs(title = "Histogram of Log of Total Personal Income",
+       x = "Log of Total Personal Income",
+       y = "Frequency")
+```
+
+## log-log regression model 
+```{r}
+library(broom)
+new_data <- rent_clean_data[rent_clean_data$INCTOT > 0, ] 
+RENTGRS=new_data$RENTGRS
+INCTOT= new_data$INCTOT
+new_rent=log(RENTGRS)
+new_income=log(INCTOT)
+
+
+enhanced_model <- lm(new_rent ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + POVERTY, data = new_data)
+enhanced_model_tidy <- tidy(enhanced_model)
+print(enhanced_model_tidy)
+
+enhanced_model_augmented <- augment(enhanced_model)
+print(enhanced_model_augmented)
+
+enhanced_model_glance <- glance(enhanced_model)
+print(enhanced_model_glance)
+```
+residual plot 
+```{r}
+ggplot(enhanced_model_augmented, aes(x = .fitted, y = .resid)) +
+  geom_point(alpha=0.1) +  
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
+  labs(x = "Fitted Values", y = "Residuals", title = "Residual vs. Fitted Plot") +
+  theme_minimal()
+
+ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + geom_point(alpha =.01) + scale_x_log10() + scale_y_log10()
+ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+```
+
+
+
+
 
