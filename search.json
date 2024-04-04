@@ -4,14 +4,14 @@
     "href": "data.html",
     "title": "Data",
     "section": "",
-    "text": "Our dataset comes from IPUMS USA.\nThe original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research."
+    "text": "Our dataset comes from IPUMS USA.\nReference: Steven Ruggles, Sarah Flood, Matthew Sobek, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Renae Rodgers, and Megan Schouweiler. IPUMS USA: Version 15.0 [dataset]. Minneapolis, MN: IPUMS, 2024. https://doi.org/10.18128/D010.V15.0\nThe original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research."
   },
   {
     "objectID": "data.html#describe-wherehow-to-find-data.",
     "href": "data.html#describe-wherehow-to-find-data.",
     "title": "Data",
     "section": "",
-    "text": "Our dataset comes from IPUMS USA.\nThe original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research."
+    "text": "Our dataset comes from IPUMS USA.\nReference: Steven Ruggles, Sarah Flood, Matthew Sobek, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Renae Rodgers, and Megan Schouweiler. IPUMS USA: Version 15.0 [dataset]. Minneapolis, MN: IPUMS, 2024. https://doi.org/10.18128/D010.V15.0\nThe original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research."
   },
   {
     "objectID": "data.html#describe-the-different-data-files-used-and-what-each-variable-means.",
