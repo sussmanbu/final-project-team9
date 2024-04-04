@@ -64,10 +64,8 @@ Peter J. Mateyka and Jayne Yoo. (2023b, February 28). Share of income needed to 
 |              |                                 | 9 = Unknown/Illegible                                                                              |
 | **POVERTY**  | Poverty status                  | 000 = N/A                                                                                               |
 
-The original uncleaned dataset is large, if you want to download the original dataset, please go this [link](https://drive.google.com/file/d/1HpxqRRIalJV40J96IOzvNZ8NXXeMzLMx/view?usp=sharing).
 
 Data cleanning code:
-
 ```{r}
 library(tidyverse)
 library(here)
