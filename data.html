@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -527,71 +493,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="summary-of-numerical-variables-we-have-right-now" class="level3">
 <h3 class="anchored" data-anchor-id="summary-of-numerical-variables-we-have-right-now">Summary of numerical variables we have right now</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">message =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forcats)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income_clean.csv"</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>rent_data_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_path,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"rent_income_clean.csv"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>rent_data_clean <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_path,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>summary_data <span class="ot">&lt;-</span> rent_data_clean <span class="sc">%&gt;%</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">list</span>(<span class="at">Mean =</span> <span class="sc">~</span><span class="fu">mean</span>(.x),</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Median =</span> <span class="sc">~</span><span class="fu">median</span>(.x),</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Min =</span> <span class="sc">~</span><span class="fu">min</span>(.x),</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                        <span class="at">Max =</span> <span class="sc">~</span><span class="fu">max</span>(.x)),</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>                   <span class="at">.names =</span> <span class="st">"{.col}_{.fn}"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(),</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"summary"</span>,</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(summary, <span class="at">into =</span> <span class="fu">c</span>(<span class="st">"variable"</span>, <span class="st">"statistic"</span>), <span class="at">sep =</span> <span class="st">"_"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"statistic"</span>, <span class="at">values_from =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(variable, Mean, Median, Min, Max)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>summary_data <span class="sc">%&gt;%</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Summary Statistics for Rental Data"</span>,</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Includes mean, median, minimum, and maximum values"</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">variable =</span> <span class="st">"Variable"</span>,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean =</span> <span class="st">"Mean"</span>,</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">Median =</span> <span class="st">"Median"</span>,</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">Min =</span> <span class="st">"Minimum"</span>,</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">Max =</span> <span class="st">"Maximum"</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Mean"</span>, <span class="st">"Median"</span>, <span class="st">"Min"</span>, <span class="st">"Max"</span>),</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_options</span>(</span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">table.font.size =</span> <span class="fu">px</span>(<span class="dv">12</span>),</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.title.font.size =</span> <span class="fu">px</span>(<span class="dv">16</span>),</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">heading.subtitle.font.size =</span> <span class="fu">px</span>(<span class="dv">12</span>)</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="gsrftsshba" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#gsrftsshba table {
+<div id="vacbogstdr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vacbogstdr table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gsrftsshba thead, #gsrftsshba tbody, #gsrftsshba tfoot, #gsrftsshba tr, #gsrftsshba td, #gsrftsshba th {
+#vacbogstdr thead, #vacbogstdr tbody, #vacbogstdr tfoot, #vacbogstdr tr, #vacbogstdr td, #vacbogstdr th {
   border-style: none;
 }
 
-#gsrftsshba p {
+#vacbogstdr p {
   margin: 0;
   padding: 0;
 }
 
-#gsrftsshba .gt_table {
+#vacbogstdr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -617,12 +537,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-left-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_caption {
+#vacbogstdr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gsrftsshba .gt_title {
+#vacbogstdr .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -634,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-width: 0;
 }
 
-#gsrftsshba .gt_subtitle {
+#vacbogstdr .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -646,7 +566,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-width: 0;
 }
 
-#gsrftsshba .gt_heading {
+#vacbogstdr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -658,13 +578,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_bottom_border {
+#vacbogstdr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_col_headings {
+#vacbogstdr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -679,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_col_heading {
+#vacbogstdr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -699,7 +619,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#gsrftsshba .gt_column_spanner_outer {
+#vacbogstdr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -711,15 +631,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 4px;
 }
 
-#gsrftsshba .gt_column_spanner_outer:first-child {
+#vacbogstdr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gsrftsshba .gt_column_spanner_outer:last-child {
+#vacbogstdr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gsrftsshba .gt_column_spanner {
+#vacbogstdr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -731,11 +651,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   width: 100%;
 }
 
-#gsrftsshba .gt_spanner_row {
+#vacbogstdr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gsrftsshba .gt_group_heading {
+#vacbogstdr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -761,7 +681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   text-align: left;
 }
 
-#gsrftsshba .gt_empty_group_heading {
+#vacbogstdr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -776,15 +696,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: middle;
 }
 
-#gsrftsshba .gt_from_md > :first-child {
+#vacbogstdr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gsrftsshba .gt_from_md > :last-child {
+#vacbogstdr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gsrftsshba .gt_row {
+#vacbogstdr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -803,7 +723,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   overflow-x: hidden;
 }
 
-#gsrftsshba .gt_stub {
+#vacbogstdr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -816,7 +736,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gsrftsshba .gt_stub_row_group {
+#vacbogstdr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -830,15 +750,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   vertical-align: top;
 }
 
-#gsrftsshba .gt_row_group_first td {
+#vacbogstdr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gsrftsshba .gt_row_group_first th {
+#vacbogstdr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gsrftsshba .gt_summary_row {
+#vacbogstdr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -848,16 +768,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gsrftsshba .gt_first_summary_row {
+#vacbogstdr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_first_summary_row.thick {
+#vacbogstdr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gsrftsshba .gt_last_summary_row {
+#vacbogstdr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -867,7 +787,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_grand_summary_row {
+#vacbogstdr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -877,7 +797,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gsrftsshba .gt_first_grand_summary_row {
+#vacbogstdr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -887,7 +807,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-top-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_last_grand_summary_row_top {
+#vacbogstdr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -897,11 +817,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_striped {
+#vacbogstdr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gsrftsshba .gt_table_body {
+#vacbogstdr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -910,7 +830,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-bottom-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_footnotes {
+#vacbogstdr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -924,7 +844,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_footnote {
+#vacbogstdr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -933,7 +853,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gsrftsshba .gt_sourcenotes {
+#vacbogstdr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -947,7 +867,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   border-right-color: #D3D3D3;
 }
 
-#gsrftsshba .gt_sourcenote {
+#vacbogstdr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -955,63 +875,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   padding-right: 5px;
 }
 
-#gsrftsshba .gt_left {
+#vacbogstdr .gt_left {
   text-align: left;
 }
 
-#gsrftsshba .gt_center {
+#vacbogstdr .gt_center {
   text-align: center;
 }
 
-#gsrftsshba .gt_right {
+#vacbogstdr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gsrftsshba .gt_font_normal {
+#vacbogstdr .gt_font_normal {
   font-weight: normal;
 }
 
-#gsrftsshba .gt_font_bold {
+#vacbogstdr .gt_font_bold {
   font-weight: bold;
 }
 
-#gsrftsshba .gt_font_italic {
+#vacbogstdr .gt_font_italic {
   font-style: italic;
 }
 
-#gsrftsshba .gt_super {
+#vacbogstdr .gt_super {
   font-size: 65%;
 }
 
-#gsrftsshba .gt_footnote_marks {
+#vacbogstdr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gsrftsshba .gt_asterisk {
+#vacbogstdr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gsrftsshba .gt_indent_1 {
+#vacbogstdr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gsrftsshba .gt_indent_2 {
+#vacbogstdr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gsrftsshba .gt_indent_3 {
+#vacbogstdr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gsrftsshba .gt_indent_4 {
+#vacbogstdr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gsrftsshba .gt_indent_5 {
+#vacbogstdr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
