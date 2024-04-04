@@ -279,7 +279,7 @@ ggplot(rooms_counts, aes(x = factor(ROOMS), y = Count, fill = factor(ROOMS))) +
   aes(label = sprintf("%1.1f%%", Percentage), y = Count), 
   vjust = -0.3, 
   color = "black",
-  size = 2.5  
+  size = 3  
 ) +
   labs(title = "Bar Chart of Room Counts", x = "Number of Rooms", y = "Count") +
   scale_fill_discrete(name = "Number of Rooms") +
