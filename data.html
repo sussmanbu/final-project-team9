@@ -121,7 +121,8 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#describe-any-cleaning-you-had-to-do-for-your-data." id="toc-describe-any-cleaning-you-had-to-do-for-your-data." class="nav-link" data-scroll-target="#describe-any-cleaning-you-had-to-do-for-your-data.">Describe any cleaning you had to do for your data.</a>
   <ul class="collapse">
-  <li><a href="#summary-of-numerical-variables-we-have-right-now" id="toc-summary-of-numerical-variables-we-have-right-now" class="nav-link" data-scroll-target="#summary-of-numerical-variables-we-have-right-now">Summary of numerical variables we have right now</a></li>
+  <li><a href="#recode-some-categorical-data-that-is-showed-in-numerical-value-in-our-raw-data." id="toc-recode-some-categorical-data-that-is-showed-in-numerical-value-in-our-raw-data." class="nav-link" data-scroll-target="#recode-some-categorical-data-that-is-showed-in-numerical-value-in-our-raw-data.">Recode some categorical data that is showed in numerical value in our raw data.</a></li>
+  <li><a href="#summary-of-numerical-variables2022" id="toc-summary-of-numerical-variables2022" class="nav-link" data-scroll-target="#summary-of-numerical-variables2022">Summary of numerical variables(2022)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -211,8 +212,8 @@ ul.task-list li input[type="checkbox"] {
 <td>Total family income</td>
 </tr>
 <tr class="odd">
-<td>POVERTY</td>
-<td>Poverty status</td>
+<td>REGION</td>
+<td>Geographical part of America</td>
 </tr>
 </tbody>
 </table>
@@ -221,7 +222,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="describe-any-cleaning-you-had-to-do-for-your-data." class="level2">
 <h2 class="anchored" data-anchor-id="describe-any-cleaning-you-had-to-do-for-your-data.">Describe any cleaning you had to do for your data.</h2>
 <ul>
-<li><p>Here is the link to our cleaned dataset <a href="./dataset//rent_income.rds">cleaned dataset.</a></p></li>
+<li><p>Here is the link to our cleaned dataset <a href="./dataset//latest.rds">cleaned dataset.</a></p></li>
 <li><p>The code for cleaning and recoding the datasets, please see class blog 2 and 3.</p></li>
 <li><p>For our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.</p></li>
 <li><p>Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. The following table shows the variables we processed:</p></li>
@@ -229,9 +230,9 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <table class="table">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 27%">
-<col style="width: 51%">
+<col style="width: 8%">
+<col style="width: 24%">
+<col style="width: 66%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -292,35 +293,57 @@ ul.task-list li input[type="checkbox"] {
 <td>00 = N/A</td>
 </tr>
 <tr class="odd">
-<td><strong>POVERTY</strong></td>
-<td>Poverty status</td>
-<td>000 = N/A</td>
-</tr>
-<tr class="even">
 <td><strong>EMPSTATA</strong></td>
 <td>Employment status</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>0 = Missing value</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>9 = Unknown/Illegible</td>
+</tr>
+<tr class="even">
+<td><strong>STATE</strong></td>
+<td>Geographic state identifier</td>
 <td>Specific codes detailed below:</td>
 </tr>
 <tr class="odd">
 <td></td>
 <td></td>
-<td>0 = Missing value</td>
+<td>91 = Overseas Military/Military Installations</td>
 </tr>
 <tr class="even">
 <td></td>
 <td></td>
-<td>9 = Unknown/Illegible</td>
+<td>92 = PUMA boundaries cross state lines - Metro sample</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>97 = State not identified</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>99 = Not identified</td>
 </tr>
 </tbody>
 </table>
+<section id="recode-some-categorical-data-that-is-showed-in-numerical-value-in-our-raw-data." class="level3">
+<h3 class="anchored" data-anchor-id="recode-some-categorical-data-that-is-showed-in-numerical-value-in-our-raw-data.">Recode some categorical data that is showed in numerical value in our raw data.</h3>
 <ul>
-<li>Recode certain variables. We modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values. The following table: The table below summarizes all variables that possess this characteristic:</li>
+<li>Recode certain variables. We modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values. The following table shows each variable that had been recoded; The detailed process of recoding is in Class blog3.</li>
 </ul>
 <table class="table">
 <colgroup>
-<col style="width: 9%">
-<col style="width: 35%">
-<col style="width: 54%">
+<col style="width: 10%">
+<col style="width: 33%">
+<col style="width: 55%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -461,16 +484,6 @@ ul.task-list li input[type="checkbox"] {
 <td>9 = Three or more major races</td>
 </tr>
 <tr class="odd">
-<td><strong>POVERTY</strong></td>
-<td>Poverty levels</td>
-<td>001 = 1 percent or less of poverty threshold (including 0 or negative income)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>501 = 501 percent or more of poverty threshold</td>
-</tr>
-<tr class="odd">
 <td><strong>EMPSTAT</strong></td>
 <td>Employment status</td>
 <td>1 = Employed</td>
@@ -485,33 +498,105 @@ ul.task-list li input[type="checkbox"] {
 <td></td>
 <td>3 = Not in the labor force</td>
 </tr>
+<tr class="even">
+<td><strong>REGION</strong></td>
+<td>Geographic region and division</td>
+<td>Specific codes detailed below:</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>11 = New England Division (Northeast)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>12 = Middle Atlantic Division (Northeast)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>13 = Mixed Northeast Divisions (Northeast)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>21 = East North Central Division (Midwest)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>22 = West North Central Division (Midwest)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>23 = Mixed Midwestern Divisions (Midwest)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>31 = South Atlantic Division (South)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>32 = East South Central Division (South)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>33 = West South Central Division (South)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>34 = Mixed Southern Divisions (South)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>41 = Mountain Division (West)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>42 = Pacific Division (West)</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>43 = Mixed Western Divisions (West)</td>
+</tr>
 </tbody>
 </table>
-<ul>
-<li>The original data source provided datasets for specific years, not in a continuous sequence. Our primary focus was on the latest data from 2022 for initial research. However, we plan to expand our analysis by incorporating data from 2019 and other years, allowing for comparative studies across different years.</li>
-</ul>
-<section id="summary-of-numerical-variables-we-have-right-now" class="level3">
-<h3 class="anchored" data-anchor-id="summary-of-numerical-variables-we-have-right-now">Summary of numerical variables we have right now</h3>
+<section id="merged-data" class="level4">
+<h4 class="anchored" data-anchor-id="merged-data">Merged data</h4>
+<p>We consolidated datasets spanning 22 years, from 1990 to 2022, sourced from the same repositories. The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.</p>
+</section>
+</section>
+<section id="summary-of-numerical-variables2022" class="level3">
+<h3 class="anchored" data-anchor-id="summary-of-numerical-variables2022">Summary of numerical variables(2022)</h3>
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="ucbdlcmrzf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ucbdlcmrzf table {
+<div id="rxccqwiyxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rxccqwiyxh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ucbdlcmrzf thead, #ucbdlcmrzf tbody, #ucbdlcmrzf tfoot, #ucbdlcmrzf tr, #ucbdlcmrzf td, #ucbdlcmrzf th {
+#rxccqwiyxh thead, #rxccqwiyxh tbody, #rxccqwiyxh tfoot, #rxccqwiyxh tr, #rxccqwiyxh td, #rxccqwiyxh th {
   border-style: none;
 }
 
-#ucbdlcmrzf p {
+#rxccqwiyxh p {
   margin: 0;
   padding: 0;
 }
 
-#ucbdlcmrzf .gt_table {
+#rxccqwiyxh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -537,12 +622,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_caption {
+#rxccqwiyxh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ucbdlcmrzf .gt_title {
+#rxccqwiyxh .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -554,7 +639,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#ucbdlcmrzf .gt_subtitle {
+#rxccqwiyxh .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -566,7 +651,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#ucbdlcmrzf .gt_heading {
+#rxccqwiyxh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -578,13 +663,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_bottom_border {
+#rxccqwiyxh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_col_headings {
+#rxccqwiyxh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -599,7 +684,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_col_heading {
+#rxccqwiyxh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -619,7 +704,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#ucbdlcmrzf .gt_column_spanner_outer {
+#rxccqwiyxh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -631,15 +716,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#ucbdlcmrzf .gt_column_spanner_outer:first-child {
+#rxccqwiyxh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ucbdlcmrzf .gt_column_spanner_outer:last-child {
+#rxccqwiyxh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ucbdlcmrzf .gt_column_spanner {
+#rxccqwiyxh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -651,11 +736,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#ucbdlcmrzf .gt_spanner_row {
+#rxccqwiyxh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ucbdlcmrzf .gt_group_heading {
+#rxccqwiyxh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -681,7 +766,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#ucbdlcmrzf .gt_empty_group_heading {
+#rxccqwiyxh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -696,15 +781,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#ucbdlcmrzf .gt_from_md > :first-child {
+#rxccqwiyxh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ucbdlcmrzf .gt_from_md > :last-child {
+#rxccqwiyxh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ucbdlcmrzf .gt_row {
+#rxccqwiyxh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -723,7 +808,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#ucbdlcmrzf .gt_stub {
+#rxccqwiyxh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -736,7 +821,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#ucbdlcmrzf .gt_stub_row_group {
+#rxccqwiyxh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -750,15 +835,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#ucbdlcmrzf .gt_row_group_first td {
+#rxccqwiyxh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ucbdlcmrzf .gt_row_group_first th {
+#rxccqwiyxh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ucbdlcmrzf .gt_summary_row {
+#rxccqwiyxh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -768,16 +853,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#ucbdlcmrzf .gt_first_summary_row {
+#rxccqwiyxh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_first_summary_row.thick {
+#rxccqwiyxh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ucbdlcmrzf .gt_last_summary_row {
+#rxccqwiyxh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -787,7 +872,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_grand_summary_row {
+#rxccqwiyxh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -797,7 +882,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#ucbdlcmrzf .gt_first_grand_summary_row {
+#rxccqwiyxh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -807,7 +892,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_last_grand_summary_row_top {
+#rxccqwiyxh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -817,11 +902,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_striped {
+#rxccqwiyxh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ucbdlcmrzf .gt_table_body {
+#rxccqwiyxh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -830,7 +915,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_footnotes {
+#rxccqwiyxh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -844,7 +929,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_footnote {
+#rxccqwiyxh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -853,7 +938,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#ucbdlcmrzf .gt_sourcenotes {
+#rxccqwiyxh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -867,7 +952,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#ucbdlcmrzf .gt_sourcenote {
+#rxccqwiyxh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -875,63 +960,63 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#ucbdlcmrzf .gt_left {
+#rxccqwiyxh .gt_left {
   text-align: left;
 }
 
-#ucbdlcmrzf .gt_center {
+#rxccqwiyxh .gt_center {
   text-align: center;
 }
 
-#ucbdlcmrzf .gt_right {
+#rxccqwiyxh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ucbdlcmrzf .gt_font_normal {
+#rxccqwiyxh .gt_font_normal {
   font-weight: normal;
 }
 
-#ucbdlcmrzf .gt_font_bold {
+#rxccqwiyxh .gt_font_bold {
   font-weight: bold;
 }
 
-#ucbdlcmrzf .gt_font_italic {
+#rxccqwiyxh .gt_font_italic {
   font-style: italic;
 }
 
-#ucbdlcmrzf .gt_super {
+#rxccqwiyxh .gt_super {
   font-size: 65%;
 }
 
-#ucbdlcmrzf .gt_footnote_marks {
+#rxccqwiyxh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ucbdlcmrzf .gt_asterisk {
+#rxccqwiyxh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ucbdlcmrzf .gt_indent_1 {
+#rxccqwiyxh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ucbdlcmrzf .gt_indent_2 {
+#rxccqwiyxh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ucbdlcmrzf .gt_indent_3 {
+#rxccqwiyxh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ucbdlcmrzf .gt_indent_4 {
+#rxccqwiyxh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ucbdlcmrzf .gt_indent_5 {
+#rxccqwiyxh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -953,37 +1038,37 @@ ul.task-list li input[type="checkbox"] {
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="variable" class="gt_row gt_left">RENTGRS</td>
-<td headers="Mean" class="gt_row gt_right">1,577.00</td>
-<td headers="Median" class="gt_row gt_right">1,390.00</td>
+<td headers="Mean" class="gt_row gt_right">1,572.82</td>
+<td headers="Median" class="gt_row gt_right">1,382.00</td>
 <td headers="Min" class="gt_row gt_right">4.00</td>
-<td headers="Max" class="gt_row gt_right">10,700.00</td></tr>
+<td headers="Max" class="gt_row gt_right">9,183.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">ROOMS</td>
-<td headers="Mean" class="gt_row gt_right">4.68</td>
+<td headers="Mean" class="gt_row gt_right">4.69</td>
 <td headers="Median" class="gt_row gt_right">4.00</td>
 <td headers="Min" class="gt_row gt_right">1.00</td>
-<td headers="Max" class="gt_row gt_right">20.00</td></tr>
+<td headers="Max" class="gt_row gt_right">18.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">AGE</td>
-<td headers="Mean" class="gt_row gt_right">42.60</td>
+<td headers="Mean" class="gt_row gt_right">42.73</td>
 <td headers="Median" class="gt_row gt_right">38.00</td>
 <td headers="Min" class="gt_row gt_right">16.00</td>
-<td headers="Max" class="gt_row gt_right">97.00</td></tr>
+<td headers="Max" class="gt_row gt_right">95.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">FTOTINC</td>
-<td headers="Mean" class="gt_row gt_right">71,600.64</td>
+<td headers="Mean" class="gt_row gt_right">71,641.68</td>
 <td headers="Median" class="gt_row gt_right">52,000.00</td>
-<td headers="Min" class="gt_row gt_right">−9,300.00</td>
-<td headers="Max" class="gt_row gt_right">1,966,000.00</td></tr>
+<td headers="Min" class="gt_row gt_right">−1,730.00</td>
+<td headers="Max" class="gt_row gt_right">1,246,000.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">POVERTY</td>
-<td headers="Mean" class="gt_row gt_right">268.74</td>
-<td headers="Median" class="gt_row gt_right">249.00</td>
+<td headers="Mean" class="gt_row gt_right">268.95</td>
+<td headers="Median" class="gt_row gt_right">250.00</td>
 <td headers="Min" class="gt_row gt_right">1.00</td>
 <td headers="Max" class="gt_row gt_right">501.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">INCTOT</td>
-<td headers="Mean" class="gt_row gt_right">38,070.86</td>
-<td headers="Median" class="gt_row gt_right">25,000.00</td>
-<td headers="Min" class="gt_row gt_right">−9,380.00</td>
-<td headers="Max" class="gt_row gt_right">1,423,200.00</td></tr>
+<td headers="Mean" class="gt_row gt_right">38,115.39</td>
+<td headers="Median" class="gt_row gt_right">25,600.00</td>
+<td headers="Min" class="gt_row gt_right">−5,500.00</td>
+<td headers="Max" class="gt_row gt_right">791,000.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">NFAMS</td>
-<td headers="Mean" class="gt_row gt_right">1.21</td>
+<td headers="Mean" class="gt_row gt_right">1.22</td>
 <td headers="Median" class="gt_row gt_right">1.00</td>
 <td headers="Min" class="gt_row gt_right">1.00</td>
 <td headers="Max" class="gt_row gt_right">20.00</td></tr>
@@ -994,87 +1079,45 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 </div>
-<section id="for-each-variable" class="level4">
-<h4 class="anchored" data-anchor-id="for-each-variable">For each variable:</h4>
+<section id="speical-notes-to-some-variables-we-have" class="level4">
+<h4 class="anchored" data-anchor-id="speical-notes-to-some-variables-we-have">Speical notes to some variables we have</h4>
 <ol type="1">
 <li>RENTGRS</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>The histogram appears to be right-skewed, with a mode somewhere before $3000. It suggests that the mean is likely to be higher than the median, which corresponds to the stats in the above section. There are a few bars past the $6000 mark, which could be considered outliers. There’s a wide range of rents; however, the majority of the data points fall below $3000, suggesting that while there are rents across a wide range.</p>
-<p>2.INCTOT</p>
-<div class="cell">
-<div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it’s the most common income range in the datasets and our dataset is from census.</p>
-<p>3.FTOTINC</p>
+<p>-The histogram appears to be right-skewed, with a mode somewhere before $3000. It suggests that the mean is likely to be higher than the median, which corresponds to the stats in the above section. -There are a few bars past the $6000 mark, which could be considered outliers. -There’s a wide range of rents; however, the majority of the data points fall below $3000, suggesting that while there are rents across a wide range. -According to the right skewd nature, we take a log transformation to it in later on regression model.</p>
+<p>2.INCTOT</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.</p>
-<p>4.NFAMS</p>
+<ul>
+<li>The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it’s the most common income range in the datasets and our dataset is from census.</li>
+<li>-According to the right skewd nature, we take a log transformation to it in later on regression model.</li>
+</ul>
+<p>3.FTOTINC</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>The bar representing one family member is significantly taller than the others, indicating that single-person families are most common in this dataset. There is a rapid decrease in frequency as the number of family members increases. The families with a very large number of members are quite rare. This is what I expected and aligns with my understanding to common demographic trends.</p>
-<p>5.Age</p>
+<ul>
+<li>Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.</li>
+<li>This variable shows to be related with INCTOT, we should test the multicollineaity issue while include it in our model.</li>
+<li>Considering its nature and the possible multicollinearity issue, we plan to replace INCTOT to this variable to see if it suggests any change.</li>
+</ul>
+<p>4.NFAMS</p>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>6.POVERTY</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>This variable has both upper and lower bounds. Therefore, the histogram is characterized by notable concentrations, indicating significant proportions of individuals or families at both ends of the poverty spectrum.</p>
-<p>7.EMPSTAT</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<ol start="8" type="1">
-<li>Kitchen</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<ol start="9" type="1">
-<li>ROOMS</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<ol start="10" type="1">
-<li>RACE</li>
-</ol>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<p>11.MARST</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<p>The bar representing one family member is significantly taller than the others, indicating that single-person families are most common in this dataset. There is a rapid decrease in frequency as the number of family members increases. The families with a very large number of members are quite rare. This is what I expected and aligns with my understanding to common demographic trends.</p>
 
 
 </section>
