@@ -32,12 +32,11 @@ We have highlighted all key dependent variables (RENTGRS) and independent variab
 | EMPSTAT  | Employment status                     |
 | **INCTOT**   | Total personal income             |
 | FTOTINC  | Total family income                   |
-| POVERTY  | Poverty status                        |
 | REGION   | Geographical part of America          |
 
 
 ## Describe any cleaning you had to do for your data.
-- Here is the link to our cleaned dataset [cleaned dataset.](./dataset//rent_income.rds)
+- Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest.rds)
 
 - The code for cleaning and recoding the datasets, please see class blog 2 and 3. 
 
@@ -58,7 +57,6 @@ We have highlighted all key dependent variables (RENTGRS) and independent variab
 |              |                                       | 9999999 = N/A                                                                                           |
 | **KITCHEN**  | Kitchen or cooking facilities         | 0 = N/A                                                                                                 |
 | **ROOMS**    | Number of rooms                       | 00 = N/A                                                                                                |
-| **POVERTY**  | Poverty status                        | 000 = N/A                                                                                               |
 | **EMPSTATA** | Employment status                     | Specific codes detailed below:                                                                          |
 |              |                                       | 0 = Missing value                                                                                       |
 |              |                                       | 9 = Unknown/Illegible                                                                                   |
@@ -68,9 +66,12 @@ We have highlighted all key dependent variables (RENTGRS) and independent variab
 |              |                                       | 97 = State not identified                                                                               |
 |              |                                       | 99 = Not identified                                                                                     |
 
+
+### Recode some categorical data that is showed in numerical value in our raw data.
+
 - Recode certain variables. We modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values.
-The following table:
-The table below summarizes all variables that possess this characteristic:
+The following table shows each variable that had been recoded;
+The detailed process of recoding is in Class blog3.
 
 | Variable     | Description                               | Notes                                                                 |
 |--------------|-------------------------------------------|-----------------------------------------------------------------------|
@@ -100,8 +101,6 @@ The table below summarizes all variables that possess this characteristic:
 |              |                                           | 7 = Other race, nec                                                   |
 |              |                                           | 8 = Two major races                                                   |
 |              |                                           | 9 = Three or more major races                                         |
-| **POVERTY**  | Poverty levels                            | 001 = 1 percent or less of poverty threshold (including 0 or negative income) |
-|              |                                           | 501 = 501 percent or more of poverty threshold                        |
 | **EMPSTAT**  | Employment status                         | 1 = Employed                                                          |
 |              |                                           | 2 = Unemployed                                                        |
 |              |                                           | 3 = Not in the labor force                                            |
@@ -121,9 +120,98 @@ The table below summarizes all variables that possess this characteristic:
 |              |                                           | 43 = Mixed Western Divisions (West)                                         |
 
 
-- The original data source provided datasets for specific years, not in a continuous sequence. Our primary focus was on the latest data from 2022 for initial research. However, we plan to expand our analysis by incorporating data from 1990s, allowing for comparative studies of near 20 years.
 
-### Summary of numerical variables we have right now 
+#### Merged data
+We consolidated datasets spanning 22 years, from 1990 to 2022, sourced from the same repositories. The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(here)
+library(dplyr)
+data_path <- here("dataset-ignore", "twenty_yr_data.csv")
+library(readr)
+twentyyr_data <- read_csv(data_path,show_col_types = FALSE)
+library(dplyr)
+set.seed(123) # Setting a seed for reproducibility
+twentyyr_data_clean <- sample_frac(twentyyr_data, 0.01)
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  filter(RENTGRS != 0,  # Exclude entries with zero rent
+         !is.na(RENTGRS),  # Exclude NA values for rent
+         EMPSTAT %in% c("1", "2", "3"),  # Include only valid employment statuses
+         KITCHEN != "0",  # Exclude entries without a kitchen
+         ROOMS != "00",  # Exclude entries with invalid room counts
+         !INCTOT %in% c(1, 9999999, 9999998, -1),  # Exclude specific INCTOT values
+         !FTOTINC %in% c(9999998, 9999999),  # Exclude specific FTOTINC values
+         POVERTY != 0,  # Exclude invalid poverty codes
+         !REGION %in% c(91, 92, 97, 99))  # Exclude specific region/state codes
+twentyyr_data_clean$REGION_CLASSIFIED <- case_when(
+  twentyyr_data_clean$REGION %in% c(11, 12, 13) ~ "NORTHEAST",
+  twentyyr_data_clean$REGION %in% c(21, 22, 23) ~ "MIDWEST",
+  twentyyr_data_clean$REGION %in% c(31, 32, 33, 34) ~ "SOUTH",
+  twentyyr_data_clean$REGION %in% c(41, 42, 43) ~ "WEST",
+  TRUE ~ "OTHER"
+)
+
+#KITCHEN
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(KITCHEN = case_when(
+    KITCHEN == "0" ~ "N/A",
+    KITCHEN == "1" ~ "No",
+    KITCHEN == "2" ~ "No, or shared use",
+    KITCHEN == "3" ~ "Yes, shared use",
+    KITCHEN == "4" ~ "Yes (shared or exclusive use)",
+    KITCHEN == "5" ~ "Yes, exclusive use",
+    TRUE ~ as.character(KITCHEN)
+  ))
+twentyyr_data_clean$KITCHEN <- as.factor(twentyyr_data_clean$KITCHEN)
+
+#MARST
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(MARST = case_when(
+    MARST == "1" ~ "Married, spouse present",
+    MARST == "2" ~ "Married, spouse absent",
+    MARST == "3" ~ "Separated",
+    MARST == "4" ~ "Divorced",
+    MARST == "5" ~ "Widowed",
+    MARST == "6" ~ "Never married/single",
+    MARST == "9" ~ "Blank, missing",
+    TRUE ~ as.character(MARST)
+  ))
+twentyyr_data_clean$MARST <- as.factor(twentyyr_data_clean$MARST)
+
+#RACE
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(RACE = case_when(
+    RACE == "1" ~ "White",
+    RACE == "2" ~ "Black/African American",
+    RACE == "3" ~ "American Indian or Alaska Native",
+    RACE == "4" ~ "Chinese",
+    RACE == "5" ~ "Japanese",
+    RACE == "6" ~ "Other Asian or Pacific Islander",
+    RACE == "7" ~ "Other race, nec",
+    RACE == "8" ~ "Two major races",
+    RACE == "9" ~ "Three or more major races",
+    TRUE ~ as.character(RACE) 
+  ))
+twentyyr_data_clean$RACE <- as.factor(twentyyr_data_clean$RACE)
+
+#EMPSTAT
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(EMPSTAT = case_when(
+    EMPSTAT == "1" ~ "Employed",
+    EMPSTAT == "2" ~ "Unemployed",
+    EMPSTAT == "3" ~ "Not in labour force",
+    TRUE ~ as.character(EMPSTAT) 
+  ))
+
+twentyyr_data_clean$EMPSTAT <- as.factor(twentyyr_data_clean$EMPSTAT)
+
+write_csv(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.csv"))
+saveRDS(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.rds"))
+```
+
+
+### Summary of numerical variables(2022)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(forcats)
@@ -131,9 +219,9 @@ library(here)
 library(readr)
 library(dplyr)
 library(gt)
-data_path <- here("dataset", "rent_income_clean.csv")
+data_path <- here("dataset", "latest.csv")
 rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
-data_path <- here("dataset", "rent_income_clean.csv")
+data_path <- here("dataset", "latest.csv")
 rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
 summary_data <- rent_data_clean %>%
   summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
@@ -170,10 +258,9 @@ summary_data %>%
     heading.title.font.size = px(16),
     heading.subtitle.font.size = px(12)
   )
-
 ```
 
-#### For each variable:
+#### Speical notes to some variables we have 
 1. RENTGRS
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2) 
@@ -185,9 +272,10 @@ ggplot(rent_data_clean, aes(x = RENTGRS)) +
        y = "Count") +
   theme_minimal()
 ```
-The histogram appears to be right-skewed, with a mode somewhere before $3000. It suggests that the mean is likely to be higher than the median, which corresponds to the stats in the above section. 
-There are a few bars past the $6000 mark, which could be considered outliers.
-There's a wide range of rents; however, the majority of the data points fall below $3000, suggesting that while there are rents across a wide range.
+-The histogram appears to be right-skewed, with a mode somewhere before $3000. It suggests that the mean is likely to be higher than the median, which corresponds to the stats in the above section. 
+-There are a few bars past the $6000 mark, which could be considered outliers.
+-There's a wide range of rents; however, the majority of the data points fall below $3000, suggesting that while there are rents across a wide range.
+-According to the right skewd nature, we take a log transformation to it in later on regression model. 
 
 2.INCTOT
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -198,7 +286,8 @@ ggplot(rent_data_clean, aes(x = INCTOT)) +
        x = "Total Personal Income",
        y = "Frequency")
 ```
-The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it's the most common income range in the datasets and our dataset is from census. 
+- The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it's the most common income range in the datasets and our dataset is from census. 
+- -According to the right skewd nature, we take a log transformation to it in later on regression model. 
 
 3.FTOTINC  
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -209,7 +298,9 @@ ggplot(rent_data_clean, aes(x = FTOTINC)) +
        x = "Total Family Income",
        y = "Frequency")
 ```
-Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.
+- Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.
+- This variable shows to be related with INCTOT, we should test the multicollineaity issue while include it in our model. 
+- Considering its nature and the possible multicollinearity issue, we plan to replace INCTOT to this variable to see if it suggests any change.
 
 4.NFAMS
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -227,113 +318,3 @@ ggplot(nfams_counts, aes(x = factor(NFAMS), y = Count, fill = factor(NFAMS))) +
 ```
 The bar representing one family member is significantly taller than the others, indicating that single-person families are most common in this dataset. There is a rapid decrease in frequency as the number of family members increases. The families with a very large number of members are quite rare. This is what I expected and  aligns with my understanding to common demographic trends.
 
-5.Age
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(rent_data_clean, aes(x = AGE)) +
-  geom_histogram(bins = 30, fill = "cornflowerblue", color = "black") + 
-  theme_minimal() +
-  labs(title = "Histogram of Age",
-       x = "Age",
-       y = "Frequency")
-```
-
-6.POVERTY
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-p <- ggplot(rent_data_clean, aes(x = POVERTY)) +
-  geom_histogram(binwidth = 5, fill = "darkgreen", color = "black") + 
-  theme_minimal() +
-  labs(title = "Histogram of Poverty Scores",
-       x = "Poverty Score",
-       y = "Frequency")
-
-p <- p + 
-  geom_vline(xintercept = 1, color = "blue", linetype = "dashed", linewidth = 1) +
-  annotate("text", x = 1, y = Inf, label = "001 = ≤1% of poverty threshold", angle = 90, hjust = 1, vjust = 2, color = "blue") +
-  geom_vline(xintercept = 501, color = "red", linetype = "dashed", linewidth = 1) +
-  annotate("text", x = 501, y = Inf, label = "501 = ≥501% of poverty threshold", angle = 90, hjust = 1, vjust = 2, color = "red")
-
-print(p)
-
-```
-This variable has both upper and lower bounds. Therefore, the histogram is characterized by notable concentrations, indicating significant proportions of individuals or families at both ends of the poverty spectrum. 
-
-7.EMPSTAT
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-empstat_counts <- rent_data_clean %>%
-  count(EMPSTAT) %>%
-  mutate(Percentage = n / sum(n) * 100)
-ggplot(empstat_counts, aes(x = "", y = n, fill = EMPSTAT)) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar(theta = "y") + 
-  theme_void() + 
-  geom_text(aes(label = sprintf("%1.1f%%", Percentage)), position = position_stack(vjust = 0.5)) +
-  labs(title = "Pie Chart of Employment Status", fill = "Employment Status")
-```
-
-8. Kitchen
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-kitchen_counts <- rent_data_clean %>%
-  group_by(KITCHEN) %>%
-  summarise(Count = n()) %>%
-  mutate(Percentage = Count / sum(Count) * 100)
-ggplot(kitchen_counts, aes(x = "", y = Count, fill = factor(KITCHEN))) +
-  geom_bar(stat = "identity", width = 1) +
-  coord_polar(theta = "y") +
-  theme_void() +
-  geom_text(aes(label = sprintf("%1.1f%%", Percentage)), position = position_stack(vjust = 0.5)) +
-  labs(title = "Pie Chart of Kitchen",fill = "Number of Kitchens")
-```
-
-9. ROOMS
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(dplyr)
-
-rooms_counts <- rent_data_clean %>%
-  group_by(ROOMS) %>%
-  summarise(Count = n(), .groups = 'drop') %>%
-  mutate(Percentage = Count / sum(Count) * 100)
-
-
-ggplot(rooms_counts, aes(x = factor(ROOMS), y = Count, fill = factor(ROOMS))) +
-  geom_bar(stat = "identity") +
-  geom_text(
-  aes(label = sprintf("%1.1f%%", Percentage), y = Count), 
-  vjust = -0.3, 
-  color = "black",
-  size = 3  
-) +
-  labs(title = "Bar Chart of Room Counts", x = "Number of Rooms", y = "Count") +
-  scale_fill_discrete(name = "Number of Rooms") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-```
-
-10. RACE
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-race_counts <- rent_data_clean %>%
-  group_by(RACE) %>%
-  summarise(Count = n()) %>%
-  mutate(Percentage = Count / sum(Count) * 100)
-
-ggplot(race_counts, aes(x = factor(RACE), y = Count, fill = factor(RACE))) +
-  geom_bar(stat = "identity") +
-  geom_text(aes(label = sprintf("%1.1f%%", Percentage), y = Count), vjust = -0.3, color = "black") +
-  labs(title = "Bar Chart of RACE", x = "RACE", y = "Count") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.5))
-```
-
-11.MARST
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-marst_counts <- rent_data_clean %>%
-  group_by(MARST) %>%
-  summarise(Count = n()) %>%
-  mutate(Percentage = Count / sum(Count) * 100)
-
-ggplot(marst_counts, aes(x = factor(MARST), y = Count, fill = factor(MARST))) +
-  geom_bar(stat = "identity") +
-  geom_text(aes(label = sprintf("%1.1f%%", Percentage), y = Count), vjust = -0.3, color = "black") +
-  labs(title = "Bar Chart of Marital Status", x = "Marital Status", y = "Count", fill = "Marital Status Categories") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-```
