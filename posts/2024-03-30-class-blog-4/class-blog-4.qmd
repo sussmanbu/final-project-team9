@@ -5,16 +5,13 @@ date: "2024-03-30"
 date-modified: "2024-03-30"
 draft: FALSE
 ---
-
-```{r}
+```{r warning=FALSE}
 library(broom)
 library(dplyr)
 library(here)
 data_path <- here("dataset", "rent_income_clean.csv")
 library(readr)
 rent_clean_data <- read_csv(data_path,show_col_types = FALSE) 
-```
-```{r}
 library(ggplot2)
 ```
 
@@ -23,7 +20,11 @@ library(ggplot2)
 ggplot(rent_clean_data, aes(x = INCTOT, y = RENTGRS)) +
   geom_point(color = 'black', alpha = 0.1)
 ```
-
+-The horizontal axis represents the total income (INCTOT), which is the predictor.
+-The vertical axis represents the rent paid (RENTGRS), which is the response.
+-The purpose of creating this scatter plot is to assess whether there is a linear or non-linear relationship between total income and rent paid in a general way. 
+-The density of the points can be seen with a darker shade, indicating a higher concentration of data points. There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.
+-The plot does not clearly show a distinct linear trend, suggesting that the relationship between these variables might be non-linear 
 
 ## Simple linear model 
 ```{r}
@@ -31,28 +32,27 @@ lm_model <- lm(RENTGRS ~ INCTOT, data = rent_clean_data)
 tidy_lm <- tidy(lm_model)
 print(tidy_lm)
 
-# Glance at the model summary
 glance_lm <- glance(lm_model)
 print(glance_lm)
 
-# Augment the model data
 augmented_data <- augment(lm_model)
-head(augmented_data)
-
-
+print(augmented_data)
 ```
+- The R-squared value is 0.094855, which means that approximately 9.49% of the variability in the rent paid (RENTGRS) can be explained by the total income (INCTOT). This is a relatively low R-squared value, indicating that the linear model does not explain a large portion of the variability in the rent.But it is fair, because we only include one predictor here.
+- The statistic value is 63312.15, which is extremely high. This suggests that the overall significance of the model is strong, despite the low R-squared. This could be due to a large sample size, which can make even small relationships appear statistically significant.
+
+### Residual plot
 ```{r}
-# Plot the residual plot
 ggplot(augmented_data, aes(x = .fitted, y = .resid)) +
-  geom_point(aes(color = INCTOT), alpha = 0.5) + # Color code by INCTOT for additional insight
+  geom_point(aes(color = INCTOT), alpha = 0.5) + 
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
   labs(x = "Fitted Values", y = "Residuals", 
        title = "Residuals vs. Fitted Values") +
   theme_minimal()
 ```
-This diagram indicates that the spread of residuals appears to increase as the fitted values increase. This pattern indicates heteroscedasticity, which means that the variability of the residuals is not constant across levels of the predictor variable. In an ideal scenario, you'd want to see a consistent spread of residuals across all levels of fitted values, suggesting homoscedasticity.
+- This diagram indicates that the spread of residuals appears to increase as the fitted values increase. This pattern indicates heteroscedasticity, which means that the variability of the residuals is not constant across levels of the predictor variable. In an ideal scenario, I'd want to see a consistent spread of residuals across all levels of fitted values, suggesting homoscedasticity.
 
-#MLR
+## Multiple linear regression
 ```{r}
 # Ensure categorical variables are treated as factors
 rent_clean_data$KITCHEN <- as.factor(rent_clean_data$KITCHEN)
@@ -61,27 +61,36 @@ rent_clean_data$RACE <- as.factor(rent_clean_data$RACE)
 rent_clean_data$EMPSTAT <- as.factor(rent_clean_data$EMPSTAT)
 
 # Fit the regression model with dummy variables for categorical factors
-mlr_model <- lm(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + POVERTY, data = rent_clean_data)
-
-# Display the summary of the model
-summary(mlr_model)
+mlr_model <- lm(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC, data = rent_clean_data)
 ```
 ```{r}
-residuals <- residuals(mlr_model)
-fitted_values <- fitted(mlr_model)
+tidy_mlr <- tidy(mlr_model)
+print(tidy_mlr)
 
-plot(fitted_values, residuals, 
-     xlab = "Fitted Values", 
-     ylab = "Residuals", 
-     main = "Residual vs. Fitted Plot",
-     pch = 20)
-abline(h = 0, col = "red")
+glance_mlr <- glance(mlr_model)
+print(glance_mlr)
 
+augmented_mlr <- augment(mlr_model)
+print(augmented_mlr)
 ```
+- The R-squared value is 0.2444284, indicating that about 24.44% of the variability in the dependent variable is explained by the model. This is a significant improvement over the simple linear model previously discussed, suggesting that including more variables helps explain the variance in the dependent variable more effectively.
+-  The adjusted R-squared value is 0.2444019, which is very close to the R-squared value.Since the adjusted R-squared is almost identical to the R-squared, this implies that the additional predictors are indeed contributing valuable information.
+-  The statistic value is 9238.626, which is very high and the p-value is 0, indicating that the model is statistically significant. It means that the likelihood of the regression results being due to chance is extremely low. 
+
+#### Multicollinearity concerns
+```{r warning=FALSE}
+library(car)
+vif_values <- vif(mlr_model)
+print(vif_values)
+```
+Through the result, INCTOT (Total Income) and FTOTINC (Family Total Income) stand out as having higher multicollinearity indicators than the others. While considering the what constitutes the Family total income, it is fair multicollinearity happens. So we decide to exclude the FTOTINC in our model. With a GVIF^(1/(2*Df)) value of approximately 1.53 and FTOTINC is about 1.51, a VIF between 1 and 5 suggests moderate indication of multicollinearity.
+
+#### Residual plot:
+Heterskedasticity still exits. 
 
 
-## solution: take log? ---  as both response and predictor right skewed
 
+## solution: 1.take log? ---  as both response and predictor right skewed
 ```{r}
 ggplot(rent_clean_data, aes(x = log(RENTGRS))) +
   geom_histogram(binwidth = 0.1, fill = "blue", color = "black") + 
@@ -100,126 +109,22 @@ ggplot(rent_clean_data, aes(x = log(INCTOT))) +
        y = "Frequency")
 ```
 
-## log-log regression model 
-```{r}
-library(broom)
-log_data <- rent_clean_data[rent_clean_data$INCTOT > 0, ] 
-log_data$new_rent = log(new_data$RENTGRS)
-log_data$new_income = log(new_data$INCTOT)
-log_data$KITCHEN <- as.factor(new_data$KITCHEN)
-log_data$MARST <- as.factor(new_data$MARST)
-log_data$RACE <- as.factor(new_data$RACE)
-log_data$EMPSTAT <- as.factor(new_data$EMPSTAT)
-
-log_model <- lm(new_rent ~ new_income + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + POVERTY, data = new_data)
-```
-
-```{r}
-summary(log_model)
-```
-```{r}
-log_model_tidy <- tidy(log_model)
-print(log_model_tidy)
-
-log_model_augmented <- augment(log_model)
-print(log_model_augmented)
-
-log_model_glance <- glance(log_model)
-print(log_model_glance)
-```
-residual plot 
-```{r}
-residual_plot_1=ggplot(log_model_augmented, aes(x = .fitted, y = .resid)) +
-  geom_point(alpha=0.1) +  
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
-  labs(x = "Fitted Values", y = "Residuals", title = "Residual vs. Fitted Plot") +
-  theme_minimal()
-print(residual_plot_1)
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-```{r}
-ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + geom_point(alpha =.01) + scale_x_log10() + scale_y_log10()
-ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
-```
-
-
-
-## Problems still exist
-*take a ranage of inctot: mean+/-3sd；add exclude not in labor force 
-```{r}
-# Calculate mean and standard deviation of INCTOT
-mean_inctot <- mean(new_data$INCTOT, na.rm = TRUE)
-sd_inctot <- sd(new_data$INCTOT, na.rm = TRUE)
-
-# Determine the range for INCTOT based on mean ± 3SD
-lower_bound <- mean_inctot - 3 * sd_inctot
-upper_bound <- mean_inctot + 3 * sd_inctot
-
-# Filter new_data to keep only the desired range of INCTOT
-# and exclude individuals not in the labor force (assuming EMPSTAT code for not in labor force is 'X')
-filtered_data <- new_data[new_data$INCTOT >= lower_bound & new_data$INCTOT <= upper_bound,]
-
-# Recreate log-transformed variables within this filtered dataset
-filtered_data$new_rent <- log(filtered_data$RENTGRS)
-filtered_data$new_income <- log(filtered_data$INCTOT)
-
-# Fit the regression model using the filtered data
-enhanced_model_2 <- lm(new_rent ~ new_income + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + POVERTY, data = filtered_data)
-
-# Summarize the model
-summary(enhanced_model_2)
-```
-```{r}
-ggplot(enhanced_model_2, aes(x = .fitted, y = .resid)) +
-  geom_point(alpha=0.1) +  
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
-  labs(x = "Fitted Values", y = "Residuals", title = "Residual vs. Fitted Plot") +
-  theme_minimal()
-```
-
-```{r}
-# Calculate residuals and fitted values for enhanced_model_2
-residuals_2 <- residuals(enhanced_model_2)
-fitted_values_2 <- fitted(enhanced_model_2)
-
-# Plot the residuals against fitted values
-plot(fitted_values_2, residuals_2,
-     xlab = "Fitted Values",
-     ylab = "Residuals",
-     main = "Residual vs. Fitted Plot for enhanced_model_2",
-     pch = 20)
-
-# Add a horizontal line at 0 to aid in interpretation
-abline(h = 0, col = "red")
-
-```
-### try new dataset with a new added region variable; group by region
-loading and cleaning again:
+## 2: Merged data 
+We consolidated datasets spanning 22 years, from 1990 to 2022, sourced from the same repositories. The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.
 ```{r}
 library(tidyverse)
 library(here)
 library(dplyr)
-data_path <- here("dataset-ignore", "usa_00002.csv")
+data_path <- here("dataset-ignore", "twenty_yr_data.csv")
 library(readr)
-rent_data_2 <- read_csv(data_path,show_col_types = FALSE)
-print(head(rent_data_2))
+twentyyr_data <- read_csv(data_path,show_col_types = FALSE)
+print(head(twentyyr_data))
 ```
 ```{r}
 library(dplyr)
-
-rent_data_clean <- rent_data_2 %>%
+set.seed(123) # Setting a seed for reproducibility
+twentyyr_data_clean <- sample_frac(twentyyr_data, 0.01)
+twentyyr_data_clean <- twentyyr_data_clean %>%
   filter(RENTGRS != 0,  # Exclude entries with zero rent
          !is.na(RENTGRS),  # Exclude NA values for rent
          EMPSTAT %in% c("1", "2", "3"),  # Include only valid employment statuses
@@ -231,71 +136,169 @@ rent_data_clean <- rent_data_2 %>%
          !REGION %in% c(91, 92, 97, 99))  # Exclude specific region/state codes
 ```
 ```{r}
-set.seed(123) # Setting a seed for reproducibility
-rent_data_clean <- sample_frac(rent_data_clean, 0.05)
-write_csv(rent_data_clean, file = here("dataset", "rent_income_clean_2.csv"))
-saveRDS(rent_data_clean, file = here("dataset", "rent_income_2.rds"))
+write_csv(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.csv"))
+saveRDS(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.rds"))
 ```
 ```{r}
-library(here)
-data_path <- here("dataset", "rent_income_clean_2.csv")
-rent_data <- read_csv(data_path, show_col_types = FALSE)
-
-# Step 2: Filter for 2022 data
-rent_data_2022 <- rent_data[rent_data$YEAR == "2022", ]
-
-# Step 3: Classify REGION into the four main regions
-rent_data_2022$REGION_CLASSIFIED <- case_when(
-  rent_data_2022$REGION %in% c(11, 12, 13) ~ "NORTHEAST",
-  rent_data_2022$REGION %in% c(21, 22, 23) ~ "MIDWEST",
-  rent_data_2022$REGION %in% c(31, 32, 33, 34) ~ "SOUTH",
-  rent_data_2022$REGION %in% c(41, 42, 43) ~ "WEST",
+twentyyr_data_clean$REGION_CLASSIFIED <- case_when(
+  twentyyr_data_clean$REGION %in% c(11, 12, 13) ~ "NORTHEAST",
+  twentyyr_data_clean$REGION %in% c(21, 22, 23) ~ "MIDWEST",
+  twentyyr_data_clean$REGION %in% c(31, 32, 33, 34) ~ "SOUTH",
+  twentyyr_data_clean$REGION %in% c(41, 42, 43) ~ "WEST",
   TRUE ~ "OTHER"
 )
+```
+```{r}
+#KITCHEN
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(KITCHEN = case_when(
+    KITCHEN == "0" ~ "N/A",
+    KITCHEN == "1" ~ "No",
+    KITCHEN == "2" ~ "No, or shared use",
+    KITCHEN == "3" ~ "Yes, shared use",
+    KITCHEN == "4" ~ "Yes (shared or exclusive use)",
+    KITCHEN == "5" ~ "Yes, exclusive use",
+    TRUE ~ as.character(KITCHEN)
+  ))
+twentyyr_data_clean$KITCHEN <- as.factor(twentyyr_data_clean$KITCHEN)
+```
+```{r}
+#MARST
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(MARST = case_when(
+    MARST == "1" ~ "Married, spouse present",
+    MARST == "2" ~ "Married, spouse absent",
+    MARST == "3" ~ "Separated",
+    MARST == "4" ~ "Divorced",
+    MARST == "5" ~ "Widowed",
+    MARST == "6" ~ "Never married/single",
+    MARST == "9" ~ "Blank, missing",
+    TRUE ~ as.character(MARST)
+  ))
+twentyyr_data_clean$MARST <- as.factor(twentyyr_data_clean$MARST)
+```
+```{r}
+#RACE
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(RACE = case_when(
+    RACE == "1" ~ "White",
+    RACE == "2" ~ "Black/African American",
+    RACE == "3" ~ "American Indian or Alaska Native",
+    RACE == "4" ~ "Chinese",
+    RACE == "5" ~ "Japanese",
+    RACE == "6" ~ "Other Asian or Pacific Islander",
+    RACE == "7" ~ "Other race, nec",
+    RACE == "8" ~ "Two major races",
+    RACE == "9" ~ "Three or more major races",
+    TRUE ~ as.character(RACE) 
+  ))
+twentyyr_data_clean$RACE <- as.factor(twentyyr_data_clean$RACE)
+```
+```{r}
+#EMPSTAT
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(EMPSTAT = case_when(
+    EMPSTAT == "1" ~ "Employed",
+    EMPSTAT == "2" ~ "Unemployed",
+    EMPSTAT == "3" ~ "Not in labour force",
+    TRUE ~ as.character(EMPSTAT) 
+  ))
 
-# Assuming the rest of the variables and the analysis you want to perform is the same
+twentyyr_data_clean$EMPSTAT <- as.factor(twentyyr_data_clean$EMPSTAT)
+```
 
-# Calculate mean and standard deviation of INCTOT
-mean_inctot <- mean(rent_data_2022$INCTOT, na.rm = TRUE)
-sd_inctot <- sd(rent_data_2022$INCTOT, na.rm = TRUE)
-
-# Determine the range for INCTOT based on mean ± 3SD
-lower_bound <- mean_inctot - 3 * sd_inctot
-upper_bound <- mean_inctot + 3 * sd_inctot
-
-# Filter rent_data_2022 to keep only the desired range of INCTOT
-filtered_data <- rent_data_2022[rent_data_2022$INCTOT >= lower_bound & rent_data_2022$INCTOT <= upper_bound, ]
-
-# Recreate log-transformed variables within this filtered dataset
-filtered_data$new_rent <- log(filtered_data$RENTGRS)
-filtered_data$new_income <- log(filtered_data$INCTOT)
-
-filtered_data <- filtered_data %>%
-  dplyr::mutate(
-    new_rent = ifelse(is.infinite(new_rent) | is.nan(new_rent), NA, new_rent),
-    new_income = ifelse(is.infinite(new_income) | is.nan(new_income), NA, new_income)
-  ) %>%
-  # Remove any rows with NA in key variables
-  dplyr::filter(complete.cases(new_rent, new_income, KITCHEN, ROOMS, NFAMS, AGE, MARST, RACE, EMPSTAT, FTOTINC, POVERTY))
+#### 1. extract 2022 dataset 2. take log of rentgrs and inctot and delete outliner +/- 3SD 3. lm()
+```{r}
+# Extracting the 2022 data
+# If the correct column name is 'Year' or 'YEAR', use that instead:
+data_2022 <- twentyyr_data_clean[twentyyr_data_clean$YEAR == 2022, ]
 
 
-# Fit the regression model using the filtered data
-enhanced_model_2 <- lm(new_rent ~ new_income + REGION_CLASSIFIED + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + POVERTY, data = filtered_data)
+# Filter out non-positive values before log transformation
+data_2022 <- data_2022[data_2022$RENTGRS > 0 & data_2022$INCTOT > 0, ]
 
-# Summarize the model
-summary(enhanced_model_2)
+# Apply log transformation
+data_2022$log_RENTGRS <- log(data_2022$RENTGRS)
+data_2022$log_INCTOT <- log(data_2022$INCTOT)
 
-# Plot residuals vs fitted values
-library(ggplot2)
-ggplot(enhanced_model_2, aes(x = .fitted, y = .resid)) +
-  geom_point(alpha=0.1) +  
-  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +  
-  labs(x = "Fitted Values", y = "Residuals", title = "Residual vs. Fitted Plot") +
-  theme_minimal()
+# Calculating means and standard deviations for the log-transformed columns
+mean_log_RENTGRS <- mean(data_2022$log_RENTGRS, na.rm = TRUE)
+sd_log_RENTGRS <- sd(data_2022$log_RENTGRS, na.rm = TRUE)
+mean_log_INCTOT <- mean(data_2022$log_INCTOT, na.rm = TRUE)
+sd_log_INCTOT <- sd(data_2022$log_INCTOT, na.rm = TRUE)
+
+
+# Defining lower and upper bounds for both variables
+lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
+ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
+lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
+ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
+
+# Filtering out outliers
+data_2022_clean <- data_2022[data_2022$log_RENTGRS >= lb_log_RENTGRS & data_2022$log_RENTGRS <= ub_log_RENTGRS & 
+                             data_2022$log_INCTOT >= lb_log_INCTOT & data_2022$log_INCTOT <= ub_log_INCTOT, ]
+```
+
+```{r}
+# Fit the multiple linear regression model with the additional predictors
+mlr_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT, data = data_2022_clean)
+
+```
+```{r}
+# Calculate residuals and fitted values
+residuals_2022 <- resid(mlr_model_2022)
+fitted_values_2022 <- fitted(mlr_model_2022)
+
+# Create a residual plot
+plot(fitted_values_2022, residuals_2022, 
+     xlab = "Fitted Values", ylab = "Residuals",
+     main = "Residual Plot", pch = 20)
+abline(h = 0, col = "red") # Adds a horizontal line at 0
+
 ```
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Twenty years trend
+```{r}
+median_twentyyr_data_clean <- twentyyr_data_clean %>%
+  group_by(YEAR, REGION_CLASSIFIED) %>%
+  summarize(median_rent = median(RENTGRS, na.rm = TRUE), .groups = 'drop') %>%
+  ungroup()
+
+ggplot(median_twentyyr_data_clean, aes(x = YEAR, y = median_rent, color = REGION_CLASSIFIED)) +
+  geom_line() + 
+  geom_point() + 
+  theme_minimal() + 
+  labs(title = "Change of Median Rent by Year",
+       x = "Year",
+       y = "Median Rent") +
+  scale_x_continuous(breaks = unique(median_twentyyr_data_clean$YEAR))+
+  theme(axis.text.x = element_text(size = 5)) 
 ```
+#### regreesion 
+
+
+
 
 
 

@@ -33,6 +33,7 @@ We have highlighted all key dependent variables (RENTGRS) and independent variab
 | **INCTOT**   | Total personal income             |
 | FTOTINC  | Total family income                   |
 | POVERTY  | Poverty status                        |
+| REGION   | Geographical part of America          |
 
 
 ## Describe any cleaning you had to do for your data.
@@ -45,62 +46,82 @@ We have highlighted all key dependent variables (RENTGRS) and independent variab
 - Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. The following table shows the variables we processed:
 * Given the vast size of the original dataset, which includes millions of records, we opted to remove these entries directly. This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.
 
-| Variable     | Description                     | Notes                                                                                                   |
-|---------------|--------------------|-------------------------------------|
-| **INCTOT**   | Total personal income           | Specific codes detailed below:                                                                          |
-|              |                                 | 0000001 = \$1 or break even (2000, 2005-onward ACS and PRCS)                                            |
-|              |                                 | 9999999 = N/A                                                                                           |
-|              |                                 | 9999998 = Unknown                                                                                       |
-| **FTOTINC**  | Total family income             | Specific codes detailed below:                                                                          |
-|              |                                 | -000001 = Net loss (1950)                                                                               |
-|              |                                 | 9999998 = Not ascertained (1950)                                                                        |
-|              |                                 | 9999999 = N/A                                                                                           |
-| **KITCHEN**  | Kitchen or cooking facilities   | 0 = N/A                                                                                                 |
-| **ROOMS**    | Number of rooms                 | 00 = N/A                                                                                                |                                                            |
-| **POVERTY**  | Poverty status                  | 000 = N/A                                                                                               |
-| **EMPSTATA**  | Employment status            | Specific codes detailed below:                                                                          |
-|              |                                 | 0 = Missing value                                                                               |
-|              |                                 | 9 = Unknown/Illegible
+| Variable     | Description                           | Notes                                                                                                   |
+|--------------|---------------------------------------|---------------------------------------------------------------------------------------------------------|
+| **INCTOT**   | Total personal income                 | Specific codes detailed below:                                                                          |
+|              |                                       | 0000001 = $1 or break even (2000, 2005-onward ACS and PRCS)                                             |
+|              |                                       | 9999999 = N/A                                                                                           |
+|              |                                       | 9999998 = Unknown                                                                                       |
+| **FTOTINC**  | Total family income                   | Specific codes detailed below:                                                                          |
+|              |                                       | -000001 = Net loss (1950)                                                                               |
+|              |                                       | 9999998 = Not ascertained (1950)                                                                        |
+|              |                                       | 9999999 = N/A                                                                                           |
+| **KITCHEN**  | Kitchen or cooking facilities         | 0 = N/A                                                                                                 |
+| **ROOMS**    | Number of rooms                       | 00 = N/A                                                                                                |
+| **POVERTY**  | Poverty status                        | 000 = N/A                                                                                               |
+| **EMPSTATA** | Employment status                     | Specific codes detailed below:                                                                          |
+|              |                                       | 0 = Missing value                                                                                       |
+|              |                                       | 9 = Unknown/Illegible                                                                                   |
+| **STATE**    | Geographic state identifier           | Specific codes detailed below:                                                                          |
+|              |                                       | 91 = Overseas Military/Military Installations                                                           |
+|              |                                       | 92 = PUMA boundaries cross state lines - Metro sample                                                   |
+|              |                                       | 97 = State not identified                                                                               |
+|              |                                       | 99 = Not identified                                                                                     |
 
 - Recode certain variables. We modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values.
 The following table:
 The table below summarizes all variables that possess this characteristic:
 
-| Variable   | Description                                | Notes                                                             |
-|------------|--------------------------------------------|-------------------------------------------------------------------|
-| **INCTOT**     | Total personal income                      | Specific codes detailed below:                                    |
-|            |                                            | -009995 = -$9,900 (1980)                                           |
-|            |                                            | -000001 = Net loss (1950)                                          |
-|            |                                            | FTOTINC-000001 = Net loss (1950)                                   |
-| **KITCHEN**    | Kitchen facilities                         | 0 = N/A                                                            |
-|            |                                            | 1 = No                                                            |
-|            |                                            | 2 = No, or shared use                                              |
-|            |                                            | 3 = Yes, shared use                                                |
-|            |                                            | 4 = Yes (shared or exclusive use)                                  |
-|            |                                            | 5 = Yes, exclusive use                                             |
-| **MARST**      | Marital status                             | 1 = Married, spouse present                                        |
-|            |                                            | 2 = Married, spouse absent                                         |
-|            |                                            | 3 = Separated                                                      |
-|            |                                            | 4 = Divorced                                                       |
-|            |                                            | 5 = Widowed                                                        |
-|            |                                            | 6 = Never married/single                                           |
-|            |                                            | 9 = Blank, missing                                                 |
-| **RACE**       | Race                                       | 1 = White                                                          |
-|            |                                            | 2 = Black/African American                                         |
-|            |                                            | 3 = American Indian or Alaska Native                               |
-|            |                                            | 4 = Chinese                                                        |
-|            |                                            | 5 = Japanese                                                       |
-|            |                                            | 6 = Other Asian or Pacific Islander                                |
-|            |                                            | 7 = Other race, nec                                                |
-|            |                                            | 8 = Two major races                                                |
-|            |                                            | 9 = Three or more major races                                      |
-| **POVERTY**    | Poverty levels                             | 001 = 1 percent or less of poverty threshold (including 0 or negative income) |
-|            |                                            | 501 = 501 percent or more of poverty threshold                     |
-| **EMPSTAT**       | Employment status                                       | 1 = Employed                                                       |
-|            |                                            | 2 = Unemployed                                         |
-|            |                                            | 3 = Not in the labor force                               |
+| Variable     | Description                               | Notes                                                                 |
+|--------------|-------------------------------------------|-----------------------------------------------------------------------|
+| **INCTOT**   | Total personal income                     | Specific codes detailed below:                                        |
+|              |                                           | -009995 = -$9,900 (1980)                                              |
+|              |                                           | -000001 = Net loss (1950)                                             |
+|              |                                           | FTOTINC-000001 = Net loss (1950)                                      |
+| **KITCHEN**  | Kitchen facilities                        | 0 = N/A                                                               |
+|              |                                           | 1 = No                                                                |
+|              |                                           | 2 = No, or shared use                                                 |
+|              |                                           | 3 = Yes, shared use                                                   |
+|              |                                           | 4 = Yes (shared or exclusive use)                                     |
+|              |                                           | 5 = Yes, exclusive use                                                |
+| **MARST**    | Marital status                            | 1 = Married, spouse present                                           |
+|              |                                           | 2 = Married, spouse absent                                            |
+|              |                                           | 3 = Separated                                                         |
+|              |                                           | 4 = Divorced                                                          |
+|              |                                           | 5 = Widowed                                                           |
+|              |                                           | 6 = Never married/single                                              |
+|              |                                           | 9 = Blank, missing                                                    |
+| **RACE**     | Race                                      | 1 = White                                                             |
+|              |                                           | 2 = Black/African American                                            |
+|              |                                           | 3 = American Indian or Alaska Native                                  |
+|              |                                           | 4 = Chinese                                                           |
+|              |                                           | 5 = Japanese                                                          |
+|              |                                           | 6 = Other Asian or Pacific Islander                                   |
+|              |                                           | 7 = Other race, nec                                                   |
+|              |                                           | 8 = Two major races                                                   |
+|              |                                           | 9 = Three or more major races                                         |
+| **POVERTY**  | Poverty levels                            | 001 = 1 percent or less of poverty threshold (including 0 or negative income) |
+|              |                                           | 501 = 501 percent or more of poverty threshold                        |
+| **EMPSTAT**  | Employment status                         | 1 = Employed                                                          |
+|              |                                           | 2 = Unemployed                                                        |
+|              |                                           | 3 = Not in the labor force                                            |
+| **REGION**   | Geographic region and division            | Specific codes detailed below:                                        |
+|              |                                           | 11 = New England Division (Northeast)                                 |
+|              |                                           | 12 = Middle Atlantic Division (Northeast)                             |
+|              |                                           | 13 = Mixed Northeast Divisions (Northeast)                                        |
+|              |                                           | 21 = East North Central Division (Midwest)                            |
+|              |                                           | 22 = West North Central Division (Midwest)                            |
+|              |                                           | 23 = Mixed Midwestern Divisions (Midwest)                                       |
+|              |                                           | 31 = South Atlantic Division (South)                                  |
+|              |                                           | 32 = East South Central Division (South)                              |
+|              |                                           | 33 = West South Central Division (South)                              |
+|              |                                           | 34 = Mixed Southern Divisions (South)                                        |
+|              |                                           | 41 = Mountain Division (West)                                         |
+|              |                                           | 42 = Pacific Division (West)                                          |
+|              |                                           | 43 = Mixed Western Divisions (West)                                         |
 
-- The original data source provided datasets for specific years, not in a continuous sequence. Our primary focus was on the latest data from 2022 for initial research. However, we plan to expand our analysis by incorporating data from 2019 and other years, allowing for comparative studies across different years.
+
+- The original data source provided datasets for specific years, not in a continuous sequence. Our primary focus was on the latest data from 2022 for initial research. However, we plan to expand our analysis by incorporating data from 1990s, allowing for comparative studies of near 20 years.
 
 ### Summary of numerical variables we have right now 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -316,4 +337,3 @@ ggplot(marst_counts, aes(x = factor(MARST), y = Count, fill = factor(MARST))) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-  
