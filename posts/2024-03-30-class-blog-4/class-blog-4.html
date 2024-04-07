@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="">
+<meta name="author" content="Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi">
 <meta name="dcterms.date" content="2024-03-30">
 
 <title>MA [46]15 Final Project by Team 9 - Class blog 4</title>
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -151,6 +117,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi </p>
+            </div>
+    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
@@ -179,58 +151,215 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="roughly-see-the-relationship-between-income-and-rent" class="level2">
-<h2 class="anchored" data-anchor-id="roughly-see-the-relationship-between-income-and-rent">Roughly see the relationship between income and rent</h2>
+<section id="roughly-see-the-relationship-between-predictor-and-response-variable" class="level2">
+<h2 class="anchored" data-anchor-id="roughly-see-the-relationship-between-predictor-and-response-variable">Roughly see the relationship between predictor and response variable</h2>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="class-blog-4_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>-The horizontal axis represents the total income (INCTOT), which is the predictor. -The vertical axis represents the rent paid (RENTGRS), which is the response. -The purpose of creating this scatter plot is to assess whether there is a linear or non-linear relationship between total income and rent paid in a general way. -There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels. -The plot does not clearly show a distinct linear trend, suggesting that the relationship between these variables might be non-linear</p>
+<ul>
+<li><p>The horizontal axis represents the total income (INCTOT), which is the predictor.</p></li>
+<li><p>The vertical axis represents the rent paid (RENTGRS), which is the response.</p></li>
+<li><p>The purpose of creating this scatter plot is to assess whether there is a linear or non-linear relationship between total income and rent paid in a general way.</p></li>
+<li><p>There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.</p></li>
+<li><p>The plot does not clearly show a distinct linear trend, suggesting that the relationship between these variables might be non-linear</p></li>
+</ul>
 </section>
 <section id="simple-linear-model" class="level2">
 <h2 class="anchored" data-anchor-id="simple-linear-model">Simple linear model</h2>
+<p>The output of fitting a simple linear model will get the summary like following:</p>
+<section id="regression-coefficients-table" class="level3">
+<h3 class="anchored" data-anchor-id="regression-coefficients-table">Regression Coefficients Table:</h3>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 5
-  term          estimate std.error statistic   p.value
-  &lt;chr&gt;            &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 (Intercept) 1370.      14.2           96.2 0        
-2 INCTOT         0.00532  0.000218      24.4 2.29e-125</code></pre>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">1369.9952048</td>
+<td style="text-align: right;">14.2472905</td>
+<td style="text-align: right;">96.15830</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">0.0053213</td>
+<td style="text-align: right;">0.0002182</td>
+<td style="text-align: right;">24.39103</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic   p.value    df  logLik    AIC    BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1    0.0902        0.0901  896.      595. 2.29e-125     1 -49310. 98626. 98646.
-# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
 </div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,001 × 8
-   RENTGRS INCTOT .fitted  .resid     .hat .sigma     .cooksd .std.resid
-     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
- 1    1200      0   1370.  -170.  0.000253   896. 0.00000455     -0.190 
- 2     253  49200   1632. -1379.  0.000174   896. 0.000206       -1.54  
- 3    3000  89900   1848.  1152.  0.000326   896. 0.000269        1.29  
- 4    2242   1500   1378.   864.  0.000246   896. 0.000114        0.964 
- 5    1403  34000   1551.  -148.  0.000168   896. 0.00000228     -0.165 
- 6    1450   2000   1381.    69.4 0.000244   896. 0.000000731     0.0774
- 7    2089  10300   1425.   664.  0.000212   896. 0.0000584       0.741 
- 8    1103  50000   1636.  -533.  0.000175   896. 0.0000310      -0.595 
- 9     968  50000   1636.  -668.  0.000175   896. 0.0000486      -0.746 
-10    2637   6000   1402.  1235.  0.000228   896. 0.000216        1.38  
-# ℹ 5,991 more rows</code></pre>
+</section>
+<section id="model-fit-statistics-table" class="level3">
+<h3 class="anchored" data-anchor-id="model-fit-statistics-table">Model Fit Statistics Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.0902228</td>
+<td style="text-align: right;">0.0900712</td>
+<td style="text-align: right;">896.1935</td>
+<td style="text-align: right;">594.9223</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-49309.79</td>
+<td style="text-align: right;">98625.57</td>
+<td style="text-align: right;">98645.67</td>
+<td style="text-align: right;">4818173576</td>
+<td style="text-align: right;">5999</td>
+<td style="text-align: right;">6001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="residuals-and-related-statistics-table" class="level3">
+<h3 class="anchored" data-anchor-id="residuals-and-related-statistics-table">Residuals and Related Statistics Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 9%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 13%">
+<col style="width: 11%">
+<col style="width: 13%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">RENTGRS</th>
+<th style="text-align: right;">INCTOT</th>
+<th style="text-align: right;">.fitted</th>
+<th style="text-align: right;">.resid</th>
+<th style="text-align: right;">.hat</th>
+<th style="text-align: right;">.sigma</th>
+<th style="text-align: right;">.cooksd</th>
+<th style="text-align: right;">.std.resid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1200</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1369.995</td>
+<td style="text-align: right;">-169.99520</td>
+<td style="text-align: right;">0.0002527</td>
+<td style="text-align: right;">896.2655</td>
+<td style="text-align: right;">0.0000045</td>
+<td style="text-align: right;">-0.1897098</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">253</td>
+<td style="text-align: right;">49200</td>
+<td style="text-align: right;">1631.803</td>
+<td style="text-align: right;">-1378.80263</td>
+<td style="text-align: right;">0.0001739</td>
+<td style="text-align: right;">896.0913</td>
+<td style="text-align: right;">0.0002059</td>
+<td style="text-align: right;">-1.5386438</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3000</td>
+<td style="text-align: right;">89900</td>
+<td style="text-align: right;">1848.379</td>
+<td style="text-align: right;">1151.62090</td>
+<td style="text-align: right;">0.0003256</td>
+<td style="text-align: right;">896.1448</td>
+<td style="text-align: right;">0.0002690</td>
+<td style="text-align: right;">1.2852229</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2242</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">1377.977</td>
+<td style="text-align: right;">864.02286</td>
+<td style="text-align: right;">0.0002461</td>
+<td style="text-align: right;">896.1988</td>
+<td style="text-align: right;">0.0001144</td>
+<td style="text-align: right;">0.9642217</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1403</td>
+<td style="text-align: right;">34000</td>
+<td style="text-align: right;">1550.919</td>
+<td style="text-align: right;">-147.91904</td>
+<td style="text-align: right;">0.0001676</td>
+<td style="text-align: right;">896.2662</td>
+<td style="text-align: right;">0.0000023</td>
+<td style="text-align: right;">-0.1650664</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1450</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">1380.638</td>
+<td style="text-align: right;">69.36222</td>
+<td style="text-align: right;">0.0002439</td>
+<td style="text-align: right;">896.2678</td>
+<td style="text-align: right;">0.0000007</td>
+<td style="text-align: right;">0.0774059</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <ul>
 <li>The R-squared value is 0.09, which means that approximately 9% of the variability in the rent paid (RENTGRS) can be explained by the total income (INCTOT). This is a relatively low R-squared value, indicating that the linear model does not explain a large portion of the variability in the rent.But it is fair, because we only include one predictor here.</li>
 <li>The statistic value is 594, which is extremely high. This suggests that the overall significance of the model is strong, despite the low R-squared. This could be due to a large sample size, which can make even small relationships appear statistically significant.</li>
 </ul>
+</section>
 <section id="residual-plot" class="level3">
 <h3 class="anchored" data-anchor-id="residual-plot">Residual plot</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="class-blog-4_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="class-blog-4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -240,90 +369,614 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="multiple-linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple linear regression</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>tidy_mlr <span class="ot">&lt;-</span> <span class="fu">tidy</span>(mlr_model)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tidy_mlr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 25 × 5
-   term                                   estimate  std.error statistic  p.value
-   &lt;chr&gt;                                     &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
- 1 (Intercept)                          138.       141.          0.978  3.28e- 1
- 2 INCTOT                                 0.000610   0.000290    2.10   3.57e- 2
- 3 KITCHENYes (shared or exclusive use)  -6.18      90.9        -0.0680 9.46e- 1
- 4 ROOMS                                 46.5        5.37        8.66   6.15e-18
- 5 NFAMS                                132.        13.7         9.65   6.82e-22
- 6 AGE                                   -2.08       0.752      -2.76   5.81e- 3
- 7 MARSTMarried, spouse absent           49.7       68.5         0.725  4.69e- 1
- 8 MARSTMarried, spouse present         160.        35.4         4.52   6.45e- 6
- 9 MARSTNever married/single            105.        36.4         2.89   3.82e- 3
-10 MARSTSeparated                        -8.89      67.7        -0.131  8.95e- 1
-# ℹ 15 more rows</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>glance_mlr <span class="ot">&lt;-</span> <span class="fu">glance</span>(mlr_model)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(glance_mlr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic p.value    df  logLik    AIC    BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-1     0.284         0.281  797.      98.6       0    24 -48593. 97238. 97412.
-# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>augmented_mlr <span class="ot">&lt;-</span> <span class="fu">augment</span>(mlr_model)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(augmented_mlr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6,001 × 17
-   RENTGRS INCTOT KITCHEN          ROOMS NFAMS   AGE MARST RACE  EMPSTAT FTOTINC
-     &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;     &lt;dbl&gt;
- 1    1200      0 Yes (shared or …     4     1    16 Neve… Othe… Not in…   37800
- 2     253  49200 Yes (shared or …     3     1    63 Wido… White Employ…   49200
- 3    3000  89900 Yes (shared or …     7     1    76 Marr… White Employ…   98700
- 4    2242   1500 Yes (shared or …     5     4    24 Neve… White Not in…    1500
- 5    1403  34000 Yes (shared or …     3     1    54 Marr… White Employ…   79000
- 6    1450   2000 Yes (shared or …     3     1    33 Neve… Othe… Not in…    2000
- 7    2089  10300 Yes (shared or …     6     1    17 Neve… White Employ…   38300
- 8    1103  50000 Yes (shared or …     6     1    39 Neve… Othe… Employ…   50000
- 9     968  50000 Yes (shared or …     4     1    40 Divo… White Employ…   65600
-10    2637   6000 Yes (shared or …     7     1    23 Marr… Two … Not in…  215000
-# ℹ 5,991 more rows
-# ℹ 7 more variables: REGION_CLASSIFIED &lt;chr&gt;, .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;,
-#   .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<ul>
-<li>The R-squared value is 0.28, indicating that about 28% of the variability in the dependent variable is explained by the model. This is a significant improvement over the simple linear model previously discussed, suggesting that including more variables helps explain the variance in the dependent variable more effectively.</li>
-<li>The adjusted R-squared value is 0.2807292, which is very close to the R-squared value.Since the adjusted R-squared is almost identical to the R-squared, this implies that the additional predictors are indeed contributing valuable information.</li>
-<li>The statistic value is 98.57, which is very high and the p-value is 0, indicating that the model is statistically significant. It means that the likelihood of the regression results being due to chance is extremely low.</li>
-</ul>
-<section id="multicollinearity-concerns" class="level4">
-<h4 class="anchored" data-anchor-id="multicollinearity-concerns">Multicollinearity concerns</h4>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                      GVIF Df GVIF^(1/(2*Df))
-INCTOT            2.239087  1        1.496358
-KITCHEN           1.026783  1        1.013303
-ROOMS             1.099700  1        1.048666
-NFAMS             1.103313  1        1.050387
-AGE               1.849885  1        1.360105
-MARST             1.876546  5        1.064966
-RACE              1.198654  8        1.011389
-EMPSTAT           1.350055  2        1.077923
-FTOTINC           2.181999  1        1.477159
-REGION_CLASSIFIED 1.129306  3        1.020474</code></pre>
-</div>
-</div>
-<ul>
-<li>Through the result, INCTOT (Total Income) and FTOTINC (Family Total Income) stand out as having higher multicollinearity indicators than the others. While considering the what constitutes the Family total income, it is fair multicollinearity happens. So we decide to exclude the FTOTINC in our model. With a GVIF^(1/(2*Df)) value of INCTOT approximately 1.50 and FTOTINC is about 1.47, a VIF between 1 and 5 suggests moderate indication of multicollinearity.</li>
-<li>Therefore, we decide to exclude the FTOTINC to avioud the multicollineariity problem.</li>
-</ul>
-</section>
-<section id="residual-plot-1" class="level4">
-<h4 class="anchored" data-anchor-id="residual-plot-1">Residual plot:</h4>
+<p>We strive to enhance model accuracy by incorporating additional control variables into the model, encompassing both categorical and numerical variables. These control variables help mitigate bias, isolate effects, and enhance generalization. Subsequently, we present the correlation matrix, which provides valuable insights into the relationships between numerical variables.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="class-blog-4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">INCTOT</th>
+<th style="text-align: right;">ROOMS</th>
+<th style="text-align: right;">NFAMS</th>
+<th style="text-align: right;">AGE</th>
+<th style="text-align: right;">FTOTINC</th>
+<th style="text-align: right;">RENTGRS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">-0.0284713</td>
+<td style="text-align: right;">-0.0358320</td>
+<td style="text-align: right;">0.0418338</td>
+<td style="text-align: right;">0.6905567</td>
+<td style="text-align: right;">0.3003711</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">-0.0284713</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.1409337</td>
+<td style="text-align: right;">-0.0610423</td>
+<td style="text-align: right;">0.1050778</td>
+<td style="text-align: right;">0.1457684</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">-0.0358320</td>
+<td style="text-align: right;">0.1409337</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">-0.1266306</td>
+<td style="text-align: right;">-0.1053792</td>
+<td style="text-align: right;">0.0966248</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">0.0418338</td>
+<td style="text-align: right;">-0.0610423</td>
+<td style="text-align: right;">-0.1266306</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">-0.0521530</td>
+<td style="text-align: right;">-0.0837413</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FTOTINC</td>
+<td style="text-align: right;">0.6905567</td>
+<td style="text-align: right;">0.1050778</td>
+<td style="text-align: right;">-0.1053792</td>
+<td style="text-align: right;">-0.0521530</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.4292341</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RENTGRS</td>
+<td style="text-align: right;">0.3003711</td>
+<td style="text-align: right;">0.1457684</td>
+<td style="text-align: right;">0.0966248</td>
+<td style="text-align: right;">-0.0837413</td>
+<td style="text-align: right;">0.4292341</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>Heterskedasticity still exits as the spread of the residuals appears to be increasing with the fitted values. According to the diagram, the residuals seem to form a pattern (rather than being randomly dispersed), it indicates that the relationship between the predictors and the response variable is not entirely linear.</p>
+<ul>
+<li><p>INCTOT and FTOINC have a strong positive correlation, indicating that as individual income rises, family income tends to rise in concert suggesting a possible overlap or direct relationship between these two variables in the dataset. So we need to care about the multicollineaity problem while fitting model.</p></li>
+<li><p>ROOMS and NFAMS display minor positive correlations to RENTGRS. This might suggest that properties with more rooms may house more families and potentially lead to higher rents.</p></li>
+<li><p>Notably, Age has a moderate negative correlation with Number of Families, which could hint at younger populations having larger family sizes or vice versa, but this is not a strong relationship. Still, we should observe the multicollineaity problem while fitting model.</p></li>
+</ul>
+<section id="regression-coefficients-table-1" class="level3">
+<h3 class="anchored" data-anchor-id="regression-coefficients-table-1">Regression Coefficients Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 45%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">138.1185777</td>
+<td style="text-align: right;">141.2714323</td>
+<td style="text-align: right;">0.9776823</td>
+<td style="text-align: right;">0.3282711</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">0.0006097</td>
+<td style="text-align: right;">0.0002902</td>
+<td style="text-align: right;">2.1007863</td>
+<td style="text-align: right;">0.0357015</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">KITCHENYes (shared or exclusive use)</td>
+<td style="text-align: right;">-6.1829776</td>
+<td style="text-align: right;">90.8767566</td>
+<td style="text-align: right;">-0.0680370</td>
+<td style="text-align: right;">0.9457585</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">46.4907520</td>
+<td style="text-align: right;">5.3702515</td>
+<td style="text-align: right;">8.6570903</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">132.1944360</td>
+<td style="text-align: right;">13.6931462</td>
+<td style="text-align: right;">9.6540586</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">-2.0758142</td>
+<td style="text-align: right;">0.7523351</td>
+<td style="text-align: right;">-2.7591615</td>
+<td style="text-align: right;">0.0058126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTMarried, spouse absent</td>
+<td style="text-align: right;">49.6811716</td>
+<td style="text-align: right;">68.5403491</td>
+<td style="text-align: right;">0.7248456</td>
+<td style="text-align: right;">0.4685751</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTMarried, spouse present</td>
+<td style="text-align: right;">159.9536213</td>
+<td style="text-align: right;">35.4269714</td>
+<td style="text-align: right;">4.5150239</td>
+<td style="text-align: right;">0.0000065</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTNever married/single</td>
+<td style="text-align: right;">105.3336893</td>
+<td style="text-align: right;">36.3950074</td>
+<td style="text-align: right;">2.8941796</td>
+<td style="text-align: right;">0.0038153</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTSeparated</td>
+<td style="text-align: right;">-8.8902061</td>
+<td style="text-align: right;">67.6504230</td>
+<td style="text-align: right;">-0.1314139</td>
+<td style="text-align: right;">0.8954523</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTWidowed</td>
+<td style="text-align: right;">155.3446449</td>
+<td style="text-align: right;">54.6823660</td>
+<td style="text-align: right;">2.8408545</td>
+<td style="text-align: right;">0.0045145</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEBlack/African American</td>
+<td style="text-align: right;">298.3828456</td>
+<td style="text-align: right;">95.0013295</td>
+<td style="text-align: right;">3.1408281</td>
+<td style="text-align: right;">0.0016929</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEChinese</td>
+<td style="text-align: right;">555.5828036</td>
+<td style="text-align: right;">124.8976462</td>
+<td style="text-align: right;">4.4483048</td>
+<td style="text-align: right;">0.0000088</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEJapanese</td>
+<td style="text-align: right;">600.4379460</td>
+<td style="text-align: right;">196.2637964</td>
+<td style="text-align: right;">3.0593413</td>
+<td style="text-align: right;">0.0022281</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEOther Asian or Pacific Islander</td>
+<td style="text-align: right;">457.2962479</td>
+<td style="text-align: right;">99.9161477</td>
+<td style="text-align: right;">4.5768002</td>
+<td style="text-align: right;">0.0000048</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEOther race, nec</td>
+<td style="text-align: right;">326.8017293</td>
+<td style="text-align: right;">96.1126737</td>
+<td style="text-align: right;">3.4001939</td>
+<td style="text-align: right;">0.0006778</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEThree or more major races</td>
+<td style="text-align: right;">423.9569703</td>
+<td style="text-align: right;">136.5156638</td>
+<td style="text-align: right;">3.1055555</td>
+<td style="text-align: right;">0.0019081</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACETwo major races</td>
+<td style="text-align: right;">344.3391572</td>
+<td style="text-align: right;">95.2001877</td>
+<td style="text-align: right;">3.6170008</td>
+<td style="text-align: right;">0.0003005</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEWhite</td>
+<td style="text-align: right;">374.0737917</td>
+<td style="text-align: right;">91.7421010</td>
+<td style="text-align: right;">4.0774496</td>
+<td style="text-align: right;">0.0000461</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMPSTATNot in labour force</td>
+<td style="text-align: right;">-16.9682582</td>
+<td style="text-align: right;">25.5211603</td>
+<td style="text-align: right;">-0.6648702</td>
+<td style="text-align: right;">0.5061592</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EMPSTATUnemployed</td>
+<td style="text-align: right;">64.2293142</td>
+<td style="text-align: right;">54.6215828</td>
+<td style="text-align: right;">1.1758962</td>
+<td style="text-align: right;">0.2396832</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">FTOTINC</td>
+<td style="text-align: right;">0.0042445</td>
+<td style="text-align: right;">0.0001887</td>
+<td style="text-align: right;">22.4923166</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REGION_CLASSIFIEDNORTHEAST</td>
+<td style="text-align: right;">388.6103788</td>
+<td style="text-align: right;">35.8876194</td>
+<td style="text-align: right;">10.8285360</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIEDSOUTH</td>
+<td style="text-align: right;">252.4183530</td>
+<td style="text-align: right;">31.3606818</td>
+<td style="text-align: right;">8.0488796</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REGION_CLASSIFIEDWEST</td>
+<td style="text-align: right;">676.2307407</td>
+<td style="text-align: right;">33.2843111</td>
+<td style="text-align: right;">20.3168015</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="model-fit-statistics-table-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-fit-statistics-table-1">Model Fit Statistics Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2836063</td>
+<td style="text-align: right;">0.2807292</td>
+<td style="text-align: right;">796.7908</td>
+<td style="text-align: right;">98.57423</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">-48592.76</td>
+<td style="text-align: right;">97237.51</td>
+<td style="text-align: right;">97411.71</td>
+<td style="text-align: right;">3794016209</td>
+<td style="text-align: right;">5976</td>
+<td style="text-align: right;">6001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="residuals-and-related-statistics-table-1" class="level3">
+<h3 class="anchored" data-anchor-id="residuals-and-related-statistics-table-1">Residuals and Related Statistics Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 3%">
+<col style="width: 3%">
+<col style="width: 14%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 3%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">RENTGRS</th>
+<th style="text-align: right;">INCTOT</th>
+<th style="text-align: left;">KITCHEN</th>
+<th style="text-align: right;">ROOMS</th>
+<th style="text-align: right;">NFAMS</th>
+<th style="text-align: right;">AGE</th>
+<th style="text-align: left;">MARST</th>
+<th style="text-align: left;">RACE</th>
+<th style="text-align: left;">EMPSTAT</th>
+<th style="text-align: right;">FTOTINC</th>
+<th style="text-align: left;">REGION_CLASSIFIED</th>
+<th style="text-align: right;">.fitted</th>
+<th style="text-align: right;">.resid</th>
+<th style="text-align: right;">.hat</th>
+<th style="text-align: right;">.sigma</th>
+<th style="text-align: right;">.cooksd</th>
+<th style="text-align: right;">.std.resid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1200</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Never married/single</td>
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: left;">Not in labour force</td>
+<td style="text-align: right;">37800</td>
+<td style="text-align: left;">SOUTH</td>
+<td style="text-align: right;">1244.907</td>
+<td style="text-align: right;">-44.90653</td>
+<td style="text-align: right;">0.0031953</td>
+<td style="text-align: right;">796.8572</td>
+<td style="text-align: right;">0.0000004</td>
+<td style="text-align: right;">-0.0564495</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">253</td>
+<td style="text-align: right;">49200</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: left;">Widowed</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Employed</td>
+<td style="text-align: right;">49200</td>
+<td style="text-align: left;">SOUTH</td>
+<td style="text-align: right;">1293.490</td>
+<td style="text-align: right;">-1040.49010</td>
+<td style="text-align: right;">0.0041196</td>
+<td style="text-align: right;">796.7433</td>
+<td style="text-align: right;">0.0002833</td>
+<td style="text-align: right;">-1.3085492</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3000</td>
+<td style="text-align: right;">89900</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: left;">Married, spouse present</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Employed</td>
+<td style="text-align: right;">98700</td>
+<td style="text-align: left;">WEST</td>
+<td style="text-align: right;">2115.807</td>
+<td style="text-align: right;">884.19328</td>
+<td style="text-align: right;">0.0024677</td>
+<td style="text-align: right;">796.7751</td>
+<td style="text-align: right;">0.0001222</td>
+<td style="text-align: right;">1.1110649</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2242</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Never married/single</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Not in labour force</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: left;">WEST</td>
+<td style="text-align: right;">1989.299</td>
+<td style="text-align: right;">252.70115</td>
+<td style="text-align: right;">0.0034850</td>
+<td style="text-align: right;">796.8507</td>
+<td style="text-align: right;">0.0000141</td>
+<td style="text-align: right;">0.3177028</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1403</td>
+<td style="text-align: right;">34000</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: left;">Married, spouse present</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Employed</td>
+<td style="text-align: right;">79000</td>
+<td style="text-align: left;">WEST</td>
+<td style="text-align: right;">1857.811</td>
+<td style="text-align: right;">-454.81093</td>
+<td style="text-align: right;">0.0016027</td>
+<td style="text-align: right;">796.8357</td>
+<td style="text-align: right;">0.0000210</td>
+<td style="text-align: right;">-0.5712614</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1450</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">Never married/single</td>
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: left;">Not in labour force</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: left;">SOUTH</td>
+<td style="text-align: right;">1012.394</td>
+<td style="text-align: right;">437.60563</td>
+<td style="text-align: right;">0.0029432</td>
+<td style="text-align: right;">796.8373</td>
+<td style="text-align: right;">0.0000357</td>
+<td style="text-align: right;">0.5500202</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>The R-squared value is 0.28, indicating that about 28% of the variability in the dependent variable is explained by the model. This is a significant improvement over the simple linear model previously discussed, suggesting that including more variables helps explain the variance in the dependent variable more effectively.</p></li>
+<li><p>The adjusted R-squared value is 0.2807292, which is very close to the R-squared value.Since the adjusted R-squared is almost identical to the R-squared, this implies that the additional predictors are indeed contributing valuable information.</p></li>
+<li><p>The statistic value is 98.57, which is very high and the p-value is 0, indicating that the model is statistically significant. It means that the likelihood of the regression results being due to chance is extremely low.</p></li>
+</ul>
+</section>
+<section id="multicollinearity-concerns" class="level3">
+<h3 class="anchored" data-anchor-id="multicollinearity-concerns">Multicollinearity concerns</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">GVIF</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">GVIF^(1/(2*Df))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">2.239087</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.496358</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">KITCHEN</td>
+<td style="text-align: right;">1.026782</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.013303</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">1.099700</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.048666</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">1.103313</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.050387</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">1.849885</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.360105</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARST</td>
+<td style="text-align: right;">1.876545</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.064966</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACE</td>
+<td style="text-align: right;">1.198654</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.011389</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMPSTAT</td>
+<td style="text-align: right;">1.350056</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.077923</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FTOTINC</td>
+<td style="text-align: right;">2.181999</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.477159</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIED</td>
+<td style="text-align: right;">1.129306</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.020474</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>Through the result, INCTOT (Total Income) and FTOTINC (Family Total Income) stand out as having higher multicollinearity indicators than the others. While considering the what constitutes the Family total income, it is fair multicollinearity happens. So we decide to exclude the FTOTINC in our model. With a GVIF^(1/(2*Df)) value of INCTOT approximately 1.50 and FTOTINC is about 1.47, a VIF between 1 and 5 suggests moderate indication of multicollinearity.</p></li>
+<li><p>Therefore, we decide to exclude the FTOTINC to avioud the multicollineariity problem.</p></li>
+</ul>
+</section>
+<section id="residual-plot-1" class="level3">
+<h3 class="anchored" data-anchor-id="residual-plot-1">Residual plot:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="class-blog-4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Heterskedasticity still exits as the spread of the residuals appears to be increasing with the fitted values. According to the diagram, the residuals seem to form a pattern (rather than being randomly dispersed), it indicates that the relationship between the predictors and the response variable is not entirely linear.</li>
+</ul>
 </section>
 </section>
 <section id="log---log-model" class="level2">
@@ -333,7 +986,7 @@ REGION_CLASSIFIED 1.129306  3        1.020474</code></pre>
 <h3 class="anchored" data-anchor-id="rentgrsdistribution-of-logrentgrs">RENTGRS:distribution of log(RENTGRS)</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="class-blog-4_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+<p><img src="class-blog-4_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -341,83 +994,444 @@ REGION_CLASSIFIED 1.129306  3        1.020474</code></pre>
 <h3 class="anchored" data-anchor-id="inctot-distribution-of-loginctot">INCTOT: distribution of log(INCTOT)</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="class-blog-4_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="class-blog-4_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<section id="log-log-model" class="level4">
-<h4 class="anchored" data-anchor-id="log-log-model">Log-log model</h4>
-<p>Based on the previous MLR model, 1. we have applied a logarithmic transformation to both the rent and income variables to mitigate skewness in their distributions. But the problem is the logarithmic transformation necessitates all data points to be positive. Consequently, this has led to the exclusion of certain data samples that contained negative values. 2. previous models indicated the presence of numerous outliers within our dataset. To address this, we have refined our dataset to include only those records where rent and income fall within three standard deviations from their respective sample means to minimize the impact of extreme values on the model’s performance.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 24 × 5
-   term                                 estimate std.error statistic  p.value
-   &lt;chr&gt;                                   &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
- 1 (Intercept)                           5.14     0.123       41.9   0       
- 2 log_INCTOT                            0.133    0.00761     17.5   6.77e-67
- 3 KITCHENYes (shared or exclusive use) -0.00666  0.0605      -0.110 9.12e- 1
- 4 ROOMS                                 0.0418   0.00361     11.6   1.18e-30
- 5 NFAMS                                 0.0329   0.0101       3.25  1.15e- 3
- 6 AGE                                  -0.00358  0.000555    -6.45  1.21e-10
- 7 MARSTMarried, spouse absent           0.120    0.0464       2.59  9.56e- 3
- 8 MARSTMarried, spouse present          0.204    0.0234       8.69  4.69e-18
- 9 MARSTNever married/single             0.109    0.0241       4.54  5.85e- 6
-10 MARSTSeparated                        0.0318   0.0448       0.710 4.78e- 1
-# ℹ 14 more rows</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic   p.value    df logLik   AIC   BIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1     0.227         0.223 0.507      65.6 5.67e-266    23 -3813. 7675. 7839.
-# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5,167 × 16
-   log_RENTGRS log_INCTOT KITCHEN          ROOMS NFAMS   AGE MARST RACE  EMPSTAT
-         &lt;dbl&gt;      &lt;dbl&gt; &lt;fct&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;  
- 1        5.53      10.8  Yes (shared or …     3     1    63 Wido… White Employ…
- 2        8.01      11.4  Yes (shared or …     7     1    76 Marr… White Employ…
- 3        7.72       7.31 Yes (shared or …     5     4    24 Neve… White Not in…
- 4        7.25      10.4  Yes (shared or …     3     1    54 Marr… White Employ…
- 5        7.28       7.60 Yes (shared or …     3     1    33 Neve… Othe… Not in…
- 6        7.64       9.24 Yes (shared or …     6     1    17 Neve… White Employ…
- 7        7.01      10.8  Yes (shared or …     6     1    39 Neve… Othe… Employ…
- 8        6.88      10.8  Yes (shared or …     4     1    40 Divo… White Employ…
- 9        7.88       8.70 Yes (shared or …     7     1    23 Marr… Two … Not in…
-10        7.63       9.20 Yes (shared or …     3     1    61 Sepa… Blac… Not in…
-# ℹ 5,157 more rows
-# ℹ 7 more variables: REGION_CLASSIFIED &lt;chr&gt;, .fitted &lt;dbl&gt;, .resid &lt;dbl&gt;,
-#   .hat &lt;dbl&gt;, .sigma &lt;dbl&gt;, .cooksd &lt;dbl&gt;, .std.resid &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<ul>
-<li>The adjusted R-squared is 0.223. This value looks modest. In practical terms, it suggests that the model doesn’t explain a large portion of the variance in the logarithm of rent. But in this social science and economic contexts, however, it is not uncommon to have lower R-squared values due to the complexity of human behavior and multiple unobserved factors. So we believe it is acceptable.</li>
-<li>The p-value for the overall model is extremely low, which is good. It indicates that the model predictors, as a set, are statistically significantly associated with the response variable, the logarithm of rent.</li>
-<li>The sigma value is the standard deviation of the error terms and is lower. This suggests that the residuals in this model are less spread out, indicating a tighter fit of the model to the data. However, since the scale is different from the previous model (which was on a log scale), this improvement is difficult to directly compare.</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals and fitted values</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>residuals_2022 <span class="ot">&lt;-</span> <span class="fu">resid</span>(log_model_2022)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>fitted_values_2022 <span class="ot">&lt;-</span> <span class="fu">fitted</span>(log_model_2022)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a residual plot</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_values_2022, residuals_2022, </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residual Plot"</span>, <span class="at">pch =</span> <span class="dv">20</span>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="class-blog-4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-<ul>
-<li>The residuals appear to be centered around zero, which is good as it suggests no bias in the predictions.</li>
-<li>There is some evidence of heteroscedasticity as the residuals seem to fan out as the fitted values increase, which is common in non-transformed data.</li>
-<li>There are no clear patterns in the residuals, which suggests that the model catch the nonlinear relationships.</li>
-<li>This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model’s homoscedasticity.</li>
-</ul>
-
-
 </section>
+</section>
+<section id="log-log-model" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-model">Log-log model</h2>
+<p>Based on the previous MLR model, 1. we have applied a logarithmic transformation to both the rent and income variables to mitigate skewness in their distributions. But the problem is the logarithmic transformation necessitates all data points to be positive. Consequently, this has led to the exclusion of certain data samples that contained negative values.</p>
+<ol start="2" type="1">
+<li>previous models indicated the presence of numerous outliers within our dataset. To address this, we have refined our dataset to include only those records where rent and income fall within three standard deviations from their respective sample means to minimize the impact of extreme values on the model’s performance.</li>
+</ol>
+<section id="regression-coefficients-table-2" class="level3">
+<h3 class="anchored" data-anchor-id="regression-coefficients-table-2">Regression Coefficients Table</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 46%">
+<col style="width: 13%">
+<col style="width: 12%">
+<col style="width: 13%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">5.1366895</td>
+<td style="text-align: right;">0.1226201</td>
+<td style="text-align: right;">41.8910906</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1334432</td>
+<td style="text-align: right;">0.0076107</td>
+<td style="text-align: right;">17.5337350</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">KITCHENYes (shared or exclusive use)</td>
+<td style="text-align: right;">-0.0066589</td>
+<td style="text-align: right;">0.0604818</td>
+<td style="text-align: right;">-0.1100975</td>
+<td style="text-align: right;">0.9123363</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">0.0418089</td>
+<td style="text-align: right;">0.0036091</td>
+<td style="text-align: right;">11.5843972</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">0.0328959</td>
+<td style="text-align: right;">0.0101097</td>
+<td style="text-align: right;">3.2538811</td>
+<td style="text-align: right;">0.0011458</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">-0.0035812</td>
+<td style="text-align: right;">0.0005551</td>
+<td style="text-align: right;">-6.4518343</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTMarried, spouse absent</td>
+<td style="text-align: right;">0.1202898</td>
+<td style="text-align: right;">0.0464015</td>
+<td style="text-align: right;">2.5923658</td>
+<td style="text-align: right;">0.0095588</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTMarried, spouse present</td>
+<td style="text-align: right;">0.2037844</td>
+<td style="text-align: right;">0.0234430</td>
+<td style="text-align: right;">8.6927664</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTNever married/single</td>
+<td style="text-align: right;">0.1093652</td>
+<td style="text-align: right;">0.0241080</td>
+<td style="text-align: right;">4.5364680</td>
+<td style="text-align: right;">0.0000059</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTSeparated</td>
+<td style="text-align: right;">0.0317790</td>
+<td style="text-align: right;">0.0447758</td>
+<td style="text-align: right;">0.7097359</td>
+<td style="text-align: right;">0.4779001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTWidowed</td>
+<td style="text-align: right;">0.1002446</td>
+<td style="text-align: right;">0.0360708</td>
+<td style="text-align: right;">2.7791094</td>
+<td style="text-align: right;">0.0054706</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEBlack/African American</td>
+<td style="text-align: right;">0.2424495</td>
+<td style="text-align: right;">0.0680585</td>
+<td style="text-align: right;">3.5623687</td>
+<td style="text-align: right;">0.0003709</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEChinese</td>
+<td style="text-align: right;">0.2866273</td>
+<td style="text-align: right;">0.0892431</td>
+<td style="text-align: right;">3.2117595</td>
+<td style="text-align: right;">0.0013274</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEJapanese</td>
+<td style="text-align: right;">0.3098268</td>
+<td style="text-align: right;">0.1428295</td>
+<td style="text-align: right;">2.1692071</td>
+<td style="text-align: right;">0.0301126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEOther Asian or Pacific Islander</td>
+<td style="text-align: right;">0.3673041</td>
+<td style="text-align: right;">0.0716804</td>
+<td style="text-align: right;">5.1241908</td>
+<td style="text-align: right;">0.0000003</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEOther race, nec</td>
+<td style="text-align: right;">0.2807264</td>
+<td style="text-align: right;">0.0690309</td>
+<td style="text-align: right;">4.0666797</td>
+<td style="text-align: right;">0.0000484</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEThree or more major races</td>
+<td style="text-align: right;">0.3545589</td>
+<td style="text-align: right;">0.0965627</td>
+<td style="text-align: right;">3.6717982</td>
+<td style="text-align: right;">0.0002433</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACETwo major races</td>
+<td style="text-align: right;">0.2827201</td>
+<td style="text-align: right;">0.0683850</td>
+<td style="text-align: right;">4.1342400</td>
+<td style="text-align: right;">0.0000362</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEWhite</td>
+<td style="text-align: right;">0.2663981</td>
+<td style="text-align: right;">0.0659347</td>
+<td style="text-align: right;">4.0403296</td>
+<td style="text-align: right;">0.0000542</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMPSTATNot in labour force</td>
+<td style="text-align: right;">-0.0362414</td>
+<td style="text-align: right;">0.0222232</td>
+<td style="text-align: right;">-1.6307879</td>
+<td style="text-align: right;">0.1029963</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EMPSTATUnemployed</td>
+<td style="text-align: right;">0.0755285</td>
+<td style="text-align: right;">0.0431087</td>
+<td style="text-align: right;">1.7520454</td>
+<td style="text-align: right;">0.0798256</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIEDNORTHEAST</td>
+<td style="text-align: right;">0.2785538</td>
+<td style="text-align: right;">0.0244365</td>
+<td style="text-align: right;">11.3990853</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REGION_CLASSIFIEDSOUTH</td>
+<td style="text-align: right;">0.1917026</td>
+<td style="text-align: right;">0.0213271</td>
+<td style="text-align: right;">8.9886669</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIEDWEST</td>
+<td style="text-align: right;">0.4656973</td>
+<td style="text-align: right;">0.0227072</td>
+<td style="text-align: right;">20.5088390</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="model-fit-statistics-table-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-fit-statistics-table-2">Model Fit Statistics Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2267794</td>
+<td style="text-align: right;">0.2233215</td>
+<td style="text-align: right;">0.5072586</td>
+<td style="text-align: right;">65.58265</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3812.607</td>
+<td style="text-align: right;">7675.215</td>
+<td style="text-align: right;">7838.966</td>
+<td style="text-align: right;">1323.352</td>
+<td style="text-align: right;">5143</td>
+<td style="text-align: right;">5167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="residuals-and-related-statistics-table-2" class="level3">
+<h3 class="anchored" data-anchor-id="residuals-and-related-statistics-table-2">Residuals and Related Statistics Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 14%">
+<col style="width: 2%">
+<col style="width: 2%">
+<col style="width: 1%">
+<col style="width: 11%">
+<col style="width: 7%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">log_RENTGRS</th>
+<th style="text-align: right;">log_INCTOT</th>
+<th style="text-align: left;">KITCHEN</th>
+<th style="text-align: right;">ROOMS</th>
+<th style="text-align: right;">NFAMS</th>
+<th style="text-align: right;">AGE</th>
+<th style="text-align: left;">MARST</th>
+<th style="text-align: left;">RACE</th>
+<th style="text-align: left;">EMPSTAT</th>
+<th style="text-align: left;">REGION_CLASSIFIED</th>
+<th style="text-align: right;">.fitted</th>
+<th style="text-align: right;">.resid</th>
+<th style="text-align: right;">.hat</th>
+<th style="text-align: right;">.sigma</th>
+<th style="text-align: right;">.cooksd</th>
+<th style="text-align: right;">.std.resid</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5.533390</td>
+<td style="text-align: right;">10.803649</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: left;">Widowed</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Employed</td>
+<td style="text-align: left;">SOUTH</td>
+<td style="text-align: right;">7.062756</td>
+<td style="text-align: right;">-1.5293665</td>
+<td style="text-align: right;">0.0046387</td>
+<td style="text-align: right;">0.5068573</td>
+<td style="text-align: right;">0.0017733</td>
+<td style="text-align: right;">-3.0219812</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">8.006368</td>
+<td style="text-align: right;">11.406453</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">76</td>
+<td style="text-align: left;">Married, spouse present</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Employed</td>
+<td style="text-align: left;">WEST</td>
+<td style="text-align: right;">7.641411</td>
+<td style="text-align: right;">0.3649568</td>
+<td style="text-align: right;">0.0028847</td>
+<td style="text-align: right;">0.5072824</td>
+<td style="text-align: right;">0.0000626</td>
+<td style="text-align: right;">0.7205089</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7.715124</td>
+<td style="text-align: right;">7.313220</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Never married/single</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Not in labour force</td>
+<td style="text-align: left;">WEST</td>
+<td style="text-align: right;">7.165828</td>
+<td style="text-align: right;">0.5492953</td>
+<td style="text-align: right;">0.0057725</td>
+<td style="text-align: right;">0.5072498</td>
+<td style="text-align: right;">0.0002853</td>
+<td style="text-align: right;">1.0860093</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7.246368</td>
+<td style="text-align: right;">10.434116</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">54</td>
+<td style="text-align: left;">Married, spouse present</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Employed</td>
+<td style="text-align: left;">WEST</td>
+<td style="text-align: right;">7.423210</td>
+<td style="text-align: right;">-0.1768415</td>
+<td style="text-align: right;">0.0018387</td>
+<td style="text-align: right;">0.5073020</td>
+<td style="text-align: right;">0.0000093</td>
+<td style="text-align: right;">-0.3489430</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7.279319</td>
+<td style="text-align: right;">7.600903</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">Never married/single</td>
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: left;">Not in labour force</td>
+<td style="text-align: left;">SOUTH</td>
+<td style="text-align: right;">6.730015</td>
+<td style="text-align: right;">0.5493040</td>
+<td style="text-align: right;">0.0045412</td>
+<td style="text-align: right;">0.5072499</td>
+<td style="text-align: right;">0.0002239</td>
+<td style="text-align: right;">1.0853546</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7.644441</td>
+<td style="text-align: right;">9.239899</td>
+<td style="text-align: left;">Yes (shared or exclusive use)</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Never married/single</td>
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">Employed</td>
+<td style="text-align: left;">MIDWEST</td>
+<td style="text-align: right;">6.961664</td>
+<td style="text-align: right;">0.6827765</td>
+<td style="text-align: right;">0.0021260</td>
+<td style="text-align: right;">0.5072184</td>
+<td style="text-align: right;">0.0001612</td>
+<td style="text-align: right;">1.3474457</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>The adjusted R-squared is 0.223. This value looks modest. In practical terms, it suggests that the model doesn’t explain a large portion of the variance in the logarithm of rent. But in this social science and economic contexts, however, it is not uncommon to have lower R-squared values due to the complexity of human behavior and multiple unobserved factors. So we believe it is acceptable.</p></li>
+<li><p>The p-value for the overall model is extremely low, which is good. It indicates that the model predictors, as a set, are statistically significantly associated with the response variable, the logarithm of rent.</p></li>
+<li><p>The sigma value is the standard deviation of the error terms and is lower. This suggests that the residuals in this model are less spread out, indicating a tighter fit of the model to the data. However, since the scale is different from the previous model (which was on a log scale), this improvement is difficult to directly compare.</p></li>
+</ul>
+</section>
+<section id="residual-plot-2" class="level3">
+<h3 class="anchored" data-anchor-id="residual-plot-2">Residual plot</h3>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="class-blog-4_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li><p>The residuals appear to be centered around zero, which is good as it suggests no bias in the predictions.</p></li>
+<li><p>There is some evidence of heteroscedasticity as the residuals seem to fan out as the fitted values increase, which is common in non-transformed data.</p></li>
+<li><p>There are no clear patterns in the residuals, which suggests that the model catch the nonlinear relationships.</p></li>
+<li><p>This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model’s homoscedasticity.</p></li>
+</ul>
+
+
 </section>
 </section>
 
