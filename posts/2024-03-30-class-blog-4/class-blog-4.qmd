@@ -1,6 +1,6 @@
 ---
 title: "Class blog 4"
-author: ""
+author: "Yating Zhu, Dingyu Guo, Suh Edwin Jiho, Wang Muxi"
 date: "2024-03-30"
 date-modified: "2024-03-30"
 draft: FALSE
