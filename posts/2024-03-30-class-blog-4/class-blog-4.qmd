@@ -9,13 +9,15 @@ draft: FALSE
 library(broom)
 library(dplyr)
 library(here)
+library(gt)
 data_path <- here("dataset", "latest.csv")
 library(readr)
 data_2022 <- read_csv(data_path,show_col_types = FALSE) 
 library(ggplot2)
+library(knitr)
 ```
 
-## Roughly see the relationship between income and rent 
+## Roughly see the relationship between predictor and response variable
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 ggplot(data_2022, aes(x = INCTOT, y = RENTGRS)) +
@@ -24,30 +26,46 @@ ggplot(data_2022, aes(x = INCTOT, y = RENTGRS)) +
   scale_x_continuous(limits = c(0, quantile(data_2022$INCTOT, 0.95))) +  
   scale_y_continuous(limits = c(0, quantile(data_2022$RENTGRS, 0.95)))  
 ```
--The horizontal axis represents the total income (INCTOT), which is the predictor.
--The vertical axis represents the rent paid (RENTGRS), which is the response.
--The purpose of creating this scatter plot is to assess whether there is a linear or non-linear relationship between total income and rent paid in a general way. 
--There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.
--The plot does not clearly show a distinct linear trend, suggesting that the relationship between these variables might be non-linear 
+- The horizontal axis represents the total income (INCTOT), which is the predictor.
+
+- The vertical axis represents the rent paid (RENTGRS), which is the response.
+
+- The purpose of creating this scatter plot is to assess whether there is a linear or non-linear relationship between total income and rent paid in a general way. 
+
+- There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.
+
+- The plot does not clearly show a distinct linear trend, suggesting that the relationship between these variables might be non-linear 
 
 ## Simple linear model 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+The output of fitting a simple linear model will get the summary like following: 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE }
 lm_model <- lm(RENTGRS ~ INCTOT, data = data_2022)
+```
+
+### Regression Coefficients Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE }
 tidy_lm <- tidy(lm_model)
-print(tidy_lm)
+kable(tidy_lm, format = "pipe")
+```
 
+### Model Fit Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 glance_lm <- glance(lm_model)
-print(glance_lm)
+kable(glance_lm, format = "pipe")
+```
 
-augmented_data <- augment(lm_model)
-print(augmented_data)
+### Residuals and Related Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+augment_lm <- augment(lm_model)
+kable(head(augment_lm), format = "pipe")
 ```
 - The R-squared value is 0.09, which means that approximately 9% of the variability in the rent paid (RENTGRS) can be explained by the total income (INCTOT). This is a relatively low R-squared value, indicating that the linear model does not explain a large portion of the variability in the rent.But it is fair, because we only include one predictor here.
 - The statistic value is 594, which is extremely high. This suggests that the overall significance of the model is strong, despite the low R-squared. This could be due to a large sample size, which can make even small relationships appear statistically significant.
 
 ### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(augmented_data, aes(x = .fitted, y = .resid)) +
+ggplot(augment_lm, aes(x = .fitted, y = .resid)) +
   geom_point(aes(color = INCTOT), alpha = 0.5) + 
   geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
   labs(x = "Fitted Values", y = "Residuals", 
@@ -57,55 +75,82 @@ ggplot(augmented_data, aes(x = .fitted, y = .resid)) +
 - This diagram indicates that the spread of residuals appears to increase as the fitted values increase. This pattern indicates heteroscedasticity, which means that the variability of the residuals is not constant across levels of the predictor variable. In an ideal scenario, I'd want to see a consistent spread of residuals across all levels of fitted values, suggesting homoscedasticity.
 
 ## Multiple linear regression
+We strive to enhance model accuracy by incorporating additional control variables into the model, encompassing both categorical and numerical variables. These control variables help mitigate bias, isolate effects, and enhance generalization. Subsequently, we present the correlation matrix, which provides valuable insights into the relationships between numerical variables.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Ensure categorical variables are treated as factors
 data_2022$KITCHEN <- as.factor(data_2022$KITCHEN)
 data_2022$MARST <- as.factor(data_2022$MARST)
 data_2022$RACE <- as.factor(data_2022$RACE)
 data_2022$EMPSTAT <- as.factor(data_2022$EMPSTAT)
+```
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+cor_matrix <- cor(data_2022[, c("INCTOT",  "ROOMS", "NFAMS", "AGE",  "FTOTINC","RENTGRS")])
+kable(cor_matrix, format = "pipe")
+```
+
+- INCTOT and FTOINC have a strong positive correlation, indicating that as individual income rises, family income tends to rise in concert suggesting a possible overlap or direct relationship between these two variables in the dataset. So we need to care about the multicollineaity problem while fitting model.
+
+- ROOMS and NFAMS display minor positive correlations to RENTGRS. This might suggest that properties with more rooms may house more families and potentially lead to higher rents.
+
+- Notably, Age has a moderate negative correlation with Number of Families, which could hint at younger populations having larger family sizes or vice versa, but this is not a strong relationship. Still, we should observe the  multicollineaity problem while fitting model.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 mlr_model <- lm(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC +  REGION_CLASSIFIED, data = data_2022)
 ```
-```{r}
+
+### Regression Coefficients Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 tidy_mlr <- tidy(mlr_model)
-print(tidy_mlr)
-
-glance_mlr <- glance(mlr_model)
-print(glance_mlr)
-
-augmented_mlr <- augment(mlr_model)
-print(augmented_mlr)
+kable(tidy_mlr, format = "pipe")
 ```
+
+### Model Fit Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+glance_mlr <- glance(mlr_model)
+kable(glance_mlr, format = "pipe")
+```
+
+### Residuals and Related Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+augmented_mlr <- head(augment(mlr_model))
+kable(augmented_mlr, format = "pipe")
+```
+
 - The R-squared value is 0.28, indicating that about 28% of the variability in the dependent variable is explained by the model. This is a significant improvement over the simple linear model previously discussed, suggesting that including more variables helps explain the variance in the dependent variable more effectively.
+
 -  The adjusted R-squared value is 0.2807292, which is very close to the R-squared value.Since the adjusted R-squared is almost identical to the R-squared, this implies that the additional predictors are indeed contributing valuable information.
+
 -  The statistic value is 98.57, which is very high and the p-value is 0, indicating that the model is statistically significant. It means that the likelihood of the regression results being due to chance is extremely low. 
 
-#### Multicollinearity concerns
+### Multicollinearity concerns
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(car)
 vif_values <- vif(mlr_model)
-print(vif_values)
+kable(vif_values)
 ```
+
 - Through the result, INCTOT (Total Income) and FTOTINC (Family Total Income) stand out as having higher multicollinearity indicators than the others. While considering the what constitutes the Family total income, it is fair multicollinearity happens. So we decide to exclude the FTOTINC in our model. With a GVIF^(1/(2*Df)) value of INCTOT approximately 1.50 and FTOTINC is about 1.47, a VIF between 1 and 5 suggests moderate indication of multicollinearity.
+
 - Therefore, we decide to exclude the FTOTINC to avioud the multicollineariity problem. 
 
-#### Residual plot:
+### Residual plot:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Fit the model
 residuals <- resid(mlr_model)
 fitted_values <- fitted(mlr_model)
 
-# Create the residual plot
+
 plot(fitted_values, residuals,
      xlab = "Fitted Values",
      ylab = "Residuals",
      main = "Residual Plot of mlr_model",
      pch = 20)
 
-# Add a horizontal line at y = 0 to highlight the 0 residual level
 abline(h = 0, col = "red")
 ```
-Heterskedasticity still exits as the spread of the residuals appears to be increasing with the fitted values. According to the diagram, the residuals seem to form a pattern (rather than being randomly dispersed), it indicates that the relationship between the predictors and the response variable is not entirely linear.
+
+- Heterskedasticity still exits as the spread of the residuals appears to be increasing with the fitted values. According to the diagram, the residuals seem to form a pattern (rather than being randomly dispersed), it indicates that the relationship between the predictors and the response variable is not entirely linear.
 
 ## Log - log Model
 Taking account into the possible non-linear relationship and the right-skwed distributions of our predictor and response variable, we take log to both of them. 
@@ -128,8 +173,10 @@ ggplot(data_2022, aes(x = log(INCTOT))) +
        x = "Log of Total Personal Income",
        y = "Frequency")
 ```
-#### Log-log model
+
+## Log-log model
 Based on the previous MLR model, 1. we have applied a logarithmic transformation to both the rent and income variables to mitigate skewness in their distributions. But the problem is the logarithmic transformation necessitates all data points to be positive. Consequently, this has led to the exclusion of certain data samples that contained negative values.
+
 2. previous models indicated the presence of numerous outliers within our dataset. To address this, we have refined our dataset to include only those records where rent and income fall within three standard deviations from their respective sample means to minimize the impact of extreme values on the model's performance.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Filter out non-positive values before log transformation
@@ -158,28 +205,36 @@ data_2022_clean <- data_2022[data_2022$log_RENTGRS >= lb_log_RENTGRS & data_2022
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Fit the multiple linear regression model with the additional predictors
 log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022_clean)
 ```
 
+### Regression Coefficients Table
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Use tidy() to get a summary of the model coefficients
+
 tidy_log_model_2022 <- tidy(log_model_2022)
-print(tidy_log_model_2022)
-
-# Use glance() to get the overall model diagnostics
-glance_log_model_2022 <- glance(log_model_2022)
-print(glance_log_model_2022)
-
-# Use augment() to add columns to the original data with information about the fitted values and residuals
-augmented_log_model_2022 <- augment(log_model_2022)
-print(augmented_log_model_2022)
+kable(tidy_log_model_2022)
 ```
+
+### Model Fit Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+glance_log_model_2022 <- glance(log_model_2022)
+kable(glance_log_model_2022)
+```
+
+### Residuals and Related Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+augmented_log_model_2022 <- head(augment(log_model_2022))
+kable(augmented_log_model_2022)
+```
+
 - The adjusted R-squared is 0.223. This value looks modest. In practical terms, it suggests that the model doesn't explain a large portion of the variance in the logarithm of rent. But in this social science and economic contexts, however, it is not uncommon to have lower R-squared values due to the complexity of human behavior and multiple unobserved factors. So we believe it is acceptable. 
+
 - The p-value for the overall model is extremely low, which is good. It indicates that the model predictors, as a set, are statistically significantly associated with the response variable, the logarithm of rent. 
+
 - The sigma value is the standard deviation of the error terms and is lower. This suggests that the residuals in this model are less spread out, indicating a tighter fit of the model to the data. However, since the scale is different from the previous model (which was on a log scale), this improvement is difficult to directly compare.
 
-```{r}
+### Residual plot
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Calculate residuals and fitted values
 residuals_2022 <- resid(log_model_2022)
 fitted_values_2022 <- fitted(log_model_2022)
@@ -190,9 +245,13 @@ plot(fitted_values_2022, residuals_2022,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
+
 - The residuals appear to be centered around zero, which is good as it suggests no bias in the predictions.
+
 - There is some evidence of heteroscedasticity as the residuals seem to fan out as the fitted values increase, which is common in non-transformed data.
+
 - There are no clear patterns in the residuals, which suggests that the model catch the nonlinear relationships.
+
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
 
 
