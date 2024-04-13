@@ -122,7 +122,6 @@ kable(augmented_mlr, format = "pipe")
 -  The adjusted R-squared value is 0.2807292, which is very close to the R-squared value.Since the adjusted R-squared is almost identical to the R-squared, this implies that the additional predictors are indeed contributing valuable information.
 
 -  The statistic value is 98.57, which is very high and the p-value is 0, indicating that the model is statistically significant. It means that the likelihood of the regression results being due to chance is extremely low. 
-
 ### Multicollinearity concerns
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(car)
@@ -186,6 +185,9 @@ data_2022 <- data_2022[data_2022$RENTGRS > 0 & data_2022$INCTOT > 0, ]
 data_2022$log_RENTGRS <- log(data_2022$RENTGRS)
 data_2022$log_INCTOT <- log(data_2022$INCTOT)
 
+#add famincome
+data_2022$Fam_income = data_2022$FTOTINC-data_2022$INCTOT
+
 # Calculating means and standard deviations for the log-transformed columns
 mean_log_RENTGRS <- mean(data_2022$log_RENTGRS, na.rm = TRUE)
 sd_log_RENTGRS <- sd(data_2022$log_RENTGRS, na.rm = TRUE)
@@ -210,10 +212,11 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + 
 
 ### Regression Coefficients Table
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-
 tidy_log_model_2022 <- tidy(log_model_2022)
 kable(tidy_log_model_2022)
 ```
+-  The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 1.334% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
+- The idea in the above conclusion that higher income leads to increased rent payments is plausible. As people earn more, they may choose to live in better accommodations or neighborhoods, which could result in higher rent expenses. And it is reliable that they only spend part of income increase on the rent. 
 
 ### Model Fit Statistics Table:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -253,13 +256,6 @@ abline(h = 0, col = "red")
 - There are no clear patterns in the residuals, which suggests that the model catch the nonlinear relationships.
 
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
-
-
-
-
-
-
-
 
 
 
