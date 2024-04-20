@@ -119,8 +119,6 @@ The detailed process of recoding is in Class blog3.
 |              |                                           | 42 = Pacific Division (West)                                          |
 |              |                                           | 43 = Mixed Western Divisions (West)                                         |
 
-
-
 #### Merged data
 We consolidated datasets spanning 22 years, from 1990 to 2022, sourced from the same repositories. The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
