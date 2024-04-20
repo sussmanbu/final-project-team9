@@ -7,7 +7,7 @@ draft: false
 ## Describe where/how to find data.
 Our dataset comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml). 
 
-Reference:
+> Reference:
 Steven Ruggles, Sarah Flood, Matthew Sobek, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Renae Rodgers, and Megan Schouweiler. IPUMS USA: Version 15.0 [dataset]. Minneapolis, MN: IPUMS, 2024.
 https://doi.org/10.18128/D010.V15.0
 
@@ -123,7 +123,6 @@ The detailed process of recoding is in Class blog3.
 
 #### Merged data
 We consolidated datasets spanning 22 years, from 1990 to 2022, sourced from the same repositories. The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(here)
@@ -219,9 +218,9 @@ library(here)
 library(readr)
 library(dplyr)
 library(gt)
-data_path <- here("dataset", "latest.csv")
+data_path <- here("dataset-ignore", "twok22_data.csv")
 rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
-data_path <- here("dataset", "latest.csv")
+data_path <- here("dataset-ignore", "twok22_data.csv")
 rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
 summary_data <- rent_data_clean %>%
   summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
