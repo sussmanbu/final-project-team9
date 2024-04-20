@@ -19,6 +19,7 @@ data_twenty <- read_csv(data_path,show_col_types = FALSE)
 data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
 library(ggplot2)
 library(knitr)
+
 ```
 ## Group BY Race, see coefficients changes over years and races
 
@@ -80,6 +81,7 @@ inctot_coefficients_by_race <- models_by_race %>%
 kable(inctot_coefficients_by_race)
 ```
 Analysis to the table:
+
 - The **Chinese** group exhibits the highest log_INCTOT coefficient, indicating the strongest positive association between income and the variable of interest in this dataset.
   
 - **American Indian or Alaska Native**, **Other Asian or Pacific Islander**, **Other race, nec**, **Three or more major races**, and **White** categories display coefficients ranging from approximately 0.0376 to 0.1676, suggesting varied degrees of positive association between income and the variable measured.
@@ -91,7 +93,7 @@ Analysis to the table:
 ### Year 2000-2022
 ### For each race, how the coefficient change across 2000 to 2022 
 - Confimed that RACE is a factor and has at least two levels. 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_twenty$RACE <- factor(data_twenty$RACE)
 if (length(levels(data_twenty$RACE)) < 2) {
   stop("RACE must have at least two levels")
@@ -99,7 +101,7 @@ if (length(levels(data_twenty$RACE)) < 2) {
 ```
 
 - No need to drop because all has more than one level. 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Convert categorical variables to factors
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
@@ -124,7 +126,7 @@ data_twenty_filtered <- data_twenty %>%
   filter(!RACE %in% races_with_single_levels)
 print(races_with_single_levels)
 ```
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Convert categorical variables to factors again after subsetting just in case
 data_twenty_filtered[categorical_vars] <- lapply(data_twenty_filtered[categorical_vars], factor)
 
@@ -142,7 +144,7 @@ race_year_with_single_levels <- race_year_levels %>%
 print(race_year_with_single_levels)
 
 ```
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # Filter out the problematic RACE-YEAR groups from the main dataset
 data_twenty_filtered_final <- data_twenty_filtered %>%
@@ -150,7 +152,7 @@ data_twenty_filtered_final <- data_twenty_filtered %>%
 
 ```
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Now, with the cleaned data, fit the models
 models_by_race_year <- data_twenty_filtered_final %>%
   group_by(RACE, YEAR) %>%
@@ -158,7 +160,7 @@ models_by_race_year <- data_twenty_filtered_final %>%
     model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
   )
 ```
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 models_with_coef <- models_by_race_year %>%
   rowwise() %>% 
   mutate(log_INCTOT_coef = coef(model)[["log_INCTOT"]]) %>%
@@ -190,11 +192,7 @@ kable(coefficients_wide)
 
 - Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the 'Other race, nec' category often has lower coefficients, implying a weaker association with income.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyr)
-library(ggplot2)
 
-# Assuming 'coefficients_wide' is actually a wide-format data frame and you need to convert it to long format
-# where 'YEAR' is a column in the data frame, and each race's coefficients are in separate columns
 coefficients_long <- coefficients_wide %>%
   pivot_longer(cols = -YEAR, names_to = "RACE", values_to = "log_INCTOT_coef")
 
