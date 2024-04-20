@@ -70,7 +70,7 @@ Data cleanning code:
 library(tidyverse)
 library(here)
 library(dplyr)
-data_path <- here("dataset-ignore", "rent.csv")
+data_path <- here("dataset-ignore", "twok22_data.csv")
 library(readr)
 rent_data <- read_csv(data_path,show_col_types = FALSE)
 print(head(rent_data))
@@ -79,10 +79,12 @@ print(head(rent_data))
 # Clean the data
 library(tidyverse)
 library(here)
-data_path <- here("dataset", "twentyyear_rent.csv")
-rent_data <- read_csv(data_path, show_col_types = FALSE)
+data_path <- here("dataset-ignore", "twok22_data.csv")
+library(readr)
+rent_data <- read_csv(data_path,show_col_types = FALSE)
+```
+```{r}
 print(rent_data)
-
 rent_data_clean <- rent_data %>%
   filter(RENTGRS != 0,
          !is.na(RENTGRS),
@@ -91,11 +93,18 @@ rent_data_clean <- rent_data %>%
          ROOMS != "00", # Filter out rows where Rooms is "00"
          !INCTOT %in% c(1, 9999999, 9999998, -000001, "FTOTINC-000001"), # Filter based on INCTOT criteria
          !FTOTINC %in% c(9999998, 9999999), # Filter based on FTOTINC criteria
-         POVERTY != 000) # Filter based on POVERTY criteria
+         POVERTY != 000
+         ) # Filter based on POVERTY criteria
+rent_data_clean$REGION_CLASSIFIED <- case_when(
+  rent_data_clean$REGION %in% c(11, 12, 13) ~ "NORTHEAST",
+  rent_data_clean$REGION %in% c(21, 22, 23) ~ "MIDWEST",
+  rent_data_clean$REGION %in% c(31, 32, 33, 34) ~ "SOUTH",
+  rent_data_clean$REGION %in% c(41, 42, 43) ~ "WEST",
+  TRUE ~ "OTHER"
+)
 
-write_csv(rent_data_clean, file = here("dataset", "twentyyear_rent.csv"))
-saveRDS(rent_data_clean, file = here("dataset", "twentyyear_rent.RData"))
-saveRDS(rent_data_clean, file = here("dataset", "twentyyear_rent.rds"))
+saveRDS(rent_data_clean, file = here("dataset", "latest.RData"))
+write_csv(rent_data_clean, file = here("dataset", "latest.csv"))
 ```
 
 We exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. Furthermore, for our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing. Given the original dataset comprises millions of samples, the exclusion of these data points still leaves us with the sufficiently cleaned large dataset for robust analysis.

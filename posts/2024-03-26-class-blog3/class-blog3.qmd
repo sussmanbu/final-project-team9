@@ -75,7 +75,7 @@ The table below summarizes all variables that possess this characteristic:
 library(dplyr)
 library(forcats)
 library(here)
-data_path <- here("dataset", "rent_income_clean.csv")
+data_path <- here("dataset", "latest.csv")
 library(readr)
 rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
 ```

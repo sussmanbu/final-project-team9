@@ -17,6 +17,7 @@ library(ggplot2)
 library(knitr)
 ```
 
+
 ## Roughly see the relationship between predictor and response variable
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
@@ -82,6 +83,7 @@ data_2022$KITCHEN <- as.factor(data_2022$KITCHEN)
 data_2022$MARST <- as.factor(data_2022$MARST)
 data_2022$RACE <- as.factor(data_2022$RACE)
 data_2022$EMPSTAT <- as.factor(data_2022$EMPSTAT)
+data_2022$REGION_CLASSIFIED <- as.factor(data_2022$REGION_CLASSIFIED)
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -204,6 +206,7 @@ ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
 # Filtering out outliers
 data_2022_clean <- data_2022[data_2022$log_RENTGRS >= lb_log_RENTGRS & data_2022$log_RENTGRS <= ub_log_RENTGRS & 
                              data_2022$log_INCTOT >= lb_log_INCTOT & data_2022$log_INCTOT <= ub_log_INCTOT, ]
+write_csv(data_2022_clean, file = here("dataset", "latest_clean.csv"))
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}

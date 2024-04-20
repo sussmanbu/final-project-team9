@@ -6,7 +6,7 @@ date: "2024-04-12"
 date-modified: "2024-04-12"
 draft: FALSE
 ---
-Previously, we investigate the relationship between rent spending and income. In this blog, we merged the dataset from 1990 to 2022, to get a further insight on the trend of the rent in these twenty years. 
+Previously, we investigate the relationship between rent spending and income. In this blog, we merged the dataset from 2000 to 2022, to get a further insight on the trend of the rent in these twenty years. 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(broom)
@@ -110,6 +110,7 @@ data_clean <- data_twenty_positive %>%
          log_INCTOT >= lb_log_INCTOT & log_INCTOT <= ub_log_INCTOT) %>%
   filter(complete.cases(KITCHEN, ROOMS, NFAMS, AGE, MARST, RACE, EMPSTAT, REGION_CLASSIFIED)) %>%
   filter_all(all_vars(!is.infinite(.)))
+write_csv(data_clean, file = here("dataset", "data_twenty_clean.csv"))
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -196,6 +197,7 @@ models_by_year %>%
 - The R-squared values represent the proportion of the variance for the dependent variable that's explained by the independent variables in the model. The fluctuation suggests that the model's explanatory power changes from year to year.
 
 - Notably, there's a sharp drop in the R-squared value in the most recent year shown, which could indicate a sudden decrease in the model's predictive power or a significant change in the underlying data structure for these years. 
+
 
 
 
