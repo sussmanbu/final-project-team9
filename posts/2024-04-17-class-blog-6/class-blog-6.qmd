@@ -19,7 +19,6 @@ data_twenty <- read_csv(data_path,show_col_types = FALSE)
 data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
 library(ggplot2)
 library(knitr)
-
 ```
 ## Group BY Race, see coefficients changes over years and races
 

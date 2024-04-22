@@ -3,124 +3,177 @@ title: Data
 description: We describe the sources of our data and the cleaning process.
 toc: true
 draft: false
+editor: 
+  markdown: 
+    wrap: sentence
 ---
-## Describe where/how to find data.
-Our dataset comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml). 
 
-> Reference:
-Steven Ruggles, Sarah Flood, Matthew Sobek, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Renae Rodgers, and Megan Schouweiler. IPUMS USA: Version 15.0 [dataset]. Minneapolis, MN: IPUMS, 2024.
-https://doi.org/10.18128/D010.V15.0
+# Describe where/how to find data
 
-The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today. We chose our dataset from this website IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places. It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research.
-  
-  
-## Describe the different data files used and what each variable means.
+Both our datasets comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).
 
-### Table contains all the variables we have
+> Reference: Steven Ruggles, Sarah Flood, Matthew Sobek, Daniel Backman, Annie Chen, Grace Cooper, Stephanie Richards, Renae Rodgers, and Megan Schouweiler.
+> IPUMS USA: Version 15.0 \[dataset\].
+> Minneapolis, MN: IPUMS, 2024.
+> https://doi.org/10.18128/D010.V15.0
 
-We have highlighted all key dependent variables (RENTGRS) and independent variables (INCTOT) in bold.
+The original data of this website came from censuses as well as the American Community Surveys (ACS) that began in 2000 and are still going on today.
 
-| Variable | Description                           |
-|----------|---------------------------------------|
-| **RENTGRS**  | Monthly gross rent                |
-| KITCHEN  | Kitchen or cooking facilities         |
-| ROOMS    | Number of rooms                       |
-| NFAMS    | Number of families in household       |
-| AGE      | Age                                   |
-| MARST    | Marital status                        |
-| RACE     | Race                                  |
-| EMPSTAT  | Employment status                     |
-| **INCTOT**   | Total personal income             |
-| FTOTINC  | Total family income                   |
-| REGION   | Geographical part of America          |
+We chose our dataset from IPUMS because this website contains datasets that are large, valid and complex, containing detailed microdata, which aims to facilitate transformative research, education, and policy-making by aggregating data across times and places.
+It makes the datasets on this website very appropriate for our research to streamline our analysis of changes, data merging, and comparative research.
+
+# Datasets detail
+
+## First Dataset (YEAR of 2022)
+
+Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest_clean.csv)
+
+### Table contains all the variables in the dataset
+
+-   Highlighted all key dependent variables (RENTGRS) and independent variables (INCTOT) in bold, as well as the logarithm of them.
+
+| Variable          | Description                            |
+|-------------------|----------------------------------------|
+| **INCTOT**        | Total personal income                  |
+| **log_INCTOT**    | Logarithm of total personal income     |
+| **log_RENTGRS**   | Logarithm of monthly gross rent        |
+| **RENTGRS**       | Monthly gross rent                     |
+| REGION            | Geographical region                    |
+| YEAR              | Year in which the data was collected   |
+| KITCHEN           | Kitchen or cooking facilities          |
+| ROOMS             | Number of rooms                        |
+| NFAMS             | Number of families in household        |
+| AGE               | Age of the individual or building      |
+| MARST             | Marital status                         |
+| RACE              | Race of the individual                 |
+| RACED             | Detailed categorization of race        |
+| EMPSTAT           | Employment status                      |
+| EMPSTATD          | Detailed categorization of employment  |
+| FTOTINC           | Total family income                    |
+| POVERTY           | Poverty level                          |
+| REGION_CLASSIFIED | Classified region categorization       |
+| Fam_income        | Alternative variable for family income |
+
+### Clean or recoding
+
+#### Raw processing
+
+-   Dependent variable—**rent**— Exclude the records indicating a rent of 0.
+    -   This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.
+-   Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. Given the vast size of the original dataset, which includes millions of records, we opted to remove the rows with these missing values directly.This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.Removed categories are summarized under the following table.
+
+##### Table of Variables with Missing Value Codes for Each Category
+
+| Variable     | Description                   | Notes                                                        |
+|------------------|------------------|-------------------------------------|
+| **INCTOT**   | Total personal income         | Specific codes detailed below:                               |
+|              |                               | 0000001 = \$1 or break even (2000, 2005-onward ACS and PRCS) |
+|              |                               | 9999999 = N/A                                                |
+|              |                               | 9999998 = Unknown                                            |
+| **FTOTINC**  | Total family income           | Specific codes detailed below:                               |
+|              |                               | -000001 = Net loss (1950)                                    |
+|              |                               | 9999998 = Not ascertained (1950)                             |
+|              |                               | 9999999 = N/A                                                |
+| **KITCHEN**  | Kitchen or cooking facilities | 0 = N/A                                                      |
+| **ROOMS**    | Number of rooms               | 00 = N/A                                                     |
+| **EMPSTATA** | Employment status             | Specific codes detailed below:                               |
+|              |                               | 0 = Missing value                                            |
+|              |                               | 9 = Unknown/Illegible                                        |
+| **STATE**    | Geographic state identifier   | Specific codes detailed below:                               |
+|              |                               | 91 = Overseas Military/Military Installations                |
+|              |                               | 92 = PUMA boundaries cross state lines - Metro sample        |
+|              |                               | 97 = State not identified                                    |
+|              |                               | 99 = Not identified                                          |
+
+#### Recode some categorical data
+
+-   Recode and modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values. Recoded categories are summarized under the following table.
+
+##### Table of Categorical Variables with Numerical Codes as Categories
+
+| Variable    | Description                    | Notes                                      |
+|-------------------|--------------------|----------------------------------|
+| **INCTOT**  | Total personal income          | Specific codes detailed below:             |
+|             |                                | -009995 = -\$9,900 (1980)                  |
+|             |                                | -000001 = Net loss (1950)                  |
+|             |                                | FTOTINC-000001 = Net loss (1950)           |
+| **KITCHEN** | Kitchen facilities             | 0 = N/A                                    |
+|             |                                | 1 = No                                     |
+|             |                                | 2 = No, or shared use                      |
+|             |                                | 3 = Yes, shared use                        |
+|             |                                | 4 = Yes (shared or exclusive use)          |
+|             |                                | 5 = Yes, exclusive use                     |
+| **MARST**   | Marital status                 | 1 = Married, spouse present                |
+|             |                                | 2 = Married, spouse absent                 |
+|             |                                | 3 = Separated                              |
+|             |                                | 4 = Divorced                               |
+|             |                                | 5 = Widowed                                |
+|             |                                | 6 = Never married/single                   |
+|             |                                | 9 = Blank, missing                         |
+| **RACE**    | Race                           | 1 = White                                  |
+|             |                                | 2 = Black/African American                 |
+|             |                                | 3 = American Indian or Alaska Native       |
+|             |                                | 4 = Chinese                                |
+|             |                                | 5 = Japanese                               |
+|             |                                | 6 = Other Asian or Pacific Islander        |
+|             |                                | 7 = Other race, nec                        |
+|             |                                | 8 = Two major races                        |
+|             |                                | 9 = Three or more major races              |
+| **EMPSTAT** | Employment status              | 1 = Employed                               |
+|             |                                | 2 = Unemployed                             |
+|             |                                | 3 = Not in the labor force                 |
+| **REGION**  | Geographic region and division | Specific codes detailed below:             |
+|             |                                | 11 = New England Division (Northeast)      |
+|             |                                | 12 = Middle Atlantic Division (Northeast)  |
+|             |                                | 13 = Mixed Northeast Divisions (Northeast) |
+|             |                                | 21 = East North Central Division (Midwest) |
+|             |                                | 22 = West North Central Division (Midwest) |
+|             |                                | 23 = Mixed Midwestern Divisions (Midwest)  |
+|             |                                | 31 = South Atlantic Division (South)       |
+|             |                                | 32 = East South Central Division (South)   |
+|             |                                | 33 = West South Central Division (South)   |
+|             |                                | 34 = Mixed Southern Divisions (South)      |
+|             |                                | 41 = Mountain Division (West)              |
+|             |                                | 42 = Pacific Division (West)               |
+|             |                                | 43 = Mixed Western Divisions (West)        |
+
+#### Advanced Processing during the modeling
+
+-   Take log of both the INCTOT and RENTGRS, as the original distribution of the
+INCTOT and RENTGRS are highly right skewed, since taking log, we exclude the value with negative values.
+
+##### The original INCTOT table 
+- 
+##### The log_INCTOT table, reduce skewness 
+
+- Exclude the outliers, since there are a lot of extreme cases, while we fit the model, we found it bias the fitted line a lot 
+```{r}
+ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + geom_point(alpha =.01) + scale_x_log10() + scale_y_log10()
+ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+```
+
+## Second Dataset (Merged YEAR of 2000 to 2022)
+
+Here is the link to our cleaned dataset [cleaned dataset.](./datasdata_twenty_clean.csv)
+
+- It has the same variables, except the YEAR variable, which contains the year from 2000 to 2022
+
+- The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.
+
+- But the sample size of the census and ACS is large, therefore we take random sample of 1% from the dataset
+
+- The year span was used to conduct the time series regression. 
+
+##### Following is the summary table after cleaned 
 
 
-## Describe any cleaning you had to do for your data.
-- Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest.rds)
-
-- The code for cleaning and recoding the datasets, please see class blog 2 and 3. 
-
-- For our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.
-
-- Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. The following table shows the variables we processed:
-* Given the vast size of the original dataset, which includes millions of records, we opted to remove these entries directly. This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.
-
-| Variable     | Description                           | Notes                                                                                                   |
-|--------------|---------------------------------------|---------------------------------------------------------------------------------------------------------|
-| **INCTOT**   | Total personal income                 | Specific codes detailed below:                                                                          |
-|              |                                       | 0000001 = $1 or break even (2000, 2005-onward ACS and PRCS)                                             |
-|              |                                       | 9999999 = N/A                                                                                           |
-|              |                                       | 9999998 = Unknown                                                                                       |
-| **FTOTINC**  | Total family income                   | Specific codes detailed below:                                                                          |
-|              |                                       | -000001 = Net loss (1950)                                                                               |
-|              |                                       | 9999998 = Not ascertained (1950)                                                                        |
-|              |                                       | 9999999 = N/A                                                                                           |
-| **KITCHEN**  | Kitchen or cooking facilities         | 0 = N/A                                                                                                 |
-| **ROOMS**    | Number of rooms                       | 00 = N/A                                                                                                |
-| **EMPSTATA** | Employment status                     | Specific codes detailed below:                                                                          |
-|              |                                       | 0 = Missing value                                                                                       |
-|              |                                       | 9 = Unknown/Illegible                                                                                   |
-| **STATE**    | Geographic state identifier           | Specific codes detailed below:                                                                          |
-|              |                                       | 91 = Overseas Military/Military Installations                                                           |
-|              |                                       | 92 = PUMA boundaries cross state lines - Metro sample                                                   |
-|              |                                       | 97 = State not identified                                                                               |
-|              |                                       | 99 = Not identified                                                                                     |
 
 
-### Recode some categorical data that is showed in numerical value in our raw data.
 
-- Recode certain variables. We modified certain variables in the dataset that are encoded with specific numerical codes, which reflect categories or qualitative information rather than quantitative values.
-The following table shows each variable that had been recoded;
-The detailed process of recoding is in Class blog3.
 
-| Variable     | Description                               | Notes                                                                 |
-|--------------|-------------------------------------------|-----------------------------------------------------------------------|
-| **INCTOT**   | Total personal income                     | Specific codes detailed below:                                        |
-|              |                                           | -009995 = -$9,900 (1980)                                              |
-|              |                                           | -000001 = Net loss (1950)                                             |
-|              |                                           | FTOTINC-000001 = Net loss (1950)                                      |
-| **KITCHEN**  | Kitchen facilities                        | 0 = N/A                                                               |
-|              |                                           | 1 = No                                                                |
-|              |                                           | 2 = No, or shared use                                                 |
-|              |                                           | 3 = Yes, shared use                                                   |
-|              |                                           | 4 = Yes (shared or exclusive use)                                     |
-|              |                                           | 5 = Yes, exclusive use                                                |
-| **MARST**    | Marital status                            | 1 = Married, spouse present                                           |
-|              |                                           | 2 = Married, spouse absent                                            |
-|              |                                           | 3 = Separated                                                         |
-|              |                                           | 4 = Divorced                                                          |
-|              |                                           | 5 = Widowed                                                           |
-|              |                                           | 6 = Never married/single                                              |
-|              |                                           | 9 = Blank, missing                                                    |
-| **RACE**     | Race                                      | 1 = White                                                             |
-|              |                                           | 2 = Black/African American                                            |
-|              |                                           | 3 = American Indian or Alaska Native                                  |
-|              |                                           | 4 = Chinese                                                           |
-|              |                                           | 5 = Japanese                                                          |
-|              |                                           | 6 = Other Asian or Pacific Islander                                   |
-|              |                                           | 7 = Other race, nec                                                   |
-|              |                                           | 8 = Two major races                                                   |
-|              |                                           | 9 = Three or more major races                                         |
-| **EMPSTAT**  | Employment status                         | 1 = Employed                                                          |
-|              |                                           | 2 = Unemployed                                                        |
-|              |                                           | 3 = Not in the labor force                                            |
-| **REGION**   | Geographic region and division            | Specific codes detailed below:                                        |
-|              |                                           | 11 = New England Division (Northeast)                                 |
-|              |                                           | 12 = Middle Atlantic Division (Northeast)                             |
-|              |                                           | 13 = Mixed Northeast Divisions (Northeast)                                        |
-|              |                                           | 21 = East North Central Division (Midwest)                            |
-|              |                                           | 22 = West North Central Division (Midwest)                            |
-|              |                                           | 23 = Mixed Midwestern Divisions (Midwest)                                       |
-|              |                                           | 31 = South Atlantic Division (South)                                  |
-|              |                                           | 32 = East South Central Division (South)                              |
-|              |                                           | 33 = West South Central Division (South)                              |
-|              |                                           | 34 = Mixed Southern Divisions (South)                                        |
-|              |                                           | 41 = Mountain Division (West)                                         |
-|              |                                           | 42 = Pacific Division (West)                                          |
-|              |                                           | 43 = Mixed Western Divisions (West)                                         |
 
-#### Merged data
-We consolidated datasets spanning 22 years, from 1990 to 2022, sourced from the same repositories. The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.
+
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(here)
@@ -207,8 +260,8 @@ write_csv(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.csv"))
 saveRDS(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.rds"))
 ```
 
-
 ### Summary of numerical variables(2022)
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(forcats)
@@ -257,8 +310,10 @@ summary_data %>%
   )
 ```
 
-#### Speical notes to some variables we have 
-1. RENTGRS
+#### Speical notes to some variables we have
+
+1.  RENTGRS
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2) 
 # Histogram to show distribution of monthly gross rent
@@ -269,12 +324,15 @@ ggplot(rent_data_clean, aes(x = RENTGRS)) +
        y = "Count") +
   theme_minimal()
 ```
--The histogram appears to be right-skewed, with a mode somewhere before $3000. It suggests that the mean is likely to be higher than the median, which corresponds to the stats in the above section. 
--There are a few bars past the $6000 mark, which could be considered outliers.
--There's a wide range of rents; however, the majority of the data points fall below $3000, suggesting that while there are rents across a wide range.
--According to the right skewd nature, we take a log transformation to it in later on regression model. 
+
+-The histogram appears to be right-skewed, with a mode somewhere before \$3000.
+It suggests that the mean is likely to be higher than the median, which corresponds to the stats in the above section.
+-There are a few bars past the \$6000 mark, which could be considered outliers.
+-There's a wide range of rents; however, the majority of the data points fall below \$3000, suggesting that while there are rents across a wide range.
+-According to the right skewd nature, we take a log transformation to it in later on regression model.
 
 2.INCTOT
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(rent_data_clean, aes(x = INCTOT)) +
   geom_histogram(bins = 100, fill = "blue", color = "black") +
@@ -283,10 +341,12 @@ ggplot(rent_data_clean, aes(x = INCTOT)) +
        x = "Total Personal Income",
        y = "Frequency")
 ```
-- The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it's the most common income range in the datasets and our dataset is from census. 
-- -According to the right skewd nature, we take a log transformation to it in later on regression model. 
 
-3.FTOTINC  
+-   The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it's the most common income range in the datasets and our dataset is from census.
+-   -According to the right skewd nature, we take a log transformation to it in later on regression model.
+
+3.FTOTINC
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(rent_data_clean, aes(x = FTOTINC)) +
   geom_histogram(bins = 100, fill = "blue", color = "black") +
@@ -295,11 +355,13 @@ ggplot(rent_data_clean, aes(x = FTOTINC)) +
        x = "Total Family Income",
        y = "Frequency")
 ```
-- Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.
-- This variable shows to be related with INCTOT, we should test the multicollineaity issue while include it in our model. 
-- Considering its nature and the possible multicollinearity issue, we plan to replace INCTOT to this variable to see if it suggests any change.
+
+-   Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.
+-   This variable shows to be related with INCTOT, we should test the multicollineaity issue while include it in our model.
+-   Considering its nature and the possible multicollinearity issue, we plan to replace INCTOT to this variable to see if it suggests any change.
 
 4.NFAMS
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 nfams_counts <- rent_data_clean %>%
   group_by(NFAMS) %>%
@@ -313,5 +375,8 @@ ggplot(nfams_counts, aes(x = factor(NFAMS), y = Count, fill = factor(NFAMS))) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 ```
-The bar representing one family member is significantly taller than the others, indicating that single-person families are most common in this dataset. There is a rapid decrease in frequency as the number of family members increases. The families with a very large number of members are quite rare. This is what I expected and  aligns with my understanding to common demographic trends.
 
+The bar representing one family member is significantly taller than the others, indicating that single-person families are most common in this dataset.
+There is a rapid decrease in frequency as the number of family members increases.
+The families with a very large number of members are quite rare.
+This is what I expected and aligns with my understanding to common demographic trends.
