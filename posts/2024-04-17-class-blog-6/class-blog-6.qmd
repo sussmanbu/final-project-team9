@@ -12,13 +12,13 @@ library(dplyr)
 library(here)
 library(gt)
 library(purrr)
-data_path <- here("dataset", "data_twenty_clean.csv")
-data_path1 <- here("dataset", "latest_clean.csv")
 library(readr)
-data_twenty <- read_csv(data_path,show_col_types = FALSE) 
-data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
 library(ggplot2)
 library(knitr)
+data_path <- here("dataset", "data_twenty_clean.csv")
+data_path1 <- here("dataset", "latest_clean.csv")
+data_twenty <- read_csv(data_path,show_col_types = FALSE) 
+data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
 ```
 ## Group BY Race, see coefficients changes over years and races
 
