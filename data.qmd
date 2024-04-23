@@ -55,12 +55,14 @@ Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest_cle
 | Fam_income        | Alternative variable for family income |
 
 ### Clean or recoding
-
 #### Raw processing
 
--   Dependent variable—**rent**— Exclude the records indicating a rent of 0.
+
+-   Dependent variable—**rent**— Exclude the records indicating a **rent of 0**.
+
     -   This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.
--   Exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. Given the vast size of the original dataset, which includes millions of records, we opted to remove the rows with these missing values directly.This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.Removed categories are summarized under the following table.
+    
+-   Exclude data entries characterized by specific codes indicative of **missing or unknown values**, as well as those representing values deemed inappropriate for analytical purposes. Given the vast size of the original dataset, which includes millions of records, we opted to remove the rows with these missing values directly.This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.Removed categories are summarized under the following table.
 
 ##### Table of Variables with Missing Value Codes for Each Category
 
@@ -139,141 +141,124 @@ Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest_cle
 
 #### Advanced Processing during the modeling
 
--   Take log of both the INCTOT and RENTGRS, as the original distribution of the
-INCTOT and RENTGRS are highly right skewed, since taking log, we exclude the value with negative values.
+-   The **logarithm of both INCTOT and RENTGRS** was computed due to their highly right-skewed distributions. Since applying the logarithmic transformation, we also excluded any records with **negative values** in these variables.
 
-##### The original INCTOT table 
-- 
-##### The log_INCTOT table, reduce skewness 
+##### The original RENTGRS plot
 
-- Exclude the outliers, since there are a lot of extreme cases, while we fit the model, we found it bias the fitted line a lot 
-```{r}
-ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + geom_point(alpha =.01) + scale_x_log10() + scale_y_log10()
-ggplot(enhanced_model_augmented, aes(x = INCTOT, y = RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(forcats)
+library(here)
+data_path <- here("dataset", "latest.csv")
+library(readr)
+rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
+library(ggplot2) 
+# Histogram to show distribution of monthly gross rent
+ggplot(rent_data_clean, aes(x = RENTGRS)) +
+  geom_histogram(binwidth = 100, fill = "lightblue", color = "blue") +
+  labs(title = "Distribution of Monthly Gross Rent",
+       x = "Monthly Gross Rent ($)",
+       y = "Count") +
+  theme_minimal()
 ```
+##### The log_RENTGRS plot
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data_path <- here("dataset", "latest_clean.csv")
+data_2022 <- read_csv(data_path,show_col_types = FALSE) 
+ggplot(data_2022, aes(x = log(RENTGRS))) +
+  geom_histogram(binwidth = 0.1, fill = "lightblue", color = "blue") + 
+  labs(title = "Distribution of Log of Monthly Gross Rent",
+       x = "Log of Monthly Gross Rent",
+       y = "Count") +
+  theme_minimal()
+```
+
+##### The original INCTOT plot
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(rent_data_clean, aes(x = INCTOT)) +
+  geom_histogram(bins = 100, fill = "lightblue", color = "blue") +
+  theme_minimal() +
+  labs(title = "Histogram of Total Personal Income",
+       x = "Total Personal Income",
+       y = "Frequency")
+```
+
+##### The log_INCTOT plot
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(data_2022, aes(x = log(INCTOT))) +
+  geom_histogram(bins = 100, fill = "lightblue", color = "blue") + 
+  theme_minimal() +
+  labs(title = "Histogram of Log of Total Personal Income",
+       x = "Log of Total Personal Income",
+       y = "Frequency")
+```
+The log transformation of both variables significantly reduced their skewness.
+
+
+- Exclude the **outliers** three standard deviations from the mean.
+
+##### The following plots shows the problem of outliers in our key predictor and response variable
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+rent_data_clean <- rent_data_clean[rent_data_clean$RENTGRS > 0 & rent_data_clean$INCTOT > 0, ]
+rent_data_clean$log_RENTGRS <- log(rent_data_clean$RENTGRS)
+rent_data_clean$log_INCTOT <- log(rent_data_clean$INCTOT)
+enhanced_model_augmented <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = rent_data_clean)
+
+
+ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+
+ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha =.05) + scale_x_log10() + scale_y_log10()
+```
+- The first density plot shows a wide spread with some points far from the main cluster, indicative of outliers. It proves there are a lot of outliers sparsely packed and are visible on the fringes of the plot.
+
+- The second plot indicates these outliers might possibly disproportionately affect the slope and intercept of our regression line as we fit in the regression models. 
+
+- After the consideration that the outliers do not reflect the typical relationship, we exclude all the outliers that are not within the three standard deviations' range. 
+
+##### The following tables shows what happened **after** exclude the outliers of our key predictor and response variable
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
+
+ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha =.05) + scale_x_log10() + scale_y_log10()
+
+ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+```
+- The density plot is to show a tighter concentration of data, with less dispersion.
+
+- The scatter plot present a clearer pattern and a trend with fewer extreme points that can distort the regression line.
+
 
 ## Second Dataset (Merged YEAR of 2000 to 2022)
 
 Here is the link to our cleaned dataset [cleaned dataset.](./datasdata_twenty_clean.csv)
 
-- It has the same variables, except the YEAR variable, which contains the year from 2000 to 2022
+- The dataset includes identical variables as the first dataset, with the exception of the "YEAR" variable, which spans from 2000 to 2022.
 
-- The approach to cleaning and processing these datasets was aligned with the methodology applied to the 2022 dataset, as previously detailed.
+- The cleaning and processing of these datasets adhered to the same methodology utilized for the 2022 dataset, as outlined earlier.
 
-- But the sample size of the census and ACS is large, therefore we take random sample of 1% from the dataset
+- Given the extensive size of the census and ACS datasets, a 1% random sample was extracted for analysis.
 
-- The year span was used to conduct the time series regression. 
+- The range of years provided was utilized to perform a time series regression analysis.
 
-##### Following is the summary table after cleaned 
-
-
-
-
-
-
-
-
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
-library(here)
-library(dplyr)
-data_path <- here("dataset-ignore", "twenty_yr_data.csv")
-library(readr)
-twentyyr_data <- read_csv(data_path,show_col_types = FALSE)
-library(dplyr)
-set.seed(123) # Setting a seed for reproducibility
-twentyyr_data_clean <- sample_frac(twentyyr_data, 0.01)
-twentyyr_data_clean <- twentyyr_data_clean %>%
-  filter(RENTGRS != 0,  # Exclude entries with zero rent
-         !is.na(RENTGRS),  # Exclude NA values for rent
-         EMPSTAT %in% c("1", "2", "3"),  # Include only valid employment statuses
-         KITCHEN != "0",  # Exclude entries without a kitchen
-         ROOMS != "00",  # Exclude entries with invalid room counts
-         !INCTOT %in% c(1, 9999999, 9999998, -1),  # Exclude specific INCTOT values
-         !FTOTINC %in% c(9999998, 9999999),  # Exclude specific FTOTINC values
-         POVERTY != 0,  # Exclude invalid poverty codes
-         !REGION %in% c(91, 92, 97, 99))  # Exclude specific region/state codes
-twentyyr_data_clean$REGION_CLASSIFIED <- case_when(
-  twentyyr_data_clean$REGION %in% c(11, 12, 13) ~ "NORTHEAST",
-  twentyyr_data_clean$REGION %in% c(21, 22, 23) ~ "MIDWEST",
-  twentyyr_data_clean$REGION %in% c(31, 32, 33, 34) ~ "SOUTH",
-  twentyyr_data_clean$REGION %in% c(41, 42, 43) ~ "WEST",
-  TRUE ~ "OTHER"
-)
-
-#KITCHEN
-twentyyr_data_clean <- twentyyr_data_clean %>%
-  mutate(KITCHEN = case_when(
-    KITCHEN == "0" ~ "N/A",
-    KITCHEN == "1" ~ "No",
-    KITCHEN == "2" ~ "No, or shared use",
-    KITCHEN == "3" ~ "Yes, shared use",
-    KITCHEN == "4" ~ "Yes (shared or exclusive use)",
-    KITCHEN == "5" ~ "Yes, exclusive use",
-    TRUE ~ as.character(KITCHEN)
-  ))
-twentyyr_data_clean$KITCHEN <- as.factor(twentyyr_data_clean$KITCHEN)
-
-#MARST
-twentyyr_data_clean <- twentyyr_data_clean %>%
-  mutate(MARST = case_when(
-    MARST == "1" ~ "Married, spouse present",
-    MARST == "2" ~ "Married, spouse absent",
-    MARST == "3" ~ "Separated",
-    MARST == "4" ~ "Divorced",
-    MARST == "5" ~ "Widowed",
-    MARST == "6" ~ "Never married/single",
-    MARST == "9" ~ "Blank, missing",
-    TRUE ~ as.character(MARST)
-  ))
-twentyyr_data_clean$MARST <- as.factor(twentyyr_data_clean$MARST)
-
-#RACE
-twentyyr_data_clean <- twentyyr_data_clean %>%
-  mutate(RACE = case_when(
-    RACE == "1" ~ "White",
-    RACE == "2" ~ "Black/African American",
-    RACE == "3" ~ "American Indian or Alaska Native",
-    RACE == "4" ~ "Chinese",
-    RACE == "5" ~ "Japanese",
-    RACE == "6" ~ "Other Asian or Pacific Islander",
-    RACE == "7" ~ "Other race, nec",
-    RACE == "8" ~ "Two major races",
-    RACE == "9" ~ "Three or more major races",
-    TRUE ~ as.character(RACE) 
-  ))
-twentyyr_data_clean$RACE <- as.factor(twentyyr_data_clean$RACE)
-
-#EMPSTAT
-twentyyr_data_clean <- twentyyr_data_clean %>%
-  mutate(EMPSTAT = case_when(
-    EMPSTAT == "1" ~ "Employed",
-    EMPSTAT == "2" ~ "Unemployed",
-    EMPSTAT == "3" ~ "Not in labour force",
-    TRUE ~ as.character(EMPSTAT) 
-  ))
-
-twentyyr_data_clean$EMPSTAT <- as.factor(twentyyr_data_clean$EMPSTAT)
-
-write_csv(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.csv"))
-saveRDS(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.rds"))
-```
-
-### Summary of numerical variables(2022)
+## Summary of numerical variables (2022)
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(forcats)
-library(here)
-library(readr)
-library(dplyr)
 library(gt)
-data_path <- here("dataset-ignore", "twok22_data.csv")
-rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
-data_path <- here("dataset-ignore", "twok22_data.csv")
-rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
-summary_data <- rent_data_clean %>%
+library(dplyr)
+data_path <- here("dataset", "data_twenty_clean.csv")
+data_path1 <- here("dataset", "latest_clean.csv")
+data_twenty <- read_csv(data_path,show_col_types = FALSE) 
+data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+summary_data <- data_2022 %>%
   summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
                    list(Mean = ~mean(.x),
                         Median = ~median(.x),
@@ -289,7 +274,7 @@ summary_data <- rent_data_clean %>%
 summary_data %>%
   gt() %>%
   tab_header(
-    title = "Summary Statistics for Rental Data",
+    title = "Summary Statistics for Rental Data (2000)",
     subtitle = "Includes mean, median, minimum, and maximum values"
   ) %>%
   cols_label(
@@ -310,73 +295,86 @@ summary_data %>%
   )
 ```
 
-#### Speical notes to some variables we have
-
-1.  RENTGRS
-
+## Summary of categorical variables (2002)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(ggplot2) 
-# Histogram to show distribution of monthly gross rent
-ggplot(rent_data_clean, aes(x = RENTGRS)) +
-  geom_histogram(binwidth = 100, fill = "blue", color = "black") +
-  labs(title = "Distribution of Monthly Gross Rent",
-       x = "Monthly Gross Rent ($)",
-       y = "Count") +
-  theme_minimal()
+library(tidyr)
+library(purrr)
+library(kableExtra)
+categorical_vars <- c("KITCHEN", "MARST", "RACE", "EMPSTAT", "REGION_CLASSIFIED")
+
+category_summaries <- map(categorical_vars, function(var) {
+  data_2022 %>%
+    count(!!sym(var)) %>%
+    rename(Levels = !!sym(var), Frequency = n) %>%
+    mutate(Variable = var)
+})
+
+combined_summary_table <- bind_rows(category_summaries) %>%
+  select(Variable, Levels, Frequency)
+
+kable(combined_summary_table)
 ```
 
--The histogram appears to be right-skewed, with a mode somewhere before \$3000.
-It suggests that the mean is likely to be higher than the median, which corresponds to the stats in the above section.
--There are a few bars past the \$6000 mark, which could be considered outliers.
--There's a wide range of rents; however, the majority of the data points fall below \$3000, suggesting that while there are rents across a wide range.
--According to the right skewd nature, we take a log transformation to it in later on regression model.
 
-2.INCTOT
-
+## Summary of numerical variables (2000-2022)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(rent_data_clean, aes(x = INCTOT)) +
-  geom_histogram(bins = 100, fill = "blue", color = "black") +
-  theme_minimal() +
-  labs(title = "Histogram of Total Personal Income",
-       x = "Total Personal Income",
-       y = "Frequency")
+summary_data <- data_twenty %>%
+  summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
+                   list(Mean = ~mean(.x),
+                        Median = ~median(.x),
+                        Min = ~min(.x),
+                        Max = ~max(.x)),
+                   .names = "{.col}_{.fn}")) %>%
+  pivot_longer(cols = everything(),
+               names_to = "summary",
+               values_to = "value") %>%
+  separate(summary, into = c("variable", "statistic"), sep = "_") %>%
+  pivot_wider(names_from = "statistic", values_from = "value") %>%
+  select(variable, Mean, Median, Min, Max)
+summary_data %>%
+  gt() %>%
+  tab_header(
+    title = "Summary Statistics for Rental Data (2000-2022)",
+    subtitle = "Includes mean, median, minimum, and maximum values"
+  ) %>%
+  cols_label(
+    variable = "Variable",
+    Mean = "Mean",
+    Median = "Median",
+    Min = "Minimum",
+    Max = "Maximum"
+  ) %>%
+  fmt_number(
+    columns = c("Mean", "Median", "Min", "Max"),
+    decimals = 2
+  ) %>%
+  tab_options(
+    table.font.size = px(12),
+    heading.title.font.size = px(16),
+    heading.subtitle.font.size = px(12)
+  )
+```
+## Summary of categorical variables (2000-2022)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+categorical_vars <- c("KITCHEN", "MARST", "RACE", "EMPSTAT", "REGION_CLASSIFIED")
+
+category_summaries <- map(categorical_vars, function(var) {
+  data_twenty %>%
+    count(!!sym(var)) %>%
+    rename(Levels = !!sym(var), Frequency = n) %>%
+    mutate(Variable = var)
+})
+
+combined_summary_table <- bind_rows(category_summaries) %>%
+  select(Variable, Levels, Frequency)
+
+kable(combined_summary_table)
 ```
 
--   The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it's the most common income range in the datasets and our dataset is from census.
--   -According to the right skewd nature, we take a log transformation to it in later on regression model.
 
-3.FTOTINC
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(rent_data_clean, aes(x = FTOTINC)) +
-  geom_histogram(bins = 100, fill = "blue", color = "black") +
-  theme_minimal() +
-  labs(title = "Histogram of Total Family Income",
-       x = "Total Family Income",
-       y = "Frequency")
-```
 
--   Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.
--   This variable shows to be related with INCTOT, we should test the multicollineaity issue while include it in our model.
--   Considering its nature and the possible multicollinearity issue, we plan to replace INCTOT to this variable to see if it suggests any change.
 
-4.NFAMS
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-nfams_counts <- rent_data_clean %>%
-  group_by(NFAMS) %>%
-  summarise(Count = n())
 
-ggplot(nfams_counts, aes(x = factor(NFAMS), y = Count, fill = factor(NFAMS))) +
-  geom_bar(stat = "identity") +
-  labs(title = "Bar Chart of Number of Family Members",
-       x = "Number of Family Members",
-       y = "Frequency") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
-```
 
-The bar representing one family member is significantly taller than the others, indicating that single-person families are most common in this dataset.
-There is a rapid decrease in frequency as the number of family members increases.
-The families with a very large number of members are quite rare.
-This is what I expected and aligns with my understanding to common demographic trends.
