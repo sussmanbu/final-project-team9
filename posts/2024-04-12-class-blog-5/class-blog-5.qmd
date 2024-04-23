@@ -6,7 +6,95 @@ date: "2024-04-12"
 date-modified: "2024-04-12"
 draft: FALSE
 ---
-Previously, we investigate the relationship between rent spending and income. In this blog, we merged the dataset from 2000 to 2022, to get a further insight on the trend of the rent in these twenty years. 
+# Merged dataset cleaning 
+Merging the dataset from 2000 to 2022, to get a further insight on the trend of the rent in these twenty years. 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(here)
+library(dplyr)
+data_path <- here("dataset-ignore", "twenty_yr_data.csv")
+library(readr)
+twentyyr_data <- read_csv(data_path,show_col_types = FALSE)
+library(dplyr)
+set.seed(123) # Setting a seed for reproducibility
+twentyyr_data_clean <- sample_frac(twentyyr_data, 0.01)
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  filter(RENTGRS != 0,  # Exclude entries with zero rent
+         !is.na(RENTGRS),  # Exclude NA values for rent
+         EMPSTAT %in% c("1", "2", "3"),  # Include only valid employment statuses
+         KITCHEN != "0",  # Exclude entries without a kitchen
+         ROOMS != "00",  # Exclude entries with invalid room counts
+         !INCTOT %in% c(1, 9999999, 9999998, -1),  # Exclude specific INCTOT values
+         !FTOTINC %in% c(9999998, 9999999),  # Exclude specific FTOTINC values
+         POVERTY != 0,  # Exclude invalid poverty codes
+         !REGION %in% c(91, 92, 97, 99))  # Exclude specific region/state codes
+twentyyr_data_clean$REGION_CLASSIFIED <- case_when(
+  twentyyr_data_clean$REGION %in% c(11, 12, 13) ~ "NORTHEAST",
+  twentyyr_data_clean$REGION %in% c(21, 22, 23) ~ "MIDWEST",
+  twentyyr_data_clean$REGION %in% c(31, 32, 33, 34) ~ "SOUTH",
+  twentyyr_data_clean$REGION %in% c(41, 42, 43) ~ "WEST",
+  TRUE ~ "OTHER"
+)
+
+#KITCHEN
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(KITCHEN = case_when(
+    KITCHEN == "0" ~ "N/A",
+    KITCHEN == "1" ~ "No",
+    KITCHEN == "2" ~ "No, or shared use",
+    KITCHEN == "3" ~ "Yes, shared use",
+    KITCHEN == "4" ~ "Yes (shared or exclusive use)",
+    KITCHEN == "5" ~ "Yes, exclusive use",
+    TRUE ~ as.character(KITCHEN)
+  ))
+twentyyr_data_clean$KITCHEN <- as.factor(twentyyr_data_clean$KITCHEN)
+
+#MARST
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(MARST = case_when(
+    MARST == "1" ~ "Married, spouse present",
+    MARST == "2" ~ "Married, spouse absent",
+    MARST == "3" ~ "Separated",
+    MARST == "4" ~ "Divorced",
+    MARST == "5" ~ "Widowed",
+    MARST == "6" ~ "Never married/single",
+    MARST == "9" ~ "Blank, missing",
+    TRUE ~ as.character(MARST)
+  ))
+twentyyr_data_clean$MARST <- as.factor(twentyyr_data_clean$MARST)
+
+#RACE
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(RACE = case_when(
+    RACE == "1" ~ "White",
+    RACE == "2" ~ "Black/African American",
+    RACE == "3" ~ "American Indian or Alaska Native",
+    RACE == "4" ~ "Chinese",
+    RACE == "5" ~ "Japanese",
+    RACE == "6" ~ "Other Asian or Pacific Islander",
+    RACE == "7" ~ "Other race, nec",
+    RACE == "8" ~ "Two major races",
+    RACE == "9" ~ "Three or more major races",
+    TRUE ~ as.character(RACE) 
+  ))
+twentyyr_data_clean$RACE <- as.factor(twentyyr_data_clean$RACE)
+
+#EMPSTAT
+twentyyr_data_clean <- twentyyr_data_clean %>%
+  mutate(EMPSTAT = case_when(
+    EMPSTAT == "1" ~ "Employed",
+    EMPSTAT == "2" ~ "Unemployed",
+    EMPSTAT == "3" ~ "Not in labour force",
+    TRUE ~ as.character(EMPSTAT) 
+  ))
+
+twentyyr_data_clean$EMPSTAT <- as.factor(twentyyr_data_clean$EMPSTAT)
+
+write_csv(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.csv"))
+saveRDS(twentyyr_data_clean, file = here("dataset", "twentyyear_rent.rds"))
+```
+
+Previously, we investigate the relationship between rent spending and income. 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(broom)

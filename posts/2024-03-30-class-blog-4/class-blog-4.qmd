@@ -187,8 +187,6 @@ data_2022 <- data_2022[data_2022$RENTGRS > 0 & data_2022$INCTOT > 0, ]
 data_2022$log_RENTGRS <- log(data_2022$RENTGRS)
 data_2022$log_INCTOT <- log(data_2022$INCTOT)
 
-#add famincome
-data_2022$Fam_income = data_2022$FTOTINC-data_2022$INCTOT
 
 # Calculating means and standard deviations for the log-transformed columns
 mean_log_RENTGRS <- mean(data_2022$log_RENTGRS, na.rm = TRUE)
