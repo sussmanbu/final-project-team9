@@ -12,35 +12,47 @@ draft: false
   - Additionally, the study considers racial differences, examining how the coefficients vary among different racial groups.
   - A time series regression model is utilized to account for temporal variations in this relationship.
   
-# Modeling Approaches Explored
+# Outline of Modeling Approaches Explored
 
-- Simple Linear Regression Model (Utilizing the 2022 Dataset)
+- Simple Linear Regression Model (Utilizing the 2022 Dataset)  -- Detail in class blog 4
   - Initial fitting of this model was conducted to determine the potential worth of exploring the relationship between the predictor and response. The findings indicated that further investigation was merited.
 
-- Multiple Linear Regression Model (Utilizing the 2022 Dataset)
+- Multiple Linear Regression Model (Utilizing the 2022 Dataset) -- Detail in class blog 4
   - This extended model incorporated additional confounding variables, building upon the simple linear regression.
   - A multicollinearity assessment was performed to circumvent overfitting issues.
   - The selection of control variables was affirmed.
   - The residual plot indicated the presence of heteroscedasticity.
 
-- Log-Log Regression Model (Utilizing the 2022 Dataset)
+- **Log-Log Regression Model** (Utilizing the 2022 Dataset) -- Detail in class blog 4
   - Both the predictor and response variables underwent log transformation to address the problem in the Multiple Linear Regression Model.
   - Outliers were identified and removed from the analysis.
   - All variables demonstrated statistical significance.
   - The residual plot suggested an acceptable fit.
   
-- Group_by **race**, log_log regression model (using 2022 dataset) -- Detail in class blog 5
+- **Log-Log Regression Model** (Utilizing the 2000-2022 Dataset) -- Detail in class blog 5
+  - Using the accepted model above to fit the dataset of each year 
+  - All coefficients show to be statistically significant 
+  - Plot the residual plot & comfirmed it is falling within an acceptable range.
+  - Compare the coefficients change for each year, plot diagram see the trend 
+  
+- Log-Log Regression Model **by Race** (2022 Dataset) — Detail in class blog 6
+  - The analysis stratified the data by race, applying the aforementioned Log-Log regression approach.
+  - It provided detailed coefficients for each racial category, examining the influence on the rent-income relationship.
+  - The statistical significance of all coefficients was verified, with residual plots falling within an acceptable range.
 
-- Group_by **race**, log_log regression model (using 2000-2022 dataset) -- Detail in class blog 6
-
+- Longitudinal Log-Log Regression Model **by Race** (2000-2022 Dataset) — Detail in class blog 6
+  - This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
+  - Trends over time for each race were charted to illustrate these dynamics.
+  - Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.
+  
 - Time series model (using 2000-2022 dataset) -- Detail in class blog 7
 
 
 
 ##  Modeling and Inference
-
-
-## Rough explorationn to the correlation 
+### Linear model 
+#### Linear model assumptions 
+1. Linearity 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(broom)
@@ -80,10 +92,13 @@ ggplot(data_2022, aes(x = INCTOT, y = RENTGRS)) +
     axis.title = element_text(face = "bold")  
   )
 ```
+For the assumptions of linear model, the plot only provide rough sense of what we could consider
+
+
 
 - There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.
 
-- For the assumptions of linear model, the plot only provide rough sense of what we could consider
+
   - The trend line suggests a possible linear relationship, but this needs further statistical testing.
   - The spread of rent appears to increase with income, hinting at heteroscedasticity rather than the required constant variance across levels of income.
   - Normality of Residuals: Cannot be assessed from the plot; but as the data_page indicate, we make log transformation 
