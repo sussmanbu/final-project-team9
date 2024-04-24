@@ -185,70 +185,108 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="time-series-model" class="level1">
-<h1>Time series model</h1>
-<ul>
-<li>Fit a time series model using data from 2000 to 2022.</li>
-<li><h2 id="summary-table" class="anchored" data-anchor-id="time-series-model">Summary table</h2></li>
-</ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>model_glance <span class="ot">&lt;-</span> broom.mixed<span class="sc">::</span><span class="fu">glance</span>(model)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>model_tidy <span class="ot">&lt;-</span> broom.mixed<span class="sc">::</span><span class="fu">tidy</span>(model)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>model_augment <span class="ot">&lt;-</span> broom.mixed<span class="sc">::</span><span class="fu">augment</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /Users/yating/Desktop/Final Project MA415</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>data_path <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"data_twenty_clean.csv"</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>data_path1 <span class="ot">&lt;-</span> <span class="fu">here</span>(<span class="st">"dataset"</span>, <span class="st">"latest_clean.csv"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>data_twenty <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_path,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>data_2022 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(data_path1,<span class="at">show_col_types =</span> <span class="cn">FALSE</span>) </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_glance)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Matrix</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Matrix'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:tidyr':
+
+    expand, pack, unpack</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RENTGRS <span class="sc">~</span> ROOMS <span class="sc">+</span> NFAMS <span class="sc">+</span> AGE <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> REGION), <span class="at">data =</span> data_twenty, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 7
-   nobs sigma   logLik      AIC      BIC deviance df.residual
-  &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;       &lt;int&gt;
-1 95664  597. -747202. 1494417. 1494473. 1494405.       95658</code></pre>
+<pre><code>Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: RENTGRS ~ ROOMS + NFAMS + AGE + (1 | REGION)
+   Data: data_twenty
+
+      AIC       BIC    logLik  deviance  df.resid 
+1494416.6 1494473.4 -747202.3 1494404.6     95658 
+
+Scaled residuals: 
+    Min      1Q  Median      3Q     Max 
+-6.2769 -0.6193 -0.1758  0.3995  8.1212 
+
+Random effects:
+ Groups   Name        Variance Std.Dev.
+ REGION   (Intercept)  42539   206.3   
+ Residual             356060   596.7   
+Number of obs: 95664, groups:  REGION, 9
+
+Fixed effects:
+            Estimate Std. Error t value
+(Intercept) 653.0188    69.2216   9.434
+ROOMS        81.0267     1.0454  77.507
+NFAMS        89.4585     2.9375  30.453
+AGE          -1.9863     0.1092 -18.191
+
+Correlation of Fixed Effects:
+      (Intr) ROOMS  NFAMS 
+ROOMS -0.066              
+NFAMS -0.051 -0.143       
+AGE   -0.078  0.044  0.158</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(model_tidy)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 6
-  effect   group    term            estimate std.error statistic
-  &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;              &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 fixed    &lt;NA&gt;     (Intercept)       653.      69.2        9.43
-2 fixed    &lt;NA&gt;     ROOMS              81.0      1.05      77.5 
-3 fixed    &lt;NA&gt;     NFAMS              89.5      2.94      30.5 
-4 fixed    &lt;NA&gt;     AGE                -1.99     0.109    -18.2 
-5 ran_pars REGION   sd__(Intercept)   206.      NA         NA   
-6 ran_pars Residual sd__Observation   597.      NA         NA   </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">head</span>(model_augment))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 16
-  RENTGRS ROOMS NFAMS   AGE REGION .fitted .resid      .hat .cooksd .fixed   .mu
-    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1    2300     3     1    93     21    633.  1667. 0.000172  3.35e-4   801.  633.
-2     355     5     1    62     22    777.  -422. 0.000204  2.55e-5  1024.  777.
-3    3160     3     1    31     12   1112.  2048. 0.0000878 2.59e-4   924. 1112.
-4     210     4     1    53     22    714.  -504. 0.000197  3.51e-5   961.  714.
-5     253     3     1    63     31    909.  -656. 0.0000767 2.32e-5   860.  909.
-6     610     5     1    22     32    833.  -223. 0.000221  7.70e-6  1104.  833.
-# ℹ 5 more variables: .offset &lt;dbl&gt;, .sqrtXwt &lt;dbl&gt;, .sqrtrwt &lt;dbl&gt;,
-#   .weights &lt;dbl&gt;, .wtres &lt;dbl&gt;</code></pre>
-</div>
-</div>
-<section id="residual-plot" class="level2">
-<h2 class="anchored" data-anchor-id="residual-plot">Residual plot</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(model))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="blog-post-7_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="blog-post-7-copy_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>fitted <span class="ot">&lt;-</span> <span class="fu">predict</span>(model, <span class="at">re.form =</span> <span class="cn">NA</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>yearly_trends <span class="ot">&lt;-</span> data_twenty <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(YEAR) <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Average_Fitted =</span> <span class="fu">mean</span>(fitted))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(yearly_trends, <span class="fu">aes</span>(<span class="at">x =</span> YEAR, <span class="at">y =</span> Average_Fitted)) <span class="sc">+</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Time Series Plot of Fitted Rent Values by Year"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Average Fitted Rent"</span>) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="blog-post-7-copy_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>data_twenty$fitted &lt;- predict(model, re.form = NA) yearly_trends &lt;- data_twenty %&gt;% group_by(YEAR) %&gt;% summarise(Average_Fitted = mean(fitted))</p>
-<p>ggplot(yearly_trends, aes(x = YEAR, y = Average_Fitted)) + geom_line() + labs(title = “Time Series Plot of Fitted Rent Values by Year”, x = “Year”, y = “Average Fitted Rent”) + theme_minimal() ``` The linear mixed-effects model is used to understand how different factors (rooms, family size, and age) influence rent prices, with variations across different regions taken into account as random effects. The model’s summary would give an insight into which factors are statistically significant and their estimated effects on rent prices.</p>
-<p>Moreover, the residual plot, which shows the residuals on the y-axis against the index of observations on the x-axis. The residuals appear to be randomly scattered around the horizontal axis at zero, with no clear patterns or trends. This suggests that the model does not exhibit obvious systematic bias. However, there are some points that stand out from the cloud of points, indicating potential outliers or anomalies in the data.</p>
+<p>The linear mixed-effects model is used to understand how different factors (rooms, family size, and age) influence rent prices, with variations across different regions taken into account as random effects. The model’s summary would give an insight into which factors are statistically significant and their estimated effects on rent prices. Moreover, the residual plot, which shows the residuals on the y-axis against the index of observations on the x-axis. The residuals appear to be randomly scattered around the horizontal axis at zero, with no clear patterns or trends. This suggests that the model does not exhibit obvious systematic bias.However, there are some points that stand out from the cloud of points, indicating potential outliers or anomalies in the data.</p>
 <p>The time series plot of the fitted rent values by year. This plot visualizes the average rent price predicted by the model across different years: The plot shows fluctuations in the average fitted rent values over time, with an overall increasing trend until around 2015, after which there is a sharp decrease. The rise until 2015 could indicate increasing rent prices over time due to various factors such as inflation, market demand, or changes in the number of rooms, family size, and the age of the buildings. The sharp decline after 2015 could be due to an economic event, policy change, or other external factors not captured by the model.</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

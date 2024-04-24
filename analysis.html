@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -148,9 +114,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#example-of-loading-data" id="toc-example-of-loading-data" class="nav-link active" data-scroll-target="#example-of-loading-data">Example of loading data</a></li>
-  <li><a href="#note-on-attribution" id="toc-note-on-attribution" class="nav-link" data-scroll-target="#note-on-attribution">Note on Attribution</a></li>
+  <li><a href="#the-question-we-want-to-address" id="toc-the-question-we-want-to-address" class="nav-link active" data-scroll-target="#the-question-we-want-to-address">The question we want to address</a></li>
+  <li><a href="#outline-of-modeling-approaches-explored" id="toc-outline-of-modeling-approaches-explored" class="nav-link" data-scroll-target="#outline-of-modeling-approaches-explored">Outline of Modeling Approaches Explored</a>
+  <ul class="collapse">
+  <li><a href="#modeling-and-inference" id="toc-modeling-and-inference" class="nav-link" data-scroll-target="#modeling-and-inference">Modeling and Inference</a>
+  <ul class="collapse">
+  <li><a href="#linear-model" id="toc-linear-model" class="nav-link" data-scroll-target="#linear-model">Linear model</a></li>
+  </ul></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -179,60 +151,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg" class="img-fluid"></p>
-<p>This comes from the file <code>analysis.qmd</code>.</p>
-<p>We describe here our detailed data analysis. This page will provide an overview of what questions you addressed, illustrations of relevant aspects of the data with tables and figures, and a statistical model that attempts to answer part of the question. You’ll also reflect on next steps and further analysis.</p>
-<p>The audience for this page is someone like your class mates, so you can expect that they have some level of statistical and quantitative sophistication and understand ideas like linear and logistic regression, coefficients, confidence intervals, overfitting, etc.</p>
-<p>While the exact number of figures and tables will vary and depend on your analysis, you should target around 5 to 6. An overly long analysis could lead to losing points. If you want you can link back to your blog posts or create separate pages with more details.</p>
-<p>The style of this paper should aim to be that of an academic paper. I don’t expect this to be of publication quality but you should keep that aim in mind. Avoid using “we” too frequently, for example “We also found that …”. Describe your methodology and your findings but don’t describe your whole process.</p>
-<section id="example-of-loading-data" class="level3">
-<h3 class="anchored" data-anchor-id="example-of-loading-data">Example of loading data</h3>
-<p>The code below shows an example of loading the loan refusal data set (which you should delete at some point).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.0     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">getwd</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/Users/yating/Desktop/Final Project MA415"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/loan_refusal_clean.csv"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 20 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): bank
-dbl (4): min, white, himin, hiwhite
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/loan_refusal.RData"</span>))</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ls</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "data"            "has_annotations" "loan_data_clean"</code></pre>
-</div>
-</div>
+<section id="the-question-we-want-to-address" class="level1">
+<h1>The question we want to address</h1>
+<ul>
+<li>The primary focus of this research is to explore the relationship between an individual’s total income and their rental expenditures.
+<ul>
+<li>The analysis aims to determine how rental spending adjusts in response to changes in income levels.</li>
+<li>Both linear and nonlinear models are employed to elucidate the connection between these variables.</li>
+<li>Additionally, the study considers racial differences, examining how the coefficients vary among different racial groups.</li>
+<li>A time series regression model is utilized to account for temporal variations in this relationship.</li>
+</ul></li>
+</ul>
 </section>
-<section id="note-on-attribution" class="level2">
-<h2 class="anchored" data-anchor-id="note-on-attribution">Note on Attribution</h2>
-<p>In general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.</p>
-<p>If you are directly quoting from a source, please make that clear. You can show quotes using <code>&gt;</code> like this</p>
-<pre><code>&gt; To be or not to be.</code></pre>
-<blockquote class="blockquote">
-<p>To be or not to be.</p>
-</blockquote>
+<section id="outline-of-modeling-approaches-explored" class="level1">
+<h1>Outline of Modeling Approaches Explored</h1>
+<ul>
+<li>Simple Linear Regression Model (Utilizing the 2022 Dataset) – Detail in class blog 4
+<ul>
+<li>Initial fitting of this model was conducted to determine the potential worth of exploring the relationship between the predictor and response. The findings indicated that further investigation was merited.</li>
+</ul></li>
+<li>Multiple Linear Regression Model (Utilizing the 2022 Dataset) – Detail in class blog 4
+<ul>
+<li>This extended model incorporated additional confounding variables, building upon the simple linear regression.</li>
+<li>A multicollinearity assessment was performed to circumvent overfitting issues.</li>
+<li>The selection of control variables was affirmed.</li>
+<li>The residual plot indicated the presence of heteroscedasticity.</li>
+</ul></li>
+<li><strong>Log-Log Regression Model</strong> (Utilizing the 2022 Dataset) – Detail in class blog 4
+<ul>
+<li>Both the predictor and response variables underwent log transformation to address the problem in the Multiple Linear Regression Model.</li>
+<li>Outliers were identified and removed from the analysis.</li>
+<li>All variables demonstrated statistical significance.</li>
+<li>The residual plot suggested an acceptable fit.</li>
+</ul></li>
+<li><strong>Log-Log Regression Model</strong> (Utilizing the 2000-2022 Dataset) – Detail in class blog 5
+<ul>
+<li>Using the accepted model above to fit the dataset of each year</li>
+<li>All coefficients show to be statistically significant</li>
+<li>Plot the residual plot &amp; comfirmed it is falling within an acceptable range.</li>
+<li>Compare the coefficients change for each year, plot diagram see the trend</li>
+</ul></li>
+<li>Log-Log Regression Model <strong>by Race</strong> (2022 Dataset) — Detail in class blog 6
+<ul>
+<li>The analysis stratified the data by race, applying the aforementioned Log-Log regression approach.</li>
+<li>It provided detailed coefficients for each racial category, examining the influence on the rent-income relationship.</li>
+<li>The statistical significance of all coefficients was verified, with residual plots falling within an acceptable range.</li>
+</ul></li>
+<li>Longitudinal Log-Log Regression Model <strong>by Race</strong> (2000-2022 Dataset) — Detail in class blog 6
+<ul>
+<li>This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.</li>
+<li>Trends over time for each race were charted to illustrate these dynamics.</li>
+<li>Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.</li>
+</ul></li>
+<li>Time series model (using 2000-2022 dataset) – Detail in class blog 7</li>
+</ul>
+<section id="modeling-and-inference" class="level2">
+<h2 class="anchored" data-anchor-id="modeling-and-inference">Modeling and Inference</h2>
+<section id="linear-model" class="level3">
+<h3 class="anchored" data-anchor-id="linear-model">Linear model</h3>
+<section id="linear-model-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="linear-model-assumptions">Linear model assumptions</h4>
+<ol type="1">
+<li>Linearity</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>For the assumptions of linear model, the plot only provide rough sense of what we could consider</p>
+<ul>
+<li><p>There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.</p>
+<ul>
+<li>The trend line suggests a possible linear relationship, but this needs further statistical testing.</li>
+<li>The spread of rent appears to increase with income, hinting at heteroscedasticity rather than the required constant variance across levels of income.</li>
+<li>Normality of Residuals: Cannot be assessed from the plot; but as the data_page indicate, we make log transformation</li>
+<li>There are visible potential outliers, especially at higher income levels, which could affect the model’s accuracy. We also found this problem in the data_page, therefore we exclude the outlier which defined as the range outside of the three standard deviations.</li>
+</ul></li>
+</ul>
 <hr>
+</section>
+</section>
 </section>
 <section id="rubric-on-this-page" class="level2">
 <h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
@@ -273,6 +272,7 @@ dbl (4): min, white, himin, hiwhite
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
