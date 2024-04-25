@@ -62,6 +62,36 @@ Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest_cle
 
     -   This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.
     
+- Variable **KITCHEN** has characteristic that over 95% of houses possess a kitchen, diminishing its analytical value. Therefore, should consider to exclude this variable while the modeling.
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyr)
+library(broom)
+library(dplyr)
+library(here)
+library(gt)
+library(purrr)
+data_path <- here("dataset", "data_twenty_clean.csv")
+data_path1 <- here("dataset", "latest_clean.csv")
+library(readr)
+data_twenty <- read_csv(data_path,show_col_types = FALSE) 
+data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
+library(ggplot2)
+library(knitr)
+library(lme4)
+library(broom.mixed)
+kitchen_counts <- data_2022 %>%
+  group_by(KITCHEN) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100)
+ggplot(kitchen_counts, aes(x = "", y = Count, fill = factor(KITCHEN))) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar(theta = "y") +
+  theme_void() +
+  geom_text(aes(label = sprintf("%1.1f%%", Percentage)), position = position_stack(vjust = 0.5)) +
+  labs(title = "Pie Chart of Kitchen",fill = "Number of Kitchens")
+```
+
+    
 -   Exclude data entries characterized by specific codes indicative of **missing or unknown values**, as well as those representing values deemed inappropriate for analytical purposes. Given the vast size of the original dataset, which includes millions of records, we opted to remove the rows with these missing values directly.This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.Removed categories are summarized under the following table.
 
 ##### Table of Variables with Missing Value Codes for Each Category
