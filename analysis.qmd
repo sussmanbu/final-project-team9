@@ -50,8 +50,7 @@ draft: false
 
 
 ##  Modeling and Inference
-### Linear model 
-#### Linear model assumptions 
+### Linear model assumptions 
 1. Linearity 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
@@ -92,17 +91,79 @@ ggplot(data_2022, aes(x = INCTOT, y = RENTGRS)) +
     axis.title = element_text(face = "bold")  
   )
 ```
-For the assumptions of linear model, the plot only provide rough sense of what we could consider
-
-
+- For the assumptions of linear model, the plot only provide rough sense of what we could consider.The trend line suggests a possible linear relationship, but this needs further statistical testing.
 
 - There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.
 
+2. Normality: 
 
-  - The trend line suggests a possible linear relationship, but this needs further statistical testing.
-  - The spread of rent appears to increase with income, hinting at heteroscedasticity rather than the required constant variance across levels of income.
-  - Normality of Residuals: Cannot be assessed from the plot; but as the data_page indicate, we make log transformation 
+3.Homoskedasticity: The spread of rent appears to increase with income, hinting at heteroscedasticity rather than the required constant variance across levels of income.
+
+4. Independence: 
+
+
+Others:
+1. Residual:
+
+2. Multicollienarity:
+
   -  There are visible potential outliers, especially at higher income levels, which could affect the model's accuracy. We also found this problem in the data_page, therefore we exclude the outlier which defined as the range outside of the three standard deviations. 
+  
+### Log-Log Regression Model
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022 )
+```
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+tidy_log_model_2022 <- tidy(log_model_2022)
+kable(tidy_log_model_2022)
+```
+- The coefficient for log_INCTOT has an estimate of approximately 0.1414 and a p-value of 0.00000000, which indicates that it is statistically significant.
+
+- The conclusion of this model is a 10% increase in income is associated with an average 1.414% increase in the dependent variable of renting expenditure, holding all other variables constant.
+
+- This result sounds make sense for us as the rent is relatively inelastic product from the econ perspective ...
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+augmented_log_model_2022 <- head(augment(log_model_2022))
+kable(augmented_log_model_2022)
+```
+
+- The adjusted R-squared is 0.223. This value looks modest. In practical terms, it suggests that the model doesn't explain a large portion of the variance in the logarithm of rent. But in this social science and economic contexts, however, it is not uncommon to have lower R-squared values due to the complexity of human behavior and multiple unobserved factors. So we believe it is acceptable. 
+
+- The p-value for the overall model is extremely low, which is good. It indicates that the model predictors, as a set, are statistically significantly associated with the response variable, the logarithm of rent. 
+
+- The sigma value is the standard deviation of the error terms and is lower. This suggests that the residuals in this model are less spread out, indicating a tighter fit of the model to the data. However, since the scale is different from the previous model (which was on a log scale), this improvement is difficult to directly compare.
+
+### Residual plot
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Calculate residuals and fitted values
+residuals_2022 <- resid(log_model_2022)
+fitted_values_2022 <- fitted(log_model_2022)
+
+# Create a residual plot
+plot(fitted_values_2022, residuals_2022, 
+     xlab = "Fitted Values", ylab = "Residuals",
+     main = "Residual Plot", pch = 20)
+abline(h = 0, col = "red") 
+```
+
+- The residuals appear to be centered around zero, which is good as it suggests no bias in the predictions.
+
+- There is some evidence of heteroscedasticity as the residuals seem to fan out as the fitted values increase, which is common in non-transformed data.
+
+- There are no clear patterns in the residuals, which suggests that the model catch the nonlinear relationships.
+
+- This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
+
+
+
+
+
+
+
+
+
+
 
 
 
