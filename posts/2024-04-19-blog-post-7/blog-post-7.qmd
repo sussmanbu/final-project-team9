@@ -82,12 +82,98 @@ ggplot(yearly_trends, aes(x = YEAR, y = Average_Fitted)) +
 
 
 
+<<<<<<< HEAD
 
 
 
 
 
 
+=======
+```{r}
+data_twenty$INCTOT <- scale(data_twenty$INCTOT, center = TRUE, scale = TRUE)
+data_twenty$ROOMS <- scale(data_twenty$ROOMS, center = TRUE, scale = TRUE)
+data_twenty$NFAMS <- scale(data_twenty$NFAMS, center = TRUE, scale = TRUE)
+data_twenty$AGE <- scale(data_twenty$AGE, center = TRUE, scale = TRUE)
+data_twenty$FTOTINC <- scale(data_twenty$FTOTINC, center = TRUE, scale = TRUE)
+
+model_with_income <- lmer(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + (1 | REGION_CLASSIFIED), data = data_twenty, REML = FALSE)
+```
+
+```{r}
+model_glance <- broom.mixed::glance(model)
+
+model_tidy <- broom.mixed::tidy(model)
+
+model_augment <- broom.mixed::augment(model)
+```
+
+```{r}
+print(model_glance)
+print(model_tidy)
+print(head(model_augment))
+```
+
+```{r}
+# Calculate residuals and fitted values
+residuals_twenty <- resid(model_with_income)
+fitted_values_twenty <- fitted(model_with_income)
+
+# Create a residual plot
+plot(fitted_values_twenty, residuals_twenty, 
+     xlab = "Fitted Values", ylab = "Residuals",
+     main = "Residual Plot", pch = 20)
+abline(h = 0, col = "red") 
+```
+
+
+
+
+```{r}
+# Filter out non-positive values before log transformation
+data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
+
+# Apply log transformation
+data_twenty$log_RENTGRS <- log(data_twenty$RENTGRS)
+data_twenty$log_INCTOT <- log(data_twenty$INCTOT)
+
+
+# Calculating means and standard deviations for the log-transformed columns
+mean_log_RENTGRS <- mean(data_twenty$log_RENTGRS, na.rm = TRUE)
+sd_log_RENTGRS <- sd(data_twenty$log_RENTGRS, na.rm = TRUE)
+mean_log_INCTOT <- mean(data_twenty$log_INCTOT, na.rm = TRUE)
+sd_log_INCTOT <- sd(data_twenty$log_INCTOT, na.rm = TRUE)
+
+
+# Defining lower and upper bounds for both variables
+lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
+ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
+lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
+ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
+
+# Filtering out outliers
+data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & data_twenty$log_RENTGRS <= ub_log_RENTGRS & 
+                             data_twenty$log_INCTOT >= lb_log_INCTOT & data_twenty$log_INCTOT <= ub_log_INCTOT, ]
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + (1 | REGION_CLASSIFIED), data = data_twenty_clean, REML = FALSE)
+```
+
+### Residual plot
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Calculate residuals and fitted values
+residuals_2022 <- resid(model_with_income_log)
+fitted_values_2022 <- fitted(model_with_income_log)
+
+# Create a residual plot
+plot(fitted_values_2022, residuals_2022, 
+     xlab = "Fitted Values", ylab = "Residuals",
+     main = "Residual Plot", pch = 20)
+abline(h = 0, col = "red") 
+```
+
+>>>>>>> 82db39764d3811eb02dffd7471ef187a724fd74e
 
 
 
