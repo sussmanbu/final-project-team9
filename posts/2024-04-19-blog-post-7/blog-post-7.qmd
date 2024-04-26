@@ -21,67 +21,12 @@ library(ggplot2)
 library(knitr)
 library(lme4)
 library(broom.mixed)
+library(nlme)
+
 ```
+
 
 # Time series model
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-model <- lmer(RENTGRS ~ ROOMS + NFAMS + AGE + (1 | REGION), data = data_twenty, REML = FALSE)
-
-model_with_income <- lmer(RENTGRS ~ ROOMS + NFAMS + AGE + INCTOT + (1 | REGION), data = data_twenty, REML = FALSE)
-```
-
-- Fit a time series model using data from 2000 to 2022. 
-- 
-## Summary table 
-```{r}
-model_glance <- broom.mixed::glance(model)
-
-model_tidy <- broom.mixed::tidy(model)
-
-model_augment <- broom.mixed::augment(model)
-```
-
-```{r}
-print(model_glance)
-print(model_tidy)
-print(head(model_augment))
-```
-## Residual plot 
-```{r}
-plot(residuals(model))
-```
-
-
-```{r}
-data_twenty$fitted <- predict(model, re.form = NA)
-yearly_trends <- data_twenty %>%
-  group_by(YEAR) %>%
-  summarise(Average_Fitted = mean(fitted))
-
-ggplot(yearly_trends, aes(x = YEAR, y = Average_Fitted)) +
-  geom_line() +
-  labs(title = "Time Series Plot of Fitted Rent Values by Year",
-       x = "Year",
-       y = "Average Fitted Rent") +
-  theme_minimal()
-```
-
-- The linear mixed-effects model assesses the impact of rooms, family size, and age on rent prices.
-- Random effects account for region-based variations.
-- The model summary indicates the significance and impact of each factor on rent prices.
-- The residual plot reveals:
-  1) Residuals are widely dispersed around zero, suggesting no systematic bias in the model.
-  2) Some outliers are present, which could be anomalies.
-- The time series plot of fitted values shows:
-  1) Fluctuating average fitted rent values over the years.
-  2) An increasing trend in rent prices up to 2015.
-  3) A post-2015 sharp decline in average fitted rent values.
-- Potential causes for trends:
-  1) Pre-2015 rise could relate to inflation, market demand, or changes in building age, room number, and family size.
-  2) The decline after 2015 might reflect economic events, policy changes, or factors outside the model's scope.
-
-
-
 ```{r}
 data_twenty$INCTOT <- scale(data_twenty$INCTOT, center = TRUE, scale = TRUE)
 data_twenty$ROOMS <- scale(data_twenty$ROOMS, center = TRUE, scale = TRUE)
@@ -92,19 +37,32 @@ data_twenty$FTOTINC <- scale(data_twenty$FTOTINC, center = TRUE, scale = TRUE)
 model_with_income <- lmer(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + (1 | REGION_CLASSIFIED), data = data_twenty, REML = FALSE)
 ```
 
-```{r}
-model_glance <- broom.mixed::glance(model)
-
-model_tidy <- broom.mixed::tidy(model)
-
-model_augment <- broom.mixed::augment(model)
+### Regression Coefficients Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE }
+tidy_lm <- tidy(model_with_income)
+kable(tidy_lm, format = "pipe")
 ```
 
-```{r}
-print(model_glance)
-print(model_tidy)
-print(head(model_augment))
+### Model Fit Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+glance_lm <- glance(model_with_income)
+kable(glance_lm, format = "pipe")
 ```
+
+### Residuals and Related Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+augment_lm <- augment(model_with_income)
+kable(head(augment_lm), format = "pipe")
+```
+- From the above tables, we observe that the term	KITCHENYes (access to kitchens) is negative in the estimate, and the variable has a large statistic, which might indicate statistic, which might indicate significance, but consider whether this variable is theoretically important for the rent price. Also AGE (Age of the renter or the rental unit): The effect size is small and the statistic value is close to zero, which may suggest it's not a strong predictor in the presence of other variables.
+- Therefore we decided to remove these two variables and continue to explore the model.
+### Multicollinearity concerns
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(car)
+vif_values <- vif(model_with_income)
+kable(vif_values)
+```
+- we observe income and family income stands out have higher multicollinearity index than others, therefore we decide to remove family income in our model.
 
 ```{r}
 # Calculate residuals and fitted values
@@ -121,6 +79,7 @@ abline(h = 0, col = "red")
 
 
 
+## log-log model
 ```{r}
 # Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
@@ -149,22 +108,41 @@ data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & dat
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + (1 | REGION_CLASSIFIED), data = data_twenty_clean, REML = FALSE)
+model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty_clean, REML = FALSE)
 ```
+
+### Regression Coefficients Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE }
+tidy_lm <- tidy(model_with_income_log)
+kable(tidy_lm, format = "pipe")
+```
+
+### Model Fit Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+glance_lm <- glance(model_with_income_log)
+kable(glance_lm, format = "pipe")
+```
+
+### Residuals and Related Statistics Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+augment_lm <- augment(model_with_income_log)
+kable(head(augment_lm), format = "pipe")
+```
+
+
 
 ### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Calculate residuals and fitted values
-residuals_2022 <- resid(model_with_income_log)
-fitted_values_2022 <- fitted(model_with_income_log)
+residuals_twenty <- resid(model_with_income_log)
+fitted_values_twenty <- fitted(model_with_income_log)
 
 # Create a residual plot
-plot(fitted_values_2022, residuals_2022, 
+plot(fitted_values_twenty, residuals_twenty, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
-
 
 
 
