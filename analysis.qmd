@@ -12,22 +12,32 @@ draft: false
   - Additionally, the study considers racial differences, examining how the coefficients vary among different racial groups.
   - A time series regression model is utilized to account for temporal variations in this relationship.
   
-# Outline of Modeling Approaches Explored
+# Models and Inferences 
 
-- Simple Linear Regression Model (Utilizing the 2022 Dataset)  -- Detail in class blog 4
-  - Initial fitting of this model was conducted to determine the potential worth of exploring the relationship between the predictor and response. The findings indicated that further investigation was merited.
-
-- Multiple Linear Regression Model (Utilizing the 2022 Dataset) -- Detail in class blog 4
-  - This extended model incorporated additional confounding variables, building upon the simple linear regression.
-  - A multicollinearity assessment was performed to circumvent overfitting issues.
-  - The selection of control variables was affirmed.
-  - The residual plot indicated the presence of heteroscedasticity.
-
+- Simple Linear Regression Model (Based on 2022 Data) – Detail analysis and plots refer to class blog 4 
+  - The initial model fitting aimed to determine the potential worth of exploring the relationship between the predictor and response. 
+  - The findings indicate that for every $1,000 increase in income, there is an associated increase of approximately 5.3213 units in the response variable on average.
+  - The coefficient of this primary predictor, along with the intercept, has shown statistical significance.
+  - Nonetheless, this initial model provides only a preliminary look at the relationship. A more comprehensive analysis will involve incorporating additional control variables.
+  
+- Multiple Linear Regression Model (Using the 2022 Dataset) -- For details, see class blog 4.
+  - This expanded model included additional confounding variables, improving upon the simple linear regression framework.
+  - The correlation matrix was utilized to select potential control variables as well as revealing variables that may potenitally pose a multicollinearity issue.
+  - Upon fitting the multiple linear regression (MLR) model, 'Kitchen' was excluded due to its statistical insignificance, as evidenced by a notably high p-value. While 'Employment Status' also showed a non-significant p-value, it was not as pronounced as with 'Kitchen'. It is speculated that there might be an interaction effect between 'Employment Status' and variables such as 'Income' or 'FTOTINC', which will be further explored. 
+  - A multicollinearity review was conducted, leading to the exclusion of 'FTOTINC' to mitigate overfitting.
+  - Control variables were selected and confirmed.
+  - Upon reviewing the statistical output, all coefficients were found to be significant, and the adjusted R-squared indicated a satisfactory model fit.
+  - The model concludes that for every $1,000 increase in total income (INCTOT), there is an expected increase of 5.1111 units in the response variable, holding all other variables unchanged.
+  - The residual plot showed signs of heteroscedasticity, suggesting the need for further model adjustments, such as adding interaction terms or applying logarithmic transformations to key regressor and response variables.
+  
 - **Log-Log Regression Model** (Utilizing the 2022 Dataset) -- Detail in class blog 4
-  - Both the predictor and response variables underwent log transformation to address the problem in the Multiple Linear Regression Model.
-  - Outliers were identified and removed from the analysis.
+  - Both the predictor and response variables underwent log transformation as their distributions are extremely right skewed (talked in data page)
+  - Outliers were identified and removed from the analysis (also talked in data page, showed the density plot)
+  - Fit the cleaned variables and do the model again.
   - All variables demonstrated statistical significance.
   - The residual plot suggested an acceptable fit.
+  
+- Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset) -- Detail in class blog 4
   
 - **Log-Log Regression Model** (Utilizing the 2000-2022 Dataset) -- Detail in class blog 5
   - Using the accepted model above to fit the dataset of each year 
@@ -39,6 +49,8 @@ draft: false
   - The analysis stratified the data by race, applying the aforementioned Log-Log regression approach.
   - It provided detailed coefficients for each racial category, examining the influence on the rent-income relationship.
   - The statistical significance of all coefficients was verified, with residual plots falling within an acceptable range.
+  
+
 
 - Longitudinal Log-Log Regression Model **by Race** (2000-2022 Dataset) — Detail in class blog 6
   - This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
@@ -49,60 +61,45 @@ draft: false
 
 
 
-##  Modeling and Inference
-### Linear model 
-#### Linear model assumptions 
-1. Linearity 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 library(tidyr)
 library(broom)
 library(dplyr)
 library(here)
 library(gt)
 library(purrr)
-library(readr)
-library(ggplot2)
-library(knitr)
 data_path <- here("dataset", "data_twenty_clean.csv")
 data_path1 <- here("dataset", "latest_clean.csv")
+library(readr)
 data_twenty <- read_csv(data_path,show_col_types = FALSE) 
 data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
+library(ggplot2)
+library(knitr)
+library(lme4)
+library(broom.mixed)
 ```
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(data_2022, aes(x = INCTOT, y = RENTGRS)) +
-  geom_point(color = 'black', alpha = 0.4, size = 1.5) +  
-  geom_smooth(method = "lm", color = "darkblue", size = 1.2) +  
-  scale_x_continuous(
-    limits = c(0, quantile(data_2022$INCTOT, 0.95)),
-    labels = scales::comma,  
-    name = "Total Income"  
-  ) +
-  scale_y_continuous(
-    limits = c(0, quantile(data_2022$RENTGRS, 0.95)),
-    labels = scales::comma,
-    name = "Gross Rent"  
-  ) +
-  labs(title = "Relationship Between Total Income and Gross Rent of 2022 dataset",  
-       subtitle = "Linear model fit shown in blue",
-       caption = "Data source: IPUMS 2022") +
-  theme_minimal() +  
-  theme(
-    text = element_text(size = 12), 
-    plot.title = element_text(face = "bold"), 
-    axis.title = element_text(face = "bold")  
-  )
-```
-For the assumptions of linear model, the plot only provide rough sense of what we could consider
 
 
 
-- There seems to be a large concentration of points towards the lower end of the income scale with lower rents, which suggests that a significant portion of the dataset includes individuals with lower income and rent levels.
 
 
-  - The trend line suggests a possible linear relationship, but this needs further statistical testing.
-  - The spread of rent appears to increase with income, hinting at heteroscedasticity rather than the required constant variance across levels of income.
-  - Normality of Residuals: Cannot be assessed from the plot; but as the data_page indicate, we make log transformation 
-  -  There are visible potential outliers, especially at higher income levels, which could affect the model's accuracy. We also found this problem in the data_page, therefore we exclude the outlier which defined as the range outside of the three standard deviations. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

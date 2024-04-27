@@ -106,6 +106,22 @@ mlr_model <- lm(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE 
 tidy_mlr <- tidy(mlr_model)
 kable(tidy_mlr, format = "pipe")
 ```
+- The variable 'Kitchen' has been identified as statistically insignificant with an exceptionally high p-value, leading to its exclusion from the dataset. This decision aligns with the data characteristic that over 95% of houses possess a kitchen, diminishing its analytical value.
+
+- 'Employment Status' also presents with a non-significant p-value, though not to the extreme observed for 'Kitchen'. It is hypothesized that there may be an interaction between 'Employment Status' and variables such as 'Income' or 'FTOTINC'. This interaction will be investigated in further analyses. Until then, 'Employment Status' will be retained in the model before exploring nonlinear interactions.
+
+### New model after excluding KITCHEN
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC +  REGION_CLASSIFIED, data = data_2022)
+```
+
+### Regression Coefficients Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+tidy_mlr <- tidy(mlr_model)
+kable(tidy_mlr, format = "pipe")
+```
+- After the exclusion, the coefficients of our key regressor showed minor change.
+
 
 ### Model Fit Statistics Table:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -124,6 +140,7 @@ kable(augmented_mlr, format = "pipe")
 -  The adjusted R-squared value is 0.2807292, which is very close to the R-squared value.Since the adjusted R-squared is almost identical to the R-squared, this implies that the additional predictors are indeed contributing valuable information.
 
 -  The statistic value is 98.57, which is very high and the p-value is 0, indicating that the model is statistically significant. It means that the likelihood of the regression results being due to chance is extremely low. 
+
 ### Multicollinearity concerns
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(car)
@@ -135,6 +152,10 @@ kable(vif_values)
 
 - Therefore, we decide to exclude the FTOTINC to avioud the multicollineariity problem. 
 
+### New model after excluding FTOTINC
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT  +  REGION_CLASSIFIED, data = data_2022)
+```
 ### Residual plot:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Fit the model
@@ -150,7 +171,6 @@ plot(fitted_values, residuals,
 
 abline(h = 0, col = "red")
 ```
-
 - Heterskedasticity still exits as the spread of the residuals appears to be increasing with the fitted values. According to the diagram, the residuals seem to form a pattern (rather than being randomly dispersed), it indicates that the relationship between the predictors and the response variable is not entirely linear.
 
 ## Log - log Model
@@ -208,7 +228,7 @@ write_csv(data_2022_clean, file = here("dataset", "latest_clean.csv"))
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022_clean)
+log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT  + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022_clean)
 ```
 
 ### Regression Coefficients Table
@@ -216,8 +236,9 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + 
 tidy_log_model_2022 <- tidy(log_model_2022)
 kable(tidy_log_model_2022)
 ```
--  The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 1.334% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
+-  The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
 - The idea in the above conclusion that higher income leads to increased rent payments is plausible. As people earn more, they may choose to live in better accommodations or neighborhoods, which could result in higher rent expenses. And it is reliable that they only spend part of income increase on the rent. 
+
 
 ### Model Fit Statistics Table:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -257,6 +278,40 @@ abline(h = 0, col = "red")
 - There are no clear patterns in the residuals, which suggests that the model catch the nonlinear relationships.
 
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
+
+
+## Log-log model with interaction term 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data_2022_clean$FTOTINC = data_2022_clean$FTOTINC-data_2022_clean$INCTOT
+log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT  + ROOMS + NFAMS + AGE + MARST + RACE +EMPSTAT*FTOTINC +REGION_CLASSIFIED, data = data_2022_clean)
+```
+### Regression Coefficients Table
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+tidy_log_model_2022 <- tidy(log_model_2022)
+kable(tidy_log_model_2022)
+```
+- After incorporating the interaction terms, the p-value for "EMPSTATUnemployed:FTOTINC" is slightly above the conventional alpha threshold of 0.05, suggesting marginal statistical significance. Conversely, the interaction term "EMPSTATNot in labor force:FTOTINC" exhibits strong statistical significance. In light of the latter's significance, there is a rationale to retain this interaction term in the model.
+
+- Furthermore, the addition of this interaction term does not adversely affect the performance of the other variables, as assessed by their respective p-values.
+
+- The inclusion of the interaction term also leads to a notable alteration in the coefficient of the primary regressor, shifting from 0.1334 to 0.1715199, indicating a potential moderating effect of employment status on the relationship between total family income and gross rent.
+
+
+### Residual plot
+```{r}
+# Calculate residuals and fitted values
+residuals_2022 <- resid(log_model_2022)
+fitted_values_2022 <- fitted(log_model_2022)
+
+# Create a residual plot
+plot(fitted_values_2022, residuals_2022, 
+     xlab = "Fitted Values", ylab = "Residuals",
+     main = "Residual Plot", pch = 20)
+abline(h = 0, col = "red") 
+```
+- The residual plot provided appears to maintain consistent performance compared to the model without the interaction term, indicating that the addition of the term does not deteriorate the model's predictive capacity. 
+
+- The dispersion of residuals suggests homoscedasticity, as there is no evident pattern of increasing or decreasing variance across the range of fitted values. This uniform spread is desirable and aligns with the assumption of equal variance (homoscedasticity) in linear regression models.
 
 
 

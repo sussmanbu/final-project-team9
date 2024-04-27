@@ -26,7 +26,6 @@ library(nlme)
 ```
 
 
-# Time series model
 ```{r}
 data_twenty$INCTOT <- scale(data_twenty$INCTOT, center = TRUE, scale = TRUE)
 data_twenty$ROOMS <- scale(data_twenty$ROOMS, center = TRUE, scale = TRUE)
@@ -143,6 +142,7 @@ plot(fitted_values_twenty, residuals_twenty,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
+
 
 
 
