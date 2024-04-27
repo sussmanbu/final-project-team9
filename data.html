@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.3.353">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -56,8 +56,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-submit-button-title": "Submit"
   }
 }</script>
 
@@ -271,7 +270,15 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.</li>
 </ul></li>
-<li><p>Exclude data entries characterized by specific codes indicative of <strong>missing or unknown values</strong>, as well as those representing values deemed inappropriate for analytical purposes. Given the vast size of the original dataset, which includes millions of records, we opted to remove the rows with these missing values directly.This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.Removed categories are summarized under the following table.</p></li>
+<li><p>Variable <strong>KITCHEN</strong> has characteristic that over 95% of houses possess a kitchen, diminishing its analytical value. Therefore, should consider to exclude this variable while the modeling.</p></li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="data_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>Exclude data entries characterized by specific codes indicative of <strong>missing or unknown values</strong>, as well as those representing values deemed inappropriate for analytical purposes. Given the vast size of the original dataset, which includes millions of records, we opted to remove the rows with these missing values directly.This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.Removed categories are summarized under the following table.</li>
 </ul>
 <section id="table-of-variables-with-missing-value-codes-for-each-category" class="level5">
 <h5 class="anchored" data-anchor-id="table-of-variables-with-missing-value-codes-for-each-category">Table of Variables with Missing Value Codes for Each Category</h5>
@@ -632,7 +639,7 @@ ul.task-list li input[type="checkbox"] {
 <h5 class="anchored" data-anchor-id="the-original-rentgrs-plot">The original RENTGRS plot</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -640,7 +647,7 @@ ul.task-list li input[type="checkbox"] {
 <h5 class="anchored" data-anchor-id="the-log_rentgrs-plot">The log_RENTGRS plot</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -648,7 +655,7 @@ ul.task-list li input[type="checkbox"] {
 <h5 class="anchored" data-anchor-id="the-original-inctot-plot">The original INCTOT plot</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
@@ -656,7 +663,7 @@ ul.task-list li input[type="checkbox"] {
 <h5 class="anchored" data-anchor-id="the-log_inctot-plot">The log_INCTOT plot</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The log transformation of both variables significantly reduced their skewness.</p>
@@ -668,10 +675,10 @@ ul.task-list li input[type="checkbox"] {
 <h5 class="anchored" data-anchor-id="the-following-plots-shows-the-problem-of-outliers-in-our-key-predictor-and-response-variable">The following plots shows the problem of outliers in our key predictor and response variable</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -684,10 +691,10 @@ ul.task-list li input[type="checkbox"] {
 <h5 class="anchored" data-anchor-id="the-following-tables-shows-what-happened-after-exclude-the-outliers-of-our-key-predictor-and-response-variable">The following tables shows what happened <strong>after</strong> exclude the outliers of our key predictor and response variable</h5>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
 <div class="cell-output-display">
-<p><img src="data_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
+<p><img src="data_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
@@ -713,23 +720,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="wwbqtigrxc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wwbqtigrxc table {
+<div id="yuixavoutl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yuixavoutl table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wwbqtigrxc thead, #wwbqtigrxc tbody, #wwbqtigrxc tfoot, #wwbqtigrxc tr, #wwbqtigrxc td, #wwbqtigrxc th {
+#yuixavoutl thead, #yuixavoutl tbody, #yuixavoutl tfoot, #yuixavoutl tr, #yuixavoutl td, #yuixavoutl th {
   border-style: none;
 }
 
-#wwbqtigrxc p {
+#yuixavoutl p {
   margin: 0;
   padding: 0;
 }
 
-#wwbqtigrxc .gt_table {
+#yuixavoutl .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -755,12 +762,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_caption {
+#yuixavoutl .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wwbqtigrxc .gt_title {
+#yuixavoutl .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -772,7 +779,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#wwbqtigrxc .gt_subtitle {
+#yuixavoutl .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -784,7 +791,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#wwbqtigrxc .gt_heading {
+#yuixavoutl .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -796,13 +803,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_bottom_border {
+#yuixavoutl .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_col_headings {
+#yuixavoutl .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -817,7 +824,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_col_heading {
+#yuixavoutl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -837,7 +844,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#wwbqtigrxc .gt_column_spanner_outer {
+#yuixavoutl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -849,15 +856,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#wwbqtigrxc .gt_column_spanner_outer:first-child {
+#yuixavoutl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wwbqtigrxc .gt_column_spanner_outer:last-child {
+#yuixavoutl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wwbqtigrxc .gt_column_spanner {
+#yuixavoutl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -869,11 +876,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#wwbqtigrxc .gt_spanner_row {
+#yuixavoutl .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wwbqtigrxc .gt_group_heading {
+#yuixavoutl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -899,7 +906,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#wwbqtigrxc .gt_empty_group_heading {
+#yuixavoutl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -914,15 +921,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#wwbqtigrxc .gt_from_md > :first-child {
+#yuixavoutl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wwbqtigrxc .gt_from_md > :last-child {
+#yuixavoutl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wwbqtigrxc .gt_row {
+#yuixavoutl .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -941,7 +948,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#wwbqtigrxc .gt_stub {
+#yuixavoutl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -954,7 +961,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#wwbqtigrxc .gt_stub_row_group {
+#yuixavoutl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -968,15 +975,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#wwbqtigrxc .gt_row_group_first td {
+#yuixavoutl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wwbqtigrxc .gt_row_group_first th {
+#yuixavoutl .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wwbqtigrxc .gt_summary_row {
+#yuixavoutl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -986,16 +993,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#wwbqtigrxc .gt_first_summary_row {
+#yuixavoutl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_first_summary_row.thick {
+#yuixavoutl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wwbqtigrxc .gt_last_summary_row {
+#yuixavoutl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1005,7 +1012,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_grand_summary_row {
+#yuixavoutl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1015,7 +1022,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#wwbqtigrxc .gt_first_grand_summary_row {
+#yuixavoutl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1025,7 +1032,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_last_grand_summary_row_top {
+#yuixavoutl .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1035,11 +1042,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_striped {
+#yuixavoutl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wwbqtigrxc .gt_table_body {
+#yuixavoutl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1048,7 +1055,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_footnotes {
+#yuixavoutl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1062,7 +1069,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_footnote {
+#yuixavoutl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1071,7 +1078,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#wwbqtigrxc .gt_sourcenotes {
+#yuixavoutl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1085,7 +1092,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#wwbqtigrxc .gt_sourcenote {
+#yuixavoutl .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1093,63 +1100,63 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#wwbqtigrxc .gt_left {
+#yuixavoutl .gt_left {
   text-align: left;
 }
 
-#wwbqtigrxc .gt_center {
+#yuixavoutl .gt_center {
   text-align: center;
 }
 
-#wwbqtigrxc .gt_right {
+#yuixavoutl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wwbqtigrxc .gt_font_normal {
+#yuixavoutl .gt_font_normal {
   font-weight: normal;
 }
 
-#wwbqtigrxc .gt_font_bold {
+#yuixavoutl .gt_font_bold {
   font-weight: bold;
 }
 
-#wwbqtigrxc .gt_font_italic {
+#yuixavoutl .gt_font_italic {
   font-style: italic;
 }
 
-#wwbqtigrxc .gt_super {
+#yuixavoutl .gt_super {
   font-size: 65%;
 }
 
-#wwbqtigrxc .gt_footnote_marks {
+#yuixavoutl .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wwbqtigrxc .gt_asterisk {
+#yuixavoutl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wwbqtigrxc .gt_indent_1 {
+#yuixavoutl .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wwbqtigrxc .gt_indent_2 {
+#yuixavoutl .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wwbqtigrxc .gt_indent_3 {
+#yuixavoutl .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wwbqtigrxc .gt_indent_4 {
+#yuixavoutl .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wwbqtigrxc .gt_indent_5 {
+#yuixavoutl .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1356,23 +1363,23 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell">
 <div class="cell-output-display">
 
-<div id="iioffqavgt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iioffqavgt table {
+<div id="ursccksnkt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ursccksnkt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iioffqavgt thead, #iioffqavgt tbody, #iioffqavgt tfoot, #iioffqavgt tr, #iioffqavgt td, #iioffqavgt th {
+#ursccksnkt thead, #ursccksnkt tbody, #ursccksnkt tfoot, #ursccksnkt tr, #ursccksnkt td, #ursccksnkt th {
   border-style: none;
 }
 
-#iioffqavgt p {
+#ursccksnkt p {
   margin: 0;
   padding: 0;
 }
 
-#iioffqavgt .gt_table {
+#ursccksnkt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1398,12 +1405,12 @@ ul.task-list li input[type="checkbox"] {
   border-left-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_caption {
+#ursccksnkt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iioffqavgt .gt_title {
+#ursccksnkt .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: initial;
@@ -1415,7 +1422,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-width: 0;
 }
 
-#iioffqavgt .gt_subtitle {
+#ursccksnkt .gt_subtitle {
   color: #333333;
   font-size: 12px;
   font-weight: initial;
@@ -1427,7 +1434,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-width: 0;
 }
 
-#iioffqavgt .gt_heading {
+#ursccksnkt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1439,13 +1446,13 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_bottom_border {
+#ursccksnkt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_col_headings {
+#ursccksnkt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1460,7 +1467,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_col_heading {
+#ursccksnkt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1480,7 +1487,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#iioffqavgt .gt_column_spanner_outer {
+#ursccksnkt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1492,15 +1499,15 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 4px;
 }
 
-#iioffqavgt .gt_column_spanner_outer:first-child {
+#ursccksnkt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iioffqavgt .gt_column_spanner_outer:last-child {
+#ursccksnkt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iioffqavgt .gt_column_spanner {
+#ursccksnkt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1512,11 +1519,11 @@ ul.task-list li input[type="checkbox"] {
   width: 100%;
 }
 
-#iioffqavgt .gt_spanner_row {
+#ursccksnkt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iioffqavgt .gt_group_heading {
+#ursccksnkt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1542,7 +1549,7 @@ ul.task-list li input[type="checkbox"] {
   text-align: left;
 }
 
-#iioffqavgt .gt_empty_group_heading {
+#ursccksnkt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1557,15 +1564,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 
-#iioffqavgt .gt_from_md > :first-child {
+#ursccksnkt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iioffqavgt .gt_from_md > :last-child {
+#ursccksnkt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iioffqavgt .gt_row {
+#ursccksnkt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1584,7 +1591,7 @@ ul.task-list li input[type="checkbox"] {
   overflow-x: hidden;
 }
 
-#iioffqavgt .gt_stub {
+#ursccksnkt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1597,7 +1604,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#iioffqavgt .gt_stub_row_group {
+#ursccksnkt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1611,15 +1618,15 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: top;
 }
 
-#iioffqavgt .gt_row_group_first td {
+#ursccksnkt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iioffqavgt .gt_row_group_first th {
+#ursccksnkt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iioffqavgt .gt_summary_row {
+#ursccksnkt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1629,16 +1636,16 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#iioffqavgt .gt_first_summary_row {
+#ursccksnkt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_first_summary_row.thick {
+#ursccksnkt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iioffqavgt .gt_last_summary_row {
+#ursccksnkt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1648,7 +1655,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_grand_summary_row {
+#ursccksnkt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1658,7 +1665,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#iioffqavgt .gt_first_grand_summary_row {
+#ursccksnkt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1668,7 +1675,7 @@ ul.task-list li input[type="checkbox"] {
   border-top-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_last_grand_summary_row_top {
+#ursccksnkt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1678,11 +1685,11 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_striped {
+#ursccksnkt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iioffqavgt .gt_table_body {
+#ursccksnkt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1691,7 +1698,7 @@ ul.task-list li input[type="checkbox"] {
   border-bottom-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_footnotes {
+#ursccksnkt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1705,7 +1712,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_footnote {
+#ursccksnkt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1714,7 +1721,7 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#iioffqavgt .gt_sourcenotes {
+#ursccksnkt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1728,7 +1735,7 @@ ul.task-list li input[type="checkbox"] {
   border-right-color: #D3D3D3;
 }
 
-#iioffqavgt .gt_sourcenote {
+#ursccksnkt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1736,63 +1743,63 @@ ul.task-list li input[type="checkbox"] {
   padding-right: 5px;
 }
 
-#iioffqavgt .gt_left {
+#ursccksnkt .gt_left {
   text-align: left;
 }
 
-#iioffqavgt .gt_center {
+#ursccksnkt .gt_center {
   text-align: center;
 }
 
-#iioffqavgt .gt_right {
+#ursccksnkt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iioffqavgt .gt_font_normal {
+#ursccksnkt .gt_font_normal {
   font-weight: normal;
 }
 
-#iioffqavgt .gt_font_bold {
+#ursccksnkt .gt_font_bold {
   font-weight: bold;
 }
 
-#iioffqavgt .gt_font_italic {
+#ursccksnkt .gt_font_italic {
   font-style: italic;
 }
 
-#iioffqavgt .gt_super {
+#ursccksnkt .gt_super {
   font-size: 65%;
 }
 
-#iioffqavgt .gt_footnote_marks {
+#ursccksnkt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iioffqavgt .gt_asterisk {
+#ursccksnkt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iioffqavgt .gt_indent_1 {
+#ursccksnkt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iioffqavgt .gt_indent_2 {
+#ursccksnkt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iioffqavgt .gt_indent_3 {
+#ursccksnkt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iioffqavgt .gt_indent_4 {
+#ursccksnkt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iioffqavgt .gt_indent_5 {
+#ursccksnkt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1814,35 +1821,35 @@ ul.task-list li input[type="checkbox"] {
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="variable" class="gt_row gt_left">RENTGRS</td>
-<td headers="Mean" class="gt_row gt_right">1,118.00</td>
-<td headers="Median" class="gt_row gt_right">960.00</td>
-<td headers="Min" class="gt_row gt_right">154.00</td>
-<td headers="Max" class="gt_row gt_right">5,767.00</td></tr>
+<td headers="Mean" class="gt_row gt_right">1,118.75</td>
+<td headers="Median" class="gt_row gt_right">965.00</td>
+<td headers="Min" class="gt_row gt_right">180.00</td>
+<td headers="Max" class="gt_row gt_right">5,162.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">ROOMS</td>
 <td headers="Mean" class="gt_row gt_right">4.63</td>
 <td headers="Median" class="gt_row gt_right">4.00</td>
 <td headers="Min" class="gt_row gt_right">1.00</td>
 <td headers="Max" class="gt_row gt_right">26.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">AGE</td>
-<td headers="Mean" class="gt_row gt_right">42.54</td>
+<td headers="Mean" class="gt_row gt_right">42.64</td>
 <td headers="Median" class="gt_row gt_right">39.00</td>
 <td headers="Min" class="gt_row gt_right">16.00</td>
 <td headers="Max" class="gt_row gt_right">96.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">FTOTINC</td>
-<td headers="Mean" class="gt_row gt_right">53,308.73</td>
-<td headers="Median" class="gt_row gt_right">39,100.00</td>
+<td headers="Mean" class="gt_row gt_right">52,901.27</td>
+<td headers="Median" class="gt_row gt_right">39,800.00</td>
 <td headers="Min" class="gt_row gt_right">−7,599.00</td>
-<td headers="Max" class="gt_row gt_right">1,246,000.00</td></tr>
+<td headers="Max" class="gt_row gt_right">1,156,000.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">POVERTY</td>
-<td headers="Mean" class="gt_row gt_right">261.68</td>
-<td headers="Median" class="gt_row gt_right">235.00</td>
+<td headers="Mean" class="gt_row gt_right">263.87</td>
+<td headers="Median" class="gt_row gt_right">238.00</td>
 <td headers="Min" class="gt_row gt_right">1.00</td>
 <td headers="Max" class="gt_row gt_right">501.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">INCTOT</td>
-<td headers="Mean" class="gt_row gt_right">32,010.98</td>
-<td headers="Median" class="gt_row gt_right">22,000.00</td>
-<td headers="Min" class="gt_row gt_right">570.00</td>
-<td headers="Max" class="gt_row gt_right">613,100.00</td></tr>
+<td headers="Mean" class="gt_row gt_right">31,677.50</td>
+<td headers="Median" class="gt_row gt_right">22,600.00</td>
+<td headers="Min" class="gt_row gt_right">1,140.00</td>
+<td headers="Max" class="gt_row gt_right">380,100.00</td></tr>
     <tr><td headers="variable" class="gt_row gt_left">NFAMS</td>
 <td headers="Mean" class="gt_row gt_right">1.20</td>
 <td headers="Median" class="gt_row gt_right">1.00</td>
@@ -1872,122 +1879,122 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td style="text-align: left;">KITCHEN</td>
 <td style="text-align: left;">No</td>
-<td style="text-align: right;">1210</td>
+<td style="text-align: right;">1192</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">KITCHEN</td>
 <td style="text-align: left;">Yes (shared or exclusive use)</td>
-<td style="text-align: right;">94454</td>
+<td style="text-align: right;">92480</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MARST</td>
 <td style="text-align: left;">Divorced</td>
-<td style="text-align: right;">15118</td>
+<td style="text-align: right;">14851</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MARST</td>
 <td style="text-align: left;">Married, spouse absent</td>
-<td style="text-align: right;">2398</td>
+<td style="text-align: right;">2345</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MARST</td>
 <td style="text-align: left;">Married, spouse present</td>
-<td style="text-align: right;">30238</td>
+<td style="text-align: right;">29797</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MARST</td>
 <td style="text-align: left;">Never married/single</td>
-<td style="text-align: right;">38149</td>
+<td style="text-align: right;">37131</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">MARST</td>
 <td style="text-align: left;">Separated</td>
-<td style="text-align: right;">3676</td>
+<td style="text-align: right;">3584</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">MARST</td>
 <td style="text-align: left;">Widowed</td>
-<td style="text-align: right;">6085</td>
+<td style="text-align: right;">5964</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">American Indian or Alaska Native</td>
-<td style="text-align: right;">1044</td>
+<td style="text-align: right;">1013</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">Black/African American</td>
-<td style="text-align: right;">15225</td>
+<td style="text-align: right;">14807</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">Chinese</td>
-<td style="text-align: right;">1126</td>
+<td style="text-align: right;">1102</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">Japanese</td>
-<td style="text-align: right;">275</td>
+<td style="text-align: right;">267</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">Other Asian or Pacific Islander</td>
-<td style="text-align: right;">4213</td>
+<td style="text-align: right;">4134</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">Other race, nec</td>
-<td style="text-align: right;">6471</td>
+<td style="text-align: right;">6367</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">Three or more major races</td>
-<td style="text-align: right;">371</td>
+<td style="text-align: right;">360</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">Two major races</td>
-<td style="text-align: right;">3594</td>
+<td style="text-align: right;">3507</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">RACE</td>
 <td style="text-align: left;">White</td>
-<td style="text-align: right;">63345</td>
+<td style="text-align: right;">62115</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EMPSTAT</td>
 <td style="text-align: left;">Employed</td>
-<td style="text-align: right;">66961</td>
+<td style="text-align: right;">66174</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">EMPSTAT</td>
 <td style="text-align: left;">Not in labour force</td>
-<td style="text-align: right;">23986</td>
+<td style="text-align: right;">23055</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">EMPSTAT</td>
 <td style="text-align: left;">Unemployed</td>
-<td style="text-align: right;">4717</td>
+<td style="text-align: right;">4443</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">REGION_CLASSIFIED</td>
 <td style="text-align: left;">MIDWEST</td>
-<td style="text-align: right;">17333</td>
+<td style="text-align: right;">16945</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">REGION_CLASSIFIED</td>
 <td style="text-align: left;">NORTHEAST</td>
-<td style="text-align: right;">18076</td>
+<td style="text-align: right;">17722</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">REGION_CLASSIFIED</td>
 <td style="text-align: left;">SOUTH</td>
-<td style="text-align: right;">33457</td>
+<td style="text-align: right;">32690</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">REGION_CLASSIFIED</td>
 <td style="text-align: left;">WEST</td>
-<td style="text-align: right;">26798</td>
+<td style="text-align: right;">26315</td>
 </tr>
 </tbody>
 </table>
