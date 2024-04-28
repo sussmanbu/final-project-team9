@@ -30,55 +30,92 @@ library(broom.mixed)
   - Additionally, the study considers racial differences, examining how the coefficients vary among different racial groups.
   - A time series regression model is utilized to account for temporal variations in this relationship.
   
+  
 # Models and Inferences (First dataset)
+# Outline
+1. Simple Linear Regression Model (Based on 2022 Data)
+2. Multiple Linear Regression Model (Based on 2022 Data)
+3. Log-Log Regression Model (Utilizing the 2022 Dataset)
+4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)
 
-## Initial imple Linear Regression Model (Based on 2022 Data) aimed to determine the potential worth of exploring the relationship between the predictor and response
- – Detail analysis and plots refer to class blog 4 
-  - The findings indicate that for every $1,000 increase in income, there is an associated increase of approximately 5.3213 units in the response variable on average.
+
+## 1. Simple Linear Regression Model (Based on 2022 Data)
+### Model Overview:
+- This model explores the relationship between the predictor (income) and the response (rent), providing insights into their potential correlation. Detailed analysis and visualizations are discussed in Class Blog 4.
+
+### Model Findings:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 lm_model <- lm(RENTGRS ~ INCTOT, data = data_2022)
+tidy_lm <- tidy(lm_model)
+kable(tidy_lm, format = "pipe")
+```
+- The model suggests that an increase of $1,000 in income is associated with an average increase of approximately 5.3213 units in the rent variable.
+
+### Statistical Significance:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 glance_lm <- glance(lm_model)
 kable(glance_lm, format = "pipe")
 ```
-  
-  - The coefficient of this primary predictor, along with the intercept, has shown statistical significance.
-  - Nonetheless, this initial model provides only a preliminary look at the relationship. A more comprehensive analysis will involve incorporating additional control variables.
+- The coefficients, including the primary predictor and the intercept, have shown statistical significance, indicating reliable estimations.
 
-## Including additional confounding variables, improving upon the simple linear regression framework.
-- Multiple Linear Regression Model (Using the 2022 Dataset) -- For details, see class blog 4.
-  - This expanded model 
-  - The correlation matrix was utilized to select potential control variables as well as revealing variables that may potenitally pose a multi-collinearity issue.
+### Model Discussion:
+- Although this preliminary model sheds light on the relationship between income and rent, further analysis should include additional variables to enhance understanding and accuracy.
+
+
+## 2. Multiple Linear Regression Model (Based on 2022 Data)
+### Model Overview:
+- This model enhances the simple linear regression by incorporating additional confounding variables to refine our analysis.
+- For more details, refer to Class Blog 4.
+- This expanded model builds upon the initial simple linear regression framework.
+
+### Variable Selection:
+- A correlation matrix was used to identify control variables and to detect potential multi-collinearity issues.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_2022$KITCHEN <- as.factor(data_2022$KITCHEN)
 data_2022$MARST <- as.factor(data_2022$MARST)
 data_2022$RACE <- as.factor(data_2022$RACE)
 data_2022$EMPSTAT <- as.factor(data_2022$EMPSTAT)
 data_2022$REGION_CLASSIFIED <- as.factor(data_2022$REGION_CLASSIFIED)
-cor_matrix <- cor(data_2022[, c("INCTOT",  "ROOMS", "NFAMS", "AGE",  "FTOTINC","RENTGRS")])
+cor_matrix <- cor(data_2022[, c("INCTOT", "ROOMS", "NFAMS", "AGE", "FTOTINC", "RENTGRS")])
 kable(cor_matrix, format = "pipe")
 ```
-  - Upon fitting the multiple linear regression (MLR) model, 'Kitchen' was excluded due to its statistical insignificance, as evidenced by a notably high p-value. While 'Employment Status' also showed a non-significant p-value, it was not as pronounced as with 'Kitchen'. It is speculated that there might be an interaction effect between 'Employment Status' and variables such as 'Income' or 'FTOTINC', which will be further explored. 
-  - A multicollinearity review was conducted, leading to the exclusion of 'FTOTINC' to mitigate overfitting.
+
+- After fitting the multiple linear regression (MLR) model, 'Kitchen' was removed due to its statistical insignificance, indicated by a high p-value. 'Employment Status', although not as critical, also showed a non-significant p-value and is suspected to interact with variables like 'Income' or 'FTOTINC'. This interaction will be explored further.
+- A review of multicollinearity prompted the removal of 'FTOTINC' to prevent model overfitting.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-mlr_model <- lm(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC +  REGION_CLASSIFIED, data = data_2022)
+mlr_model <- lm(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + REGION_CLASSIFIED, data = data_2022)
 library(car)
 vif_values <- vif(mlr_model)
 kable(vif_values)
 ```
-  
-  - Control variables were selected and confirmed.
+- The selection and validation of control variables were systematically conducted.
+
+### Inference:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT  +  REGION_CLASSIFIED, data = data_2022)
 glance_mlr <- glance(mlr_model)
 kable(glance_mlr, format = "pipe")
 ```
-  
-  - The model concludes that for every $1,000 increase in total income (INCTOT), there is an expected increase of 5.1111 units in the response variable, holding all other variables unchanged.
-  - The residual plot showed signs of heteroscedasticity, suggesting the need for further model adjustments, such as adding interaction terms or applying logarithmic transformations to key regressor and response variables.
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+### Inference:
+```{r}
+mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
+tidy_mlr <- tidy(mlr_model)
+kable(tidy_mlr, format = "pipe")
+```
+- The analysis reveals that a unit increase in total income (INCTOT) is associated with an average increase of 0.0005482 in gross rent (RENTGRS), assuming other variables are constant.
+
+### Statistical Performance:
+- The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.
+- The adjusted R-squared value of 0.2807292 closely mirrors the R-squared value, suggesting that the additional predictors are effectively contributing valuable information.
+- A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.
+
+### Discussion of the Model:
+```{r}
+# Fit the model
 residuals <- resid(mlr_model)
 fitted_values <- fitted(mlr_model)
-
 
 plot(fitted_values, residuals,
      xlab = "Fitted Values",
@@ -88,39 +125,53 @@ plot(fitted_values, residuals,
 
 abline(h = 0, col = "red")
 ```
-  
-  
+- The residual plot shows signs of heteroskedasticity, as the spread of residuals increases with the fitted values. The presence of patterns in the residuals suggests a non-linear relationship between predictors and the response, indicating potential violations of linear model assumptions.
+- These issues could be attributed to large values and skewness in the data variables, leading us to consider alternative models, such as a log-log transformation to address these discrepancies.
 
-## Log-Log Regression Model (Utilizing the 2022 Dataset)
+
+  
+  
+  
+## 3. Log-Log Regression Model (Utilizing the 2022 Dataset)
+### Explanation of the Model: 
  -- Detail in class blog 4
   - Both the predictor and response variables underwent log transformation as their distributions are extremely right skewed (talked in data page)
   - Outliers were identified and removed from the analysis (also talked in data page, showed the density plot)
   - Fit the cleaned variables and do the model again.
-  - All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.
+  
+## Inference:
+- We accept this conclusion main conclusion we got from the model is The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
+
+### Statistical Performance:
+- All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT  + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
 glance_log_model_2022 <- glance(log_model_2022)
 kable(glance_log_model_2022)
 ```
+
+### Discussion of the model:
   - The residual plot suggested an acceptable fit.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Calculate residuals and fitted values
 residuals_2022 <- resid(log_model_2022)
 fitted_values_2022 <- fitted(log_model_2022)
 
-# Create a residual plot
 plot(fitted_values_2022, residuals_2022, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
-  - The residual histogram. 
-  - Four assumptions of linear regression.
-  - We accept this conclusion main conclusion we got from the model is The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
-  
-## Adding interaction terms 
-- Log-Log Regression Model **with interaction terms** (Utilizing the 2022 Dataset) -- Detail in class blog 4
-  - Add interaction term EMPSTAT*FTOTINC; as indicated the potential interaction between them,
+- The residual histogram. 
+- Four assumptions of linear regression. -- potential non-linearity 
+
+
+## 4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)
+### Explanation of the Model: 
+-  Detail in class blog 4
+- good fit in section3 but consider nonlinearity
+
+### variable selction
+- Add interaction term EMPSTAT*FTOTINC; as indicated the potential interaction between them,
   confirm to add the interaction term, After incorporating the interaction terms, the p-value for "EMPSTATUnemployed:FTOTINC" is slightly above the conventional alpha threshold of 0.05, suggesting marginal statistical significance. 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_2022$FTOTINC = data_2022$FTOTINC-data_2022$INCTOT
@@ -129,9 +180,16 @@ tidy_log_model_2022 <- tidy(log_model_2022)
 kable(tidy_log_model_2022)
 ```
   - The addition of this interaction term does not adversely affect the performance of the other variables, as assessed by their respective p-values.
-  - All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.
-  -The residual plot suggested an acceptable fit.
-```{r}
+  
+### Inference 
+-The conclusion is the coefficient change from shifting from 0.1334 to 0.1715199, indicating a potential moderating effect of employment status on the relationship between total family income and gross rent.It means that given a 10% increase in total income (INCTOT) is associated with an average 17.15% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
+
+### Statistical Performance:
+- All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.
+  
+### Discussion of the model:
+-The residual plot suggested an acceptable fit.
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Calculate residuals and fitted values
 residuals_2022 <- resid(log_model_2022)
 fitted_values_2022 <- fitted(log_model_2022)
@@ -143,8 +201,16 @@ plot(fitted_values_2022, residuals_2022,
 abline(h = 0, col = "red") 
 ```
   
-  -The conclusion is the coefficient change from shifting from 0.1334 to 0.1715199, indicating a potential moderating effect of employment status on the relationship between total family income and gross rent.It means that given a 10% increase in total income (INCTOT) is associated with an average 17.15% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
   
+  
+  
+  
+  
+  
+  
+  
+  
+# Models and Inferences (Second dataset)  
 - **Log-Log Regression Model** (Utilizing the 2000-2022 Dataset) -- Detail in class blog 5
   - Using the accepted model above to fit the dataset of each year 
   - All coefficients show to be statistically significant 
