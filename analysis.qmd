@@ -99,7 +99,7 @@ glance_mlr <- glance(mlr_model)
 kable(glance_mlr, format = "pipe")
 ```
 ### Inference:
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
 tidy_mlr <- tidy(mlr_model)
 kable(tidy_mlr, format = "pipe")
@@ -112,7 +112,7 @@ kable(tidy_mlr, format = "pipe")
 - A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.
 
 ### Discussion of the Model:
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Fit the model
 residuals <- resid(mlr_model)
 fitted_values <- fitted(mlr_model)
@@ -128,47 +128,79 @@ abline(h = 0, col = "red")
 - The residual plot shows signs of heteroskedasticity, as the spread of residuals increases with the fitted values. The presence of patterns in the residuals suggests a non-linear relationship between predictors and the response, indicating potential violations of linear model assumptions.
 - These issues could be attributed to large values and skewness in the data variables, leading us to consider alternative models, such as a log-log transformation to address these discrepancies.
 
+  
+## 3. Log-Log Regression Model
+### Model Overview:
+- A thorough explanation is provided in Class Blog 4.
+- Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page.
+- Density plots were used to identify and remove outliers for a more accurate model.
+- A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.
 
-  
-  
-  
-## 3. Log-Log Regression Model (Utilizing the 2022 Dataset)
-### Explanation of the Model: 
- -- Detail in class blog 4
-  - Both the predictor and response variables underwent log transformation as their distributions are extremely right skewed (talked in data page)
-  - Outliers were identified and removed from the analysis (also talked in data page, showed the density plot)
-  - Fit the cleaned variables and do the model again.
-  
-## Inference:
-- We accept this conclusion main conclusion we got from the model is The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
+### Inference:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
+tidy_log_model_2022 <- tidy(log_model_2022)
+kable(tidy_log_model_2022)
+```
+- The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical Performance:
-- All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT  + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
-glance_log_model_2022 <- glance(log_model_2022)
-kable(glance_log_model_2022)
+glance(log_model_2022)
+```
+- An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.
+- A very low p-value signifies the statistical significance of the model’s predictors.
+- The sigma value's reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.
+
+### Model Discussion:
+1. Linearity and Homoscedasticity: 
+```{r}
+# Plotting residuals vs. fitted values
+plot(fitted(log_model_2022), residuals(log_model_2022),
+     xlab = "Fitted values",
+     ylab = "Residuals",
+     main = "Residuals vs. Fitted Values")
+abline(h = 0, col = "red")
+```
+- The absence of a systematic pattern in the residuals indicates a proper capture of the relationship between the predictors and response variable in the log-transformed model.
+- The spread of residuals is mostly consistent, though some widening at the extremes suggests minor heteroscedasticity. This is often a minor issue in economic data, reflecting the variability in higher income or rent brackets, and doesn't significantly affect the model's overall validity.
+- Residuals predominantly centering around the zero line signify no model bias, reinforcing the model's accuracy.
+- A small number of potential outliers deviate from the main cluster, which is typical in large economic datasets and generally does not markedly impact the robust central trend captured by the model.
+
+2. Normality of Residuals:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Q-Q plot of residuals
+qqnorm(residuals(log_model_2022))
+qqline(residuals(log_model_2022), col = "steelblue")
+```
+   - The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends.
+   - These deviations, often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.
+
+3. IID Errors:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Durbin-Watson test
+library(lmtest)
+test = dwtest(log_model_2022)
+print(test)
 ```
 
-### Discussion of the model:
-  - The residual plot suggested an acceptable fit.
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-residuals_2022 <- resid(log_model_2022)
-fitted_values_2022 <- fitted(log_model_2022)
+- For Durbin-Watson Statistic, the result value close to 2 indicates no autocorrelation, implying that the errors are independent. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.
 
-plot(fitted_values_2022, residuals_2022, 
-     xlab = "Fitted Values", ylab = "Residuals",
-     main = "Residual Plot", pch = 20)
-abline(h = 0, col = "red") 
+4. Multicollinearity:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+index=vif(log_model_2022)
+kable(index)
 ```
-- The residual histogram. 
-- Four assumptions of linear regression. -- potential non-linearity 
+- The adjusted GVIF values, being all near or below the threshold of 1.5 after taking the root, demonstrate that the multicollinearity is likely not distorting the estimates in the regression model significantly. This implies that each predictor variable is providing unique information that is not overly redundant with other variables in the model.
+
+**Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.**
+
 
 
 ## 4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)
 ### Explanation of the Model: 
 -  Detail in class blog 4
-- good fit in section3 but consider nonlinearity
+- good fit in section3 but consider nonlinearity,
 
 ### variable selction
 - Add interaction term EMPSTAT*FTOTINC; as indicated the potential interaction between them,
@@ -200,6 +232,10 @@ plot(fitted_values_2022, residuals_2022,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
+  
+  
+  
+  
   
   
   
