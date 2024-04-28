@@ -1,11 +1,11 @@
 ---
-title: "Big Picture"
-description: "A 538/Upshot style article about the data."
+title: "The Price of Home"
+description: "Exploring the Tug-of-War Between Income and Rent in America"
 toc: true
 draft: FALSE
 ---
 
-![](images/The_Big_Picture_2.jpeg)
+![](images/rentvsincome.png)
 
 This comes from the file `big_picture.Rmd`.
 
