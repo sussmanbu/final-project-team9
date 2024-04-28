@@ -168,22 +168,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#statistical-performance" id="toc-statistical-performance" class="nav-link" data-scroll-target="#statistical-performance">Statistical Performance:</a></li>
   <li><a href="#discussion-of-the-model" id="toc-discussion-of-the-model" class="nav-link" data-scroll-target="#discussion-of-the-model">Discussion of the Model:</a></li>
   </ul></li>
-  <li><a href="#log-log-regression-model-utilizing-the-2022-dataset" id="toc-log-log-regression-model-utilizing-the-2022-dataset" class="nav-link" data-scroll-target="#log-log-regression-model-utilizing-the-2022-dataset">3. Log-Log Regression Model (Utilizing the 2022 Dataset)</a>
+  <li><a href="#log-log-regression-model" id="toc-log-log-regression-model" class="nav-link" data-scroll-target="#log-log-regression-model">3. Log-Log Regression Model</a>
   <ul class="collapse">
-  <li><a href="#explanation-of-the-model" id="toc-explanation-of-the-model" class="nav-link" data-scroll-target="#explanation-of-the-model">Explanation of the Model:</a></li>
-  </ul></li>
-  <li><a href="#inference-2" id="toc-inference-2" class="nav-link" data-scroll-target="#inference-2">Inference:</a>
-  <ul class="collapse">
+  <li><a href="#model-overview-2" id="toc-model-overview-2" class="nav-link" data-scroll-target="#model-overview-2">Model Overview:</a></li>
+  <li><a href="#inference-2" id="toc-inference-2" class="nav-link" data-scroll-target="#inference-2">Inference:</a></li>
   <li><a href="#statistical-performance-1" id="toc-statistical-performance-1" class="nav-link" data-scroll-target="#statistical-performance-1">Statistical Performance:</a></li>
-  <li><a href="#discussion-of-the-model-1" id="toc-discussion-of-the-model-1" class="nav-link" data-scroll-target="#discussion-of-the-model-1">Discussion of the model:</a></li>
+  <li><a href="#model-discussion-1" id="toc-model-discussion-1" class="nav-link" data-scroll-target="#model-discussion-1">Model Discussion:</a></li>
   </ul></li>
   <li><a href="#log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" id="toc-log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" class="nav-link" data-scroll-target="#log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset">4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)</a>
   <ul class="collapse">
-  <li><a href="#explanation-of-the-model-1" id="toc-explanation-of-the-model-1" class="nav-link" data-scroll-target="#explanation-of-the-model-1">Explanation of the Model:</a></li>
+  <li><a href="#explanation-of-the-model" id="toc-explanation-of-the-model" class="nav-link" data-scroll-target="#explanation-of-the-model">Explanation of the Model:</a></li>
   <li><a href="#variable-selction" id="toc-variable-selction" class="nav-link" data-scroll-target="#variable-selction">variable selction</a></li>
   <li><a href="#inference-3" id="toc-inference-3" class="nav-link" data-scroll-target="#inference-3">Inference</a></li>
   <li><a href="#statistical-performance-2" id="toc-statistical-performance-2" class="nav-link" data-scroll-target="#statistical-performance-2">Statistical Performance:</a></li>
-  <li><a href="#discussion-of-the-model-2" id="toc-discussion-of-the-model-2" class="nav-link" data-scroll-target="#discussion-of-the-model-2">Discussion of the model:</a></li>
+  <li><a href="#discussion-of-the-model-1" id="toc-discussion-of-the-model-1" class="nav-link" data-scroll-target="#discussion-of-the-model-1">Discussion of the model:</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#models-and-inferences-second-dataset" id="toc-models-and-inferences-second-dataset" class="nav-link" data-scroll-target="#models-and-inferences-second-dataset">Models and Inferences (Second dataset)</a>
@@ -590,9 +588,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="inference-1" class="level3">
 <h3 class="anchored" data-anchor-id="inference-1">Inference:</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RENTGRS <span class="sc">~</span> INCTOT <span class="sc">+</span> ROOMS <span class="sc">+</span> NFAMS <span class="sc">+</span> AGE <span class="sc">+</span> MARST <span class="sc">+</span> RACE <span class="sc">+</span> EMPSTAT <span class="sc">+</span> REGION_CLASSIFIED, <span class="at">data =</span> data_2022)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tidy_mlr <span class="ot">&lt;-</span> <span class="fu">tidy</span>(mlr_model)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tidy_mlr, <span class="at">format =</span> <span class="st">"pipe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
@@ -792,17 +787,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="discussion-of-the-model" class="level3">
 <h3 class="anchored" data-anchor-id="discussion-of-the-model">Discussion of the Model:</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> <span class="fu">resid</span>(mlr_model)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fitted_values <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mlr_model)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_values, residuals,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residual Plot of mlr_model"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -813,99 +797,355 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </section>
 </section>
-<section id="log-log-regression-model-utilizing-the-2022-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="log-log-regression-model-utilizing-the-2022-dataset">3. Log-Log Regression Model (Utilizing the 2022 Dataset)</h2>
-<section id="explanation-of-the-model" class="level3">
-<h3 class="anchored" data-anchor-id="explanation-of-the-model">Explanation of the Model:</h3>
-<p>– Detail in class blog 4 - Both the predictor and response variables underwent log transformation as their distributions are extremely right skewed (talked in data page) - Outliers were identified and removed from the analysis (also talked in data page, showed the density plot) - Fit the cleaned variables and do the model again.</p>
-</section>
-</section>
-<section id="inference-2" class="level2">
-<h2 class="anchored" data-anchor-id="inference-2">Inference:</h2>
+<section id="log-log-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-regression-model">3. Log-Log Regression Model</h2>
+<section id="model-overview-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-2">Model Overview:</h3>
 <ul>
-<li>We accept this conclusion main conclusion we got from the model is The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.</li>
+<li>A thorough explanation is provided in Class Blog 4.</li>
+<li>Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page.</li>
+<li>Density plots were used to identify and remove outliers for a more accurate model.</li>
+<li>A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.</li>
 </ul>
-<section id="statistical-performance-1" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
-<ul>
-<li>All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.</li>
-</ul>
+</section>
+<section id="inference-2" class="level3">
+<h3 class="anchored" data-anchor-id="inference-2">Inference:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
 <colgroup>
-<col style="width: 9%">
+<col style="width: 46%">
+<col style="width: 14%">
 <col style="width: 12%">
-<col style="width: 9%">
-<col style="width: 9%">
-<col style="width: 7%">
-<col style="width: 2%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 11%">
-<col style="width: 4%">
+<col style="width: 14%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: right;">r.squared</th>
-<th style="text-align: right;">adj.r.squared</th>
-<th style="text-align: right;">sigma</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
 <th style="text-align: right;">statistic</th>
 <th style="text-align: right;">p.value</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">logLik</th>
-<th style="text-align: right;">AIC</th>
-<th style="text-align: right;">BIC</th>
-<th style="text-align: right;">deviance</th>
-<th style="text-align: right;">df.residual</th>
-<th style="text-align: right;">nobs</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;">0.2267776</td>
-<td style="text-align: right;">0.2234707</td>
-<td style="text-align: right;">0.5072099</td>
-<td style="text-align: right;">68.5763</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">22</td>
-<td style="text-align: right;">-3812.614</td>
-<td style="text-align: right;">7673.227</td>
-<td style="text-align: right;">7830.428</td>
-<td style="text-align: right;">1323.355</td>
-<td style="text-align: right;">5144</td>
-<td style="text-align: right;">5167</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">5.1300453</td>
+<td style="text-align: right;">0.1067311</td>
+<td style="text-align: right;">48.0651464</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1334422</td>
+<td style="text-align: right;">0.0076099</td>
+<td style="text-align: right;">17.5353005</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">0.0417813</td>
+<td style="text-align: right;">0.0036000</td>
+<td style="text-align: right;">11.6060404</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">0.0329669</td>
+<td style="text-align: right;">0.0100882</td>
+<td style="text-align: right;">3.2678822</td>
+<td style="text-align: right;">0.0010907</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">-0.0035780</td>
+<td style="text-align: right;">0.0005543</td>
+<td style="text-align: right;">-6.4554553</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTMarried, spouse absent</td>
+<td style="text-align: right;">0.1202752</td>
+<td style="text-align: right;">0.0463969</td>
+<td style="text-align: right;">2.5923119</td>
+<td style="text-align: right;">0.0095603</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTMarried, spouse present</td>
+<td style="text-align: right;">0.2037563</td>
+<td style="text-align: right;">0.0234393</td>
+<td style="text-align: right;">8.6929177</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTNever married/single</td>
+<td style="text-align: right;">0.1093599</td>
+<td style="text-align: right;">0.0241056</td>
+<td style="text-align: right;">4.5366957</td>
+<td style="text-align: right;">0.0000058</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTSeparated</td>
+<td style="text-align: right;">0.0317849</td>
+<td style="text-align: right;">0.0447714</td>
+<td style="text-align: right;">0.7099382</td>
+<td style="text-align: right;">0.4777746</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTWidowed</td>
+<td style="text-align: right;">0.1003713</td>
+<td style="text-align: right;">0.0360489</td>
+<td style="text-align: right;">2.7843077</td>
+<td style="text-align: right;">0.0053838</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEBlack/African American</td>
+<td style="text-align: right;">0.2424072</td>
+<td style="text-align: right;">0.0680509</td>
+<td style="text-align: right;">3.5621460</td>
+<td style="text-align: right;">0.0003712</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEChinese</td>
+<td style="text-align: right;">0.2865844</td>
+<td style="text-align: right;">0.0892336</td>
+<td style="text-align: right;">3.2116179</td>
+<td style="text-align: right;">0.0013280</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEJapanese</td>
+<td style="text-align: right;">0.3096517</td>
+<td style="text-align: right;">0.1428069</td>
+<td style="text-align: right;">2.1683238</td>
+<td style="text-align: right;">0.0301798</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEOther Asian or Pacific Islander</td>
+<td style="text-align: right;">0.3673317</td>
+<td style="text-align: right;">0.0716731</td>
+<td style="text-align: right;">5.1251000</td>
+<td style="text-align: right;">0.0000003</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEOther race, nec</td>
+<td style="text-align: right;">0.2807254</td>
+<td style="text-align: right;">0.0690242</td>
+<td style="text-align: right;">4.0670562</td>
+<td style="text-align: right;">0.0000483</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEThree or more major races</td>
+<td style="text-align: right;">0.3548441</td>
+<td style="text-align: right;">0.0965187</td>
+<td style="text-align: right;">3.6764279</td>
+<td style="text-align: right;">0.0002389</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACETwo major races</td>
+<td style="text-align: right;">0.2827093</td>
+<td style="text-align: right;">0.0683784</td>
+<td style="text-align: right;">4.1344834</td>
+<td style="text-align: right;">0.0000361</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEWhite</td>
+<td style="text-align: right;">0.2663832</td>
+<td style="text-align: right;">0.0659283</td>
+<td style="text-align: right;">4.0405009</td>
+<td style="text-align: right;">0.0000541</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EMPSTATNot in labour force</td>
+<td style="text-align: right;">-0.0361988</td>
+<td style="text-align: right;">0.0222177</td>
+<td style="text-align: right;">-1.6292740</td>
+<td style="text-align: right;">0.1033163</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMPSTATUnemployed</td>
+<td style="text-align: right;">0.0756027</td>
+<td style="text-align: right;">0.0430993</td>
+<td style="text-align: right;">1.7541506</td>
+<td style="text-align: right;">0.0794642</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REGION_CLASSIFIEDNORTHEAST</td>
+<td style="text-align: right;">0.2785550</td>
+<td style="text-align: right;">0.0244342</td>
+<td style="text-align: right;">11.4002308</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIEDSOUTH</td>
+<td style="text-align: right;">0.1916896</td>
+<td style="text-align: right;">0.0213248</td>
+<td style="text-align: right;">8.9890579</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REGION_CLASSIFIEDWEST</td>
+<td style="text-align: right;">0.4657014</td>
+<td style="text-align: right;">0.0227049</td>
+<td style="text-align: right;">20.5110144</td>
+<td style="text-align: right;">0.0000000</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-</section>
-<section id="discussion-of-the-model-1" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-of-the-model-1">Discussion of the model:</h3>
 <ul>
-<li>The residual plot suggested an acceptable fit.</li>
+<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
 </ul>
+</section>
+<section id="statistical-performance-1" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  r.squared adj.r.squared sigma statistic   p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.227         0.223 0.507      68.6 6.81e-267    22 -3813. 7673. 7830.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;</code></pre>
+</div>
+</div>
+<ul>
+<li>An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.</li>
+<li>A very low p-value signifies the statistical significance of the model’s predictors.</li>
+<li>The sigma value’s reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.</li>
+</ul>
+</section>
+<section id="model-discussion-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-1">Model Discussion:</h3>
+<ol type="1">
+<li>Linearity and Homoscedasticity:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting residuals vs. fitted values</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(log_model_2022), <span class="fu">residuals</span>(log_model_2022),</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted values"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residuals vs. Fitted Values"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>The absence of a systematic pattern in the residuals indicates a proper capture of the relationship between the predictors and response variable in the log-transformed model.</li>
+<li>The spread of residuals is mostly consistent, though some widening at the extremes suggests minor heteroscedasticity. This is often a minor issue in economic data, reflecting the variability in higher income or rent brackets, and doesn’t significantly affect the model’s overall validity.</li>
+<li>Residuals predominantly centering around the zero line signify no model bias, reinforcing the model’s accuracy.</li>
+<li>A small number of potential outliers deviate from the main cluster, which is typical in large economic datasets and generally does not markedly impact the robust central trend captured by the model.</li>
+</ul>
+<ol start="2" type="1">
+<li>Normality of Residuals:</li>
+</ol>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
-<li>The residual histogram.</li>
-<li>Four assumptions of linear regression. – potential non-linearity</li>
+<li>The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends.</li>
+<li>These deviations, often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.</li>
 </ul>
+<ol start="3" type="1">
+<li>IID Errors:</li>
+</ol>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Durbin-Watson test
+
+data:  log_model_2022
+DW = 1.9775, p-value = 0.2092
+alternative hypothesis: true autocorrelation is greater than 0</code></pre>
+</div>
+</div>
+<ul>
+<li>For Durbin-Watson Statistic, the result value close to 2 indicates no autocorrelation, implying that the errors are independent. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.</li>
+</ul>
+<ol start="4" type="1">
+<li>Multicollinearity:</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">GVIF</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">GVIF^(1/(2*Df))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">1.298351</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.139452</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">1.069938</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.034378</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">1.088234</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.043185</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">2.109694</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.452479</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARST</td>
+<td style="text-align: right;">1.790805</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.059997</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACE</td>
+<td style="text-align: right;">1.193223</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.011102</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EMPSTAT</td>
+<td style="text-align: right;">1.844666</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.165412</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIED</td>
+<td style="text-align: right;">1.119686</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.019020</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>The adjusted GVIF values, being all near or below the threshold of 1.5 after taking the root, demonstrate that the multicollinearity is likely not distorting the estimates in the regression model significantly. This implies that each predictor variable is providing unique information that is not overly redundant with other variables in the model.</li>
+</ul>
+<p><strong>Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.</strong></p>
 </section>
 </section>
 <section id="log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset">4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)</h2>
-<section id="explanation-of-the-model-1" class="level3">
-<h3 class="anchored" data-anchor-id="explanation-of-the-model-1">Explanation of the Model:</h3>
+<section id="explanation-of-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-the-model">Explanation of the Model:</h3>
 <ul>
 <li>Detail in class blog 4</li>
-<li>good fit in section3 but consider nonlinearity</li>
+<li>good fit in section3 but consider nonlinearity,</li>
 </ul>
 </section>
 <section id="variable-selction" class="level3">
@@ -1133,12 +1373,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.</li>
 </ul>
 </section>
-<section id="discussion-of-the-model-2" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-of-the-model-2">Discussion of the model:</h3>
+<section id="discussion-of-the-model-1" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-the-model-1">Discussion of the model:</h3>
 <p>-The residual plot suggested an acceptable fit.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 </section>
