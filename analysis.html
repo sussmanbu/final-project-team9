@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./big_picture.html" rel="" target="">
- <span class="menu-text">Big Picture</span></a>
+ <span class="menu-text">The Price of Home: Exploring the Tug-of-War Between Income and Rent in America</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./analysis.html" rel="" target="" aria-current="page">
@@ -149,12 +149,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-question-we-want-to-address" id="toc-the-question-we-want-to-address" class="nav-link active" data-scroll-target="#the-question-we-want-to-address">The question we want to address</a></li>
-  <li><a href="#models-and-inferences-first-dataset" id="toc-models-and-inferences-first-dataset" class="nav-link" data-scroll-target="#models-and-inferences-first-dataset">Models and Inferences (First dataset)</a>
+  <li><a href="#models-and-inferences-first-dataset" id="toc-models-and-inferences-first-dataset" class="nav-link" data-scroll-target="#models-and-inferences-first-dataset">Models and Inferences (First dataset)</a></li>
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a>
   <ul class="collapse">
-  <li><a href="#initial-imple-linear-regression-model-based-on-2022-data-aimed-to-determine-the-potential-worth-of-exploring-the-relationship-between-the-predictor-and-response" id="toc-initial-imple-linear-regression-model-based-on-2022-data-aimed-to-determine-the-potential-worth-of-exploring-the-relationship-between-the-predictor-and-response" class="nav-link" data-scroll-target="#initial-imple-linear-regression-model-based-on-2022-data-aimed-to-determine-the-potential-worth-of-exploring-the-relationship-between-the-predictor-and-response">Initial imple Linear Regression Model (Based on 2022 Data) aimed to determine the potential worth of exploring the relationship between the predictor and response</a></li>
-  <li><a href="#including-additional-confounding-variables-improving-upon-the-simple-linear-regression-framework." id="toc-including-additional-confounding-variables-improving-upon-the-simple-linear-regression-framework." class="nav-link" data-scroll-target="#including-additional-confounding-variables-improving-upon-the-simple-linear-regression-framework.">Including additional confounding variables, improving upon the simple linear regression framework.</a></li>
-  <li><a href="#log-log-regression-model-utilizing-the-2022-dataset" id="toc-log-log-regression-model-utilizing-the-2022-dataset" class="nav-link" data-scroll-target="#log-log-regression-model-utilizing-the-2022-dataset">Log-Log Regression Model (Utilizing the 2022 Dataset)</a></li>
-  <li><a href="#adding-interaction-terms" id="toc-adding-interaction-terms" class="nav-link" data-scroll-target="#adding-interaction-terms">Adding interaction terms</a></li>
+  <li><a href="#simple-linear-regression-model-based-on-2022-data" id="toc-simple-linear-regression-model-based-on-2022-data" class="nav-link" data-scroll-target="#simple-linear-regression-model-based-on-2022-data">1. Simple Linear Regression Model (Based on 2022 Data)</a>
+  <ul class="collapse">
+  <li><a href="#model-overview" id="toc-model-overview" class="nav-link" data-scroll-target="#model-overview">Model Overview:</a></li>
+  <li><a href="#model-findings" id="toc-model-findings" class="nav-link" data-scroll-target="#model-findings">Model Findings:</a></li>
+  <li><a href="#statistical-significance" id="toc-statistical-significance" class="nav-link" data-scroll-target="#statistical-significance">Statistical Significance:</a></li>
+  <li><a href="#model-discussion" id="toc-model-discussion" class="nav-link" data-scroll-target="#model-discussion">Model Discussion:</a></li>
+  </ul></li>
+  <li><a href="#multiple-linear-regression-model-based-on-2022-data" id="toc-multiple-linear-regression-model-based-on-2022-data" class="nav-link" data-scroll-target="#multiple-linear-regression-model-based-on-2022-data">2. Multiple Linear Regression Model (Based on 2022 Data)</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-1" id="toc-model-overview-1" class="nav-link" data-scroll-target="#model-overview-1">Model Overview:</a></li>
+  <li><a href="#variable-selection" id="toc-variable-selection" class="nav-link" data-scroll-target="#variable-selection">Variable Selection:</a></li>
+  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference">Inference:</a></li>
+  <li><a href="#inference-1" id="toc-inference-1" class="nav-link" data-scroll-target="#inference-1">Inference:</a></li>
+  <li><a href="#statistical-performance" id="toc-statistical-performance" class="nav-link" data-scroll-target="#statistical-performance">Statistical Performance:</a></li>
+  <li><a href="#discussion-of-the-model" id="toc-discussion-of-the-model" class="nav-link" data-scroll-target="#discussion-of-the-model">Discussion of the Model:</a></li>
+  </ul></li>
+  <li><a href="#log-log-regression-model-utilizing-the-2022-dataset" id="toc-log-log-regression-model-utilizing-the-2022-dataset" class="nav-link" data-scroll-target="#log-log-regression-model-utilizing-the-2022-dataset">3. Log-Log Regression Model (Utilizing the 2022 Dataset)</a>
+  <ul class="collapse">
+  <li><a href="#explanation-of-the-model" id="toc-explanation-of-the-model" class="nav-link" data-scroll-target="#explanation-of-the-model">Explanation of the Model:</a></li>
+  </ul></li>
+  <li><a href="#inference-2" id="toc-inference-2" class="nav-link" data-scroll-target="#inference-2">Inference:</a>
+  <ul class="collapse">
+  <li><a href="#statistical-performance-1" id="toc-statistical-performance-1" class="nav-link" data-scroll-target="#statistical-performance-1">Statistical Performance:</a></li>
+  <li><a href="#discussion-of-the-model-1" id="toc-discussion-of-the-model-1" class="nav-link" data-scroll-target="#discussion-of-the-model-1">Discussion of the model:</a></li>
+  </ul></li>
+  <li><a href="#log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" id="toc-log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" class="nav-link" data-scroll-target="#log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset">4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)</a>
+  <ul class="collapse">
+  <li><a href="#explanation-of-the-model-1" id="toc-explanation-of-the-model-1" class="nav-link" data-scroll-target="#explanation-of-the-model-1">Explanation of the Model:</a></li>
+  <li><a href="#variable-selction" id="toc-variable-selction" class="nav-link" data-scroll-target="#variable-selction">variable selction</a></li>
+  <li><a href="#inference-3" id="toc-inference-3" class="nav-link" data-scroll-target="#inference-3">Inference</a></li>
+  <li><a href="#statistical-performance-2" id="toc-statistical-performance-2" class="nav-link" data-scroll-target="#statistical-performance-2">Statistical Performance:</a></li>
+  <li><a href="#discussion-of-the-model-2" id="toc-discussion-of-the-model-2" class="nav-link" data-scroll-target="#discussion-of-the-model-2">Discussion of the model:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#models-and-inferences-second-dataset" id="toc-models-and-inferences-second-dataset" class="nav-link" data-scroll-target="#models-and-inferences-second-dataset">Models and Inferences (Second dataset)</a>
+  <ul class="collapse">
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul></li>
   </ul>
@@ -199,9 +232,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="models-and-inferences-first-dataset" class="level1">
 <h1>Models and Inferences (First dataset)</h1>
-<section id="initial-imple-linear-regression-model-based-on-2022-data-aimed-to-determine-the-potential-worth-of-exploring-the-relationship-between-the-predictor-and-response" class="level2">
-<h2 class="anchored" data-anchor-id="initial-imple-linear-regression-model-based-on-2022-data-aimed-to-determine-the-potential-worth-of-exploring-the-relationship-between-the-predictor-and-response">Initial imple Linear Regression Model (Based on 2022 Data) aimed to determine the potential worth of exploring the relationship between the predictor and response</h2>
-<p>– Detail analysis and plots refer to class blog 4 - The findings indicate that for every $1,000 increase in income, there is an associated increase of approximately 5.3213 units in the response variable on average.</p>
+</section>
+<section id="outline" class="level1">
+<h1>Outline</h1>
+<ol type="1">
+<li>Simple Linear Regression Model (Based on 2022 Data)</li>
+<li>Multiple Linear Regression Model (Based on 2022 Data)</li>
+<li>Log-Log Regression Model (Utilizing the 2022 Dataset)</li>
+<li>Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)</li>
+</ol>
+<section id="simple-linear-regression-model-based-on-2022-data" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression-model-based-on-2022-data">1. Simple Linear Regression Model (Based on 2022 Data)</h2>
+<section id="model-overview" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview">Model Overview:</h3>
+<ul>
+<li>This model explores the relationship between the predictor (income) and the response (rent), providing insights into their potential correlation. Detailed analysis and visualizations are discussed in Class Blog 4.</li>
+</ul>
+</section>
+<section id="model-findings" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings">Model Findings:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">1329.7165501</td>
+<td style="text-align: right;">15.8008996</td>
+<td style="text-align: right;">84.15448</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">0.0057046</td>
+<td style="text-align: right;">0.0002248</td>
+<td style="text-align: right;">25.38011</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>The model suggests that an increase of $1,000 in income is associated with an average increase of approximately 5.3213 units in the rent variable.</li>
+</ul>
+</section>
+<section id="statistical-significance" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-significance">Statistical Significance:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -255,18 +341,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>The coefficient of this primary predictor, along with the intercept, has shown statistical significance.</li>
-<li>Nonetheless, this initial model provides only a preliminary look at the relationship. A more comprehensive analysis will involve incorporating additional control variables.</li>
+<li>The coefficients, including the primary predictor and the intercept, have shown statistical significance, indicating reliable estimations.</li>
 </ul>
 </section>
-<section id="including-additional-confounding-variables-improving-upon-the-simple-linear-regression-framework." class="level2">
-<h2 class="anchored" data-anchor-id="including-additional-confounding-variables-improving-upon-the-simple-linear-regression-framework.">Including additional confounding variables, improving upon the simple linear regression framework.</h2>
+<section id="model-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion">Model Discussion:</h3>
 <ul>
-<li>Multiple Linear Regression Model (Using the 2022 Dataset) – For details, see class blog 4.
+<li>Although this preliminary model sheds light on the relationship between income and rent, further analysis should include additional variables to enhance understanding and accuracy.</li>
+</ul>
+</section>
+</section>
+<section id="multiple-linear-regression-model-based-on-2022-data" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression-model-based-on-2022-data">2. Multiple Linear Regression Model (Based on 2022 Data)</h2>
+<section id="model-overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-1">Model Overview:</h3>
 <ul>
-<li>This expanded model</li>
-<li>The correlation matrix was utilized to select potential control variables as well as revealing variables that may potenitally pose a multi-collinearity issue.</li>
-</ul></li>
+<li>This model enhances the simple linear regression by incorporating additional confounding variables to refine our analysis.</li>
+<li>For more details, refer to Class Blog 4.</li>
+<li>This expanded model builds upon the initial simple linear regression framework.</li>
+</ul>
+</section>
+<section id="variable-selection" class="level3">
+<h3 class="anchored" data-anchor-id="variable-selection">Variable Selection:</h3>
+<ul>
+<li>A correlation matrix was used to identify control variables and to detect potential multi-collinearity issues.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -351,8 +449,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>Upon fitting the multiple linear regression (MLR) model, ‘Kitchen’ was excluded due to its statistical insignificance, as evidenced by a notably high p-value. While ‘Employment Status’ also showed a non-significant p-value, it was not as pronounced as with ‘Kitchen’. It is speculated that there might be an interaction effect between ‘Employment Status’ and variables such as ‘Income’ or ‘FTOTINC’, which will be further explored.</li>
-<li>A multicollinearity review was conducted, leading to the exclusion of ‘FTOTINC’ to mitigate overfitting.</li>
+<li>After fitting the multiple linear regression (MLR) model, ‘Kitchen’ was removed due to its statistical insignificance, indicated by a high p-value. ‘Employment Status’, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like ‘Income’ or ‘FTOTINC’. This interaction will be explored further.</li>
+<li>A review of multicollinearity prompted the removal of ‘FTOTINC’ to prevent model overfitting.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -431,8 +529,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li>Control variables were selected and confirmed.</li>
+<li>The selection and validation of control variables were systematically conducted.</li>
 </ul>
+</section>
+<section id="inference" class="level3">
+<h3 class="anchored" data-anchor-id="inference">Inference:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -485,19 +586,250 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
-<ul>
-<li>The model concludes that for every $1,000 increase in total income (INCTOT), there is an expected increase of 5.1111 units in the response variable, holding all other variables unchanged.</li>
-<li>The residual plot showed signs of heteroscedasticity, suggesting the need for further model adjustments, such as adding interaction terms or applying logarithmic transformations to key regressor and response variables.</li>
-</ul>
+</section>
+<section id="inference-1" class="level3">
+<h3 class="anchored" data-anchor-id="inference-1">Inference:</h3>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mlr_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(RENTGRS <span class="sc">~</span> INCTOT <span class="sc">+</span> ROOMS <span class="sc">+</span> NFAMS <span class="sc">+</span> AGE <span class="sc">+</span> MARST <span class="sc">+</span> RACE <span class="sc">+</span> EMPSTAT <span class="sc">+</span> REGION_CLASSIFIED, <span class="at">data =</span> data_2022)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>tidy_mlr <span class="ot">&lt;-</span> <span class="fu">tidy</span>(mlr_model)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(tidy_mlr, <span class="at">format =</span> <span class="st">"pipe"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 44%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 13%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">192.4680339</td>
+<td style="text-align: right;">125.4185543</td>
+<td style="text-align: right;">1.5346057</td>
+<td style="text-align: right;">0.1249422</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">0.0051585</td>
+<td style="text-align: right;">0.0002198</td>
+<td style="text-align: right;">23.4696962</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">62.4778275</td>
+<td style="text-align: right;">5.8448723</td>
+<td style="text-align: right;">10.6893401</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">88.3019863</td>
+<td style="text-align: right;">16.3854438</td>
+<td style="text-align: right;">5.3890506</td>
+<td style="text-align: right;">0.0000001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">-3.0743841</td>
+<td style="text-align: right;">0.8875968</td>
+<td style="text-align: right;">-3.4637171</td>
+<td style="text-align: right;">0.0005371</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTMarried, spouse absent</td>
+<td style="text-align: right;">94.9406492</td>
+<td style="text-align: right;">75.3701889</td>
+<td style="text-align: right;">1.2596578</td>
+<td style="text-align: right;">0.2078500</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTMarried, spouse present</td>
+<td style="text-align: right;">270.2800166</td>
+<td style="text-align: right;">38.1022679</td>
+<td style="text-align: right;">7.0935414</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTNever married/single</td>
+<td style="text-align: right;">133.7032021</td>
+<td style="text-align: right;">39.1610925</td>
+<td style="text-align: right;">3.4141847</td>
+<td style="text-align: right;">0.0006447</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARSTSeparated</td>
+<td style="text-align: right;">-12.8753038</td>
+<td style="text-align: right;">72.7354147</td>
+<td style="text-align: right;">-0.1770156</td>
+<td style="text-align: right;">0.8595031</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARSTWidowed</td>
+<td style="text-align: right;">165.1710342</td>
+<td style="text-align: right;">58.5735588</td>
+<td style="text-align: right;">2.8198907</td>
+<td style="text-align: right;">0.0048224</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEBlack/African American</td>
+<td style="text-align: right;">311.1982598</td>
+<td style="text-align: right;">110.5848687</td>
+<td style="text-align: right;">2.8141125</td>
+<td style="text-align: right;">0.0049098</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEChinese</td>
+<td style="text-align: right;">442.5579390</td>
+<td style="text-align: right;">144.9951127</td>
+<td style="text-align: right;">3.0522266</td>
+<td style="text-align: right;">0.0022831</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEJapanese</td>
+<td style="text-align: right;">359.8914300</td>
+<td style="text-align: right;">231.9929731</td>
+<td style="text-align: right;">1.5513032</td>
+<td style="text-align: right;">0.1208906</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEOther Asian or Pacific Islander</td>
+<td style="text-align: right;">497.1734167</td>
+<td style="text-align: right;">116.4670507</td>
+<td style="text-align: right;">4.2687903</td>
+<td style="text-align: right;">0.0000200</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACEOther race, nec</td>
+<td style="text-align: right;">343.5788878</td>
+<td style="text-align: right;">112.1486813</td>
+<td style="text-align: right;">3.0636017</td>
+<td style="text-align: right;">0.0021982</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEThree or more major races</td>
+<td style="text-align: right;">498.8640790</td>
+<td style="text-align: right;">156.7572625</td>
+<td style="text-align: right;">3.1823985</td>
+<td style="text-align: right;">0.0014693</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACETwo major races</td>
+<td style="text-align: right;">379.9573896</td>
+<td style="text-align: right;">111.1079215</td>
+<td style="text-align: right;">3.4197147</td>
+<td style="text-align: right;">0.0006317</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACEWhite</td>
+<td style="text-align: right;">390.0560268</td>
+<td style="text-align: right;">107.1130784</td>
+<td style="text-align: right;">3.6415350</td>
+<td style="text-align: right;">0.0002737</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EMPSTATNot in labour force</td>
+<td style="text-align: right;">-16.1759159</td>
+<td style="text-align: right;">33.5495389</td>
+<td style="text-align: right;">-0.4821502</td>
+<td style="text-align: right;">0.6297198</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMPSTATUnemployed</td>
+<td style="text-align: right;">55.6707902</td>
+<td style="text-align: right;">69.1339994</td>
+<td style="text-align: right;">0.8052592</td>
+<td style="text-align: right;">0.4207073</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REGION_CLASSIFIEDNORTHEAST</td>
+<td style="text-align: right;">404.8892183</td>
+<td style="text-align: right;">39.7506791</td>
+<td style="text-align: right;">10.1857183</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIEDSOUTH</td>
+<td style="text-align: right;">253.5626804</td>
+<td style="text-align: right;">34.6492894</td>
+<td style="text-align: right;">7.3179763</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">REGION_CLASSIFIEDWEST</td>
+<td style="text-align: right;">719.8277912</td>
+<td style="text-align: right;">36.9311828</td>
+<td style="text-align: right;">19.4910570</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
+<ul>
+<li>The analysis reveals that a unit increase in total income (INCTOT) is associated with an average increase of 0.0005482 in gross rent (RENTGRS), assuming other variables are constant.</li>
+</ul>
+</section>
+<section id="statistical-performance" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance">Statistical Performance:</h3>
+<ul>
+<li>The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.</li>
+<li>The adjusted R-squared value of 0.2807292 closely mirrors the R-squared value, suggesting that the additional predictors are effectively contributing valuable information.</li>
+<li>A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.</li>
+</ul>
+</section>
+<section id="discussion-of-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-the-model">Discussion of the Model:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>residuals <span class="ot">&lt;-</span> <span class="fu">resid</span>(mlr_model)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fitted_values <span class="ot">&lt;-</span> <span class="fu">fitted</span>(mlr_model)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_values, residuals,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residual Plot of mlr_model"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">20</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>The residual plot shows signs of heteroskedasticity, as the spread of residuals increases with the fitted values. The presence of patterns in the residuals suggests a non-linear relationship between predictors and the response, indicating potential violations of linear model assumptions.</li>
+<li>These issues could be attributed to large values and skewness in the data variables, leading us to consider alternative models, such as a log-log transformation to address these discrepancies.</li>
+</ul>
+</section>
 </section>
 <section id="log-log-regression-model-utilizing-the-2022-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="log-log-regression-model-utilizing-the-2022-dataset">Log-Log Regression Model (Utilizing the 2022 Dataset)</h2>
-<p>– Detail in class blog 4 - Both the predictor and response variables underwent log transformation as their distributions are extremely right skewed (talked in data page) - Outliers were identified and removed from the analysis (also talked in data page, showed the density plot) - Fit the cleaned variables and do the model again. - All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.</p>
+<h2 class="anchored" data-anchor-id="log-log-regression-model-utilizing-the-2022-dataset">3. Log-Log Regression Model (Utilizing the 2022 Dataset)</h2>
+<section id="explanation-of-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-the-model">Explanation of the Model:</h3>
+<p>– Detail in class blog 4 - Both the predictor and response variables underwent log transformation as their distributions are extremely right skewed (talked in data page) - Outliers were identified and removed from the analysis (also talked in data page, showed the density plot) - Fit the cleaned variables and do the model again.</p>
+</section>
+</section>
+<section id="inference-2" class="level2">
+<h2 class="anchored" data-anchor-id="inference-2">Inference:</h2>
+<ul>
+<li>We accept this conclusion main conclusion we got from the model is The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.</li>
+</ul>
+<section id="statistical-performance-1" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
+<ul>
+<li>All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.</li>
+</ul>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -550,27 +882,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 </div>
 </div>
+</section>
+<section id="discussion-of-the-model-1" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-the-model-1">Discussion of the model:</h3>
 <ul>
 <li>The residual plot suggested an acceptable fit.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <ul>
 <li>The residual histogram.</li>
-<li>Four assumptions of linear regression.</li>
-<li>We accept this conclusion main conclusion we got from the model is The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.</li>
+<li>Four assumptions of linear regression. – potential non-linearity</li>
 </ul>
 </section>
-<section id="adding-interaction-terms" class="level2">
-<h2 class="anchored" data-anchor-id="adding-interaction-terms">Adding interaction terms</h2>
+</section>
+<section id="log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset">4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)</h2>
+<section id="explanation-of-the-model-1" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-the-model-1">Explanation of the Model:</h3>
 <ul>
-<li>Log-Log Regression Model <strong>with interaction terms</strong> (Utilizing the 2022 Dataset) – Detail in class blog 4
+<li>Detail in class blog 4</li>
+<li>good fit in section3 but consider nonlinearity</li>
+</ul>
+</section>
+<section id="variable-selction" class="level3">
+<h3 class="anchored" data-anchor-id="variable-selction">variable selction</h3>
 <ul>
 <li>Add interaction term EMPSTAT*FTOTINC; as indicated the potential interaction between them, confirm to add the interaction term, After incorporating the interaction terms, the p-value for “EMPSTATUnemployed:FTOTINC” is slightly above the conventional alpha threshold of 0.05, suggesting marginal statistical significance.</li>
-</ul></li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -780,23 +1121,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <ul>
 <li>The addition of this interaction term does not adversely affect the performance of the other variables, as assessed by their respective p-values.</li>
-<li>All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status. -The residual plot suggested an acceptable fit.</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals and fitted values</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>residuals_2022 <span class="ot">&lt;-</span> <span class="fu">resid</span>(log_model_2022)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fitted_values_2022 <span class="ot">&lt;-</span> <span class="fu">fitted</span>(log_model_2022)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a residual plot</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_values_2022, residuals_2022, </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residual Plot"</span>, <span class="at">pch =</span> <span class="dv">20</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+</section>
+<section id="inference-3" class="level3">
+<h3 class="anchored" data-anchor-id="inference-3">Inference</h3>
 <p>-The conclusion is the coefficient change from shifting from 0.1334 to 0.1715199, indicating a potential moderating effect of employment status on the relationship between total family income and gross rent.It means that given a 10% increase in total income (INCTOT) is associated with an average 17.15% increase in rent gross (RENTGRS), given that other variables in the model are held constant.</p>
+</section>
+<section id="statistical-performance-2" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-2">Statistical Performance:</h3>
+<ul>
+<li>All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.</li>
+</ul>
+</section>
+<section id="discussion-of-the-model-2" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-the-model-2">Discussion of the model:</h3>
+<p>-The residual plot suggested an acceptable fit.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="models-and-inferences-second-dataset" class="level1">
+<h1>Models and Inferences (Second dataset)</h1>
 <ul>
 <li><strong>Log-Log Regression Model</strong> (Utilizing the 2000-2022 Dataset) – Detail in class blog 5
 <ul>
@@ -820,7 +1169,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Time series model (using 2000-2022 dataset) – Detail in class blog 7</li>
 </ul>
 <hr>
-</section>
 <section id="rubric-on-this-page" class="level2">
 <h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
 <p>You will</p>
