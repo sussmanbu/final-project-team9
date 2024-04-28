@@ -284,7 +284,7 @@
     "href": "big_picture.html",
     "title": "The Price of Home",
     "section": "",
-    "text": "{: width=“50%”}\nThis comes from the file big_picture.Rmd.\nThink of this page as your 538/Upshot style article. This means that you should try to tell a story through the data and your analysis. Read articles from those sites and similar sites to get a feeling for what they are like. Try to write in the style of a news or popular article. Importantly, this pge should be geared towards the general public. You shouldn’t assume the reader understands how to interpret a linear regression. Focus on interpretation and visualizations."
+    "text": "{: height=“50%”}\nThis comes from the file big_picture.Rmd.\nThink of this page as your 538/Upshot style article. This means that you should try to tell a story through the data and your analysis. Read articles from those sites and similar sites to get a feeling for what they are like. Try to write in the style of a news or popular article. Importantly, this pge should be geared towards the general public. You shouldn’t assume the reader understands how to interpret a linear regression. Focus on interpretation and visualizations."
   },
   {
     "objectID": "big_picture.html#rubric-on-this-page",
