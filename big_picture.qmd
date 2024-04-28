@@ -5,7 +5,7 @@ toc: true
 draft: FALSE
 ---
 
-![](images/rentvsincome.png){: width="50%"}
+![](images/rentvsincome.png){: height="50%"}
 
 This comes from the file `big_picture.Rmd`.
 
