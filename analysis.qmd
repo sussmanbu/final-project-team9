@@ -191,13 +191,94 @@ print(test)
 index=vif(log_model_2022)
 kable(index)
 ```
+
 - The adjusted GVIF values, being all near or below the threshold of 1.5 after taking the root, demonstrate that the multicollinearity is likely not distorting the estimates in the regression model significantly. This implies that each predictor variable is providing unique information that is not overly redundant with other variables in the model.
 
 **Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.**
 
+## 4. Log-Log Regression Model by Race
+### Model Overview 
+- This analysis applies a stratified Log-Log regression approach, segregating data by race as detailed in Class Blog 6. It builds upon the strong foundational understanding from Section 3.
+
+### Model Inferences:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Convert categorical variables to factors
+categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
+data_2022[categorical_vars] <- lapply(data_2022[categorical_vars], factor)
+
+# Convert categorical variables to factors
+categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
+data_2022[categorical_vars] <- lapply(data_2022[categorical_vars], factor)
+
+# Check the number of levels per categorical variable within each RACE group
+race_levels <- data_2022 %>%
+  group_by(RACE) %>%
+  summarize(across(all_of(categorical_vars), ~n_distinct(.))) %>%
+  ungroup()
+
+# Identify RACE groups with any categorical variable having only one level
+races_with_single_levels <- race_levels %>%
+  filter(if_any(everything(), ~.x == 1)) %>%
+  pull(RACE) # Extract the RACE values with problematic levels
+
+# Filter out the problematic RACE groups from the main dataset
+data_2022_filtered <- data_2022 %>%
+  filter(!RACE %in% races_with_single_levels)
+
+models_by_race <- data_2022_filtered%>%
+  group_by(RACE) %>%
+  do(
+    model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
+  )
+
+models_summaries <- models_by_race %>%
+  rowwise() %>%
+  do(
+    tidy_model = broom::tidy(.$model)
+  )
+unnested_models_summaries <- tidyr::unnest(models_summaries, tidy_model)
+
+inctot_coefficients_by_race <- models_by_race %>%
+  rowwise() %>%
+  summarize(
+    RACE = unique(RACE),
+    log_INCTOT_Coefficient = coef(model)["log_INCTOT"]
+  )
+kable(inctot_coefficients_by_race)
+```
+- The coefficient for log_INCTOT shows notable variation across racial categories, which indicates the impact of income on rent varies by race.
+
+- The Chinese group demonstrates the highest log_INCTOT coefficient, indicating a particularly strong positive association between income and rent within this demographic.
+
+- American Indian or Alaska Native, Other Asian or Pacific Islander, Other race, nec, Three or more major races, and White categories show a range of coefficients, suggesting varied levels of positive association.
+
+- Black/African American and Two major races groups present with lower coefficients, hinting at a relatively weaker positive relationship.
 
 
-## 4. Enhanced Log-Log Regression Model with Interaction Terms (Based on the 2022 Dataset)
+### Statistical Performance Assessment
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+models_summaries <- data_2022_filtered %>%
+  group_by(RACE) %>%
+  do(
+    tidy_model = broom::tidy(lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .))
+  ) %>%
+  unnest(tidy_model) %>%
+  filter(term == "log_INCTOT") %>%
+  select(RACE, term, estimate, p.value) %>%
+  arrange(RACE)
+print(kable(models_summaries))
+```
+- For most racial groups, the p-values indicate statistical significance (p < 0.05), especially pronounced for Black/African American, Chinese, Other Asian or Pacific Islander, and White categories, implying a strong relationship between income and rent.
+
+- The higher p-value for American Indian or Alaska Native suggests that the relationship between income and rent is not statistically significant for this group, based on the traditional alpha threshold.
+
+### Discussion of the model:
+- The evident variability in log_INCTOT coefficients across races suggests that the relationship between income and rent is influenced by racial factors, pointing towards the complexity inherent in socio-economic dynamics.
+- Non-significance in certain racial categories may reflect data limitations or the presence of other variables not captured in the model, indicating areas where further research or data collection could be beneficial.
+- The model's overall robustness and the significance of its findings provide valuable insights, yet also suggest that an exploration of additional socio-economic factors and historical trends could contribute to a more nuanced understanding.
+
+
+## 5. Enhanced Log-Log Regression Model with Interaction Terms (Based on the 2022 Dataset)
 ### Model Rationale:
 - As outlined in Class Blog 4, we've built upon the solid foundation established in Section 3. We're now exploring nonlinearity further and addressing the potential skewness identified in the conclusions of Model 3.
 
@@ -241,43 +322,124 @@ plot(fitted_values_2022, residuals_2022,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
+- This model also meet all the assumption we discussed in section 3.
+
+**Therefore, this model's conclusions offer a credible extension to our understanding of the economic factors influencing rent prices in section 3.**
 
 
 
+# Models and Inferences (Merged dataset)
+## Outline
+1. Log-Log Regression Model by YEAR
+2. Longitudinal Log-Log Regression Model by Race
+3. Time series model 
 
 
+## 1. Log-Log Regression Model by YEAR
+
+### Model Overview:
+- This analysis implements the validated Log-Log regression approach on annual data segments to assess temporal trends and variations.
+
+### Model Inferences:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+models_by_year <- data_twenty %>%
+  group_by(YEAR) %>%
+  nest() %>%
+  mutate(
+    model = map(data, ~ lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = .)),
+    tidied = map(model, tidy)
+  ) %>%
+  ungroup() %>%
+  select(YEAR, tidied) %>%
+  unnest(cols = tidied) %>%
+  filter(term == "log_INCTOT") %>%
+  arrange(YEAR)
+print(models_by_year)
+```
+  - The analyses yield detailed `log_INCTOT` coefficients for each year, elucidating the evolving income-rent relationship dynamics.
+  - Fluctuations in `log_INCTOT` coefficients over different years suggest changing influences on the dependent variable within the model.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(models_by_year, aes(x = as.numeric(YEAR), y = estimate)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Trend of Coefficient for log_INCTOT Over Years",
+       x = "Year",
+       y = "Coefficient Estimate")
+```
+
+  - Observations show peaks in coefficient estimates, notably in the early 2000s and around 2020, with subsequent troughs suggesting potential corrective periods.
+  - The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.
+  - Coefficient estimates range within a tight interval, indicating a consistent strength of relationship across the dataset's timespan.
   
-  
-  
-  
-  
-  
-  
-  
-  
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+models_by_year <- data_twenty %>%
+  group_by(YEAR) %>%
+  nest() %>%
+  mutate(
+    model = map(data, ~ lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = .)),
+    tidied = map(model, tidy),
+    glance_data = map(model, glance)  # Ensure this line correctly creates glance_data
+  ) %>%
+  ungroup()
+
+# Check if glance_data exists before proceeding to plotting
+if ("glance_data" %in% names(models_by_year)) {
+  # If glance_data exists, proceed with the visualization
+  r_squared_trends <- models_by_year %>%
+    select(YEAR, glance_data) %>%
+    unnest(cols = glance_data) %>%
+    ggplot(aes(x = as.numeric(YEAR), y = r.squared)) +
+    geom_line() +
+    geom_point() +
+    labs(title = "Trend of R-squared Over Years",
+         x = "Year",
+         y = "R-squared")
+
+  print(r_squared_trends)
+} else {
+  cat("Error: 'glance_data' column does not exist. Check model fitting and glance data generation steps.\n")
+}
+
+```
+- R-squared values demonstrate time-bound variability, implying shifts in the model's explanatory power from year to year.
+- A recent sharp decline in R-squared highlights a potential reduction in predictive accuracy or a substantial data structure change.
+
+
+### Statistical Performance Assessment:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+if ("glance_data" %in% names(models_by_year)) {
+  # If glance_data exists, proceed with the unnesting and arranging
+  models_by_year_2 <- models_by_year %>%
+    select(YEAR, glance_data) %>%
+    unnest(cols = glance_data) %>%
+    arrange(YEAR)
+
+  # Use kable to display the model summary statistics in a nicely formatted table
+  kable(models_by_year_2)
+} else {
+  cat("glance_data column is missing in the models_by_year dataframe.")
+}
+```
+- All model coefficients are statistically validated, with a noticeable exception in the MARSTSeparated category for the year 2022.
+- R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.
+- Adjusted R-squared values, marginally lower than the R-squared, adhere to expectations, considering model complexity relative to data volume.
+- P-values indicate consistent statistical significance for the model's predictors on an annual basis.
+- Log-likelihood, AIC, and BIC values increment over time, which may indicate an improving model fit or increasing data variability.
+- The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.
 
 
 
-
-# Models and Inferences (Second dataset)  
-- **Log-Log Regression Model** (Utilizing the 2000-2022 Dataset) -- Detail in class blog 5
-  - Using the accepted model above to fit the dataset of each year 
-  - All coefficients show to be statistically significant 
-  - Plot the residual plot & comfirmed it is falling within an acceptable range.
-  - Compare the coefficients change for each year, plot diagram see the trend 
-  
-- Log-Log Regression Model **by Race** (2022 Dataset) — Detail in class blog 6
-  - The analysis stratified the data by race, applying the aforementioned Log-Log regression approach.
-  - It provided detailed coefficients for each racial category, examining the influence on the rent-income relationship.
-  - The statistical significance of all coefficients was verified, with residual plots falling within an acceptable range.
-  
-
-- Longitudinal Log-Log Regression Model **by Race** (2000-2022 Dataset) — Detail in class blog 6
+## 2. Longitudinal Log-Log Regression Model by Race
+### Model Overview:
   - This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
   - Trends over time for each race were charted to illustrate these dynamics.
   - Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.
   
-- Time series model (using 2000-2022 dataset) -- Detail in class blog 7
+## 3.Time series model
+### Model Overview:
+
 
 
 
