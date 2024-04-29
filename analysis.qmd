@@ -154,7 +154,7 @@ glance(log_model_2022)
 
 ### Model Discussion:
 1. Linearity and Homoscedasticity: 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Plotting residuals vs. fitted values
 plot(fitted(log_model_2022), residuals(log_model_2022),
      xlab = "Fitted values",
@@ -197,28 +197,37 @@ kable(index)
 
 
 
-## 4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)
-### Explanation of the Model: 
--  Detail in class blog 4
-- good fit in section3 but consider nonlinearity,
+## 4. Enhanced Log-Log Regression Model with Interaction Terms (Based on the 2022 Dataset)
+### Model Rationale:
+- As outlined in Class Blog 4, we've built upon the solid foundation established in Section 3. We're now exploring nonlinearity further and addressing the potential skewness identified in the conclusions of Model 3.
 
-### variable selction
-- Add interaction term EMPSTAT*FTOTINC; as indicated the potential interaction between them,
-  confirm to add the interaction term, After incorporating the interaction terms, the p-value for "EMPSTATUnemployed:FTOTINC" is slightly above the conventional alpha threshold of 0.05, suggesting marginal statistical significance. 
+### Variable Selection and Refinement:
+- The interaction term `EMPSTAT * FTOTINC` has been introduced to investigate the suspected interaction effect between employment status and total family income.
+- Post inclusion, the p-value for `EMPSTATUnemployed:FTOTINC` is slightly above 0.05, suggesting it has borderline statistical significance.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-data_2022$FTOTINC = data_2022$FTOTINC-data_2022$INCTOT
-log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT  + ROOMS + NFAMS + AGE + MARST + RACE +EMPSTAT*FTOTINC +REGION_CLASSIFIED, data = data_2022)
+# Adjust FTOTINC for the potential overlap with INCTOT
+data_2022$FTOTINC = data_2022$FTOTINC - data_2022$INCTOT
+
+# Update the model to include the interaction term
+log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT*FTOTINC + REGION_CLASSIFIED, data = data_2022)
 tidy_log_model_2022 <- tidy(log_model_2022)
 kable(tidy_log_model_2022)
 ```
-  - The addition of this interaction term does not adversely affect the performance of the other variables, as assessed by their respective p-values.
-  
-### Inference 
--The conclusion is the coefficient change from shifting from 0.1334 to 0.1715199, indicating a potential moderating effect of employment status on the relationship between total family income and gross rent.It means that given a 10% increase in total income (INCTOT) is associated with an average 17.15% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
 
-### Statistical Performance:
-- All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.
-  
+- The integration of the interaction term retains the significance of other variables, with no detrimental impact on the model’s variables as reflected in their p-values.
+
+### Model Inferences:
+- There is a noticeable shift in the coefficient from 0.1334 to 0.1715199 after adding the interaction term. This change suggests that employment status may moderate the influence of total family income on gross rent. Specifically, a 10% increase in total income (INCTOT) now corresponds to a 17.15% increase in gross rent (RENTGRS), ceteris paribus.
+
+### Statistical Performance Assessment:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Summarize the model's statistical metrics
+glance_log_model_2022 <- glance(log_model_2022)
+kable(glance_log_model_2022)
+```
+- All predictors show statistical significance, with the exception of certain categories within marital status and employment status, indicating robustness in the variable selection.
+
 ### Discussion of the model:
 -The residual plot suggested an acceptable fit.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -232,6 +241,11 @@ plot(fitted_values_2022, residuals_2022,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
+
+
+
+
+
   
   
   
@@ -241,11 +255,10 @@ abline(h = 0, col = "red")
   
   
   
-  
-  
-  
-  
-  
+
+
+
+
 # Models and Inferences (Second dataset)  
 - **Log-Log Regression Model** (Utilizing the 2000-2022 Dataset) -- Detail in class blog 5
   - Using the accepted model above to fit the dataset of each year 
