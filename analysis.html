@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -175,17 +141,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#statistical-performance-1" id="toc-statistical-performance-1" class="nav-link" data-scroll-target="#statistical-performance-1">Statistical Performance:</a></li>
   <li><a href="#model-discussion-1" id="toc-model-discussion-1" class="nav-link" data-scroll-target="#model-discussion-1">Model Discussion:</a></li>
   </ul></li>
-  <li><a href="#log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" id="toc-log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" class="nav-link" data-scroll-target="#log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset">4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)</a>
+  <li><a href="#log-log-regression-model-by-race" id="toc-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#log-log-regression-model-by-race">4. Log-Log Regression Model by Race</a>
   <ul class="collapse">
-  <li><a href="#explanation-of-the-model" id="toc-explanation-of-the-model" class="nav-link" data-scroll-target="#explanation-of-the-model">Explanation of the Model:</a></li>
-  <li><a href="#variable-selction" id="toc-variable-selction" class="nav-link" data-scroll-target="#variable-selction">variable selction</a></li>
-  <li><a href="#inference-3" id="toc-inference-3" class="nav-link" data-scroll-target="#inference-3">Inference</a></li>
-  <li><a href="#statistical-performance-2" id="toc-statistical-performance-2" class="nav-link" data-scroll-target="#statistical-performance-2">Statistical Performance:</a></li>
+  <li><a href="#model-overview-3" id="toc-model-overview-3" class="nav-link" data-scroll-target="#model-overview-3">Model Overview</a></li>
+  <li><a href="#model-inferences" id="toc-model-inferences" class="nav-link" data-scroll-target="#model-inferences">Model Inferences:</a></li>
+  <li><a href="#statistical-performance-assessment" id="toc-statistical-performance-assessment" class="nav-link" data-scroll-target="#statistical-performance-assessment">Statistical Performance Assessment</a></li>
   <li><a href="#discussion-of-the-model-1" id="toc-discussion-of-the-model-1" class="nav-link" data-scroll-target="#discussion-of-the-model-1">Discussion of the model:</a></li>
   </ul></li>
-  </ul></li>
-  <li><a href="#models-and-inferences-second-dataset" id="toc-models-and-inferences-second-dataset" class="nav-link" data-scroll-target="#models-and-inferences-second-dataset">Models and Inferences (Second dataset)</a>
+  <li><a href="#enhanced-log-log-regression-model-with-interaction-terms-based-on-the-2022-dataset" id="toc-enhanced-log-log-regression-model-with-interaction-terms-based-on-the-2022-dataset" class="nav-link" data-scroll-target="#enhanced-log-log-regression-model-with-interaction-terms-based-on-the-2022-dataset">5. Enhanced Log-Log Regression Model with Interaction Terms (Based on the 2022 Dataset)</a>
   <ul class="collapse">
+  <li><a href="#model-rationale" id="toc-model-rationale" class="nav-link" data-scroll-target="#model-rationale">Model Rationale:</a></li>
+  <li><a href="#variable-selection-and-refinement" id="toc-variable-selection-and-refinement" class="nav-link" data-scroll-target="#variable-selection-and-refinement">Variable Selection and Refinement:</a></li>
+  <li><a href="#model-inferences-1" id="toc-model-inferences-1" class="nav-link" data-scroll-target="#model-inferences-1">Model Inferences:</a></li>
+  <li><a href="#statistical-performance-assessment-1" id="toc-statistical-performance-assessment-1" class="nav-link" data-scroll-target="#statistical-performance-assessment-1">Statistical Performance Assessment:</a></li>
+  <li><a href="#discussion-of-the-model-2" id="toc-discussion-of-the-model-2" class="nav-link" data-scroll-target="#discussion-of-the-model-2">Discussion of the model:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#models-and-inferences-merged-dataset" id="toc-models-and-inferences-merged-dataset" class="nav-link" data-scroll-target="#models-and-inferences-merged-dataset">Models and Inferences (Merged dataset)</a>
+  <ul class="collapse">
+  <li><a href="#outline-1" id="toc-outline-1" class="nav-link" data-scroll-target="#outline-1">Outline</a></li>
+  <li><a href="#log-log-regression-model-by-year" id="toc-log-log-regression-model-by-year" class="nav-link" data-scroll-target="#log-log-regression-model-by-year">1. Log-Log Regression Model by YEAR</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-4" id="toc-model-overview-4" class="nav-link" data-scroll-target="#model-overview-4">Model Overview:</a></li>
+  <li><a href="#model-inferences-2" id="toc-model-inferences-2" class="nav-link" data-scroll-target="#model-inferences-2">Model Inferences:</a></li>
+  <li><a href="#statistical-performance-assessment-2" id="toc-statistical-performance-assessment-2" class="nav-link" data-scroll-target="#statistical-performance-assessment-2">Statistical Performance Assessment:</a></li>
+  </ul></li>
+  <li><a href="#longitudinal-log-log-regression-model-by-race" id="toc-longitudinal-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#longitudinal-log-log-regression-model-by-race">2. Longitudinal Log-Log Regression Model by Race</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-5" id="toc-model-overview-5" class="nav-link" data-scroll-target="#model-overview-5">Model Overview:</a></li>
+  </ul></li>
+  <li><a href="#time-series-model" id="toc-time-series-model" class="nav-link" data-scroll-target="#time-series-model">3.Time series model</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-6" id="toc-model-overview-6" class="nav-link" data-scroll-target="#model-overview-6">Model Overview:</a></li>
+  </ul></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul></li>
   </ul>
@@ -1022,12 +1010,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Linearity and Homoscedasticity:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting residuals vs. fitted values</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">fitted</span>(log_model_2022), <span class="fu">residuals</span>(log_model_2022),</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted values"</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residuals vs. Fitted Values"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1139,19 +1121,114 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 <p><strong>Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.</strong></p>
 </section>
 </section>
-<section id="log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="log-log-regression-model-with-interaction-terms-utilizing-the-2022-dataset">4. Log-Log Regression Model with interaction terms (Utilizing the 2022 Dataset)</h2>
-<section id="explanation-of-the-model" class="level3">
-<h3 class="anchored" data-anchor-id="explanation-of-the-model">Explanation of the Model:</h3>
+<section id="log-log-regression-model-by-race" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-regression-model-by-race">4. Log-Log Regression Model by Race</h2>
+<section id="model-overview-3" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-3">Model Overview</h3>
 <ul>
-<li>Detail in class blog 4</li>
-<li>good fit in section3 but consider nonlinearity,</li>
+<li>This analysis applies a stratified Log-Log regression approach, segregating data by race as detailed in Class Blog 6. It builds upon the strong foundational understanding from Section 3.</li>
 </ul>
 </section>
-<section id="variable-selction" class="level3">
-<h3 class="anchored" data-anchor-id="variable-selction">variable selction</h3>
+<section id="model-inferences" class="level3">
+<h3 class="anchored" data-anchor-id="model-inferences">Model Inferences:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">RACE</th>
+<th style="text-align: right;">log_INCTOT_Coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">0.0937685</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">0.0621126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">0.1915177</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">0.1050231</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">0.0376731</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">0.1048730</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">0.0882288</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">0.1676538</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ul>
-<li>Add interaction term EMPSTAT*FTOTINC; as indicated the potential interaction between them, confirm to add the interaction term, After incorporating the interaction terms, the p-value for “EMPSTATUnemployed:FTOTINC” is slightly above the conventional alpha threshold of 0.05, suggesting marginal statistical significance.</li>
+<li><p>The coefficient for log_INCTOT shows notable variation across racial categories, which indicates the impact of income on rent varies by race.</p></li>
+<li><p>The Chinese group demonstrates the highest log_INCTOT coefficient, indicating a particularly strong positive association between income and rent within this demographic.</p></li>
+<li><p>American Indian or Alaska Native, Other Asian or Pacific Islander, Other race, nec, Three or more major races, and White categories show a range of coefficients, suggesting varied levels of positive association.</p></li>
+<li><p>Black/African American and Two major races groups present with lower coefficients, hinting at a relatively weaker positive relationship.</p></li>
+</ul>
+</section>
+<section id="statistical-performance-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-assessment">Statistical Performance Assessment</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+|RACE                             |term       |  estimate|   p.value|
+|:--------------------------------|:----------|---------:|---------:|
+|American Indian or Alaska Native |log_INCTOT | 0.0937685| 0.3138472|
+|Black/African American           |log_INCTOT | 0.0621126| 0.0012082|
+|Chinese                          |log_INCTOT | 0.1915177| 0.0428004|
+|Other Asian or Pacific Islander  |log_INCTOT | 0.1050231| 0.0001647|
+|Other race, nec                  |log_INCTOT | 0.0376731| 0.1041104|
+|Three or more major races        |log_INCTOT | 0.1048730| 0.1615109|
+|Two major races                  |log_INCTOT | 0.0882288| 0.0000441|
+|White                            |log_INCTOT | 0.1676538| 0.0000000|</code></pre>
+</div>
+</div>
+<ul>
+<li><p>For most racial groups, the p-values indicate statistical significance (p &lt; 0.05), especially pronounced for Black/African American, Chinese, Other Asian or Pacific Islander, and White categories, implying a strong relationship between income and rent.</p></li>
+<li><p>The higher p-value for American Indian or Alaska Native suggests that the relationship between income and rent is not statistically significant for this group, based on the traditional alpha threshold.</p></li>
+</ul>
+</section>
+<section id="discussion-of-the-model-1" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-the-model-1">Discussion of the model:</h3>
+<ul>
+<li>The evident variability in log_INCTOT coefficients across races suggests that the relationship between income and rent is influenced by racial factors, pointing towards the complexity inherent in socio-economic dynamics.</li>
+<li>Non-significance in certain racial categories may reflect data limitations or the presence of other variables not captured in the model, indicating areas where further research or data collection could be beneficial.</li>
+<li>The model’s overall robustness and the significance of its findings provide valuable insights, yet also suggest that an exploration of additional socio-economic factors and historical trends could contribute to a more nuanced understanding.</li>
+</ul>
+</section>
+</section>
+<section id="enhanced-log-log-regression-model-with-interaction-terms-based-on-the-2022-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="enhanced-log-log-regression-model-with-interaction-terms-based-on-the-2022-dataset">5. Enhanced Log-Log Regression Model with Interaction Terms (Based on the 2022 Dataset)</h2>
+<section id="model-rationale" class="level3">
+<h3 class="anchored" data-anchor-id="model-rationale">Model Rationale:</h3>
+<ul>
+<li>As outlined in Class Blog 4, we’ve built upon the solid foundation established in Section 3. We’re now exploring nonlinearity further and addressing the potential skewness identified in the conclusions of Model 3.</li>
+</ul>
+</section>
+<section id="variable-selection-and-refinement" class="level3">
+<h3 class="anchored" data-anchor-id="variable-selection-and-refinement">Variable Selection and Refinement:</h3>
+<ul>
+<li>The interaction term <code>EMPSTAT * FTOTINC</code> has been introduced to investigate the suspected interaction effect between employment status and total family income.</li>
+<li>Post inclusion, the p-value for <code>EMPSTATUnemployed:FTOTINC</code> is slightly above 0.05, suggesting it has borderline statistical significance.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -1360,55 +1437,565 @@ alternative hypothesis: true autocorrelation is greater than 0</code></pre>
 </div>
 </div>
 <ul>
-<li>The addition of this interaction term does not adversely affect the performance of the other variables, as assessed by their respective p-values.</li>
+<li>The integration of the interaction term retains the significance of other variables, with no detrimental impact on the model’s variables as reflected in their p-values.</li>
 </ul>
 </section>
-<section id="inference-3" class="level3">
-<h3 class="anchored" data-anchor-id="inference-3">Inference</h3>
-<p>-The conclusion is the coefficient change from shifting from 0.1334 to 0.1715199, indicating a potential moderating effect of employment status on the relationship between total family income and gross rent.It means that given a 10% increase in total income (INCTOT) is associated with an average 17.15% increase in rent gross (RENTGRS), given that other variables in the model are held constant.</p>
-</section>
-<section id="statistical-performance-2" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-2">Statistical Performance:</h3>
+<section id="model-inferences-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-inferences-1">Model Inferences:</h3>
 <ul>
-<li>All variables demonstrated statistical significance except one subgroup of marital status and one subgroup of employment status.</li>
+<li>There is a noticeable shift in the coefficient from 0.1334 to 0.1715199 after adding the interaction term. This change suggests that employment status may moderate the influence of total family income on gross rent. Specifically, a 10% increase in total income (INCTOT) now corresponds to a 17.15% increase in gross rent (RENTGRS), ceteris paribus.</li>
 </ul>
 </section>
-<section id="discussion-of-the-model-1" class="level3">
-<h3 class="anchored" data-anchor-id="discussion-of-the-model-1">Discussion of the model:</h3>
+<section id="statistical-performance-assessment-1" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-assessment-1">Statistical Performance Assessment:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2727009</td>
+<td style="text-align: right;">0.2691641</td>
+<td style="text-align: right;">0.4920608</td>
+<td style="text-align: right;">77.10474</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">-3654.429</td>
+<td style="text-align: right;">7362.857</td>
+<td style="text-align: right;">7539.709</td>
+<td style="text-align: right;">1244.758</td>
+<td style="text-align: right;">5141</td>
+<td style="text-align: right;">5167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>All predictors show statistical significance, with the exception of certain categories within marital status and employment status, indicating robustness in the variable selection.</li>
+</ul>
+</section>
+<section id="discussion-of-the-model-2" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-the-model-2">Discussion of the model:</h3>
 <p>-The residual plot suggested an acceptable fit.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<ul>
+<li>This model also meet all the assumption we discussed in section 3.</li>
+</ul>
+<p><strong>Therefore, this model’s conclusions offer a credible extension to our understanding of the economic factors influencing rent prices in section 3.</strong></p>
 </section>
 </section>
 </section>
-<section id="models-and-inferences-second-dataset" class="level1">
-<h1>Models and Inferences (Second dataset)</h1>
+<section id="models-and-inferences-merged-dataset" class="level1">
+<h1>Models and Inferences (Merged dataset)</h1>
+<section id="outline-1" class="level2">
+<h2 class="anchored" data-anchor-id="outline-1">Outline</h2>
+<ol type="1">
+<li>Log-Log Regression Model by YEAR</li>
+<li>Longitudinal Log-Log Regression Model by Race</li>
+<li>Time series model</li>
+</ol>
+</section>
+<section id="log-log-regression-model-by-year" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-regression-model-by-year">1. Log-Log Regression Model by YEAR</h2>
+<section id="model-overview-4" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-4">Model Overview:</h3>
 <ul>
-<li><strong>Log-Log Regression Model</strong> (Utilizing the 2000-2022 Dataset) – Detail in class blog 5
+<li>This analysis implements the validated Log-Log regression approach on annual data segments to assess temporal trends and variations.</li>
+</ul>
+</section>
+<section id="model-inferences-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-inferences-2">Model Inferences:</h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 23 × 6
+    YEAR term       estimate std.error statistic  p.value
+   &lt;dbl&gt; &lt;chr&gt;         &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+ 1  2000 log_INCTOT    0.121   0.0199       6.10 1.88e- 9
+ 2  2001 log_INCTOT    0.147   0.0117      12.6  4.68e-35
+ 3  2002 log_INCTOT    0.121   0.0131       9.26 6.71e-20
+ 4  2003 log_INCTOT    0.115   0.0118       9.72 8.43e-22
+ 5  2004 log_INCTOT    0.118   0.0123       9.59 2.91e-21
+ 6  2005 log_INCTOT    0.121   0.00779     15.5  1.11e-52
+ 7  2006 log_INCTOT    0.121   0.00774     15.6  1.24e-53
+ 8  2007 log_INCTOT    0.131   0.00805     16.3  4.10e-58
+ 9  2008 log_INCTOT    0.113   0.00776     14.6  5.42e-47
+10  2009 log_INCTOT    0.118   0.00787     15.0  1.90e-49
+# ℹ 13 more rows</code></pre>
+</div>
+</div>
 <ul>
-<li>Using the accepted model above to fit the dataset of each year</li>
-<li>All coefficients show to be statistically significant</li>
-<li>Plot the residual plot &amp; comfirmed it is falling within an acceptable range.</li>
-<li>Compare the coefficients change for each year, plot diagram see the trend</li>
-</ul></li>
-<li>Log-Log Regression Model <strong>by Race</strong> (2022 Dataset) — Detail in class blog 6
+<li>The analyses yield detailed <code>log_INCTOT</code> coefficients for each year, elucidating the evolving income-rent relationship dynamics.</li>
+<li>Fluctuations in <code>log_INCTOT</code> coefficients over different years suggest changing influences on the dependent variable within the model.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 <ul>
-<li>The analysis stratified the data by race, applying the aforementioned Log-Log regression approach.</li>
-<li>It provided detailed coefficients for each racial category, examining the influence on the rent-income relationship.</li>
-<li>The statistical significance of all coefficients was verified, with residual plots falling within an acceptable range.</li>
-</ul></li>
-<li>Longitudinal Log-Log Regression Model <strong>by Race</strong> (2000-2022 Dataset) — Detail in class blog 6
+<li>Observations show peaks in coefficient estimates, notably in the early 2000s and around 2020, with subsequent troughs suggesting potential corrective periods.</li>
+<li>The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.</li>
+<li>Coefficient estimates range within a tight interval, indicating a consistent strength of relationship across the dataset’s timespan.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<ul>
+<li>R-squared values demonstrate time-bound variability, implying shifts in the model’s explanatory power from year to year.</li>
+<li>A recent sharp decline in R-squared highlights a potential reduction in predictive accuracy or a substantial data structure change.</li>
+</ul>
+</section>
+<section id="statistical-performance-assessment-2" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-assessment-2">Statistical Performance Assessment:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 4%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">YEAR</th>
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.3004684</td>
+<td style="text-align: right;">0.2734731</td>
+<td style="text-align: right;">0.4224935</td>
+<td style="text-align: right;">11.13038</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-333.323</td>
+<td style="text-align: right;">716.6461</td>
+<td style="text-align: right;">827.3891</td>
+<td style="text-align: right;">106.3864</td>
+<td style="text-align: right;">596</td>
+<td style="text-align: right;">620</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2470440</td>
+<td style="text-align: right;">0.2375703</td>
+<td style="text-align: right;">0.4343406</td>
+<td style="text-align: right;">26.07673</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-1071.364</td>
+<td style="text-align: right;">2192.7289</td>
+<td style="text-align: right;">2330.8294</td>
+<td style="text-align: right;">344.8555</td>
+<td style="text-align: right;">1828</td>
+<td style="text-align: right;">1852</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2331442</td>
+<td style="text-align: right;">0.2219811</td>
+<td style="text-align: right;">0.4474190</td>
+<td style="text-align: right;">20.88527</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-973.854</td>
+<td style="text-align: right;">1997.7081</td>
+<td style="text-align: right;">2132.2145</td>
+<td style="text-align: right;">316.2903</td>
+<td style="text-align: right;">1580</td>
+<td style="text-align: right;">1604</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2465441</td>
+<td style="text-align: right;">0.2370067</td>
+<td style="text-align: right;">0.4480918</td>
+<td style="text-align: right;">25.85020</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-1122.311</td>
+<td style="text-align: right;">2294.6224</td>
+<td style="text-align: right;">2432.5740</td>
+<td style="text-align: right;">364.8287</td>
+<td style="text-align: right;">1817</td>
+<td style="text-align: right;">1841</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2503521</td>
+<td style="text-align: right;">0.2402157</td>
+<td style="text-align: right;">0.4474393</td>
+<td style="text-align: right;">24.69849</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-1048.315</td>
+<td style="text-align: right;">2146.6299</td>
+<td style="text-align: right;">2282.9544</td>
+<td style="text-align: right;">340.5435</td>
+<td style="text-align: right;">1701</td>
+<td style="text-align: right;">1725</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2578132</td>
+<td style="text-align: right;">0.2537284</td>
+<td style="text-align: right;">0.4519094</td>
+<td style="text-align: right;">63.11557</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-2613.433</td>
+<td style="text-align: right;">5276.8654</td>
+<td style="text-align: right;">5435.4542</td>
+<td style="text-align: right;">853.4443</td>
+<td style="text-align: right;">4179</td>
+<td style="text-align: right;">4203</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2886511</td>
+<td style="text-align: right;">0.2846915</td>
+<td style="text-align: right;">0.4463248</td>
+<td style="text-align: right;">72.89924</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-2532.394</td>
+<td style="text-align: right;">5114.7885</td>
+<td style="text-align: right;">5273.0962</td>
+<td style="text-align: right;">823.1186</td>
+<td style="text-align: right;">4132</td>
+<td style="text-align: right;">4156</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2579863</td>
+<td style="text-align: right;">0.2539132</td>
+<td style="text-align: right;">0.4657137</td>
+<td style="text-align: right;">63.33896</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-2747.100</td>
+<td style="text-align: right;">5544.2009</td>
+<td style="text-align: right;">5702.8551</td>
+<td style="text-align: right;">908.7660</td>
+<td style="text-align: right;">4190</td>
+<td style="text-align: right;">4214</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2473125</td>
+<td style="text-align: right;">0.2433582</td>
+<td style="text-align: right;">0.4633991</td>
+<td style="text-align: right;">62.54309</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-2848.263</td>
+<td style="text-align: right;">5746.5269</td>
+<td style="text-align: right;">5906.2723</td>
+<td style="text-align: right;">940.1263</td>
+<td style="text-align: right;">4378</td>
+<td style="text-align: right;">4402</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2549819</td>
+<td style="text-align: right;">0.2512881</td>
+<td style="text-align: right;">0.4705660</td>
+<td style="text-align: right;">69.03019</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3089.421</td>
+<td style="text-align: right;">6228.8423</td>
+<td style="text-align: right;">6390.0277</td>
+<td style="text-align: right;">1027.2247</td>
+<td style="text-align: right;">4639</td>
+<td style="text-align: right;">4663</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2679043</td>
+<td style="text-align: right;">0.2644022</td>
+<td style="text-align: right;">0.4511145</td>
+<td style="text-align: right;">76.49772</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-2997.845</td>
+<td style="text-align: right;">6045.6891</td>
+<td style="text-align: right;">6207.7645</td>
+<td style="text-align: right;">978.4487</td>
+<td style="text-align: right;">4808</td>
+<td style="text-align: right;">4832</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2603548</td>
+<td style="text-align: right;">0.2568985</td>
+<td style="text-align: right;">0.4740125</td>
+<td style="text-align: right;">75.32791</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3313.745</td>
+<td style="text-align: right;">6677.4909</td>
+<td style="text-align: right;">6840.1493</td>
+<td style="text-align: right;">1105.9138</td>
+<td style="text-align: right;">4922</td>
+<td style="text-align: right;">4946</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2771554</td>
+<td style="text-align: right;">0.2739096</td>
+<td style="text-align: right;">0.4600769</td>
+<td style="text-align: right;">85.38670</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3294.673</td>
+<td style="text-align: right;">6639.3453</td>
+<td style="text-align: right;">6802.9947</td>
+<td style="text-align: right;">1084.1776</td>
+<td style="text-align: right;">5122</td>
+<td style="text-align: right;">5146</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2761514</td>
+<td style="text-align: right;">0.2728593</td>
+<td style="text-align: right;">0.4602770</td>
+<td style="text-align: right;">83.88121</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3255.114</td>
+<td style="text-align: right;">6560.2281</td>
+<td style="text-align: right;">6723.5597</td>
+<td style="text-align: right;">1071.3503</td>
+<td style="text-align: right;">5057</td>
+<td style="text-align: right;">5081</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2739684</td>
+<td style="text-align: right;">0.2708225</td>
+<td style="text-align: right;">0.4612843</td>
+<td style="text-align: right;">87.08596</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3428.168</td>
+<td style="text-align: right;">6906.3364</td>
+<td style="text-align: right;">7070.8734</td>
+<td style="text-align: right;">1129.4535</td>
+<td style="text-align: right;">5308</td>
+<td style="text-align: right;">5332</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2676026</td>
+<td style="text-align: right;">0.2643909</td>
+<td style="text-align: right;">0.4591722</td>
+<td style="text-align: right;">83.32228</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3363.339</td>
+<td style="text-align: right;">6776.6777</td>
+<td style="text-align: right;">6940.9176</td>
+<td style="text-align: right;">1105.8510</td>
+<td style="text-align: right;">5245</td>
+<td style="text-align: right;">5269</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2617749</td>
+<td style="text-align: right;">0.2585815</td>
+<td style="text-align: right;">0.4688414</td>
+<td style="text-align: right;">81.97435</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3520.766</td>
+<td style="text-align: right;">7091.5316</td>
+<td style="text-align: right;">7256.1108</td>
+<td style="text-align: right;">1168.7418</td>
+<td style="text-align: right;">5317</td>
+<td style="text-align: right;">5341</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2588462</td>
+<td style="text-align: right;">0.2556947</td>
+<td style="text-align: right;">0.4728262</td>
+<td style="text-align: right;">82.13395</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3627.601</td>
+<td style="text-align: right;">7305.2017</td>
+<td style="text-align: right;">7470.2079</td>
+<td style="text-align: right;">1209.2611</td>
+<td style="text-align: right;">5409</td>
+<td style="text-align: right;">5433</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2877600</td>
+<td style="text-align: right;">0.2847376</td>
+<td style="text-align: right;">0.4738139</td>
+<td style="text-align: right;">95.20847</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3646.330</td>
+<td style="text-align: right;">7342.6610</td>
+<td style="text-align: right;">7507.7177</td>
+<td style="text-align: right;">1216.7881</td>
+<td style="text-align: right;">5420</td>
+<td style="text-align: right;">5444</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2898507</td>
+<td style="text-align: right;">0.2867566</td>
+<td style="text-align: right;">0.4801230</td>
+<td style="text-align: right;">93.68034</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3621.724</td>
+<td style="text-align: right;">7293.4472</td>
+<td style="text-align: right;">7457.8479</td>
+<td style="text-align: right;">1216.9048</td>
+<td style="text-align: right;">5279</td>
+<td style="text-align: right;">5303</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2820342</td>
+<td style="text-align: right;">0.2778789</td>
+<td style="text-align: right;">0.4948471</td>
+<td style="text-align: right;">67.87314</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-2848.262</td>
+<td style="text-align: right;">5746.5231</td>
+<td style="text-align: right;">5903.8619</td>
+<td style="text-align: right;">973.1280</td>
+<td style="text-align: right;">3974</td>
+<td style="text-align: right;">3998</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2677132</td>
+<td style="text-align: right;">0.2643873</td>
+<td style="text-align: right;">0.4841706</td>
+<td style="text-align: right;">80.49233</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3517.113</td>
+<td style="text-align: right;">7084.2259</td>
+<td style="text-align: right;">7247.5919</td>
+<td style="text-align: right;">1187.1087</td>
+<td style="text-align: right;">5064</td>
+<td style="text-align: right;">5088</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2239915</td>
+<td style="text-align: right;">0.2205238</td>
+<td style="text-align: right;">0.5099087</td>
+<td style="text-align: right;">64.59389</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">-3842.513</td>
+<td style="text-align: right;">7735.0255</td>
+<td style="text-align: right;">7898.7961</td>
+<td style="text-align: right;">1338.2554</td>
+<td style="text-align: right;">5147</td>
+<td style="text-align: right;">5171</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>All model coefficients are statistically validated, with a noticeable exception in the MARSTSeparated category for the year 2022.</li>
+<li>R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.</li>
+<li>Adjusted R-squared values, marginally lower than the R-squared, adhere to expectations, considering model complexity relative to data volume.</li>
+<li>P-values indicate consistent statistical significance for the model’s predictors on an annual basis.</li>
+<li>Log-likelihood, AIC, and BIC values increment over time, which may indicate an improving model fit or increasing data variability.</li>
+<li>The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.</li>
+</ul>
+</section>
+</section>
+<section id="longitudinal-log-log-regression-model-by-race" class="level2">
+<h2 class="anchored" data-anchor-id="longitudinal-log-log-regression-model-by-race">2. Longitudinal Log-Log Regression Model by Race</h2>
+<section id="model-overview-5" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-5">Model Overview:</h3>
 <ul>
 <li>This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.</li>
 <li>Trends over time for each race were charted to illustrate these dynamics.</li>
 <li>Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.</li>
-</ul></li>
-<li>Time series model (using 2000-2022 dataset) – Detail in class blog 7</li>
 </ul>
+</section>
+</section>
+<section id="time-series-model" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-model">3.Time series model</h2>
+<section id="model-overview-6" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-6">Model Overview:</h3>
 <hr>
+</section>
+</section>
 <section id="rubric-on-this-page" class="level2">
 <h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
 <p>You will</p>
