@@ -46,6 +46,8 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,21,600,Yes (shared or exclusive use),3,1,26,Never married/single,White,100,Employed,12,11000,28000,149,MIDWEST,6.396929655216146,9.305650551780507
 2022,12,1190,Yes (shared or exclusive use),4,2,35,Never married/single,"Other race, nec",700,Employed,10,60000,60000,411,NORTHEAST,7.081708586105575,11.002099841204238
 2022,42,2188,Yes (shared or exclusive use),3,1,44,Never married/single,Black/African American,200,Not in labour force,30,31700,53500,135,WEST,7.690743163541872,10.364071959865372
+2022,32,620,Yes (shared or exclusive use),2,1,24,"Married, spouse present",Black/African American,200,Employed,10,960,2460,13,SOUTH,6.429719478039138,6.866933284461882
+2022,31,980,Yes (shared or exclusive use),5,1,35,Divorced,Black/African American,200,Employed,10,791000,791000,501,SOUTH,6.887552571664617,13.581053246749791
 2022,21,774,Yes (shared or exclusive use),2,1,34,"Married, spouse present",Other Asian or Pacific Islander,643,Employed,10,24000,48000,255,MIDWEST,6.651571873589727,10.085809109330082
 2022,22,540,Yes (shared or exclusive use),3,1,60,Divorced,White,100,Employed,10,23100,23100,158,MIDWEST,6.29156913955832,10.047587896509885
 2022,42,1058,Yes (shared or exclusive use),5,5,24,Never married/single,White,100,Not in labour force,30,7200,7200,49,WEST,6.964135612418245,8.881836305004146
@@ -63,6 +65,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,6000,Yes (shared or exclusive use),5,1,41,Never married/single,"Other race, nec",700,Employed,10,7000,8500,44,WEST,8.699514748210191,8.85366542803745
 2022,42,773,Yes (shared or exclusive use),3,1,57,"Married, spouse present",Black/African American,200,Employed,10,35000,42000,223,WEST,6.650279048587422,10.46310334047155
 2022,42,310,Yes (shared or exclusive use),3,1,78,Divorced,Two major races,802,Not in labour force,30,10800,10800,80,WEST,5.736572297479192,9.287301413112312
+2022,31,220,Yes (shared or exclusive use),4,1,55,Never married/single,Black/African American,200,Not in labour force,30,9000,9000,62,SOUTH,5.393627546352362,9.104979856318357
 2022,42,2900,Yes (shared or exclusive use),6,1,16,Never married/single,Two major races,826,Employed,10,51000,149400,265,WEST,7.9724660159745655,10.839580911706463
 2022,33,1007,Yes (shared or exclusive use),6,1,44,Never married/single,White,100,Employed,10,11900,45000,205,SOUTH,6.914730892718563,9.38429367909962
 2022,33,1980,Yes (shared or exclusive use),3,1,23,Never married/single,White,100,Employed,10,34000,110000,501,SOUTH,7.590852123688581,10.4341158035983
@@ -220,6 +223,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,33,2400,Yes (shared or exclusive use),6,3,22,Never married/single,White,100,Employed,10,20000,20000,137,SOUTH,7.783224016336037,9.903487552536127
 2022,21,740,Yes (shared or exclusive use),3,1,81,Never married/single,Black/African American,200,Not in labour force,30,7200,7200,53,MIDWEST,6.606650186198215,8.881836305004146
 2022,31,1700,Yes (shared or exclusive use),4,1,53,Divorced,White,100,Employed,10,80000,84000,447,SOUTH,7.438383530044307,11.289781913656018
+2022,32,540,Yes (shared or exclusive use),6,2,45,"Married, spouse present",White,100,Not in labour force,30,1100,73100,157,SOUTH,6.29156913955832,7.003065458786462
 2022,31,1980,Yes (shared or exclusive use),9,1,47,"Married, spouse present",White,100,Employed,10,37000,98400,334,SOUTH,7.590852123688581,10.51867319162636
 2022,22,689,Yes (shared or exclusive use),3,1,68,Divorced,White,100,Employed,10,37000,37000,275,MIDWEST,6.535241271013659,10.51867319162636
 2022,22,1292,Yes (shared or exclusive use),5,1,32,Never married/single,Black/African American,200,Employed,10,32600,51100,272,MIDWEST,7.163946684342547,10.392067567354799
@@ -324,6 +328,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,41,3215,Yes (shared or exclusive use),6,1,41,"Married, spouse present",White,100,Not in labour force,30,63600,123600,434,WEST,8.07558263667172,11.060368749328214
 2022,12,550,Yes (shared or exclusive use),4,1,75,Never married/single,White,100,Not in labour force,30,16300,16300,121,NORTHEAST,6.309918278226516,9.698920386794853
 2022,42,1282,Yes (shared or exclusive use),4,1,55,Divorced,"Other race, nec",700,Not in labour force,30,3600,28200,166,WEST,7.156176637480615,8.1886891244442
+2022,33,966,Yes (shared or exclusive use),5,1,35,"Married, spouse present",Two major races,826,Employed,10,1000,12500,37,SOUTH,6.873163834212518,6.907755278982137
 2022,41,1814,Yes (shared or exclusive use),4,1,31,"Married, spouse present","Other race, nec",700,Employed,10,6000,10000,30,WEST,7.503289630675082,8.699514748210191
 2022,11,2317,Yes (shared or exclusive use),3,1,29,Never married/single,Two major races,845,Employed,10,27000,142000,490,NORTHEAST,7.748028524432376,10.203592144986466
 2022,12,1700,Yes (shared or exclusive use),3,1,47,"Married, spouse present","Other race, nec",700,Employed,10,58000,142000,501,NORTHEAST,7.438383530044307,10.968198289528557
@@ -523,6 +528,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,22,1700,Yes (shared or exclusive use),4,1,37,Never married/single,Other Asian or Pacific Islander,661,Employed,10,55000,102600,349,MIDWEST,7.438383530044307,10.915088464214607
 2022,21,890,Yes (shared or exclusive use),4,1,69,"Married, spouse present",White,100,Not in labour force,30,25000,39300,232,MIDWEST,6.7912214627261855,10.126631103850338
 2022,41,3090,Yes (shared or exclusive use),4,1,32,Never married/single,White,100,Employed,10,170000,370000,501,WEST,8.035926369891792,12.043553716032399
+2022,22,997,Yes (shared or exclusive use),8,1,19,Never married/single,Two major races,802,Employed,10,1000,1004,5,MIDWEST,6.904750769961838,6.907755278982137
 2022,11,730,Yes (shared or exclusive use),4,2,57,Divorced,Two major races,802,Not in labour force,30,8900,8900,61,NORTHEAST,6.593044534142437,9.093806555720231
 2022,21,1133,Yes (shared or exclusive use),7,3,33,Never married/single,White,100,Employed,10,50000,50000,342,MIDWEST,7.0326242610280065,10.819778284410283
 2022,11,2220,Yes (shared or exclusive use),6,1,72,Never married/single,White,100,Not in labour force,30,78200,160800,501,NORTHEAST,7.705262474866325,11.267024926533402
@@ -536,6 +542,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,754,Yes (shared or exclusive use),3,1,26,Never married/single,Chinese,400,Employed,12,6200,6200,42,SOUTH,6.625392368007956,8.732304571033183
 2022,41,436,Yes (shared or exclusive use),6,1,77,Divorced,Two major races,826,Not in labour force,30,10300,10300,76,WEST,6.077642243349034,9.239899174217728
 2022,31,1626,Yes (shared or exclusive use),4,1,29,Never married/single,Black/African American,200,Employed,10,16600,76600,339,SOUTH,7.3938782901077555,9.717157974344635
+2022,33,1054,Yes (shared or exclusive use),4,2,17,Never married/single,White,100,Not in labour force,30,900,900,6,SOUTH,6.960347729101308,6.802394763324311
 2022,31,1290,Yes (shared or exclusive use),4,1,51,"Married, spouse present","Other race, nec",700,Employed,10,33600,33600,100,SOUTH,7.162397497355718,10.422281345951296
 2022,11,1290,Yes (shared or exclusive use),4,1,50,"Married, spouse present",White,100,Not in labour force,30,24000,46330,138,NORTHEAST,7.162397497355718,10.085809109330082
 2022,33,1380,Yes (shared or exclusive use),5,2,21,Never married/single,"Other race, nec",700,Employed,10,5000,5000,34,SOUTH,7.22983877815125,8.517193191416238
@@ -626,6 +633,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,32,1090,Yes (shared or exclusive use),4,1,24,Never married/single,White,100,Employed,10,48000,48000,329,SOUTH,6.993932975223189,10.778956289890028
 2022,31,300,Yes (shared or exclusive use),5,1,60,Never married/single,White,100,Employed,10,49000,53300,284,SOUTH,5.703782474656201,10.799575577092764
 2022,41,1447,Yes (shared or exclusive use),6,1,34,Never married/single,White,100,Not in labour force,30,34700,71000,378,WEST,7.277247726631484,10.45449496593495
+2022,32,2733,Yes (shared or exclusive use),5,1,38,Never married/single,Black/African American,200,Not in labour force,30,900,1800,10,SOUTH,7.913155185928068,6.802394763324311
 2022,42,3400,Yes (shared or exclusive use),4,2,34,"Married, spouse present",White,100,Employed,10,65000,125000,501,WEST,8.131530710604252,11.082142548877775
 2022,12,240,Yes (shared or exclusive use),6,1,30,"Married, spouse absent",Black/African American,200,Employed,10,60000,135700,477,NORTHEAST,5.480638923341991,11.002099841204238
 2022,12,1850,Yes (shared or exclusive use),5,1,64,Divorced,White,100,Employed,10,58000,64300,285,NORTHEAST,7.52294091807237,10.968198289528557
@@ -638,6 +646,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1118,Yes (shared or exclusive use),4,1,48,Widowed,Black/African American,200,Employed,10,22000,35000,186,SOUTH,7.0192966537150445,9.998797732340453
 2022,31,1152,Yes (shared or exclusive use),5,1,49,Widowed,White,100,Employed,10,26000,33500,178,SOUTH,7.049254841255837,10.165851817003619
 2022,33,1883,Yes (shared or exclusive use),6,1,55,"Married, spouse absent",Black/African American,200,Employed,10,89000,89000,501,SOUTH,7.5406215286571525,11.396391648714276
+2022,41,230,Yes (shared or exclusive use),3,1,70,Never married/single,White,100,Not in labour force,30,9600,9600,71,WEST,5.438079308923196,9.169518377455928
 2022,32,990,Yes (shared or exclusive use),7,1,32,Never married/single,White,100,Employed,10,57700,95100,501,SOUTH,6.897704943128636,10.96301245249619
 2022,21,890,Yes (shared or exclusive use),5,1,23,Never married/single,White,100,Employed,10,18800,68300,363,MIDWEST,6.7912214627261855,9.84161214881804
 2022,21,848,Yes (shared or exclusive use),2,1,24,"Married, spouse present",Other Asian or Pacific Islander,671,Employed,10,44050,85150,453,MIDWEST,6.742880635791903,10.693080631364326
@@ -761,6 +770,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,1380,Yes (shared or exclusive use),4,1,66,"Married, spouse present",Chinese,400,Unemployed,20,18500,44400,262,NORTHEAST,7.22983877815125,9.825526011066415
 2022,33,240,Yes (shared or exclusive use),1,1,92,Widowed,Two major races,826,Not in labour force,30,9500,9500,71,SOUTH,5.480638923341991,9.159047077588632
 2022,21,1080,Yes (shared or exclusive use),5,1,42,"Married, spouse present",White,100,Employed,12,25000,55000,147,MIDWEST,6.984716320118266,10.126631103850338
+2022,33,3303,Yes (shared or exclusive use),4,1,26,Never married/single,White,100,Not in labour force,30,1000,51000,271,SOUTH,8.10258642539079,6.907755278982137
 2022,21,500,Yes (shared or exclusive use),3,1,29,Never married/single,White,100,Employed,10,61000,61000,418,MIDWEST,6.214608098422191,11.018629143155449
 2022,33,763,Yes (shared or exclusive use),1,1,23,Never married/single,Black/African American,200,Not in labour force,30,1400,1400,4,SOUTH,6.637258031284457,7.24422751560335
 2022,21,1070,Yes (shared or exclusive use),4,3,35,Never married/single,Black/African American,200,Employed,10,25000,25000,171,MIDWEST,6.975413927455952,10.126631103850338
@@ -798,6 +808,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,2454,Yes (shared or exclusive use),7,1,36,Never married/single,Two major races,826,Employed,10,60000,99600,454,WEST,7.805474625270857,11.002099841204238
 2022,41,2292,Yes (shared or exclusive use),5,1,25,"Married, spouse present",Two major races,826,Employed,10,80000,90000,479,WEST,7.73718007783463,11.289781913656018
 2022,32,1494,Yes (shared or exclusive use),3,1,22,Never married/single,White,100,Employed,10,18000,18000,123,SOUTH,7.309212365692763,9.798127036878302
+2022,21,725,Yes (shared or exclusive use),4,1,56,"Married, spouse present",White,100,Not in labour force,30,970,1970,10,MIDWEST,6.586171654854675,6.877296071497429
 2022,32,740,Yes (shared or exclusive use),7,1,32,"Married, spouse present",White,100,Employed,10,70000,108000,379,SOUTH,6.606650186198215,11.156250521031495
 2022,12,4160,Yes (shared or exclusive use),3,1,37,"Married, spouse present",White,100,Employed,10,185000,826000,501,NORTHEAST,8.333270353255308,12.128111104060462
 2022,33,620,Yes (shared or exclusive use),2,1,28,Never married/single,White,100,Employed,10,40000,40000,274,SOUTH,6.429719478039138,10.596634733096073
@@ -965,6 +976,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,41,1500,Yes (shared or exclusive use),4,1,89,Widowed,White,100,Not in labour force,30,57100,57100,424,WEST,7.313220387090301,10.952559395644101
 2022,31,2017,Yes (shared or exclusive use),5,1,53,"Married, spouse present",White,100,Employed,10,74000,159000,501,SOUTH,7.6093665379542115,11.211820372186306
 2022,22,3600,Yes (shared or exclusive use),2,1,79,"Married, spouse present",White,100,Not in labour force,30,12000,65020,383,MIDWEST,8.1886891244442,9.392661928770137
+2022,12,1000,Yes (shared or exclusive use),7,2,60,Never married/single,White,100,Not in labour force,30,900,900,6,NORTHEAST,6.907755278982137,6.802394763324311
 2022,22,847,Yes (shared or exclusive use),5,1,31,Never married/single,White,100,Employed,12,35000,37400,165,MIDWEST,6.741700694652055,10.46310334047155
 2022,42,912,Yes (shared or exclusive use),4,1,28,Never married/single,Two major races,826,Not in labour force,30,12000,83600,289,WEST,6.815639990074331,9.392661928770137
 2022,41,700,Yes (shared or exclusive use),2,1,27,"Married, spouse present",White,100,Employed,10,55000,104000,501,WEST,6.551080335043404,10.915088464214607
@@ -1003,6 +1015,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1800,Yes (shared or exclusive use),6,1,17,Never married/single,White,100,Employed,10,3400,110880,281,SOUTH,7.495541943884256,8.131530710604252
 2022,31,1187,Yes (shared or exclusive use),2,1,32,Never married/single,White,100,Employed,10,42600,42600,292,SOUTH,7.079184394609668,10.659609532257463
 2022,21,925,Yes (shared or exclusive use),3,1,70,Divorced,White,100,Not in labour force,30,22300,22300,166,MIDWEST,6.829793737512425,10.01234195744821
+2022,31,230,Yes (shared or exclusive use),3,1,63,Divorced,Black/African American,200,Not in labour force,30,10800,10800,74,SOUTH,5.438079308923196,9.287301413112312
 2022,31,1470,Yes (shared or exclusive use),4,1,55,"Married, spouse present","Other race, nec",700,Employed,10,50000,68000,362,SOUTH,7.293017679772782,10.819778284410283
 2022,21,1153,Yes (shared or exclusive use),6,1,18,Never married/single,Black/African American,200,Employed,10,14000,75000,399,MIDWEST,7.050122520269059,9.546812608597396
 2022,33,1126,Yes (shared or exclusive use),4,1,28,Never married/single,Black/African American,200,Employed,10,1400,1400,7,SOUTH,7.026426808699636,7.24422751560335
@@ -1082,6 +1095,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,21,750,Yes (shared or exclusive use),3,1,26,Never married/single,White,100,Employed,10,44000,82000,436,MIDWEST,6.620073206530356,10.691944912900398
 2022,31,824,Yes (shared or exclusive use),5,1,75,Widowed,White,100,Not in labour force,30,14500,39500,210,SOUTH,6.714170529909472,9.581903928408666
 2022,33,2265,Yes (shared or exclusive use),6,1,27,"Married, spouse present",White,100,Employed,10,41000,86000,302,SOUTH,7.725330037917135,10.621327345686446
+2022,42,960,Yes (shared or exclusive use),4,1,59,Divorced,White,100,Not in labour force,30,1090,1090,7,WEST,6.866933284461882,6.993932975223189
 2022,31,743,Yes (shared or exclusive use),6,1,71,Separated,White,100,Employed,10,28400,28400,211,SOUTH,6.610696044717759,10.254144424149297
 2022,31,2580,Yes (shared or exclusive use),5,1,45,"Married, spouse present",Black/African American,200,Employed,12,28000,148000,501,SOUTH,7.855544677915663,10.239959789157341
 2022,42,3306,Yes (shared or exclusive use),6,1,35,Divorced,White,100,Employed,10,65000,155000,501,WEST,8.10349427838097,11.082142548877775
@@ -1114,6 +1128,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,32,2700,Yes (shared or exclusive use),2,1,83,Widowed,Other Asian or Pacific Islander,620,Not in labour force,30,155000,155000,501,SOUTH,7.90100705199242,11.951180395901384
 2022,21,500,Yes (shared or exclusive use),5,1,72,Divorced,White,100,Not in labour force,30,10100,10100,75,MIDWEST,6.214608098422191,9.22029070282935
 2022,21,600,Yes (shared or exclusive use),5,1,37,"Married, spouse present",White,100,Employed,10,40000,88000,299,MIDWEST,6.396929655216146,10.596634733096073
+2022,31,1177,Yes (shared or exclusive use),8,1,20,Never married/single,Black/African American,200,Unemployed,20,1000,1000,5,SOUTH,7.0707241072602764,6.907755278982137
 2022,12,860,Yes (shared or exclusive use),4,1,33,"Married, spouse present",White,100,Employed,10,54000,92000,489,NORTHEAST,6.756932389247553,10.896739325546411
 2022,21,1763,Yes (shared or exclusive use),5,1,57,"Married, spouse present",White,100,Employed,10,24000,58000,309,MIDWEST,7.47477218239787,10.085809109330082
 2022,31,2645,Yes (shared or exclusive use),2,1,22,Never married/single,White,100,Employed,12,11700,88500,403,SOUTH,7.8804263442924,9.367344120785848
@@ -1128,6 +1143,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1090,Yes (shared or exclusive use),7,1,35,"Married, spouse present",Other Asian or Pacific Islander,600,Employed,10,53000,83000,367,SOUTH,6.993932975223189,10.87804719253426
 2022,11,2030,Yes (shared or exclusive use),4,1,66,Widowed,White,100,Not in labour force,30,11300,46300,273,NORTHEAST,7.615791072035833,9.332558004700433
 2022,21,920,Yes (shared or exclusive use),4,1,30,Never married/single,White,100,Employed,10,35000,35000,240,MIDWEST,6.824373670043086,10.46310334047155
+2022,21,230,Yes (shared or exclusive use),2,1,67,Never married/single,Black/African American,200,Not in labour force,30,10800,10800,80,MIDWEST,5.438079308923196,9.287301413112312
 2022,11,1577,Yes (shared or exclusive use),6,1,44,Divorced,White,100,Employed,10,155000,155000,501,NORTHEAST,7.3632795869630385,11.951180395901384
 2022,31,2740,Yes (shared or exclusive use),7,1,80,"Married, spouse present",White,100,Not in labour force,30,116500,124900,501,SOUTH,7.9157131993821155,11.665646551987892
 2022,31,1203,Yes (shared or exclusive use),5,1,89,Widowed,White,100,Not in labour force,30,27200,27200,202,SOUTH,7.0925737159746784,10.210972252284089
@@ -1295,12 +1311,14 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,33,1303,Yes (shared or exclusive use),5,1,46,"Married, spouse present",Black/African American,200,Employed,10,28000,28000,149,SOUTH,7.172424577124845,10.239959789157341
 2022,11,5140,Yes (shared or exclusive use),7,1,79,"Married, spouse present",White,100,Not in labour force,30,127900,195900,501,NORTHEAST,8.544808358449211,11.759003987566935
 2022,42,1340,Yes (shared or exclusive use),3,1,32,"Married, spouse present",White,100,Not in labour force,30,12000,37000,130,WEST,7.200424892944957,9.392661928770137
+2022,21,680,Yes (shared or exclusive use),3,1,24,Never married/single,White,100,Not in labour force,30,1000,1000,7,MIDWEST,6.522092798170152,6.907755278982137
 2022,21,1903,Yes (shared or exclusive use),3,1,32,"Married, spouse present",White,100,Employed,10,128000,163200,501,MIDWEST,7.551186867296149,11.759785542901755
 2022,21,1000,Yes (shared or exclusive use),4,1,69,Divorced,White,100,Employed,10,36100,36100,268,MIDWEST,6.907755278982137,10.494048144320972
 2022,11,1800,Yes (shared or exclusive use),5,2,26,Never married/single,White,100,Employed,10,60000,60000,411,NORTHEAST,7.495541943884256,11.002099841204238
 2022,21,1025,Yes (shared or exclusive use),3,1,36,Never married/single,White,100,Employed,10,50000,50000,342,MIDWEST,6.932447891572509,10.819778284410283
 2022,42,560,Yes (shared or exclusive use),3,1,51,Divorced,Two major races,802,Not in labour force,30,13900,13900,95,WEST,6.327936783729195,9.539644119118783
 2022,32,270,Yes (shared or exclusive use),4,1,84,"Married, spouse present",White,100,Not in labour force,30,38500,45500,268,SOUTH,5.598421958998375,10.558413520275876
+2022,12,980,Yes (shared or exclusive use),8,1,29,Never married/single,White,100,Not in labour force,30,990,990,3,NORTHEAST,6.887552571664617,6.897704943128636
 2022,42,3454,Yes (shared or exclusive use),5,1,83,Divorced,White,100,Not in labour force,30,47520,47520,353,WEST,8.147288258706624,10.768905954036526
 2022,31,804,Yes (shared or exclusive use),2,1,41,"Married, spouse present","Other race, nec",700,Employed,10,45000,45000,239,SOUTH,6.6895992691789665,10.714417768752456
 2022,33,1443,Yes (shared or exclusive use),7,1,31,"Married, spouse present",White,100,Employed,10,71000,71000,212,SOUTH,7.274479558773871,11.170435156023453
@@ -1466,6 +1484,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1104,Yes (shared or exclusive use),10,1,72,"Married, spouse present",White,100,Not in labour force,30,8700,148000,501,SOUTH,7.00669522683704,9.071078304642676
 2022,12,1430,Yes (shared or exclusive use),12,1,46,Never married/single,Black/African American,200,Employed,10,20000,54000,186,NORTHEAST,7.265429723253953,9.903487552536127
 2022,31,1030,Yes (shared or exclusive use),8,1,21,Never married/single,"Other race, nec",700,Employed,10,30400,121600,420,SOUTH,6.937314081223682,10.322197887394314
+2022,31,2000,Yes (shared or exclusive use),4,1,25,Never married/single,Black/African American,200,Employed,10,1000,1000,4,SOUTH,7.600902459542082,6.907755278982137
 2022,33,1110,Yes (shared or exclusive use),5,1,36,Divorced,White,100,Not in labour force,30,10000,95000,420,SOUTH,7.01211529430638,9.210340371976184
 2022,42,2994,Yes (shared or exclusive use),4,1,40,"Married, spouse present",White,100,Employed,10,91000,182470,501,WEST,8.004365564979574,11.418614785498987
 2022,32,1563,Yes (shared or exclusive use),9,1,40,"Married, spouse present",White,100,Employed,15,110000,110000,386,SOUTH,7.354362330421477,11.608235644774552
@@ -1589,6 +1608,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,1335,Yes (shared or exclusive use),4,1,19,Never married/single,"Other race, nec",700,Employed,10,18500,28500,97,WEST,7.19668657083435,9.825526011066415
 2022,12,1900,Yes (shared or exclusive use),4,1,50,"Married, spouse present","Other race, nec",700,Employed,10,32000,45000,100,NORTHEAST,7.549609165154532,10.373491181781864
 2022,33,1230,Yes (shared or exclusive use),4,1,45,Never married/single,Two major races,826,Employed,10,50000,91200,485,SOUTH,7.114769448366463,10.819778284410283
+2022,21,685,Yes (shared or exclusive use),4,1,54,Divorced,White,100,Not in labour force,30,860,21160,125,MIDWEST,6.529418838262226,6.756932389247553
 2022,12,3300,Yes (shared or exclusive use),4,1,31,Never married/single,Chinese,400,Employed,10,200000,200000,501,NORTHEAST,8.101677747454572,12.206072645530174
 2022,21,1120,No,4,1,46,Divorced,Three or more major races,901,Employed,10,20000,20000,137,MIDWEST,7.02108396428914,9.903487552536127
 2022,31,1338,Yes (shared or exclusive use),5,1,27,"Married, spouse present",White,100,Employed,10,70000,90800,271,SOUTH,7.198931240688173,11.156250521031495
@@ -1628,6 +1648,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,740,Yes (shared or exclusive use),5,1,25,"Married, spouse present",White,100,Employed,10,13000,53000,186,SOUTH,6.606650186198215,9.472704636443673
 2022,41,1210,Yes (shared or exclusive use),2,1,80,Widowed,Two major races,826,Not in labour force,30,34100,34100,253,WEST,7.098375638590786,10.437052663271608
 2022,42,872,Yes (shared or exclusive use),4,1,60,Never married/single,"Other race, nec",700,Not in labour force,30,13000,27000,144,WEST,6.77078942390898,9.472704636443673
+2022,42,2767,Yes (shared or exclusive use),6,1,21,Never married/single,White,100,Not in labour force,30,950,155950,501,WEST,7.925518979786926,6.856461984594587
 2022,42,4678,Yes (shared or exclusive use),5,1,23,Never married/single,Two major races,826,Employed,10,27000,227300,501,WEST,8.450625947144124,10.203592144986466
 2022,31,1790,Yes (shared or exclusive use),4,1,25,Never married/single,Other Asian or Pacific Islander,640,Not in labour force,30,24000,24000,124,SOUTH,7.489970898834801,10.085809109330082
 2022,33,1576,Yes (shared or exclusive use),4,1,42,"Married, spouse present",White,100,Employed,10,69000,99000,348,SOUTH,7.362645270417825,11.141861783579396
@@ -1668,6 +1689,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,2100,Yes (shared or exclusive use),4,1,17,Never married/single,White,100,Employed,10,4000,95010,323,NORTHEAST,7.649692623711514,8.294049640102028
 2022,31,1217,Yes (shared or exclusive use),6,1,85,Widowed,White,100,Not in labour force,30,20900,50900,300,SOUTH,7.104144092987527,9.947504437952903
 2022,31,850,Yes (shared or exclusive use),4,1,65,Divorced,Black/African American,200,Employed,10,56000,118000,501,SOUTH,6.745236349484363,10.933106969717286
+2022,41,220,Yes (shared or exclusive use),7,1,21,"Married, spouse present",White,100,Employed,10,30000,30000,133,WEST,5.393627546352362,10.308952660644293
 2022,12,800,Yes (shared or exclusive use),6,3,35,"Married, spouse present",Black/African American,200,Employed,10,22500,74500,396,NORTHEAST,6.684611727667927,10.021270588192511
 2022,42,1750,Yes (shared or exclusive use),3,1,42,"Married, spouse present",White,100,Employed,10,130000,144000,501,WEST,7.4673710669175595,11.77528972943772
 2022,11,1470,Yes (shared or exclusive use),4,1,52,Divorced,White,100,Employed,10,78000,78000,501,NORTHEAST,7.293017679772782,11.26446410567173
@@ -1788,6 +1810,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,2530,Yes (shared or exclusive use),5,1,44,Divorced,White,100,Employed,10,82000,82000,424,WEST,7.835974581721566,11.314474526246391
 2022,33,800,Yes (shared or exclusive use),3,1,52,Divorced,White,100,Not in labour force,30,10100,10100,69,SOUTH,6.684611727667927,9.22029070282935
 2022,31,2880,Yes (shared or exclusive use),6,1,42,"Married, spouse present",White,100,Not in labour force,30,82100,87700,308,SOUTH,7.965545573129992,11.31569329544052
+2022,42,1392,Yes (shared or exclusive use),7,1,61,"Married, spouse present",Other Asian or Pacific Islander,682,Not in labour force,30,1000,51000,101,WEST,7.238496840894365,6.907755278982137
 2022,11,1600,Yes (shared or exclusive use),3,1,29,"Married, spouse present","Other race, nec",700,Employed,10,26000,51000,179,NORTHEAST,7.3777589082278725,10.165851817003619
 2022,42,1450,Yes (shared or exclusive use),5,1,50,Never married/single,"Other race, nec",700,Unemployed,20,16700,33700,85,WEST,7.27931883541462,9.723163998404846
 2022,33,1400,Yes (shared or exclusive use),4,1,23,Never married/single,Black/African American,200,Employed,10,30000,30000,205,SOUTH,7.24422751560335,10.308952660644293
@@ -1822,6 +1845,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,22,740,Yes (shared or exclusive use),1,1,24,Never married/single,Two major races,801,Employed,10,25000,25000,171,MIDWEST,6.606650186198215,10.126631103850338
 2022,21,1280,Yes (shared or exclusive use),2,1,38,Never married/single,White,100,Employed,10,35000,115000,404,MIDWEST,7.154615356913663,10.46310334047155
 2022,42,1360,Yes (shared or exclusive use),3,1,57,"Married, spouse present",Black/African American,200,Not in labour force,30,16000,10500,48,WEST,7.215239978730097,9.680344001221918
+2022,42,213,Yes (shared or exclusive use),3,1,73,Divorced,White,100,Not in labour force,30,10000,10000,74,WEST,5.3612921657094255,9.210340371976184
 2022,41,2738,Yes (shared or exclusive use),6,1,23,"Married, spouse present",White,100,Employed,10,45500,110500,501,WEST,7.914983005848394,10.725467604939041
 2022,11,3433,Yes (shared or exclusive use),8,1,42,"Married, spouse present",White,100,Employed,10,125000,325000,501,NORTHEAST,8.141189793457691,11.736069016284437
 2022,31,1700,Yes (shared or exclusive use),5,2,20,Never married/single,"Other race, nec",700,Employed,10,19200,62400,332,SOUTH,7.438383530044307,9.862665558015873
@@ -1912,6 +1936,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,2400,Yes (shared or exclusive use),5,1,77,"Married, spouse present",White,100,Not in labour force,30,4000,21000,124,NORTHEAST,7.783224016336037,8.294049640102028
 2022,41,2450,Yes (shared or exclusive use),4,1,47,Divorced,White,100,Employed,10,110000,170000,501,WEST,7.803843303538772,11.608235644774552
 2022,31,696,Yes (shared or exclusive use),4,1,56,Divorced,White,100,Employed,10,45000,76200,405,SOUTH,6.54534966033442,10.714417768752456
+2022,12,7300,Yes (shared or exclusive use),3,1,39,"Married, spouse present",White,100,Employed,10,761000,841000,501,NORTHEAST,8.895629627136483,13.542388636843823
 2022,12,870,Yes (shared or exclusive use),5,1,56,Never married/single,White,100,Employed,10,30000,30000,205,NORTHEAST,6.76849321164863,10.308952660644293
 2022,12,740,Yes (shared or exclusive use),3,1,65,Divorced,White,100,Not in labour force,30,21600,21600,160,NORTHEAST,6.606650186198215,9.980448593672257
 2022,31,1640,Yes (shared or exclusive use),3,2,31,Never married/single,Two major races,826,Employed,10,85000,106000,501,SOUTH,7.402451520818244,11.350406535472453
@@ -1965,6 +1990,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,880,Yes (shared or exclusive use),4,1,50,Never married/single,Two major races,826,Employed,10,55000,55000,377,WEST,6.779921907472252,10.915088464214607
 2022,22,900,Yes (shared or exclusive use),4,1,45,Divorced,White,100,Employed,10,52000,52000,269,MIDWEST,6.802394763324311,10.858998997563564
 2022,31,865,Yes (shared or exclusive use),6,1,44,"Married, spouse present",Two major races,845,Employed,10,57000,77000,270,SOUTH,6.762729506931879,10.950806546816688
+2022,33,1247,Yes (shared or exclusive use),4,1,51,"Married, spouse present",Black/African American,200,Employed,10,1000,26000,91,SOUTH,7.1284959456800365,6.907755278982137
 2022,21,835,Yes (shared or exclusive use),4,1,30,Never married/single,White,100,Employed,10,35400,70800,377,MIDWEST,6.727431724850855,10.474467099121865
 2022,41,1333,Yes (shared or exclusive use),5,1,33,"Married, spouse present","Other race, nec",700,Employed,12,9000,29000,87,WEST,7.195187320178709,9.104979856318357
 2022,31,2350,Yes (shared or exclusive use),7,1,27,Never married/single,Black/African American,200,Employed,10,40000,124000,501,SOUTH,7.762170607138205,10.596634733096073
@@ -2006,6 +2032,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,32,740,Yes (shared or exclusive use),6,1,46,"Married, spouse absent",Two major races,826,Employed,10,30000,50000,266,SOUTH,6.606650186198215,10.308952660644293
 2022,21,1193,Yes (shared or exclusive use),5,2,18,Never married/single,White,100,Unemployed,20,13800,78800,419,MIDWEST,7.084226422097916,9.532423871145296
 2022,33,880,Yes (shared or exclusive use),5,1,71,Divorced,White,100,Not in labour force,30,11600,34200,202,SOUTH,6.779921907472252,9.358760377094455
+2022,32,230,Yes (shared or exclusive use),4,1,49,"Married, spouse present",American Indian or Alaska Native,399,Not in labour force,30,13000,13000,69,SOUTH,5.438079308923196,9.472704636443673
 2022,21,940,Yes (shared or exclusive use),5,1,42,"Married, spouse absent",White,100,Employed,10,75000,75000,501,MIDWEST,6.84587987526405,11.225243392518447
 2022,33,480,Yes (shared or exclusive use),4,1,77,Widowed,White,100,Not in labour force,30,18000,18000,134,SOUTH,6.173786103901937,9.798127036878302
 2022,31,1080,Yes (shared or exclusive use),3,1,41,Never married/single,Black/African American,200,Employed,10,45000,45000,308,SOUTH,6.984716320118266,10.714417768752456
@@ -2140,6 +2167,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,21,1067,Yes (shared or exclusive use),6,1,44,"Married, spouse present",White,100,Employed,10,34000,109000,482,MIDWEST,6.9726062513017535,10.4341158035983
 2022,31,847,Yes (shared or exclusive use),2,1,22,Never married/single,White,100,Not in labour force,30,2000,35000,186,SOUTH,6.741700694652055,7.600902459542082
 2022,41,1237,Yes (shared or exclusive use),4,1,59,"Married, spouse present",White,100,Not in labour force,30,31200,90800,256,WEST,7.1204443723924875,10.348173373797573
+2022,21,526,No,3,1,46,Divorced,White,100,Not in labour force,30,830,830,6,MIDWEST,6.26530121273771,6.721425700790643
 2022,33,1338,Yes (shared or exclusive use),5,2,58,Widowed,"Other race, nec",700,Employed,10,24000,34100,102,SOUTH,7.198931240688173,10.085809109330082
 2022,12,790,Yes (shared or exclusive use),4,1,27,Never married/single,White,100,Employed,10,35000,35000,240,NORTHEAST,6.672032945461067,10.46310334047155
 2022,12,2960,Yes (shared or exclusive use),5,1,48,"Married, spouse present",White,100,Employed,10,5000,43900,234,NORTHEAST,7.992944547318106,8.517193191416238
@@ -2306,6 +2334,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,1970,Yes (shared or exclusive use),2,1,47,Never married/single,Black/African American,200,Employed,10,12500,25300,112,WEST,7.585788821732034,9.433483923290392
 2022,21,430,Yes (shared or exclusive use),4,1,70,Never married/single,White,100,Not in labour force,30,8500,8500,63,MIDWEST,6.063785208687608,9.047821442478408
 2022,22,920,Yes (shared or exclusive use),3,1,55,Divorced,Black/African American,200,Unemployed,20,5100,5100,35,MIDWEST,6.824373670043086,8.536995818712418
+2022,42,2900,Yes (shared or exclusive use),5,4,22,Never married/single,White,100,Employed,10,800,800,5,WEST,7.9724660159745655,6.684611727667927
 2022,31,2150,Yes (shared or exclusive use),5,1,23,"Married, spouse present",Other Asian or Pacific Islander,610,Unemployed,20,9000,9000,48,SOUTH,7.673223121121708,9.104979856318357
 2022,12,4700,Yes (shared or exclusive use),4,1,31,"Married, spouse present",White,100,Employed,10,485000,1246000,501,NORTHEAST,8.45531778769815,13.091904169919621
 2022,33,1035,Yes (shared or exclusive use),3,1,52,Never married/single,White,100,Employed,10,57000,57000,390,SOUTH,6.942156705699469,10.950806546816688
@@ -2366,6 +2395,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,870,Yes (shared or exclusive use),3,1,21,Never married/single,White,100,Employed,10,3000,3000,21,SOUTH,6.76849321164863,8.006367567650246
 2022,32,1365,Yes (shared or exclusive use),6,1,60,Never married/single,Black/African American,200,Employed,10,14400,14400,99,SOUTH,7.21890970761906,9.574983485564092
 2022,42,3540,Yes (shared or exclusive use),5,1,29,"Married, spouse present",White,100,Employed,14,125000,250000,501,WEST,8.17188200612782,11.736069016284437
+2022,21,220,Yes (shared or exclusive use),3,1,75,Divorced,Black/African American,200,Not in labour force,30,22800,22800,169,MIDWEST,5.393627546352362,10.034515814942532
 2022,42,1590,Yes (shared or exclusive use),4,1,49,"Married, spouse present","Other race, nec",700,Employed,10,15000,82900,377,WEST,7.371489295214277,9.615805480084347
 2022,12,1310,Yes (shared or exclusive use),6,1,30,Never married/single,Black/African American,200,Employed,10,12000,12000,82,NORTHEAST,7.177782416195197,9.392661928770137
 2022,12,1250,Yes (shared or exclusive use),3,1,62,Separated,"Other race, nec",700,Employed,10,33000,54700,291,NORTHEAST,7.1308988302963465,10.404262840448617
@@ -2402,6 +2432,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1527,Yes (shared or exclusive use),7,1,16,Never married/single,"Other race, nec",700,Not in labour force,30,6700,193300,501,SOUTH,7.3310603052186325,8.809862805379057
 2022,31,1788,Yes (shared or exclusive use),4,2,21,Never married/single,White,100,Employed,10,9300,9300,64,SOUTH,7.488852955733459,9.137769679141348
 2022,31,2763,Yes (shared or exclusive use),3,1,28,Never married/single,White,100,Employed,10,85000,187000,501,SOUTH,7.924072324923417,11.350406535472453
+2022,22,1087,Yes (shared or exclusive use),8,1,17,Never married/single,White,100,Not in labour force,30,790,18190,80,MIDWEST,6.99117688712121,6.672032945461067
 2022,42,590,Yes (shared or exclusive use),5,1,37,"Married, spouse present","Other race, nec",700,Employed,10,32000,56000,248,WEST,6.380122536899765,10.373491181781864
 2022,42,3225,Yes (shared or exclusive use),4,1,29,"Married, spouse present",Chinese,400,Employed,10,156000,225000,501,WEST,8.078688229229872,11.957611286231675
 2022,41,730,Yes (shared or exclusive use),5,1,68,Separated,Black/African American,200,Not in labour force,30,10500,10500,78,WEST,6.593044534142437,9.259130536145614
@@ -2427,6 +2458,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,2450,Yes (shared or exclusive use),7,3,26,Never married/single,White,100,Employed,10,51000,51000,349,NORTHEAST,7.803843303538772,10.839580911706463
 2022,12,600,Yes (shared or exclusive use),4,1,21,Never married/single,White,100,Employed,10,30000,60000,319,NORTHEAST,6.396929655216146,10.308952660644293
 2022,41,1573,Yes (shared or exclusive use),3,2,34,Never married/single,White,100,Employed,10,30000,30000,205,WEST,7.360739903058278,10.308952660644293
+2022,42,2260,Yes (shared or exclusive use),3,1,46,Never married/single,White,100,Employed,10,692000,870000,501,WEST,7.723120092266331,13.447341234599806
 2022,21,2664,Yes (shared or exclusive use),9,1,82,Widowed,White,100,Employed,10,57100,78100,460,MIDWEST,7.88758403166028,10.952559395644101
 2022,42,1550,Yes (shared or exclusive use),4,1,58,"Married, spouse present",Chinese,400,Employed,10,20000,40000,213,WEST,7.346010209913293,9.903487552536127
 2022,12,790,Yes (shared or exclusive use),3,1,78,Divorced,White,100,Not in labour force,30,39700,39700,295,NORTHEAST,6.672032945461067,10.589106466675283
@@ -2657,12 +2689,14 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,1100,Yes (shared or exclusive use),4,1,33,Never married/single,White,100,Employed,10,45000,85000,452,NORTHEAST,7.003065458786462,10.714417768752456
 2022,21,430,Yes (shared or exclusive use),5,1,50,Divorced,White,100,Employed,10,50000,50000,258,MIDWEST,6.063785208687608,10.819778284410283
 2022,31,1880,Yes (shared or exclusive use),4,1,34,Never married/single,Other Asian or Pacific Islander,610,Employed,10,98000,103000,501,SOUTH,7.539027055823995,11.49272275765271
+2022,12,1010,Yes (shared or exclusive use),4,1,49,"Married, spouse present",White,100,Not in labour force,30,750,54750,242,NORTHEAST,6.917705609835305,6.620073206530356
 2022,12,1200,Yes (shared or exclusive use),2,1,76,Widowed,White,100,Not in labour force,30,18000,18000,134,NORTHEAST,7.090076835776092,9.798127036878302
 2022,33,710,Yes (shared or exclusive use),6,1,21,Never married/single,Two major races,826,Not in labour force,30,9000,9000,62,SOUTH,6.565264970035361,9.104979856318357
 2022,32,1136,Yes (shared or exclusive use),1,1,66,Never married/single,Black/African American,200,Not in labour force,30,9600,9600,71,SOUTH,7.035268599281097,9.169518377455928
 2022,42,2850,Yes (shared or exclusive use),5,1,30,Never married/single,Two major races,826,Employed,10,54000,54420,241,WEST,7.955074273262696,10.896739325546411
 2022,42,1300,Yes (shared or exclusive use),4,2,27,Never married/single,Other Asian or Pacific Islander,600,Employed,10,30000,68900,305,WEST,7.170119543449628,10.308952660644293
 2022,42,940,No,1,1,94,Widowed,White,100,Not in labour force,30,84000,84000,501,WEST,6.84587987526405,11.33857207782545
+2022,21,1130,Yes (shared or exclusive use),9,4,21,Never married/single,White,100,Employed,12,1000,1000,7,MIDWEST,7.029972911706386,6.907755278982137
 2022,42,1234,Yes (shared or exclusive use),17,1,32,Divorced,Two major races,801,Employed,10,27000,68600,365,WEST,7.1180162044653335,10.203592144986466
 2022,31,380,Yes (shared or exclusive use),5,1,49,"Married, spouse absent",White,100,Not in labour force,30,10100,10100,69,SOUTH,5.940171252720432,9.22029070282935
 2022,31,1376,Yes (shared or exclusive use),4,2,30,Never married/single,White,100,Employed,10,54000,54000,370,SOUTH,7.226936018493289,10.896739325546411
@@ -2670,6 +2704,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1030,Yes (shared or exclusive use),1,1,63,"Married, spouse absent",Black/African American,200,Employed,10,22000,22000,151,SOUTH,6.937314081223682,9.998797732340453
 2022,41,1133,Yes (shared or exclusive use),3,2,38,Never married/single,Two major races,802,Employed,10,5300,5300,36,WEST,7.0326242610280065,8.575462099540212
 2022,33,980,Yes (shared or exclusive use),3,1,26,Never married/single,Black/African American,200,Employed,10,26400,56400,300,SOUTH,6.887552571664617,10.181119289134408
+2022,33,1730,Yes (shared or exclusive use),7,1,41,Never married/single,Black/African American,200,Employed,10,990,2190,10,SOUTH,7.455876687491824,6.897704943128636
 2022,33,1550,Yes (shared or exclusive use),4,1,18,Never married/single,Two major races,826,Employed,10,12600,31900,141,SOUTH,7.346010209913293,9.441452092939569
 2022,42,2480,Yes (shared or exclusive use),3,1,56,"Married, spouse present","Other race, nec",700,Not in labour force,30,6000,18600,110,WEST,7.8160138391590275,8.699514748210191
 2022,42,1648,Yes (shared or exclusive use),4,1,30,Never married/single,White,100,Unemployed,20,28000,80000,239,WEST,7.4073177104694174,10.239959789157341
@@ -2833,6 +2868,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,22,1013,Yes (shared or exclusive use),5,1,59,"Married, spouse absent",Two major races,826,Employed,10,63000,83000,441,MIDWEST,6.920671504248683,11.05089000537367
 2022,22,1040,Yes (shared or exclusive use),5,1,22,Never married/single,White,100,Employed,10,23000,63000,279,MIDWEST,6.946975992135418,10.043249494911286
 2022,12,3110,Yes (shared or exclusive use),10,5,22,Never married/single,White,100,Employed,10,22200,22200,152,NORTHEAST,8.04237800517328,10.00784756786037
+2022,33,1250,Yes (shared or exclusive use),5,1,58,Never married/single,Black/African American,200,Not in labour force,30,1000,1000,7,SOUTH,7.1308988302963465,6.907755278982137
 2022,21,1292,Yes (shared or exclusive use),14,1,26,Never married/single,Black/African American,200,Employed,10,25000,70000,310,MIDWEST,7.163946684342547,10.126631103850338
 2022,31,3595,Yes (shared or exclusive use),3,1,30,Never married/single,White,100,Unemployed,20,49900,50250,267,SOUTH,8.187299270155147,10.81777628173961
 2022,22,1760,Yes (shared or exclusive use),3,1,31,Divorced,Black/African American,200,Not in labour force,30,11070,82170,374,MIDWEST,7.473069088032197,9.311994025702683
@@ -2955,6 +2991,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,3500,Yes (shared or exclusive use),5,2,23,Never married/single,White,100,Employed,10,40000,40000,274,WEST,8.160518247477505,10.596634733096073
 2022,41,2220,Yes (shared or exclusive use),5,2,20,Never married/single,Two major races,813,Employed,10,13000,13000,89,WEST,7.705262474866325,9.472704636443673
 2022,31,563,Yes (shared or exclusive use),4,1,75,Divorced,White,100,Not in labour force,30,26000,26000,193,SOUTH,6.333279628139691,10.165851817003619
+2022,21,230,Yes (shared or exclusive use),3,1,69,Never married/single,Black/African American,200,Not in labour force,30,9800,9800,73,MIDWEST,5.438079308923196,9.190137664658664
 2022,31,1473,Yes (shared or exclusive use),4,2,28,Never married/single,White,100,Employed,10,70000,70000,479,SOUTH,7.29505641646263,11.156250521031495
 2022,31,728,Yes (shared or exclusive use),6,2,58,Divorced,White,100,Not in labour force,30,58200,92200,420,SOUTH,6.590301048196686,10.97164063371953
 2022,21,483,Yes (shared or exclusive use),4,1,55,Divorced,Two major races,826,Not in labour force,30,22800,116000,501,MIDWEST,6.180016653652572,10.034515814942532
@@ -2963,6 +3000,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1515,Yes (shared or exclusive use),6,1,49,Never married/single,American Indian or Alaska Native,361,Employed,10,20000,71500,421,SOUTH,7.323170717943469,9.903487552536127
 2022,41,1734,Yes (shared or exclusive use),6,1,20,Never married/single,White,100,Employed,10,12500,103900,232,WEST,7.458186157340487,9.433483923290392
 2022,21,1320,Yes (shared or exclusive use),6,1,56,"Married, spouse present",White,100,Employed,10,25000,50000,146,MIDWEST,7.1853870155804165,10.126631103850338
+2022,41,230,Yes (shared or exclusive use),17,1,61,Divorced,White,100,Not in labour force,30,10320,10320,71,WEST,5.438079308923196,9.241839039035554
 2022,12,1180,Yes (shared or exclusive use),2,1,67,Divorced,Japanese,500,Employed,10,143100,143100,501,NORTHEAST,7.07326971745971,11.871298965544542
 2022,33,940,Yes (shared or exclusive use),6,1,46,Divorced,Black/African American,200,Not in labour force,30,18000,18000,123,SOUTH,6.84587987526405,9.798127036878302
 2022,33,880,Yes (shared or exclusive use),16,1,77,Widowed,White,100,Not in labour force,30,16900,46600,275,SOUTH,6.779921907472252,9.735068900911164
@@ -3036,6 +3074,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1412,Yes (shared or exclusive use),6,1,51,Widowed,White,100,Employed,10,33600,106600,301,SOUTH,7.252762418053187,10.422281345951296
 2022,12,1800,Yes (shared or exclusive use),10,1,52,"Married, spouse present",White,100,Employed,10,20000,100400,457,NORTHEAST,7.495541943884256,9.903487552536127
 2022,12,2290,Yes (shared or exclusive use),5,1,31,"Married, spouse present",White,100,Employed,12,80000,102000,464,NORTHEAST,7.736307096548285,11.289781913656018
+2022,33,1329,Yes (shared or exclusive use),6,1,42,Separated,Two major races,802,Not in labour force,30,900,33900,180,SOUTH,7.192182058713246,6.802394763324311
 2022,31,720,Yes (shared or exclusive use),6,1,45,"Married, spouse present",White,100,Employed,10,45000,82000,436,SOUTH,6.579251212010101,10.714417768752456
 2022,21,2906,Yes (shared or exclusive use),6,1,30,"Married, spouse present",White,100,Employed,10,60000,77000,230,MIDWEST,7.974532844130228,11.002099841204238
 2022,31,2500,Yes (shared or exclusive use),6,3,31,Never married/single,White,100,Employed,10,30000,30000,205,SOUTH,7.824046010856292,10.308952660644293
@@ -3055,6 +3094,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,2465,Yes (shared or exclusive use),5,1,60,"Married, spouse present",White,100,Employed,10,123000,129000,501,WEST,7.80994708647679,11.719939634354555
 2022,12,1050,Yes (shared or exclusive use),2,1,28,Never married/single,Two major races,826,Employed,10,42000,42000,288,NORTHEAST,6.956545443151569,10.645424897265505
 2022,42,877,Yes (shared or exclusive use),6,1,39,Separated,Two major races,826,Employed,10,26980,43580,130,WEST,6.776506992372183,10.202851129761747
+2022,42,3310,Yes (shared or exclusive use),7,1,49,"Married, spouse present",White,100,Employed,10,687000,723000,501,WEST,8.104703468371108,13.440089571204487
 2022,33,1161,Yes (shared or exclusive use),3,2,26,Never married/single,White,100,Employed,10,74000,74000,501,SOUTH,7.057036981697891,11.211820372186306
 2022,32,1620,Yes (shared or exclusive use),4,1,34,"Married, spouse present",White,100,Employed,10,42000,92000,489,SOUTH,7.3901814282264295,10.645424897265505
 2022,33,440,Yes (shared or exclusive use),3,1,74,Divorced,White,100,Not in labour force,30,20900,20900,155,SOUTH,6.0867747269123065,9.947504437952903
@@ -3169,12 +3209,15 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1380,Yes (shared or exclusive use),3,1,27,Never married/single,Other Asian or Pacific Islander,620,Employed,10,28000,80000,364,SOUTH,7.22983877815125,10.239959789157341
 2022,12,472,Yes (shared or exclusive use),6,1,16,Never married/single,White,100,Not in labour force,30,8700,20700,92,NORTHEAST,6.156978985585555,9.071078304642676
 2022,42,3090,Yes (shared or exclusive use),5,1,30,Never married/single,White,100,Employed,10,66000,206400,501,WEST,8.035926369891792,11.097410021008562
+2022,33,1450,Yes (shared or exclusive use),9,1,21,Never married/single,Black/African American,200,Not in labour force,30,980,123780,307,SOUTH,7.27931883541462,6.887552571664617
 2022,31,4160,Yes (shared or exclusive use),1,1,23,Never married/single,White,100,Employed,10,47000,53000,282,SOUTH,8.333270353255308,10.757902880692196
 2022,42,2630,Yes (shared or exclusive use),6,1,26,"Married, spouse present",Two major races,802,Employed,10,90000,175000,501,WEST,7.874739125171811,11.407564949312402
 2022,31,1080,Yes (shared or exclusive use),3,1,31,Never married/single,White,100,Employed,10,60000,60000,411,SOUTH,6.984716320118266,11.002099841204238
 2022,12,1970,Yes (shared or exclusive use),4,3,41,Never married/single,White,100,Employed,10,24100,49100,217,NORTHEAST,7.585788821732034,10.089967119478747
 2022,31,1083,Yes (shared or exclusive use),7,1,25,Never married/single,Two major races,845,Employed,10,12000,36150,165,SOUTH,6.9874902470009905,9.392661928770137
 2022,21,1528,Yes (shared or exclusive use),5,1,67,Divorced,White,100,Not in labour force,30,22000,56000,330,MIDWEST,7.331714969726466,9.998797732340453
+2022,42,1100,Yes (shared or exclusive use),5,1,26,"Married, spouse present",White,100,Not in labour force,30,900,9900,44,WEST,7.003065458786462,6.802394763324311
+2022,12,2363,No,6,1,56,Never married/single,Black/African American,200,Not in labour force,30,1000,45100,156,NORTHEAST,7.767687277186908,6.907755278982137
 2022,31,2483,Yes (shared or exclusive use),6,1,27,Never married/single,White,100,Employed,10,50000,50000,342,SOUTH,7.817222785508166,10.819778284410283
 2022,31,2353,Yes (shared or exclusive use),1,1,27,Never married/single,White,100,Employed,10,150000,150000,501,SOUTH,7.763446388727362,11.918390573078392
 2022,22,5300,Yes (shared or exclusive use),5,1,89,Widowed,White,100,Not in labour force,30,94900,94900,501,MIDWEST,8.575462099540212,11.460578984598019
@@ -3223,6 +3266,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,700,Yes (shared or exclusive use),4,1,77,Widowed,White,100,Not in labour force,30,21800,21800,162,WEST,6.551080335043404,9.98966524877718
 2022,42,2307,Yes (shared or exclusive use),6,1,80,Widowed,White,100,Not in labour force,30,21600,133400,461,WEST,7.7437032581737535,9.980448593672257
 2022,21,780,Yes (shared or exclusive use),5,1,37,Never married/single,Black/African American,200,Employed,10,30000,30000,205,MIDWEST,6.659293919683638,10.308952660644293
+2022,33,3725,Yes (shared or exclusive use),10,1,16,Never married/single,Black/African American,200,Employed,10,800,71300,194,SOUTH,8.22282213081366,6.684611727667927
 2022,32,781,Yes (shared or exclusive use),4,1,73,Divorced,White,100,Not in labour force,30,18500,18500,137,SOUTH,6.660575149839686,9.825526011066415
 2022,33,1720,Yes (shared or exclusive use),2,2,60,Never married/single,"Other race, nec",700,Not in labour force,30,4980,4980,34,SOUTH,7.450079569807499,8.513185170018698
 2022,12,970,Yes (shared or exclusive use),4,1,86,Widowed,White,100,Not in labour force,30,26400,26400,196,NORTHEAST,6.877296071497429,10.181119289134408
@@ -3426,6 +3470,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,1070,Yes (shared or exclusive use),4,1,26,Never married/single,Two major races,812,Employed,10,28000,50400,223,SOUTH,6.975413927455952,10.239959789157341
 2022,42,5500,Yes (shared or exclusive use),4,1,86,"Married, spouse present",White,100,Not in labour force,30,91200,96400,501,WEST,8.612503371220562,11.420810176062423
 2022,21,1630,Yes (shared or exclusive use),9,1,51,"Married, spouse present",White,100,Employed,10,90000,140000,501,MIDWEST,7.396335293800808,11.407564949312402
+2022,21,1120,Yes (shared or exclusive use),4,1,22,Never married/single,White,100,Unemployed,20,1000,1000,7,MIDWEST,7.02108396428914,6.907755278982137
 2022,21,2780,Yes (shared or exclusive use),4,1,27,Never married/single,White,100,Employed,10,80000,150000,501,MIDWEST,7.930206206684683,11.289781913656018
 2022,42,1060,Yes (shared or exclusive use),3,1,42,Never married/single,White,100,Employed,10,25000,55000,293,WEST,6.966024187106113,10.126631103850338
 2022,33,1195,Yes (shared or exclusive use),2,1,26,Never married/single,White,100,Employed,10,53000,53000,363,SOUTH,7.085901464365611,10.87804719253426
@@ -3479,6 +3524,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,370,Yes (shared or exclusive use),4,1,62,"Married, spouse absent",Black/African American,200,Not in labour force,30,9900,9900,68,NORTHEAST,5.91350300563827,9.20029003612268
 2022,31,780,Yes (shared or exclusive use),5,1,48,Divorced,White,100,Employed,10,31600,69300,243,SOUTH,6.659293919683638,10.360912399575003
 2022,42,550,Yes (shared or exclusive use),15,1,81,"Married, spouse present",Other Asian or Pacific Islander,600,Not in labour force,30,11000,31970,188,WEST,6.309918278226516,9.305650551780507
+2022,12,730,Yes (shared or exclusive use),7,1,63,Never married/single,White,100,Employed,10,761000,761000,501,NORTHEAST,6.593044534142437,13.542388636843823
 2022,21,1973,Yes (shared or exclusive use),5,2,32,Never married/single,White,100,Employed,10,75000,75000,501,MIDWEST,7.587310506022615,11.225243392518447
 2022,41,2617,Yes (shared or exclusive use),8,1,22,Never married/single,Black/African American,200,Employed,10,18000,90000,258,WEST,7.869783902530146,9.798127036878302
 2022,11,3400,Yes (shared or exclusive use),6,3,24,Never married/single,White,100,Employed,10,19500,19500,133,NORTHEAST,8.131530710604252,9.878169744551839
@@ -3682,6 +3728,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,4730,Yes (shared or exclusive use),8,1,60,Divorced,White,100,Employed,10,55000,182000,501,WEST,8.46168048148598,10.915088464214607
 2022,31,1535,Yes (shared or exclusive use),5,1,23,"Married, spouse present",White,100,Employed,10,33000,38000,202,SOUTH,7.336285660021297,10.404262840448617
 2022,31,886,Yes (shared or exclusive use),7,1,50,"Married, spouse present",Two major races,826,Employed,10,24000,24000,128,SOUTH,6.786716950605081,10.085809109330082
+2022,32,935,Yes (shared or exclusive use),6,1,22,Never married/single,Black/African American,200,Not in labour force,30,880,11480,51,SOUTH,6.840546529288687,6.779921907472252
 2022,31,1090,Yes (shared or exclusive use),5,1,45,Never married/single,Two major races,801,Employed,10,35600,100100,259,SOUTH,6.993932975223189,10.480100916840122
 2022,21,1560,Yes (shared or exclusive use),5,1,47,"Married, spouse present",White,100,Employed,10,35000,95000,420,MIDWEST,7.352441100243583,10.46310334047155
 2022,42,1974,No,4,1,40,"Married, spouse present","Other race, nec",700,Not in labour force,30,60000,60000,160,WEST,7.587817219993427,11.002099841204238
@@ -3720,6 +3767,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,33,1060,Yes (shared or exclusive use),5,1,41,Separated,White,100,Employed,10,89000,89000,501,SOUTH,6.966024187106113,11.396391648714276
 2022,41,3663,Yes (shared or exclusive use),7,1,61,"Married, spouse present",White,100,Not in labour force,30,80000,215000,501,WEST,8.206037762778815,11.289781913656018
 2022,42,1360,No,1,2,48,Separated,Two major races,826,Employed,10,42000,42000,186,WEST,7.215239978730097,10.645424897265505
+2022,42,1980,Yes (shared or exclusive use),4,1,44,"Married, spouse present",Other Asian or Pacific Islander,640,Employed,10,1000,100100,352,WEST,7.590852123688581,6.907755278982137
 2022,41,1800,Yes (shared or exclusive use),5,1,28,Divorced,Two major races,826,Employed,10,20000,44000,114,WEST,7.495541943884256,9.903487552536127
 2022,42,990,Yes (shared or exclusive use),3,1,27,Never married/single,Other Asian or Pacific Islander,640,Employed,10,13000,45000,155,WEST,6.897704943128636,9.472704636443673
 2022,31,3018,Yes (shared or exclusive use),9,1,41,"Married, spouse present",White,100,Employed,10,19000,162000,501,SOUTH,8.012349639327795,9.852194258148577
@@ -3750,6 +3798,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,1550,Yes (shared or exclusive use),11,1,69,Widowed,White,100,Not in labour force,30,14000,62000,274,NORTHEAST,7.346010209913293,9.546812608597396
 2022,41,3250,Yes (shared or exclusive use),5,1,54,"Married, spouse present",White,100,Employed,10,14800,75800,403,WEST,8.086410275323782,9.6023824597522065
 2022,31,920,Yes (shared or exclusive use),3,1,63,"Married, spouse present",White,100,Unemployed,20,8500,8500,45,SOUTH,6.824373670043086,9.047821442478408
+2022,12,230,Yes (shared or exclusive use),3,1,69,Never married/single,White,100,Not in labour force,30,21590,21590,160,NORTHEAST,5.438079308923196,9.979985523508853
 2022,33,1195,Yes (shared or exclusive use),7,1,66,"Married, spouse present",White,100,Employed,10,33100,45600,269,SOUTH,7.085901464365611,10.407288561365155
 2022,31,3437,Yes (shared or exclusive use),5,1,35,"Married, spouse present","Other race, nec",700,Employed,12,65000,164000,501,SOUTH,8.142354276849835,11.082142548877775
 2022,33,2388,Yes (shared or exclusive use),5,1,20,Never married/single,Black/African American,200,Not in labour force,30,9600,38600,131,SOUTH,7.778211474512493,9.169518377455928
@@ -3828,6 +3877,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,2353,Yes (shared or exclusive use),3,2,29,Never married/single,White,100,Employed,10,45000,45000,308,NORTHEAST,7.763446388727362,10.714417768752456
 2022,22,580,Yes (shared or exclusive use),3,1,86,Divorced,White,100,Not in labour force,30,20100,20100,149,MIDWEST,6.363028103540465,9.908475094047168
 2022,21,670,Yes (shared or exclusive use),5,1,63,"Married, spouse present",Black/African American,200,Not in labour force,30,17000,42000,186,MIDWEST,6.507277712385012,9.740968623038354
+2022,11,4800,Yes (shared or exclusive use),5,3,65,Never married/single,White,100,Employed,10,665000,665000,501,NORTHEAST,8.476371196895983,13.407542319637992
 2022,31,1000,Yes (shared or exclusive use),3,1,29,Never married/single,White,100,Employed,10,35000,77000,410,SOUTH,6.907755278982137,10.46310334047155
 2022,42,1970,Yes (shared or exclusive use),4,1,55,Never married/single,White,100,Employed,10,10000,64000,283,WEST,7.585788821732034,9.210340371976184
 2022,12,1220,Yes (shared or exclusive use),4,1,56,Divorced,White,100,Employed,10,59000,59000,404,NORTHEAST,7.106606137727303,10.985292722887856
@@ -4123,6 +4173,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,21,2140,Yes (shared or exclusive use),5,1,32,Never married/single,White,100,Employed,10,125000,180000,501,MIDWEST,7.668561108015897,11.736069016284437
 2022,12,2990,Yes (shared or exclusive use),3,1,31,Never married/single,White,100,Employed,10,52100,52100,357,NORTHEAST,8.003028666384733,10.860920227741458
 2022,42,1900,Yes (shared or exclusive use),6,1,72,Divorced,Black/African American,200,Not in labour force,30,44300,44300,329,WEST,7.549609165154532,10.698739956033227
+2022,11,3270,Yes (shared or exclusive use),2,1,26,Never married/single,Other Asian or Pacific Islander,610,Employed,10,760000,760000,501,NORTHEAST,8.0925452638913,13.541073712262515
 2022,42,1110,Yes (shared or exclusive use),2,1,32,Never married/single,White,100,Employed,10,5200,5200,36,WEST,7.01211529430638,8.556413904569519
 2022,12,1460,Yes (shared or exclusive use),2,1,32,Never married/single,White,100,Employed,10,16000,16000,110,NORTHEAST,7.286191714702382,9.680344001221918
 2022,12,1700,Yes (shared or exclusive use),7,1,54,Never married/single,"Other race, nec",700,Unemployed,20,187000,220100,501,NORTHEAST,7.438383530044307,12.138863895836725
@@ -4162,6 +4213,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,2210,Yes (shared or exclusive use),4,2,63,Never married/single,Two major races,826,Not in labour force,30,5700,5700,39,WEST,7.700747794511798,8.648221453822641
 2022,12,940,Yes (shared or exclusive use),4,1,83,"Married, spouse present","Other race, nec",700,Not in labour force,30,27400,50350,223,NORTHEAST,6.84587987526405,10.218298292376161
 2022,42,1270,Yes (shared or exclusive use),1,1,33,Never married/single,Black/African American,200,Employed,10,70000,70000,479,WEST,7.146772179452637,11.156250521031495
+2022,31,850,Yes (shared or exclusive use),6,1,18,Never married/single,Two major races,826,Employed,10,1000,25000,73,SOUTH,6.745236349484363,6.907755278982137
 2022,42,1860,Yes (shared or exclusive use),3,2,68,Separated,White,100,Employed,10,50400,50400,374,WEST,7.528331766707247,10.82774645405946
 2022,31,2180,Yes (shared or exclusive use),6,1,66,Divorced,Two major races,826,Employed,10,17400,38200,134,SOUTH,7.687080155783135,9.764225485202621
 2022,32,992,Yes (shared or exclusive use),6,1,40,Never married/single,White,100,Employed,10,36500,59330,205,SOUTH,6.899723107284872,10.505067539570582
@@ -4186,6 +4238,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,21,660,Yes (shared or exclusive use),4,1,34,"Married, spouse present",White,100,Employed,10,33500,45500,242,MIDWEST,6.492239835020471,10.419300717813158
 2022,31,2390,Yes (shared or exclusive use),5,1,69,"Married, spouse present",Two major races,802,Employed,10,98000,163200,501,SOUTH,7.779048644925556,11.49272275765271
 2022,11,1580,Yes (shared or exclusive use),4,1,37,Never married/single,Three or more major races,904,Unemployed,20,25200,61800,184,NORTHEAST,7.365180126021013,10.134599273499514
+2022,41,7730,Yes (shared or exclusive use),9,1,36,"Married, spouse present",White,100,Employed,10,286000,288800,501,WEST,8.952864141581468,12.56374708980199
 2022,31,1819,Yes (shared or exclusive use),3,1,31,Never married/single,White,100,Employed,10,110000,110000,501,SOUTH,7.506042178518122,11.608235644774552
 2022,21,2450,Yes (shared or exclusive use),2,1,31,"Married, spouse present",Two major races,826,Employed,10,12000,132000,501,MIDWEST,7.803843303538772,9.392661928770137
 2022,21,948,Yes (shared or exclusive use),5,1,19,Never married/single,Two major races,826,Employed,10,25000,79000,223,MIDWEST,6.854354502255021,10.126631103850338
@@ -4234,6 +4287,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,41,2075,Yes (shared or exclusive use),7,1,55,"Married, spouse present",White,100,Employed,10,50000,202000,501,WEST,7.637716432664798,10.819778284410283
 2022,12,1350,Yes (shared or exclusive use),5,1,35,Never married/single,Black/African American,200,Employed,10,25000,25000,88,NORTHEAST,7.2078598714324755,10.126631103850338
 2022,21,500,Yes (shared or exclusive use),3,1,80,Widowed,White,100,Not in labour force,30,18100,18100,134,MIDWEST,6.214608098422191,9.803667217253917
+2022,22,230,Yes (shared or exclusive use),1,1,68,Widowed,Black/African American,200,Not in labour force,30,11300,11300,84,MIDWEST,5.438079308923196,9.332558004700433
 2022,33,1470,Yes (shared or exclusive use),8,1,39,Never married/single,Two major races,826,Employed,10,53000,62000,148,SOUTH,7.293017679772782,10.87804719253426
 2022,42,4057,Yes (shared or exclusive use),5,4,26,Never married/single,Three or more major races,963,Employed,10,97400,97400,501,WEST,8.308199063206446,11.486581489630627
 2022,33,2902,Yes (shared or exclusive use),4,1,76,"Married, spouse present",White,100,Not in labour force,30,438100,507300,501,SOUTH,7.973155433444133,12.99020247380199
@@ -4269,6 +4323,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,33,1233,Yes (shared or exclusive use),5,1,43,Divorced,"Other race, nec",700,Employed,10,28800,38400,204,SOUTH,7.117205503164344,10.268130666124037
 2022,22,1033,Yes (shared or exclusive use),5,1,27,Never married/single,White,100,Employed,10,70000,70000,479,MIDWEST,6.940222469119639,11.156250521031495
 2022,42,3427,Yes (shared or exclusive use),10,1,58,Never married/single,Black/African American,200,Employed,10,132000,310600,501,WEST,8.139440521874608,11.790557201568507
+2022,12,900,Yes (shared or exclusive use),6,1,21,Never married/single,White,100,Not in labour force,30,1000,31000,165,NORTHEAST,6.802394763324311,6.907755278982137
 2022,12,2190,Yes (shared or exclusive use),5,2,18,Never married/single,"Other race, nec",700,Employed,10,26400,58200,169,NORTHEAST,7.691656822810547,10.181119289134408
 2022,12,2050,Yes (shared or exclusive use),3,1,31,"Married, spouse present",White,100,Employed,10,98000,203000,501,NORTHEAST,7.6255950721324535,11.49272275765271
 2022,31,1900,Yes (shared or exclusive use),4,1,28,"Married, spouse present",Two major races,826,Employed,10,12240,64240,293,SOUTH,7.549609165154532,9.412464556066316
@@ -4405,6 +4460,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,1570,Yes (shared or exclusive use),5,1,64,"Married, spouse present",White,100,Not in labour force,30,13000,43000,229,NORTHEAST,7.358830898342354,9.472704636443673
 2022,42,2810,Yes (shared or exclusive use),1,1,41,Never married/single,American Indian or Alaska Native,304,Employed,10,72000,73300,390,WEST,7.940939762327791,11.184421397998193
 2022,31,620,Yes (shared or exclusive use),4,1,17,Never married/single,White,100,Not in labour force,30,4800,87200,296,SOUTH,6.429719478039138,8.476371196895983
+2022,33,1273,Yes (shared or exclusive use),2,1,30,Never married/single,White,100,Not in labour force,30,800,57500,339,SOUTH,7.149131598557407,6.684611727667927
 2022,32,1506,Yes (shared or exclusive use),6,1,32,Never married/single,Black/African American,200,Not in labour force,30,30000,40100,136,SOUTH,7.317212408359839,10.308952660644293
 2022,12,1320,Yes (shared or exclusive use),4,1,43,Separated,"Other race, nec",700,Employed,10,47000,60900,214,NORTHEAST,7.1853870155804165,10.757902880692196
 2022,21,1280,Yes (shared or exclusive use),3,1,27,Divorced,White,100,Employed,10,50000,50000,221,MIDWEST,7.154615356913663,10.819778284410283
@@ -4672,6 +4728,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,21,360,Yes (shared or exclusive use),4,1,47,Separated,White,100,Not in labour force,30,11900,11900,81,MIDWEST,5.886104031450156,9.38429367909962
 2022,42,3542,Yes (shared or exclusive use),6,1,39,Never married/single,White,100,Employed,10,36000,39600,180,WEST,8.17244681834278,10.491274217438248
 2022,32,1650,Yes (shared or exclusive use),6,1,63,"Married, spouse present",Two major races,845,Not in labour force,30,73000,98200,501,SOUTH,7.408530566894626,11.198214720130528
+2022,21,950,Yes (shared or exclusive use),4,1,24,Never married/single,Black/African American,200,Employed,10,1000,10600,56,MIDWEST,6.856461984594587,6.907755278982137
 2022,42,770,Yes (shared or exclusive use),1,2,54,Divorced,Three or more major races,901,Employed,10,8000,8000,55,WEST,6.646390514847729,8.987196820661973
 2022,41,1992,Yes (shared or exclusive use),7,1,72,Divorced,White,100,Not in labour force,30,48000,48000,356,WEST,7.596894438144544,10.778956289890028
 2022,41,1154,Yes (shared or exclusive use),1,1,24,Never married/single,White,100,Employed,10,39000,39000,267,WEST,7.050989447068045,10.571316925111784
@@ -4696,6 +4753,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,610,Yes (shared or exclusive use),7,1,23,Never married/single,"Other race, nec",700,Not in labour force,30,2100,3600,16,NORTHEAST,6.413458957167357,7.649692623711514
 2022,12,1720,Yes (shared or exclusive use),3,1,56,"Married, spouse present",Other Asian or Pacific Islander,610,Employed,10,98000,197600,501,NORTHEAST,7.450079569807499,11.49272275765271
 2022,31,1030,Yes (shared or exclusive use),6,1,62,"Married, spouse present",Black/African American,200,Employed,10,40000,65000,346,SOUTH,6.937314081223682,10.596634733096073
+2022,33,1420,Yes (shared or exclusive use),3,1,22,Never married/single,White,100,Not in labour force,30,800,800,5,SOUTH,7.258412150595307,6.684611727667927
 2022,42,970,Yes (shared or exclusive use),3,1,51,Divorced,"Other race, nec",700,Employed,10,47200,85600,245,WEST,6.877296071497429,10.762149171573647
 2022,12,2120,Yes (shared or exclusive use),4,1,32,"Married, spouse present",Other Asian or Pacific Islander,610,Employed,10,4000,108000,501,NORTHEAST,7.659171367666058,8.294049640102028
 2022,42,1650,Yes (shared or exclusive use),4,1,57,"Married, spouse present",Black/African American,200,Employed,12,25500,75500,402,WEST,7.408530566894626,10.146433731146518
@@ -4746,6 +4804,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,31,880,Yes (shared or exclusive use),8,1,29,Never married/single,Black/African American,200,Employed,10,26000,36100,192,SOUTH,6.779921907472252,10.165851817003619
 2022,22,250,Yes (shared or exclusive use),6,5,22,Never married/single,White,100,Not in labour force,30,6000,6000,41,MIDWEST,5.521460917862246,8.699514748210191
 2022,42,1221,Yes (shared or exclusive use),3,1,37,Never married/single,Black/African American,200,Employed,10,18000,48000,255,WEST,7.107425474110705,9.798127036878302
+2022,12,660,Yes (shared or exclusive use),6,1,59,"Married, spouse present",White,100,Not in labour force,30,890,17890,95,NORTHEAST,6.492239835020471,6.7912214627261855
 2022,33,1644,Yes (shared or exclusive use),3,1,27,Never married/single,Two major races,826,Employed,10,54000,119000,501,SOUTH,7.404887575616125,10.896739325546411
 2022,31,1490,Yes (shared or exclusive use),1,1,23,Never married/single,Two major races,826,Employed,10,20000,20000,103,SOUTH,7.306531398939505,9.903487552536127
 2022,42,2936,Yes (shared or exclusive use),7,1,29,Never married/single,Two major races,826,Employed,10,51000,269600,501,WEST,7.984803389734406,10.839580911706463
@@ -4816,6 +4875,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,1940,Yes (shared or exclusive use),8,1,64,"Married, spouse present",Other Asian or Pacific Islander,678,Not in labour force,30,66000,184900,501,NORTHEAST,7.570443252057374,11.097410021008562
 2022,41,1680,Yes (shared or exclusive use),2,1,34,"Married, spouse present",White,100,Employed,10,82000,156300,501,WEST,7.426549072397305,11.314474526246391
 2022,31,544,Yes (shared or exclusive use),2,1,71,Never married/single,Black/African American,200,Not in labour force,30,15500,15500,115,SOUTH,6.298949246855942,9.648595302907339
+2022,41,1060,Yes (shared or exclusive use),4,1,17,Never married/single,White,100,Not in labour force,30,1100,27400,142,WEST,6.966024187106113,7.003065458786462
 2022,12,3008,Yes (shared or exclusive use),6,1,49,"Married, spouse present",White,100,Employed,10,79000,137000,501,NORTHEAST,8.00903068506973,11.27720313144916
 2022,41,1660,Yes (shared or exclusive use),4,2,26,Never married/single,White,100,Employed,10,35000,35000,240,WEST,7.414572881350589,10.46310334047155
 2022,32,818,Yes (shared or exclusive use),5,1,54,"Married, spouse present",White,100,Employed,10,100000,145000,501,SOUTH,6.706862336602747,11.512925464970229
@@ -4827,8 +4887,10 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,41,5800,Yes (shared or exclusive use),3,1,74,Divorced,White,100,Not in labour force,30,28400,87800,501,WEST,8.66561319653451,10.254144424149297
 2022,42,2200,Yes (shared or exclusive use),3,1,31,"Married, spouse present",White,100,Employed,10,37000,103000,501,WEST,7.696212639346407,10.51867319162636
 2022,31,1987,Yes (shared or exclusive use),6,1,37,"Married, spouse present","Other race, nec",700,Employed,10,38000,66000,192,SOUTH,7.594381242551817,10.545341438708522
+2022,21,3823,Yes (shared or exclusive use),7,1,20,Never married/single,Two major races,802,Employed,10,1000,190000,501,MIDWEST,8.248790733696413,6.907755278982137
 2022,32,1428,Yes (shared or exclusive use),4,1,50,"Married, spouse present",Two major races,826,Employed,10,45000,83000,441,SOUTH,7.2640301428995295,10.714417768752456
 2022,42,1800,Yes (shared or exclusive use),5,1,19,Never married/single,"Other race, nec",700,Employed,10,19200,44400,112,WEST,7.495541943884256,9.862665558015873
+2022,41,230,Yes (shared or exclusive use),4,1,53,Divorced,White,100,Not in labour force,30,9600,9600,66,WEST,5.438079308923196,9.169518377455928
 2022,31,1410,Yes (shared or exclusive use),2,1,25,"Married, spouse present",White,100,Employed,10,28000,59000,314,SOUTH,7.251344983372214,10.239959789157341
 2022,31,1400,Yes (shared or exclusive use),4,1,20,Never married/single,Two major races,826,Employed,10,15000,68000,192,SOUTH,7.24422751560335,9.615805480084347
 2022,32,1000,Yes (shared or exclusive use),5,1,71,"Married, spouse present",Black/African American,200,Not in labour force,30,44000,44000,259,SOUTH,6.907755278982137,10.691944912900398
@@ -4867,6 +4929,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,33,1150,Yes (shared or exclusive use),6,2,18,Never married/single,White,100,Employed,10,10000,10000,68,SOUTH,7.047517221357296,9.210340371976184
 2022,33,2103,Yes (shared or exclusive use),1,1,29,"Married, spouse present",White,100,Employed,10,130000,230000,501,SOUTH,7.6511201757027,11.77528972943772
 2022,42,2240,Yes (shared or exclusive use),3,1,30,"Married, spouse absent",White,100,Employed,10,107000,107000,501,WEST,7.7142311448490855,11.580584113444043
+2022,22,830,Yes (shared or exclusive use),2,1,21,Never married/single,White,100,Not in labour force,30,1000,1000,7,MIDWEST,6.721425700790643,6.907755278982137
 2022,42,2280,Yes (shared or exclusive use),9,1,61,Divorced,White,100,Not in labour force,30,12200,34500,119,WEST,7.731930721948486,9.409191230721348
 2022,31,910,No,5,1,44,Never married/single,Three or more major races,920,Unemployed,20,19900,19900,136,SOUTH,6.813444599510896,9.898475010712584
 2022,32,1028,Yes (shared or exclusive use),4,1,78,Divorced,White,100,Not in labour force,30,8200,8200,61,SOUTH,6.93537044601511,9.011889433252344
@@ -4974,6 +5037,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,42,324,Yes (shared or exclusive use),5,1,59,"Married, spouse present",White,100,Employed,10,52000,217310,501,WEST,5.780743515792329,10.858998997563564
 2022,42,2902,Yes (shared or exclusive use),2,1,27,"Married, spouse present","Other race, nec",700,Employed,10,35000,100000,501,WEST,7.973155433444133,10.46310334047155
 2022,42,2408,Yes (shared or exclusive use),5,1,82,"Married, spouse present",Two major races,826,Not in labour force,30,21000,84400,384,WEST,7.786551806428712,9.95227771670556
+2022,42,6700,Yes (shared or exclusive use),4,1,40,"Married, spouse present",White,100,Employed,10,730000,788500,501,WEST,8.809862805379057,13.500799813124575
 2022,42,1872,Yes (shared or exclusive use),8,1,26,Never married/single,White,100,Unemployed,20,10000,42000,223,WEST,7.534762657037537,9.210340371976184
 2022,42,1280,Yes (shared or exclusive use),2,1,68,"Married, spouse present",Other Asian or Pacific Islander,600,Employed,10,34400,83400,491,WEST,7.154615356913663,10.44581184336149
 2022,12,1900,Yes (shared or exclusive use),3,1,50,"Married, spouse present","Other race, nec",700,Employed,10,50000,50000,149,NORTHEAST,7.549609165154532,10.819778284410283
@@ -5017,6 +5081,7 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,32,480,Yes (shared or exclusive use),5,1,65,Never married/single,White,100,Not in labour force,30,32000,32000,238,SOUTH,6.173786103901937,10.373491181781864
 2022,12,2930,Yes (shared or exclusive use),2,2,31,"Married, spouse present",White,100,Employed,10,70000,77000,410,NORTHEAST,7.982757702011113,11.156250521031495
 2022,42,1600,Yes (shared or exclusive use),6,1,27,Never married/single,Black/African American,200,Employed,10,8000,26000,118,WEST,7.3777589082278725,8.987196820661973
+2022,12,1120,Yes (shared or exclusive use),3,1,24,Never married/single,White,100,Employed,10,1100,1100,8,NORTHEAST,7.02108396428914,7.003065458786462
 2022,33,2800,Yes (shared or exclusive use),5,1,88,Widowed,White,100,Not in labour force,30,85620,85620,501,SOUTH,7.937374696163295,11.357674179698938
 2022,33,1930,Yes (shared or exclusive use),3,1,31,Divorced,White,100,Employed,10,85000,125000,501,SOUTH,7.5652752818989315,11.350406535472453
 2022,11,1030,Yes (shared or exclusive use),3,1,66,"Married, spouse present",White,100,Employed,10,52600,88600,501,NORTHEAST,6.937314081223682,10.870471398725801
@@ -5099,4 +5164,5 @@ YEAR,REGION,RENTGRS,KITCHEN,ROOMS,NFAMS,AGE,MARST,RACE,RACED,EMPSTAT,EMPSTATD,IN
 2022,12,690,Yes (shared or exclusive use),5,1,55,Divorced,White,100,Employed,10,34000,34000,181,NORTHEAST,6.536691597591305,10.4341158035983
 2022,42,650,No,15,1,46,Never married/single,Chinese,400,Employed,10,50030,50030,343,WEST,6.476972362889683,10.82037810448225
 2022,12,1132,Yes (shared or exclusive use),4,1,59,Never married/single,White,100,Employed,10,74000,123200,501,NORTHEAST,7.0317412587631285,11.211820372186306
+2022,11,1108,Yes (shared or exclusive use),6,1,20,Never married/single,White,100,Employed,10,1000,47700,217,NORTHEAST,7.010311867307229,6.907755278982137
 2022,11,270,Yes (shared or exclusive use),3,1,71,Widowed,Other Asian or Pacific Islander,600,Not in labour force,30,8000,8000,59,NORTHEAST,5.598421958998375,8.987196820661973
