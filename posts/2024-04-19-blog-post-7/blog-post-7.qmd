@@ -22,6 +22,7 @@ library(knitr)
 library(lme4)
 library(broom.mixed)
 library(nlme)
+library(car)
 
 ```
 
@@ -104,6 +105,8 @@ ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
 # Filtering out outliers
 data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & data_twenty$log_RENTGRS <= ub_log_RENTGRS & 
                              data_twenty$log_INCTOT >= lb_log_INCTOT & data_twenty$log_INCTOT <= ub_log_INCTOT, ]
+
+
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -142,6 +145,30 @@ plot(fitted_values_twenty, residuals_twenty,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
+- The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. However, this is common in non-transformed data and it is our one of the limitation in our model. 
+- This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
+
+
+```{r}
+library(lattice)
+
+# Q-Q plot for normality
+qqmath(resid(model_with_income_log), distribution = qnorm,
+       main = "Q-Q Plot for Model Residuals", 
+       xlab = "Theoretical Quantiles", 
+       ylab = "Sample Quantiles")
+
+# Residuals vs Fitted plot for homoscedasticity
+plot(residuals(model_with_income_log) ~ fitted(model_with_income_log))
+abline(h = 0, col = "red")
+qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
+
+
+
+```
+- The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.
+- The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
+- The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
 
 
 
