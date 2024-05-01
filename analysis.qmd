@@ -5,6 +5,7 @@ toc: true
 draft: false
 ---
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(DT)
 library(tidyr)
 library(broom)
 library(dplyr)
@@ -342,6 +343,7 @@ abline(h = 0, col = "red")
 
 ### Model Inferences:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+
 models_by_year <- data_twenty %>%
   group_by(YEAR) %>%
   nest() %>%
@@ -354,8 +356,18 @@ models_by_year <- data_twenty %>%
   unnest(cols = tidied) %>%
   filter(term == "log_INCTOT") %>%
   arrange(YEAR)
-print(models_by_year)
+datatable(models_by_year, 
+          options = list(
+            pageLength = 1,      
+            lengthMenu = c(1,5,10,25,50,100),
+            autoWidth = TRUE
+          ))
+
+
 ```
+
+
+
   - The analyses yield detailed `log_INCTOT` coefficients for each year, elucidating the evolving income-rent relationship dynamics.
   - Fluctuations in `log_INCTOT` coefficients over different years suggest changing influences on the dependent variable within the model.
 
@@ -549,31 +561,24 @@ for (race in unique_races) {
 
 ### Statistical Performance:
 ```{r}
-library(dplyr)
-library(tidyr)
-library(broom)
-
-models_with_stats <- data_twenty_filtered_final %>%
+log_inctot_p_values <- data_twenty_filtered_final %>%
   group_by(RACE, YEAR) %>%
   do({
     model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
-    tidy(model)  # This function from broom package automatically formats model output
+    tidy(model)
   }) %>%
-  ungroup()  # Ensures we can manipulate the overall data frame
+  ungroup() %>%
+  filter(term == "log_INCTOT") %>%  # Filter to only include rows where the term is 'log_INCTOT'
+  select(RACE, YEAR, term, estimate, p.value)  # Select only the relevant columns
 
-# Flatten the results to have a single row per RACE-YEAR with coefficients and p-values
-models_flat <- models_with_stats %>%
-  pivot_wider(names_from = term, values_from = c(estimate, p.value), names_sep = "_")
-
-# Display the results as a table
-print(models_flat)
-
+# Print or view the results
+print(log_inctot_p_values)
 
 ```
+- All showed to be statistically significant 
+### Discussion of the topic:
+Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed. 
 
-
-
-### Conclusion:
 
   
 ## 3.Time series model
