@@ -437,8 +437,149 @@ if ("glance_data" %in% names(models_by_year)) {
   - Trends over time for each race were charted to illustrate these dynamics.
   - Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.
   
+
+### Model Inferences:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Convert categorical variables to factors
+categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
+data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
+
+# Convert categorical variables to factors
+categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
+data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
+
+# Check the number of levels per categorical variable within each RACE group
+race_levels <- data_twenty %>%
+  group_by(RACE) %>%
+  summarize(across(all_of(categorical_vars), ~n_distinct(.))) %>%
+  ungroup()
+
+# Identify RACE groups with any categorical variable having only one level
+races_with_single_levels <- race_levels %>%
+  filter(if_any(everything(), ~.x == 1)) %>%
+  pull(RACE) # Extract the RACE values with problematic levels
+
+# Filter out the problematic RACE groups from the main dataset
+data_twenty_filtered <- data_twenty %>%
+  filter(!RACE %in% races_with_single_levels)
+
+# Convert categorical variables to factors again after subsetting just in case
+data_twenty_filtered[categorical_vars] <- lapply(data_twenty_filtered[categorical_vars], factor)
+
+# Check the number of levels per categorical variable within each RACE-YEAR group
+race_year_levels <- data_twenty_filtered %>%
+  group_by(RACE, YEAR) %>%
+  summarize(across(all_of(categorical_vars), ~n_distinct(.))) %>%
+  ungroup()
+
+# Identify RACE-YEAR groups with any categorical variable having only one level
+race_year_with_single_levels <- race_year_levels %>%
+  filter(if_any(everything(), ~.x == 1)) 
+
+data_twenty_filtered_final <- data_twenty_filtered %>%
+  anti_join(race_year_with_single_levels, by = c("RACE", "YEAR"))
+
+models_by_race_year <- data_twenty_filtered_final %>%
+  group_by(RACE, YEAR) %>%
+  do(
+    model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
+  )
+
+models_with_coef <- models_by_race_year %>%
+  rowwise() %>% 
+  mutate(log_INCTOT_coef = coef(model)[["log_INCTOT"]]) %>%
+  ungroup() %>%
+  select(RACE, YEAR, log_INCTOT_coef)
+
+coefficients_wide <- models_with_coef %>%
+  pivot_wider(names_from = RACE, values_from = log_INCTOT_coef, names_prefix = "coef_")
+
+kable(coefficients_wide)
+```
+- Specific Trends:
+
+**Alaska Native**: Shows minor fluctuations around zero, with both positive and negative coefficients, indicating inconsistent trends over the years.
+
+**American**: This category has NA values, suggesting incomplete data, making it hard to discern a clear trend.
+
+**Chinese**: Generally has higher positive coefficients compared to other groups, particularly noticeable in later years, indicating a strong positive association with income in those years.
+
+**Japanese**: Has some missing values but otherwise presents mostly positive coefficients, with a notable spike in recent years.
+
+**Islander**: Also features both positive and negative coefficients with considerable variability.
+
+**Other race, nec**: Shows a mix of positive, negative, and NA values, making a clear trend difficult to establish.
+
+**Two or more races**: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association with income.
+
+**Whites**: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.
+
+- Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the 'Other race, nec' category often has lower coefficients, implying a weaker association with income.
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+coefficients_long <- coefficients_wide %>%
+  pivot_longer(cols = -YEAR, names_to = "RACE", values_to = "log_INCTOT_coef")
+
+unique_races <- unique(coefficients_long$RACE)
+
+# Define a nice color for the bars
+bar_color <- "#2C3E50" # A deep shade of blue
+
+# Loop through each race and create a separate plot
+plots_list <- list()  # Create an empty list to store plots (if needed)
+for (race in unique_races) {
+  # Filter the data for the current race
+  race_data <- subset(coefficients_long, RACE == race)
+  
+  # Create the plot
+  p <- ggplot(race_data, aes(x = as.factor(YEAR), y = log_INCTOT_coef)) +
+    geom_bar(stat = "identity", fill = bar_color, width = 0.7) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=0.5), # Adjust for better label positioning
+          plot.title = element_text(hjust = 0.5, face = "bold")) + 
+    labs(title = paste("Income Coefficient:", race),
+         x = "Year",
+         y = "Coefficient")
+  plots_list[[race]] <- p
+  print(p)
+}
+```
+
+### Statistical Performance:
+```{r}
+library(dplyr)
+library(tidyr)
+library(broom)
+
+models_with_stats <- data_twenty_filtered_final %>%
+  group_by(RACE, YEAR) %>%
+  do({
+    model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
+    tidy(model)  # This function from broom package automatically formats model output
+  }) %>%
+  ungroup()  # Ensures we can manipulate the overall data frame
+
+# Flatten the results to have a single row per RACE-YEAR with coefficients and p-values
+models_flat <- models_with_stats %>%
+  pivot_wider(names_from = term, values_from = c(estimate, p.value), names_sep = "_")
+
+# Display the results as a table
+print(models_flat)
+
+
+```
+
+
+
+### Conclusion:
+
+  
 ## 3.Time series model
-### Model Overview:
+
+
+
 
 
 
