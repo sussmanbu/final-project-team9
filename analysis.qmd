@@ -1,8 +1,10 @@
 ---
 title: "Analysis"
 description: "Here we provide a detailed analysis using more sophisticated statistics techniques."
-draft: false
-runtime: shiny
+format:
+  html:
+    widgets: true
+
 ---
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
