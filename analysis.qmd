@@ -399,25 +399,17 @@ kable(models_summaries)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 server <- function(input, output, session) {
   output$modelTable <- renderDT({
-    # Ensure data is loaded
     req(models_by_year)
-    
-    # Filter data based on slider input
     year_data <- models_by_year %>%
       filter(YEAR == input$yearSlider)
-
-    # Assuming 'tidied' contains complex objects, let's extract only necessary information
-    # For example, assuming 'tidied' contains coefficient estimates:
     year_data <- year_data %>%
       mutate(
-        estimate = map_dbl(tidied, ~ .x$estimate[.x$term == "log_INCTOT"]),  # Extracting estimates for 'log_INCTOT'
-        std_error = map_dbl(tidied, ~ .x$std.error[.x$term == "log_INCTOT"]),  # Extracting std.error
-        statistic = map_dbl(tidied, ~ .x$statistic[.x$term == "log_INCTOT"]),  # Extracting t-value
-        p_value = map_dbl(tidied, ~ .x$p.value[.x$term == "log_INCTOT"])  # Extracting p-value
+        estimate = map_dbl(tidied, ~ .x$estimate[.x$term == "log_INCTOT"]),  
+        std_error = map_dbl(tidied, ~ .x$std.error[.x$term == "log_INCTOT"]),
+        statistic = map_dbl(tidied, ~ .x$statistic[.x$term == "log_INCTOT"]),
+        p_value = map_dbl(tidied, ~ .x$p.value[.x$term == "log_INCTOT"]) 
       ) %>%
-      select(YEAR, estimate, std_error, statistic, p_value)  # Selecting only necessary columns
-
-    # Render the table with simpler data
+      select(YEAR, estimate, std_error, statistic, p_value)  
     datatable(year_data, 
       options = list(
         pageLength = 1,      
@@ -428,8 +420,6 @@ server <- function(input, output, session) {
     )
   })
 }
-
-
 ```
 
 
@@ -476,8 +466,7 @@ abline(h = 0, col = "red")
 
 -   This analysis implements the validated Log-Log regression approach on annual data segments to assess temporal trends and variations.
 
-### Model Inferences:
-
+### Model Findings:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 models_by_year <- data_twenty %>%
   group_by(YEAR) %>%
@@ -489,20 +478,19 @@ models_by_year <- data_twenty %>%
     augmented = map(model, augment)
   ) %>%
   ungroup()
-
-models_by_year_1 <- models_by_year %>%
-  select(YEAR, tidied) %>%
+models_by_year %>%
   unnest(tidied) %>%
-  arrange(YEAR)
-
-models_by_year_2 <- models_by_year %>%
-  select(YEAR, glance_data) %>%
-  unnest(glance_data) %>%
-  arrange(YEAR)
-kable(models_by_year_2)
+  filter(term == "log_INCTOT") %>%
+  ggplot(aes(x = as.numeric(YEAR), y = estimate)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Trend of Coefficient for log_INCTOT Over Years",
+       x = "Year",
+       y = "Coefficient Estimate")
 ```
 
--   Observations show peaks in coefficient estimates, notably in the early 2000s and around 2020, with subsequent troughs suggesting potential corrective periods.
+-   Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.
+- The coefficient shows dropping down during the Covid-19 period.
 -   The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.
 -   Coefficient estimates range within a tight interval, indicating a consistent strength of relationship across the dataset's timespan.
 
@@ -517,7 +505,6 @@ models_by_year <- data_twenty %>%
   ) %>%
   ungroup()
 
-# Check if glance_data exists before proceeding to plotting
 if ("glance_data" %in% names(models_by_year)) {
   # If glance_data exists, proceed with the visualization
   r_squared_trends <- models_by_year %>%
@@ -543,22 +530,44 @@ if ("glance_data" %in% names(models_by_year)) {
 ### Statistical Performance:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+ui <- fluidPage(
+  titlePanel("Model Summary Statistics by Year"),
+  sidebarLayout(
+    sidebarPanel(
+      # Ensure years are sorted in descending order
+      selectInput("year", "Choose a year:", choices = sort(unique(models_by_year$YEAR), decreasing = TRUE))
+    ),
+    mainPanel(
+      DTOutput("model_summary_table")  # Use DTOutput for data tables
+    )
+  )
+)
 
-if ("glance_data" %in% names(models_by_year)) {
-  # If glance_data exists, proceed with the unnesting and arranging
-  models_by_year_2 <- models_by_year %>%
-    select(YEAR, glance_data) %>%
-    unnest(cols = glance_data) %>%
-    arrange(YEAR)
-
-  # Use kable to display the model summary statistics in a nicely formatted table
-  kable(models_by_year_2)
-} else {
-  cat("glance_data column is missing in the models_by_year dataframe.")
+server <- function(input, output) {
+  output$model_summary_table <- renderDT({
+    req(models_by_year) 
+    year_data <- models_by_year %>%
+      filter(YEAR == input$year)
+    year_data <- year_data %>%
+      select(YEAR, glance_data) %>%
+      unnest(cols = glance_data) %>%
+      arrange(YEAR) %>%
+      select(YEAR, r.squared, adj.r.squared, sigma, statistic, p.value, df, logLik, AIC, BIC, deviance, df.residual, nobs) 
+    datatable(year_data, 
+      options = list(
+        pageLength = 10,      
+        lengthMenu = c(5, 10, 25, 50, 100),
+        autoWidth = TRUE
+      ),
+      rownames = FALSE
+    )
+  })
 }
+
+shinyApp(ui = ui, server = server)
 ```
 
--   All model coefficients are statistically validated, with a noticeable exception in the MARSTSeparated category for the year 2022.
+-   All models are statistically validated, while reviewing each coefficient of each year through 'tidy' table, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .
 -   R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.
 -   Adjusted R-squared values, marginally lower than the R-squared, adhere to expectations, considering model complexity relative to data volume.
 -   P-values indicate consistent statistical significance for the model's predictors on an annual basis.
@@ -573,42 +582,32 @@ if ("glance_data" %in% names(models_by_year)) {
 -   Trends over time for each race were charted to illustrate these dynamics.
 -   Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.
 
-### Model Inferences:
+### Model Findings:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Convert categorical variables to factors
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
 
-# Convert categorical variables to factors
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
 
-# Check the number of levels per categorical variable within each RACE group
 race_levels <- data_twenty %>%
   group_by(RACE) %>%
   summarize(across(all_of(categorical_vars), ~n_distinct(.))) %>%
   ungroup()
-
-# Identify RACE groups with any categorical variable having only one level
 races_with_single_levels <- race_levels %>%
   filter(if_any(everything(), ~.x == 1)) %>%
-  pull(RACE) # Extract the RACE values with problematic levels
-
-# Filter out the problematic RACE groups from the main dataset
+  pull(RACE) 
 data_twenty_filtered <- data_twenty %>%
   filter(!RACE %in% races_with_single_levels)
 
-# Convert categorical variables to factors again after subsetting just in case
 data_twenty_filtered[categorical_vars] <- lapply(data_twenty_filtered[categorical_vars], factor)
 
-# Check the number of levels per categorical variable within each RACE-YEAR group
 race_year_levels <- data_twenty_filtered %>%
   group_by(RACE, YEAR) %>%
   summarize(across(all_of(categorical_vars), ~n_distinct(.))) %>%
   ungroup()
 
-# Identify RACE-YEAR groups with any categorical variable having only one level
 race_year_with_single_levels <- race_year_levels %>%
   filter(if_any(everything(), ~.x == 1)) 
 
@@ -654,22 +653,16 @@ kable(coefficients_wide)
 -   Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the 'Other race, nec' category often has lower coefficients, implying a weaker association with income.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-
 coefficients_long <- coefficients_wide %>%
   pivot_longer(cols = -YEAR, names_to = "RACE", values_to = "log_INCTOT_coef")
 
 unique_races <- unique(coefficients_long$RACE)
 
-# Define a nice color for the bars
-bar_color <- "#2C3E50" # A deep shade of blue
-
-# Loop through each race and create a separate plot
-plots_list <- list()  # Create an empty list to store plots (if needed)
+bar_color <- "#2C3E50" 
+plots_list <- list()
 for (race in unique_races) {
-  # Filter the data for the current race
   race_data <- subset(coefficients_long, RACE == race)
   
-  # Create the plot
   p <- ggplot(race_data, aes(x = as.factor(YEAR), y = log_INCTOT_coef)) +
     geom_bar(stat = "identity", fill = bar_color, width = 0.7) +
     theme_minimal() +
@@ -679,29 +672,98 @@ for (race in unique_races) {
          x = "Year",
          y = "Coefficient")
   plots_list[[race]] <- p
-  print(p)
 }
+coefficients_long <- coefficients_wide %>%
+  pivot_longer(cols = -YEAR, names_to = "RACE", values_to = "log_INCTOT_coef")
+
+unique_races <- unique(coefficients_long$RACE)
+
+ui <- fluidPage(
+  titlePanel("Income Coefficients by Race"),
+  sidebarLayout(
+    sidebarPanel(
+      selectInput("selected_race", "Choose a race:", choices = unique_races)
+    ),
+    mainPanel(
+      plotOutput("race_plot")
+    )
+  )
+)
+server <- function(input, output) {
+  selected_data <- reactive({
+    coefficients_long %>%
+      filter(RACE == input$selected_race)
+  })
+  
+  output$race_plot <- renderPlot({
+    data <- selected_data()  
+    ggplot(data, aes(x = as.factor(YEAR), y = log_INCTOT_coef)) +
+      geom_bar(stat = "identity", fill = "#2C3E50", width = 0.7) +
+      theme_minimal() +
+      theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=0.5), 
+            plot.title = element_text(hjust = 0.5, face = "bold")) +
+      labs(title = paste("Income Coefficient:", input$selected_race),
+           x = "Year",
+           y = "Coefficient")
+  })
+}
+shinyApp(ui = ui, server = server)
 ```
 
 ### Statistical Performance:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+ui <- fluidPage(
+  titlePanel("INCTOT Coefficients Analysis by Race"),
+  sidebarLayout(
+    sidebarPanel(
+      # Ensure no prefix like "coef_" in race names unless absolutely needed
+      selectInput("selected_race", "Choose a race:", choices = unique(log_inctot_p_values$RACE))
+    ),
+    mainPanel(
+      dataTableOutput("filtered_data")
+    )
+  )
+)
 
-```{r}
-log_inctot_p_values <- data_twenty_filtered_final %>%
-  group_by(RACE, YEAR) %>%
-  do({
-    model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
-    tidy(model)
-  }) %>%
-  ungroup() %>%
-  filter(term == "log_INCTOT") %>%  # Filter to only include rows where the term is 'log_INCTOT'
-  select(RACE, YEAR, term, estimate, p.value)  # Select only the relevant columns
+server <- function(input, output) {
+  # Create a reactive expression that filters the data based on the selected race
+  filtered_data <- reactive({
+    # Debug: Print selected race to see what's being received
+    print(paste("Selected race:", input$selected_race))
+    
+    filtered <- log_inctot_p_values %>%
+      filter(RACE == input$selected_race)
+    
+    # Debug: Print the number of rows after filtering
+    print(paste("Rows after filter:", nrow(filtered)))
 
-# Print or view the results
-print(log_inctot_p_values)
+    if(nrow(filtered) == 0) {
+      print(unique(log_inctot_p_values$RACE))
+    }
+    
+    filtered
+  })
+  
+  # Render the table output
+  output$filtered_data <- renderDataTable({
+    dt <- filtered_data()
+    if (is.data.frame(dt) && nrow(dt) > 0) {
+      datatable(dt, options = list(pageLength = 10, autoWidth = TRUE))
+    } else {
+      # Return an empty data frame with the correct columns if no data to avoid error
+      datatable(data.frame(RACE=character(), YEAR=integer(), term=character(), estimate=numeric(), p.value=numeric()),
+                options = list(pageLength = 10, autoWidth = TRUE))
+    }
+  })
+}
+
+
+shinyApp(ui = ui, server = server)
 
 ```
 
--   All showed to be statistically significant \### Discussion of the topic: Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed.
+
+### Discussion of the topic: Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed.
 
 ## 3.Time series model
 
