@@ -641,10 +641,13 @@ unique_races <- unique(models_by_race_year$RACE)
 
 ## 3.Time series model
 ### Model Overview:
+- Here we use time series random effect model to further analyze the relationship between rent and income. 
+-Random Effects term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
+- The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.
 
 ### Model Findings:
-## log-log model
-```{r}
+#### log-log model
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(broom)
 library(dplyr)
@@ -662,7 +665,6 @@ library(lme4)
 library(broom.mixed)
 library(nlme)
 library(car)
-
 ```
 
 
@@ -701,20 +703,15 @@ model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST +
 tidy_lm <- tidy(model_with_income_log)
 kable(tidy_lm, format = "pipe")
 ```
-- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.66%, with all other
+- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other
 variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical performance:
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-glance_lm <- glance(model_with_income_log)
-kable(glance_lm, format = "pipe")
-```
-- There are 94520 observations in the table, which generally is a large number which is good. 
-- Residual Standard Error (sigma): The residual standard error is 0.4839304, This value indicates there are deviation of the observed values from the fitted values. A lower residual standard error suggests a model with a good fit to the data.
-- Overall statistics suggests there are limitations to the model, but it generally captures the overall trend which further suggests in the residual plot and qq plot.
+- Lower standard errors indicate more precise estimates of the coefficients, and most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates. 
+- Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. ROOMS and NFAMS have t-statistics of 76.24 and 35.64 respectively, indicating strong significance in predicting rent.
 
 ### Model discussion
-## Residual plot
+#### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Calculate residuals and fitted values
 residuals_twenty <- resid(model_with_income_log)
@@ -726,10 +723,10 @@ plot(fitted_values_twenty, residuals_twenty,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
-- The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. However, this is common in non-transformed data and it is our one of the limitation in our model. 
+- The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. 
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
 
-## QQ plot
+#### QQ plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(lattice)
 # Residuals vs Fitted plot for homoscedasticity
@@ -742,5 +739,5 @@ qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
 ```
 - The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.
 - The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
-- The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
+
 
