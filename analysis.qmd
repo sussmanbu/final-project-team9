@@ -1,11 +1,11 @@
 ---
 title: "Analysis"
 description: "Here we provide a detailed analysis using more sophisticated statistics techniques."
-format:
-  html:
-    widgets: true
+toc: true
+draft: FALSE
 
 ---
+
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -637,10 +637,16 @@ unique_races <- unique(models_by_race_year$RACE)
 
 
 ```
+- The p-value of 0 consistently across all races and years suggests that the models are statistically significant. This means the results are unlikely to have occurred by chance, and there is a statistically significant relationship between the dependent and independent variables in the models used.
 
 ### Discussion of the topic: 
-- Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed.
+- Race is really a point that needs to explore. Through the result and the visualization of the coefficient changes for each race, there is definitely different patterns showed.
 
 ## 3.Time series model
+### Model Overview:
 
-------------------------------------------------------------------------
+### Model Findings:
+
+### Statistical Performance:
+
+### Discussion of the topic:

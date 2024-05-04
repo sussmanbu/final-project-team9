@@ -1,17 +1,137 @@
 ---
-title: "The Price of Home"
-description: "Exploring the Tug-of-War Between Income and Rent in America"
+title: Landlords Envy Him -- The Budget Whisperer!
+description: Exploring the Tug-of-War Between Income and Rent in America
 toc: true
 draft: FALSE
 ---
 
-![](images/)
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(shiny)
+library(DT)
+library(tidyr)
+library(broom)
+library(dplyr)
+library(here)
+library(gt)
+library(purrr)
+library(readr)
+library(ggplot2)
+library(knitr)
+library(lme4)
+library(broom.mixed)
+library(kableExtra)
 
-This comes from the file `big_picture.Rmd`.
+data_path <- here("dataset", "data_twenty_clean.csv")
+data_path1 <- here("dataset", "latest_clean.csv")
 
-Think of this page as your 538/Upshot style article. This means that you should try to tell a story through the data and your analysis. Read articles from those sites and similar sites to get a feeling for what they are like. Try to write in the style of a news or popular article. Importantly, this pge should be geared towards the general public. You shouldn't assume the reader understands how to interpret a linear regression. Focus on interpretation and visualizations.
+data_twenty <- read_csv(data_path,show_col_types = FALSE) 
+data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
 
----
+```
+
+# Introduction
+Imagine every year, as the calendar turns, you write a bigger check for your rent. You're not alone. Across the country, millions are penning this annual escalation into their ledgers. But there's another figure that's climbing too—your income. Let's explore this curious dance of numbers and what it means for the roof over your head.
+
+## The Dance Begins: Rising Rent
+As the years roll by, the cost of renting a home has steadily increased. We've tracked this change using data from the IPUMS ACS, and the patterns are clear. The graph below is not just a line climbing a chart; it's a reflection of changing lives, of budgets adjusted, and of the increasing value we place on our homes.
+
+
+#### Trend of Median Rent Over the Years
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+annual_median_rent <- data_twenty %>%
+  group_by(YEAR) %>%
+  summarize(MedianRent = median(RENTGRS, na.rm = TRUE))
+
+ggplot(annual_median_rent, aes(x = YEAR, y = MedianRent)) +
+  geom_line(size=1.2, color="#95A5A6") + 
+  geom_point(size=1.5, color="#3498DB", shape=21, fill="#3498DB") +  
+  theme_minimal(base_size = 15) +  
+  theme(
+    plot.title = element_text(hjust = 0.5, size=15, face="bold", color="#34495E"), 
+    axis.title = element_text(size=10, face="bold", color="#34495E"),  
+    axis.text = element_text(color="#34495E"), 
+    panel.grid.major = element_line(color="#ECF0F1", size=0.2),  
+    panel.grid.minor = element_blank(), 
+    legend.position = "none",
+    plot.margin = margin(5.5, 5.5, 5.5, 5.5, "mm")
+  ) +
+  labs(
+    title = "Trend of Median Rent Over the Years",
+    x = "Year",
+    y = "Median Gross Rent",
+    caption = "Data Source: IPUMS"  
+  )
+```
+
+## A Sigh of Relief: Rising Income
+
+But as rent demands more from our wallets, something else is happening. Our incomes are also on an upward trajectory. This next graph isn't just about higher wages; it’s about the resilience and growth that have characterized our economy and personal financial stories.
+
+#### Trend of Median Personal Income Over the Years
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+annual_median_income <- data_twenty %>%
+  group_by(YEAR) %>%
+  summarize(MedianIncome = median(INCTOT, na.rm = TRUE))
+ggplot(annual_median_income, aes(x = YEAR, y = MedianIncome)) +
+  geom_line(size=1.2, color="#95A5A6") + 
+  geom_point(size=1.5, color="#3498DB", shape=21, fill="#3498DB") + 
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size=15, face="bold", color="#34495E"),
+    axis.title = element_text(size=10, face="bold", color="#34495E"),
+    axis.text = element_text(color="#34495E"),
+    panel.grid.major = element_line(color="#ECF0F1", size=0.2),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(5.5, 5.5, 5.5, 5.5, "mm")
+  ) +
+  labs(
+    title = "Trend of Median Personal Income Over the Years",
+    x = "Year",
+    y = "Median Gross Personal Income",
+    caption = "Data Source: IPUMS"
+  )
+```
+
+## Interactive Exploration
+While the national trends provide a broad picture, the real story unfolds at a more personal level. How does your city fare in this dance of rent and income? Dive into our interactive dashboard to explore detailed data for your area
+
+[Click the link here to find the city median rent of 2021 you live!](https://yatingzhu.shinyapps.io/app6/)
+
+## Bridging the Graphs: Analysis and Insights
+
+While we've seen the upward trends in both rent and income through our graphs, let's take a closer look at what these changes really mean. Our analysis goes beyond simple observation and digs into how these financial changes affect each other and what this might mean for you.
+
+### Understanding the Model's Message
+
+Our analysis used a special kind of mathematical model to predict how changes in income affect rent. Here’s what we found: if incomes go up by 10%, rent could increase by about 13.34% on average. This isn't just a random guess; it's a prediction backed by strong data, showing us how closely linked our earnings are to what we pay for housing.
+
+### Explaining the Findings in Everyday Terms
+
+- **How Rent Reacts to Income**: The number 0.1334 from our model tells us that rent doesn’t just increase slightly when incomes go up; it jumps by a noticeable amount. Imagine getting a 100 dollar increase in your monthly pay; this model predicts that your rent could go up by about 13.34 dollar. So, as we earn more, we also tend to spend more on rent.
+  
+- **Confidence in Our Model**: The details behind these numbers are very reliable. The data tells us this isn’t just happening by chance—it’s a real pattern that we see repeatedly in the numbers.
+
+### Wrapping Up: What This Means for Us
+
+This deep dive into the numbers helps us understand the tricky balance between earning more and the rising cost of living, especially when it comes to housing. It’s clear that as our incomes grow, so does the amount we have to pay in rent, often faster than we might hope. This can help everyone, from policymakers to renters, understand and plan better for the future.
+
+### Learn More Yourself
+
+You don’t have to take our word for it. Check out our interactive dashboard where you can dive into the numbers yourself. See how your city stacks up, and explore what these trends could mean for your own wallet.
+
+[Do you want to know what the most matching increase in renting expenditure for you? Click here!]()
+
+[Do you want to know what the predicted renting expenditure for you of your income? Click here for exploration!]()
+
+
+
+
+
+
+
+
+
 
 ## Rubric: On this page
 

@@ -226,6 +226,55 @@ for (race in unique_races) {
 
 
 
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(broom)
+library(tidyr)
+
+# Assuming 'data_twenty' is already loaded and contains the necessary variables
+
+# Convert categorical variables to factors
+categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
+data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
+
+# Identify races with insufficient variability in any categorical variable
+race_levels <- data_twenty %>%
+  group_by(RACE) %>%
+  summarize(across(all_of(categorical_vars), n_distinct), .groups = 'drop') %>%
+  filter(across(everything(), ~ .x <= 1))
+
+# Filter out races with insufficient variability
+data_twenty_filtered <- data_twenty %>%
+  filter(!RACE %in% race_levels$RACE)
+
+# Check categorical variable levels within each RACE-YEAR group
+race_year_levels <- data_twenty_filtered %>%
+  group_by(RACE, YEAR) %>%
+  summarize(across(all_of(categorical_vars), n_distinct), .groups = 'drop') %>%
+  filter(across(everything(), ~ .x <= 1))
+
+# Remove problematic RACE-YEAR groups
+data_twenty_filtered_final <- data_twenty_filtered %>%
+  anti_join(race_year_levels, by = c("RACE", "YEAR"))
+
+# Fit models and obtain summaries
+models_by_race_year <- data_twenty_filtered_final %>%
+  group_by(RACE, YEAR) %>%
+  summarize(model_glance = list(glance(lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .))),
+            .groups = 'drop') %>%
+  unnest(model_glance)
+
+# Optionally, select specific columns if the glance output is too wide
+models_by_race_year <- models_by_race_year %>%
+  select(RACE, YEAR, r.squared, adj.r.squared, sigma, statistic, p.value, AIC, BIC)
+
+# Output the models' glance summaries
+print(models_by_race_year)
+
+```
+
+
 
 
 
