@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Here we provide a detailed analysis using more sophisticated statistics techniques.">
+
+<title>MA [46]15 Final Project by Team 9 - Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MA [46]15 Final Project by Team 9</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./big_picture.html"> 
+<span class="menu-text">Landlords Envy Him – The Budget Whisperer!</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./analysis.html" aria-current="page"> 
+<span class="menu-text">Analysis</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./data.html"> 
+<span class="menu-text">Data</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#research-question-and-motivation" id="toc-research-question-and-motivation" class="nav-link active" data-scroll-target="#research-question-and-motivation">Research Question and Motivation</a>
+  <ul class="collapse">
+  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  </ul></li>
+  <li><a href="#models-and-inferences-first-dataset" id="toc-models-and-inferences-first-dataset" class="nav-link" data-scroll-target="#models-and-inferences-first-dataset">Models and Inferences (First dataset)</a>
+  <ul class="collapse">
+  <li><a href="#outline-of-models-used-in-class-blogs" id="toc-outline-of-models-used-in-class-blogs" class="nav-link" data-scroll-target="#outline-of-models-used-in-class-blogs">Outline of models used in class blogs</a></li>
+  <li><a href="#multiple-linear-regression-model" id="toc-multiple-linear-regression-model" class="nav-link" data-scroll-target="#multiple-linear-regression-model">2. Multiple Linear Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#model-overview" id="toc-model-overview" class="nav-link" data-scroll-target="#model-overview">Model Overview:</a></li>
+  <li><a href="#model-findings" id="toc-model-findings" class="nav-link" data-scroll-target="#model-findings">Model Findings:</a></li>
+  <li><a href="#statistical-performance" id="toc-statistical-performance" class="nav-link" data-scroll-target="#statistical-performance">Statistical Performance:</a></li>
+  <li><a href="#variable-selection-and-model-refinement" id="toc-variable-selection-and-model-refinement" class="nav-link" data-scroll-target="#variable-selection-and-model-refinement">Variable Selection and model refinement:</a></li>
+  <li><a href="#model-discussion" id="toc-model-discussion" class="nav-link" data-scroll-target="#model-discussion">Model Discussion :</a></li>
+  </ul></li>
+  <li><a href="#log-log-regression-model" id="toc-log-log-regression-model" class="nav-link" data-scroll-target="#log-log-regression-model">3. Log-Log Regression Model</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-1" id="toc-model-overview-1" class="nav-link" data-scroll-target="#model-overview-1">Model Overview:</a></li>
+  <li><a href="#model-findings-1" id="toc-model-findings-1" class="nav-link" data-scroll-target="#model-findings-1">Model Findings:</a></li>
+  <li><a href="#statistical-performance-1" id="toc-statistical-performance-1" class="nav-link" data-scroll-target="#statistical-performance-1">Statistical Performance:</a></li>
+  <li><a href="#model-discussion-1" id="toc-model-discussion-1" class="nav-link" data-scroll-target="#model-discussion-1">Model Discussion :</a></li>
+  </ul></li>
+  <li><a href="#log-log-regression-model-by-race" id="toc-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#log-log-regression-model-by-race">4. Log-Log Regression Model by Race</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-2" id="toc-model-overview-2" class="nav-link" data-scroll-target="#model-overview-2">Model Overview</a></li>
+  <li><a href="#model-findings-2" id="toc-model-findings-2" class="nav-link" data-scroll-target="#model-findings-2">Model Findings:</a></li>
+  <li><a href="#statistical-performance-2" id="toc-statistical-performance-2" class="nav-link" data-scroll-target="#statistical-performance-2">Statistical Performance:</a></li>
+  <li><a href="#model-discussion-2" id="toc-model-discussion-2" class="nav-link" data-scroll-target="#model-discussion-2">Model Discussion:</a></li>
+  </ul></li>
+  <li><a href="#enhanced-log-log-regression-model-with-interaction-terms" id="toc-enhanced-log-log-regression-model-with-interaction-terms" class="nav-link" data-scroll-target="#enhanced-log-log-regression-model-with-interaction-terms">5. Enhanced Log-Log Regression Model with Interaction Terms</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-3" id="toc-model-overview-3" class="nav-link" data-scroll-target="#model-overview-3">Model Overview</a></li>
+  <li><a href="#model-overview-and-model-refinement" id="toc-model-overview-and-model-refinement" class="nav-link" data-scroll-target="#model-overview-and-model-refinement">Model Overview and Model Refinement:</a></li>
+  <li><a href="#statistical-performance-3" id="toc-statistical-performance-3" class="nav-link" data-scroll-target="#statistical-performance-3">Statistical Performance:</a></li>
+  <li><a href="#model-discussion-3" id="toc-model-discussion-3" class="nav-link" data-scroll-target="#model-discussion-3">Model Discussion:</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#models-and-inferences-merged-dataset" id="toc-models-and-inferences-merged-dataset" class="nav-link" data-scroll-target="#models-and-inferences-merged-dataset">Models and Inferences (Merged dataset)</a>
+  <ul class="collapse">
+  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
+  <li><a href="#log-log-regression-model-by-year" id="toc-log-log-regression-model-by-year" class="nav-link" data-scroll-target="#log-log-regression-model-by-year">1. Log-Log Regression Model by YEAR</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-4" id="toc-model-overview-4" class="nav-link" data-scroll-target="#model-overview-4">Model Overview:</a></li>
+  <li><a href="#model-findings-3" id="toc-model-findings-3" class="nav-link" data-scroll-target="#model-findings-3">Model Findings:</a></li>
+  <li><a href="#statistical-performance-4" id="toc-statistical-performance-4" class="nav-link" data-scroll-target="#statistical-performance-4">Statistical Performance:</a></li>
+  </ul></li>
+  <li><a href="#longitudinal-log-log-regression-model-by-race" id="toc-longitudinal-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#longitudinal-log-log-regression-model-by-race">2. Longitudinal Log-Log Regression Model by Race</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-5" id="toc-model-overview-5" class="nav-link" data-scroll-target="#model-overview-5">Model Overview:</a></li>
+  <li><a href="#model-findings-4" id="toc-model-findings-4" class="nav-link" data-scroll-target="#model-findings-4">Model Findings:</a></li>
+  <li><a href="#statistical-performance-5" id="toc-statistical-performance-5" class="nav-link" data-scroll-target="#statistical-performance-5">Statistical Performance:</a></li>
+  </ul></li>
+  <li><a href="#time-series-model" id="toc-time-series-model" class="nav-link" data-scroll-target="#time-series-model">3.Time series model</a>
+  <ul class="collapse">
+  <li><a href="#model-overview-6" id="toc-model-overview-6" class="nav-link" data-scroll-target="#model-overview-6">Model Overview:</a></li>
+  <li><a href="#model-findings-5" id="toc-model-findings-5" class="nav-link" data-scroll-target="#model-findings-5">Model Findings:</a></li>
+  <li><a href="#regression-coefficients-table" id="toc-regression-coefficients-table" class="nav-link" data-scroll-target="#regression-coefficients-table">Regression Coefficients Table:</a></li>
+  <li><a href="#statistical-performance-6" id="toc-statistical-performance-6" class="nav-link" data-scroll-target="#statistical-performance-6">Statistical performance:</a></li>
+  <li><a href="#model-discussion-4" id="toc-model-discussion-4" class="nav-link" data-scroll-target="#model-discussion-4">Model discussion</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Analysis</h1>
+</div>
+
+<div>
+  <div class="description">
+    Here we provide a detailed analysis using more sophisticated statistics techniques.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="research-question-and-motivation" class="level1">
+<h1>Research Question and Motivation</h1>
+<section id="motivation" class="level2">
+<h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
+<p>The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time.</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ul>
+<li><strong>Relationship Exploration</strong>: We aim to determine how changes in income levels affect rental spending. This includes examining whether the relationship is strictly linear or if there are nonlinear dynamics that better capture the fluctuations in rental expenditures as income varies.</li>
+<li><strong>Quantitative Analysis</strong>: Our goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income.</li>
+<li><strong>Demographic Variance</strong>: The study will also consider racial differences to identify how income’s impact on rent varies among different racial groups.</li>
+<li><strong>Temporal Analysis</strong>: Employing a time series regression model allows us to account for changes over time, providing a dynamic perspective on the income-rent relationship.</li>
+</ul>
+</section>
+</section>
+<section id="models-and-inferences-first-dataset" class="level1">
+<h1>Models and Inferences (First dataset)</h1>
+<section id="outline-of-models-used-in-class-blogs" class="level2">
+<h2 class="anchored" data-anchor-id="outline-of-models-used-in-class-blogs">Outline of models used in class blogs</h2>
+<ol type="1">
+<li>Simple Linear Regression Model (Detailed in Class Blog 4)</li>
+</ol>
+<ul>
+<li>Investigates the relationship between income (the predictor) and rent (the response), offering preliminary insights into whether they share a positive or negative correlation and assessing if it is worth to have further detailed analysis.</li>
+</ul>
+<ol start="2" type="1">
+<li><p>Multiple Linear Regression Model (Detailed in Class Blog 4)</p></li>
+<li><p>Log-Log Regression Model</p></li>
+<li><p>Log-Log Regression Model with interaction terms</p></li>
+</ol>
+</section>
+<section id="multiple-linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression-model">2. Multiple Linear Regression Model</h2>
+<section id="model-overview" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview">Model Overview:</h3>
+<ul>
+<li>This model enhances the simple linear regression by incorporating additional confounding variables to refine our analysis.</li>
+<li>This expanded model builds upon the initial simple linear regression framework.</li>
+</ul>
+</section>
+<section id="model-findings" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings">Model Findings:</h3>
+<p><a href="https://yatingzhu.shinyapps.io/app1/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
+<ul>
+<li>A $1,000 increase in total income (INCTOT) is associated with an average increase of 5.2 in gross rent (RENTGRS), assuming other variables are constant.</li>
+</ul>
+</section>
+<section id="statistical-performance" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance">Statistical Performance:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2317473</td>
+<td style="text-align: right;">0.2284616</td>
+<td style="text-align: right;">824.1282</td>
+<td style="text-align: right;">70.53243</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">-42013.05</td>
+<td style="text-align: right;">84074.11</td>
+<td style="text-align: right;">84231.31</td>
+<td style="text-align: right;">3493739342</td>
+<td style="text-align: right;">5144</td>
+<td style="text-align: right;">5167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.</p></li>
+<li><p>A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.</p></li>
+</ul>
+</section>
+<section id="variable-selection-and-model-refinement" class="level3">
+<h3 class="anchored" data-anchor-id="variable-selection-and-model-refinement">Variable Selection and model refinement:</h3>
+<ul>
+<li>A correlation matrix was used to identify control variables and to detect potential multi-collinearity issues.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">INCTOT</th>
+<th style="text-align: right;">ROOMS</th>
+<th style="text-align: right;">NFAMS</th>
+<th style="text-align: right;">AGE</th>
+<th style="text-align: right;">FTOTINC</th>
+<th style="text-align: right;">RENTGRS</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">-0.0149409</td>
+<td style="text-align: right;">-0.0313099</td>
+<td style="text-align: right;">-0.0077964</td>
+<td style="text-align: right;">0.7282638</td>
+<td style="text-align: right;">0.3329946</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">-0.0149409</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.1631221</td>
+<td style="text-align: right;">-0.0439707</td>
+<td style="text-align: right;">0.1083906</td>
+<td style="text-align: right;">0.1406264</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">-0.0313099</td>
+<td style="text-align: right;">0.1631221</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">-0.1405046</td>
+<td style="text-align: right;">-0.0924716</td>
+<td style="text-align: right;">0.0881204</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">-0.0077964</td>
+<td style="text-align: right;">-0.0439707</td>
+<td style="text-align: right;">-0.1405046</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">-0.0768613</td>
+<td style="text-align: right;">-0.0870537</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FTOTINC</td>
+<td style="text-align: right;">0.7282638</td>
+<td style="text-align: right;">0.1083906</td>
+<td style="text-align: right;">-0.0924716</td>
+<td style="text-align: right;">-0.0768613</td>
+<td style="text-align: right;">1.0000000</td>
+<td style="text-align: right;">0.4448424</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RENTGRS</td>
+<td style="text-align: right;">0.3329946</td>
+<td style="text-align: right;">0.1406264</td>
+<td style="text-align: right;">0.0881204</td>
+<td style="text-align: right;">-0.0870537</td>
+<td style="text-align: right;">0.4448424</td>
+<td style="text-align: right;">1.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>A review of multicollinearity prompted the removal of <code>FTOTINC</code> to prevent model overfitting.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">GVIF</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">GVIF^(1/(2*Df))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">2.317240</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.522248</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">KITCHEN</td>
+<td style="text-align: right;">1.023481</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.011673</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">1.108739</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.052967</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">1.111046</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.054062</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">2.074406</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.440280</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">MARST</td>
+<td style="text-align: right;">1.856902</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.063846</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">RACE</td>
+<td style="text-align: right;">1.198063</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.011358</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMPSTAT</td>
+<td style="text-align: right;">1.576945</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.120609</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">FTOTINC</td>
+<td style="text-align: right;">2.385884</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.544631</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIED</td>
+<td style="text-align: right;">1.130442</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.020645</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value.</li>
+<li><code>Employment Status</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income</code> or <code>FTOTINC</code>. This interaction will be explored further.</li>
+</ul>
+</section>
+<section id="model-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion">Model Discussion :</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>The plot indicates a potential non-linear relationship and heteroscedasticity, evident from the increase in variability with the size of the fitted values.</p></li>
+<li><p>Some points notably deviate from the main cluster, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points.</p></li>
+</ul>
+</section>
+</section>
+<section id="log-log-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-regression-model">3. Log-Log Regression Model</h2>
+<section id="model-overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-1">Model Overview:</h3>
+<ul>
+<li><p>Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.</p></li>
+<li><p>A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.</p></li>
+</ul>
+</section>
+<section id="model-findings-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-1">Model Findings:</h3>
+<p><a href="https://yatingzhu.shinyapps.io/app2/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
+<ul>
+<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
+</ul>
+</section>
+<section id="statistical-performance-1" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2267776</td>
+<td style="text-align: right;">0.2234707</td>
+<td style="text-align: right;">0.5072099</td>
+<td style="text-align: right;">68.5763</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">-3812.614</td>
+<td style="text-align: right;">7673.227</td>
+<td style="text-align: right;">7830.428</td>
+<td style="text-align: right;">1323.355</td>
+<td style="text-align: right;">5144</td>
+<td style="text-align: right;">5167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.</p></li>
+<li><p>A very low p-value signifies the statistical significance of the model’s predictors.</p></li>
+<li><p>The sigma value’s reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.</p></li>
+</ul>
+</section>
+<section id="model-discussion-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-1">Model Discussion :</h3>
+<ol type="1">
+<li>Linearity and Homoscedasticity:</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>The residuals show no systematic pattern, indicating an effective capture of the relationship between predictors and response variable.</p></li>
+<li><p>While the spread is mostly consistent, some widening at the extremes suggests minor heteroscedasticity, typical in economic data involving higher income or rent brackets, but it does not significantly compromise the model’s validity. Residuals predominantly center around the zero line, indicating no model bias and reinforcing its accuracy.</p></li>
+<li><p>A few potential outliers, common in large economic datasets, do not notably affect the robust central trend captured by the model.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Normality of Residuals:</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.</li>
+</ul>
+<ol start="3" type="1">
+<li>IID Errors:</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<caption>Durbin-Watson Test Results</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Statistic</th>
+<th style="text-align: right;">p_Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1.977496</td>
+<td style="text-align: right;">0.2092356</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>For Durbin-Watson Statistic, the result statistic value close to 2 indicates no autocorrelation, implying that the errors are independent. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.</li>
+</ul>
+<ol start="4" type="1">
+<li>Multicollinearity:</li>
+</ol>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">GVIF</th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">GVIF^(1/(2*Df))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">1.298351</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.139452</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">1.069938</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.034378</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">1.088234</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.043185</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">AGE</td>
+<td style="text-align: right;">2.109694</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1.452479</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">MARST</td>
+<td style="text-align: right;">1.790805</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">1.059997</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">RACE</td>
+<td style="text-align: right;">1.193223</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">1.011102</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">EMPSTAT</td>
+<td style="text-align: right;">1.844666</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.165412</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">REGION_CLASSIFIED</td>
+<td style="text-align: right;">1.119686</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.019020</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>The adjusted GVIF values, being all near or below the threshold of 1.5 after taking the root, demonstrate that the multicollinearity is likely not distorting the estimates in the regression model significantly. This implies that each predictor variable is providing unique information that is not overly redundant with other variables in the model.</li>
+</ul>
+<p><strong>Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.</strong></p>
+</section>
+</section>
+<section id="log-log-regression-model-by-race" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-regression-model-by-race">4. Log-Log Regression Model by Race</h2>
+<section id="model-overview-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-2">Model Overview</h3>
+<ul>
+<li>This analysis applies a stratified Log-Log regression approach, segregating data by race . It builds upon the foundational understanding from Section 3.</li>
+</ul>
+</section>
+<section id="model-findings-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-2">Model Findings:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">RACE</th>
+<th style="text-align: right;">log_INCTOT_Coefficient</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">0.0937685</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">0.0621126</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">0.1915177</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">0.1050231</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">0.0376731</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">0.1048730</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">0.0882288</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">0.1676538</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>The coefficient for log_INCTOT shows notable variation across racial categories, which indicates the impact of income on rent varies by race.</p></li>
+<li><p>The Chinese group demonstrates the highest log_INCTOT coefficient, indicating a particularly strong positive association between income and rent within this demographic.</p></li>
+<li><p>American Indian or Alaska Native, Other Asian or Pacific Islander, Other race, nec, Three or more major races, and White categories show a range of coefficients, suggesting varied levels of positive association.</p></li>
+<li><p>Black/African American and Two major races groups present with lower coefficients, hinting at a relatively weaker positive relationship.</p></li>
+</ul>
+</section>
+<section id="statistical-performance-2" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-2">Statistical Performance:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">RACE</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.0937685</td>
+<td style="text-align: right;">0.3138472</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.0621126</td>
+<td style="text-align: right;">0.0012082</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1915177</td>
+<td style="text-align: right;">0.0428004</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1050231</td>
+<td style="text-align: right;">0.0001647</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.0376731</td>
+<td style="text-align: right;">0.1041104</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1048730</td>
+<td style="text-align: right;">0.1615109</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.0882288</td>
+<td style="text-align: right;">0.0000441</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1676538</td>
+<td style="text-align: right;">0.0000000</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>For most racial groups, the p-values indicate statistical significance (p &lt; 0.05), especially pronounced for <code>Black/African American</code>, <code>Chinese</code>, <code>Other Asian or Pacific Islander</code>, and <code>White categories</code>, implying a strong relationship between income and rent.</p></li>
+<li><p>But the higher p-value for some groups suggests that the relationship between income and rent is <strong>not statistically significant</strong> .</p></li>
+</ul>
+</section>
+<section id="model-discussion-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-2">Model Discussion:</h3>
+<ul>
+<li><p>The evident variability in log_INCTOT coefficients across races suggests that the relationship between income and rent is influenced by racial factors, pointing towards the complexity inherent in socio-economic dynamics.</p></li>
+<li><p>Non-significance in certain racial categories may reflect data limitations or the presence of other variables not captured in the model, indicating areas where further research or data collection could be beneficial.</p></li>
+</ul>
+</section>
+</section>
+<section id="enhanced-log-log-regression-model-with-interaction-terms" class="level2">
+<h2 class="anchored" data-anchor-id="enhanced-log-log-regression-model-with-interaction-terms">5. Enhanced Log-Log Regression Model with Interaction Terms</h2>
+<section id="model-overview-3" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-3">Model Overview</h3>
+<ul>
+<li>This model is built upon the foundation established in Section 3. This section explores nonlinearity further.</li>
+</ul>
+</section>
+<section id="model-overview-and-model-refinement" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-and-model-refinement">Model Overview and Model Refinement:</h3>
+<ul>
+<li>The interaction term <code>EMPSTAT * FTOTINC</code> has been introduced to investigate the suspected interaction effect between employment status and total family income.</li>
+<li>But the p-value for <code>EMPSTATUnemployed:FTOTINC</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.</li>
+</ul>
+</section>
+<section id="statistical-performance-3" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-3">Statistical Performance:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2727009</td>
+<td style="text-align: right;">0.2691641</td>
+<td style="text-align: right;">0.4920608</td>
+<td style="text-align: right;">77.10474</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">25</td>
+<td style="text-align: right;">-3654.429</td>
+<td style="text-align: right;">7362.857</td>
+<td style="text-align: right;">7539.709</td>
+<td style="text-align: right;">1244.758</td>
+<td style="text-align: right;">5141</td>
+<td style="text-align: right;">5167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>All predictors show statistical significance, with the exception of certain categories within marital status and employment status.</p></li>
+<li><p>The integration of the interaction term retains the significance of other variables, with no detrimental impact on the model’s variables as reflected in their p-values.</p></li>
+</ul>
+</section>
+<section id="model-discussion-3" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-3">Model Discussion:</h3>
+<ul>
+<li>The residual plot indicates that the model without interaction terms performs better than the log-log regression with interaction terms. This residual plot does not show the performance as well as the section 3.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Therefore, although this model’s conclusions offer an extension to our understanding of the economic factors influencing rent prices in section 3, we still take the log_log model for further analysis.</strong></p>
+</section>
+</section>
+</section>
+<section id="models-and-inferences-merged-dataset" class="level1">
+<h1>Models and Inferences (Merged dataset)</h1>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<ol type="1">
+<li>Log-Log Regression Model by YEAR</li>
+<li>Longitudinal Log-Log Regression Model by Race</li>
+<li>Time series model</li>
+</ol>
+</section>
+<section id="log-log-regression-model-by-year" class="level2">
+<h2 class="anchored" data-anchor-id="log-log-regression-model-by-year">1. Log-Log Regression Model by YEAR</h2>
+<section id="model-overview-4" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-4">Model Overview:</h3>
+<ul>
+<li>This analysis implements the validated Log-Log regression approach on annual data segments to assess temporal trends and variations.</li>
+</ul>
+</section>
+<section id="model-findings-3" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-3">Model Findings:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.</p></li>
+<li><p>The coefficient shows dropping down during the Covid-19 period.</p></li>
+<li><p>The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.</p></li>
+</ul>
+</section>
+<section id="statistical-performance-4" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-4">Statistical Performance:</h3>
+<p>[Click here to view the summary table for the model of each Year.] (https://yatingzhu.shinyapps.io/app3/)</p>
+<ul>
+<li><p>All models are statistically validated, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .</p></li>
+<li><p>R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.</p></li>
+<li><p>P-values indicate consistent statistical significance for the model’s predictors on an annual basis.</p></li>
+<li><p>The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.</p></li>
+</ul>
+</section>
+</section>
+<section id="longitudinal-log-log-regression-model-by-race" class="level2">
+<h2 class="anchored" data-anchor-id="longitudinal-log-log-regression-model-by-race">2. Longitudinal Log-Log Regression Model by Race</h2>
+<section id="model-overview-5" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-5">Model Overview:</h3>
+<ul>
+<li>This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.</li>
+</ul>
+</section>
+<section id="model-findings-4" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-4">Model Findings:</h3>
+<p><a href="https://yatingzhu.shinyapps.io/app4/">Click here to view the plot for the cofficients across Years for each race.</a></p>
+<ul>
+<li>Specific Trends:</li>
+</ul>
+<p><strong>Alaska Native</strong>: Shows minor fluctuations around zero, with both positive and negative coefficients, indicating inconsistent trends over the years.</p>
+<p><strong>American</strong>: This category has NA values, suggesting incomplete data, making it hard to discern a clear trend.</p>
+<p><strong>Chinese</strong>: Generally has higher positive coefficients compared to other groups, particularly noticeable in later years, indicating a strong positive association with income in those years.</p>
+<p><strong>Japanese</strong>: Has some missing values but otherwise presents mostly positive coefficients, with a notable spike in recent years.</p>
+<p><strong>Islander</strong>: Also features both positive and negative coefficients with considerable variability.</p>
+<p><strong>Other race, nec</strong>: Shows a mix of positive, negative, and NA values, making a clear trend difficult to establish.</p>
+<p><strong>Two or more races</strong>: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association with income.</p>
+<p><strong>Whites</strong>: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.</p>
+</section>
+<section id="statistical-performance-5" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-5">Statistical Performance:</h3>
+<p><a href="https://yatingzhu.shinyapps.io/app5/">Click here to view the summary table of each race across Years.</a></p>
+<ul>
+<li>The p-value of 0 consistently across all races and years suggests that the models are statistically significant. This means the results are unlikely to have occurred by chance, and there is a statistically significant relationship between the dependent and independent variables in the models used.</li>
+</ul>
+</section>
+</section>
+<section id="time-series-model" class="level2">
+<h2 class="anchored" data-anchor-id="time-series-model">3.Time series model</h2>
+<section id="model-overview-6" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-6">Model Overview:</h3>
+<ul>
+<li>Here we use time series random effect model to further analyze the relationship between rent and income. -Random Effects term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model’s fixed effects.</li>
+<li>The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.</li>
+</ul>
+</section>
+<section id="model-findings-5" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-5">Model Findings:</h3>
+<section id="log-log-model" class="level4">
+<h4 class="anchored" data-anchor-id="log-log-model">log-log model</h4>
+</section>
+</section>
+<section id="regression-coefficients-table" class="level3">
+<h3 class="anchored" data-anchor-id="regression-coefficients-table">Regression Coefficients Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 37%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">effect</th>
+<th style="text-align: left;">group</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">4.6473187</td>
+<td style="text-align: right;">0.0722683</td>
+<td style="text-align: right;">64.3064481</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1466717</td>
+<td style="text-align: right;">0.0017573</td>
+<td style="text-align: right;">83.4655767</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">0.0662534</td>
+<td style="text-align: right;">0.0008691</td>
+<td style="text-align: right;">76.2356703</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">0.0876972</td>
+<td style="text-align: right;">0.0024604</td>
+<td style="text-align: right;">35.6427658</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTMarried, spouse absent</td>
+<td style="text-align: right;">0.1084348</td>
+<td style="text-align: right;">0.0107642</td>
+<td style="text-align: right;">10.0736180</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTMarried, spouse present</td>
+<td style="text-align: right;">0.1940211</td>
+<td style="text-align: right;">0.0049332</td>
+<td style="text-align: right;">39.3300138</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTNever married/single</td>
+<td style="text-align: right;">0.1507032</td>
+<td style="text-align: right;">0.0048136</td>
+<td style="text-align: right;">31.3079709</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTSeparated</td>
+<td style="text-align: right;">0.0140153</td>
+<td style="text-align: right;">0.0089928</td>
+<td style="text-align: right;">1.5585015</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTWidowed</td>
+<td style="text-align: right;">0.0171637</td>
+<td style="text-align: right;">0.0076327</td>
+<td style="text-align: right;">2.2486938</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEBlack/African American</td>
+<td style="text-align: right;">0.2025752</td>
+<td style="text-align: right;">0.0157059</td>
+<td style="text-align: right;">12.8979976</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEChinese</td>
+<td style="text-align: right;">0.3392542</td>
+<td style="text-align: right;">0.0210242</td>
+<td style="text-align: right;">16.1363309</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEJapanese</td>
+<td style="text-align: right;">0.4122124</td>
+<td style="text-align: right;">0.0330440</td>
+<td style="text-align: right;">12.4746375</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEOther Asian or Pacific Islander</td>
+<td style="text-align: right;">0.4046109</td>
+<td style="text-align: right;">0.0169256</td>
+<td style="text-align: right;">23.9051903</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEOther race, nec</td>
+<td style="text-align: right;">0.2698439</td>
+<td style="text-align: right;">0.0163122</td>
+<td style="text-align: right;">16.5425061</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEThree or more major races</td>
+<td style="text-align: right;">0.3714474</td>
+<td style="text-align: right;">0.0294801</td>
+<td style="text-align: right;">12.5999178</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACETwo major races</td>
+<td style="text-align: right;">0.3498633</td>
+<td style="text-align: right;">0.0171818</td>
+<td style="text-align: right;">20.3624349</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEWhite</td>
+<td style="text-align: right;">0.2300570</td>
+<td style="text-align: right;">0.0152785</td>
+<td style="text-align: right;">15.0576130</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">EMPSTATNot in labour force</td>
+<td style="text-align: right;">-0.0888542</td>
+<td style="text-align: right;">0.0042660</td>
+<td style="text-align: right;">-20.8284874</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">EMPSTATUnemployed</td>
+<td style="text-align: right;">0.0050312</td>
+<td style="text-align: right;">0.0075894</td>
+<td style="text-align: right;">0.6629276</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ran_pars</td>
+<td style="text-align: left;">REGION_CLASSIFIED</td>
+<td style="text-align: left;">sd__(Intercept)</td>
+<td style="text-align: right;">0.1360942</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ran_pars</td>
+<td style="text-align: left;">Residual</td>
+<td style="text-align: left;">sd__Observation</td>
+<td style="text-align: right;">0.4839304</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
+</ul>
+</section>
+<section id="statistical-performance-6" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-6">Statistical performance:</h3>
+<ul>
+<li>Lower standard errors indicate more precise estimates of the coefficients, and most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates.</li>
+<li>Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. ROOMS and NFAMS have t-statistics of 76.24 and 35.64 respectively, indicating strong significance in predicting rent.</li>
+</ul>
+</section>
+<section id="model-discussion-4" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-4">Model discussion</h3>
+<section id="residual-plot" class="level4">
+<h4 class="anchored" data-anchor-id="residual-plot">Residual plot</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4.</li>
+<li>This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model’s homoscedasticity.</li>
+</ul>
+</section>
+<section id="qq-plot" class="level4">
+<h4 class="anchored" data-anchor-id="qq-plot">QQ plot</h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2873 24699</code></pre>
+</div>
+</div>
+<ul>
+<li>The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.</li>
+<li>The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.</li>
+</ul>
+
+
+</section>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
