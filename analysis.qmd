@@ -576,15 +576,28 @@ data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & dat
 model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty_clean, REML = FALSE)
 ### add a table here for the conclsuion: broom:tidy 
 ```
-- The model suggests that a 10% increase in income is predicted to raise rent by an average of 16.09%, with all other variables held constant, indicating income's elasticity effect on rent.
+
+### Regression Coefficients Table:
+```{r echo=FALSE, message=FALSE, warning=FALSE }
+tidy_lm <- tidy(model_with_income_log)
+kable(tidy_lm, format = "pipe")
+```
+- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.66%, with all other
+variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical performance:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 glance_lm <- glance(model_with_income_log)
 kable(glance_lm, format = "pipe")
 ```
+<<<<<<< HEAD
 - Residual Standard Error (sigma): The residual standard error is 0.4329367, This value indicates there are deviation of the observed values from the fitted values. 
 
+=======
+- There are 94520 observations in the table, which generally is a large number which is good. 
+- Residual Standard Error (sigma): The residual standard error is 0.4839304, This value indicates there are deviation of the observed values from the fitted values. A lower residual standard error suggests a model with a good fit to the data.
+- Overall statistics suggests there are limitations to the model, but it generally captures the overall trend which further suggests in the residual plot and qq plot.
+>>>>>>> 6e77506c9cc146911bce2b216819e0975cb5e29a
 
 ### Model discussion
 ## Residual plot
@@ -603,10 +616,6 @@ abline(h = 0, col = "red")
 
 ## QQ plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-qqmath(resid(model_with_income_log), distribution = qnorm,
-       main = "Q-Q Plot for Model Residuals", 
-       xlab = "Theoretical Quantiles", 
-       ylab = "Sample Quantiles")
 
 plot(residuals(model_with_income_log) ~ fitted(model_with_income_log))
 abline(h = 0, col = "red")
