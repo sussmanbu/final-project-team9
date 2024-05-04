@@ -5,23 +5,20 @@ toc: true
 draft: FALSE
 ---
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(lattice)
-library(nlme)
-library(car)
-library(shiny)
-library(DT)
 library(tidyr)
 library(broom)
 library(dplyr)
 library(here)
 library(gt)
 library(purrr)
+
 library(readr)
 library(ggplot2)
 library(knitr)
 library(lme4)
 library(broom.mixed)
-library(kableExtra)
+library(nlme)
+library(car)
 
 data_path <- here("dataset", "data_twenty_clean.csv")
 data_path1 <- here("dataset", "latest_clean.csv")
@@ -546,55 +543,9 @@ unique_races <- unique(models_by_race_year$RACE)
 
 ### Model Findings:
 #### log-log model
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyr)
-library(broom)
-library(dplyr)
-library(here)
-library(gt)
-library(purrr)
-data_path <- here("dataset", "data_twenty_clean.csv")
-data_path1 <- here("dataset", "latest_clean.csv")
-library(readr)
-data_twenty <- read_csv(data_path,show_col_types = FALSE) 
-data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
-library(ggplot2)
-library(knitr)
-library(lme4)
-library(broom.mixed)
-library(nlme)
-library(car)
-```
-
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Filter out non-positive values before log transformation
-data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
-
-
-### Statistical Performance:
-# Calculating means and standard deviations for the log-transformed columns
-mean_log_RENTGRS <- mean(data_twenty$log_RENTGRS, na.rm = TRUE)
-sd_log_RENTGRS <- sd(data_twenty$log_RENTGRS, na.rm = TRUE)
-mean_log_INCTOT <- mean(data_twenty$log_INCTOT, na.rm = TRUE)
-sd_log_INCTOT <- sd(data_twenty$log_INCTOT, na.rm = TRUE)
-
-
-# Defining lower and upper bounds for both variables
-lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
-ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
-lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
-ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
-
-# Filtering out outliers
-data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & data_twenty$log_RENTGRS <= ub_log_RENTGRS & 
-                             data_twenty$log_INCTOT >= lb_log_INCTOT & data_twenty$log_INCTOT <= ub_log_INCTOT, ]
-
-
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty_clean, REML = FALSE)
+model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty, REML = FALSE)
 ```
 
 ### Regression Coefficients Table:

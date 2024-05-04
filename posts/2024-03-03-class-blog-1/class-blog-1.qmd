@@ -1,7 +1,7 @@
 ---
 title: "Class Blog 1"
 subtitle: "Three datasets proposed for final project"
-author: "Yating Zhu,Dingyu Guo"
+author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-03-03"
 date-modified: "2024-03-03"
 draft: FALSE

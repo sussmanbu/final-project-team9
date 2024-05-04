@@ -5,6 +5,7 @@ date: "2024-04-17"
 date-modified: "2024-04-17"
 draft: FALSE
 ---
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(broom)
@@ -20,17 +21,21 @@ data_path1 <- here("dataset", "latest_clean.csv")
 data_twenty <- read_csv(data_path,show_col_types = FALSE) 
 data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
 ```
+
 ## Group BY Race, see coefficients changes over years and races
 
 ### Year 2022
 - Confirmed that RACE is a factor and has at least two levels. 
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_2022$RACE <- factor(data_2022$RACE)
 if (length(levels(data_2022$RACE)) < 2) {
   stop("RACE must have at least two levels")
 }
 ```
+
 - Identifying and removing groups where any of the specified categorical variables have only one level within each racial category, potentially indicating insufficient variability for statistical analysis.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Convert categorical variables to factors
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
@@ -56,7 +61,9 @@ data_2022_filtered <- data_2022 %>%
   filter(!RACE %in% races_with_single_levels)
 print(races_with_single_levels)
 ```
+
 - Table shows the coefficient of each races to the key predictor  
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 models_by_race <- data_2022_filtered%>%
   group_by(RACE) %>%
@@ -79,6 +86,7 @@ inctot_coefficients_by_race <- models_by_race %>%
   )
 kable(inctot_coefficients_by_race)
 ```
+
 Analysis to the table:
 
 - The **Chinese** group exhibits the highest log_INCTOT coefficient, indicating the strongest positive association between income and the variable of interest in this dataset.
@@ -92,6 +100,7 @@ Analysis to the table:
 ### Year 2000-2022
 ### For each race, how the coefficient change across 2000 to 2022 
 - Confimed that RACE is a factor and has at least two levels. 
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_twenty$RACE <- factor(data_twenty$RACE)
 if (length(levels(data_twenty$RACE)) < 2) {
@@ -99,7 +108,9 @@ if (length(levels(data_twenty$RACE)) < 2) {
 }
 ```
 
+
 - No need to drop because all has more than one level. 
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Convert categorical variables to factors
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
@@ -125,6 +136,7 @@ data_twenty_filtered <- data_twenty %>%
   filter(!RACE %in% races_with_single_levels)
 print(races_with_single_levels)
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Convert categorical variables to factors again after subsetting just in case
 data_twenty_filtered[categorical_vars] <- lapply(data_twenty_filtered[categorical_vars], factor)
@@ -143,6 +155,7 @@ race_year_with_single_levels <- race_year_levels %>%
 print(race_year_with_single_levels)
 
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 # Filter out the problematic RACE-YEAR groups from the main dataset
@@ -159,6 +172,7 @@ models_by_race_year <- data_twenty_filtered_final %>%
     model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
   )
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 models_with_coef <- models_by_race_year %>%
   rowwise() %>% 
@@ -171,6 +185,7 @@ coefficients_wide <- models_with_coef %>%
 
 kable(coefficients_wide)
 ```
+
 - Specific Trends:
 
 **Alaska Native**: Shows minor fluctuations around zero, with both positive and negative coefficients, indicating inconsistent trends over the years.
@@ -190,6 +205,7 @@ kable(coefficients_wide)
 **Whites**: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.
 
 - Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the 'Other race, nec' category often has lower coefficients, implying a weaker association with income.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 coefficients_long <- coefficients_wide %>%
@@ -223,8 +239,6 @@ for (race in unique_races) {
   print(p)
 }
 ```
-
-
 
 ```{r}
 # Load necessary libraries
@@ -273,8 +287,4 @@ models_by_race_year <- models_by_race_year %>%
 print(models_by_race_year)
 
 ```
-
-
-
-
 

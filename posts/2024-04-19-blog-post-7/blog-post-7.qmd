@@ -1,6 +1,6 @@
 ---
 title: "Blog Post 7"
-author: "Yating Zhu, Dingyu Guo"
+author: "Yating Zhu, Dingyu Guo，Suh Edwin Jiho"
 date: "2024-04-19"
 date-modified: "2024-04-19"
 draft: FALSE
