@@ -7,7 +7,7 @@ editor:
   markdown: 
     wrap: sentence
 ---
-
+![](images/DataPageImage.png)
 # Describe where/how to find data
 
 Both our datasets comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).
