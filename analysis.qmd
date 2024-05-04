@@ -5,9 +5,10 @@ toc: true
 draft: FALSE
 
 ---
-
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(lattice)
+library(nlme)
+library(car)
 library(shiny)
 library(DT)
 library(tidyr)
@@ -44,52 +45,20 @@ The primary focus of this research is to investigate the relationship between in
 -   **Demographic Variance**: The study will also consider racial differences to identify how income's impact on rent varies among different racial groups.
 -   **Temporal Analysis**: Employing a time series regression model allows us to account for changes over time, providing a dynamic perspective on the income-rent relationship.
 
-## Key Questions
-
--   What is the quantitative impact of income changes on rental expenditures?
--   How does the relationship between income and rent vary across different racial groups?
--   Does the relationship between income and rent change over time?
 
 # Models and Inferences (First dataset)
 
-## Outline
+## Outline of models used in class blogs
 
 1.  Simple Linear Regression Model (Detailed in Class Blog 4)
+- Investigates the relationship between income (the predictor) and rent (the response), offering preliminary insights into whether they share a positive or negative correlation and assessing if it is worth to have further detailed analysis.
+
 2.  Multiple Linear Regression Model (Detailed in Class Blog 4)
+
 3.  Log-Log Regression Model
+
 4.  Log-Log Regression Model with interaction terms
 
-## 1. Simple Linear Regression Model
-
-### Model Overview:
-
-This model investigates the relationship between income (the predictor) and rent (the response), offering preliminary insights into whether they share a positive or negative correlation and assessing if it is worth to have further detailed analysis.
-
-### Model Findings:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-lm_model <- lm(RENTGRS ~ INCTOT, data = data_2022)
-tidy_lm <- tidy(lm_model)
-kable(tidy_lm, format = "pipe")
-```
-
--   The model suggests that an increase of \$1,000 in income is associated with an average increase of approximately 5.7 dollars in the rent variable.
-
-### Statistical Performance:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-glance_lm <- glance(lm_model)
-kable(glance_lm, format = "pipe")
-```
-
--   The model's R-squared and adjusted R-squared values are modest but acceptable for simple linear regression, justifying further exploration.
-
--   A significant F-statistic and p_value confirm the model's statistical relevance, despite a high sigma pointing to considerable unexplained variance.
-
-### Model Discussion:
-
--   The model offers an initial look at the income-rent relationship but is incomplete.
--   Future analysis should incorporate more factors for greater accuracy.
 
 ## 2. Multiple Linear Regression Model
 
@@ -111,7 +80,7 @@ glance_mlr=glance(mlr_model)
 kable(glance_mlr)
 ```
 -   The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.
--   The adjusted R-squared value of 0.2807292 closely mirrors the R-squared value, suggesting that the additional predictors are effectively contributing valuable information.
+
 -   A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.
 
 ### Variable Selection and model refinement:
@@ -134,7 +103,6 @@ library(car)
 vif_values <- vif(mlr_model)
 kable(vif_values)
 ```
--   The selection and validation of control variables were systematically conducted.
 -   After fitting the multiple linear regression (MLR) model, `Kitchen` was removed due to its statistical insignificance, indicated by a high p-value.
 -   `Employment Status`, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like `Income` or `FTOTINC`. This interaction will be explored further.
 
@@ -153,22 +121,21 @@ plot(fitted_values, residuals,
 
 abline(h = 0, col = "red")
 ```
+- The plot indicates a potential non-linear relationship and heteroscedasticity, evident from the increase in variability with the size of the fitted values.
 
-- The pattern in this plot suggests potential non-linear relationships and heteroscedasticity as the systematic pattern seen here where residuals create a fan-shaped spread. 
-- There are some points that stand out from the cloud of points, especially on the bottom left and the top right of the plot. These could be potential outliers or leverage points.
-- Given the apparent increase in variability of residuals with the size of the fitted values and the non-linear pattern, applying a log transformation to the variable might help. 
+- Some points notably deviate from the main cluster, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points. 
 
 ## 3. Log-Log Regression Model
 
 ### Model Overview:
 -   Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.
+
 -   A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.
 
 ### Model Findings:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
-
 ```
 
 [Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.]( https://yatingzhu.shinyapps.io/app2/)
@@ -181,10 +148,12 @@ glance_log=glance(log_model_2022)
 kable(glance_log)
 ```
 -   An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.
+
 -   A very low p-value signifies the statistical significance of the model’s predictors.
+
 -   The sigma value's reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.
 
-### Model Discussion:
+### Model Discussion :
 1.  Linearity and Homoscedasticity:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 plot(fitted(log_model_2022), residuals(log_model_2022),
@@ -194,10 +163,11 @@ plot(fitted(log_model_2022), residuals(log_model_2022),
 abline(h = 0, col = "red")
 ```
 
--   The absence of a systematic pattern in the residuals indicates a proper capture of the relationship between the predictors and response variable in the log-transformed model.
--   The spread of residuals is mostly consistent, though some widening at the extremes suggests minor heteroscedasticity. This is often a minor issue in economic data, reflecting the variability in higher income or rent brackets, and doesn't significantly affect the model's overall validity.
--   Residuals predominantly centering around the zero line signify no model bias, reinforcing the model's accuracy.
--   A small number of potential outliers deviate from the main cluster, which is typical in large economic datasets and generally does not markedly impact the robust central trend captured by the model.
+- The residuals show no systematic pattern, indicating an effective capture of the relationship between predictors and response variable. 
+
+- While the spread is mostly consistent, some widening at the extremes suggests minor heteroscedasticity, typical in economic data involving higher income or rent brackets, but it does not significantly compromise the model's validity. Residuals predominantly center around the zero line, indicating no model bias and reinforcing its accuracy. 
+
+- A few potential outliers, common in large economic datasets, do not notably affect the robust central trend captured by the model.
 
 2.  Normality of Residuals:
 
@@ -207,8 +177,7 @@ qqnorm(residuals(log_model_2022))
 qqline(residuals(log_model_2022), col = "steelblue")
 ```
 
--   The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends.
--   These deviations, often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.
+-   The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.
 
 3.  IID Errors:
 
@@ -238,7 +207,7 @@ kable(index)
 
 ### Model Overview
 
--   This analysis applies a stratified Log-Log regression approach, segregating data by race as detailed in Class Blog 6. It builds upon the strong foundational understanding from Section 3.
+-   This analysis applies a stratified Log-Log regression approach, segregating data by race . It builds upon the foundational understanding from Section 3.
 
 ### Model Findings:
 
@@ -281,11 +250,11 @@ kable(inctot_coefficients_by_race)
 
 -   The coefficient for log_INCTOT shows notable variation across racial categories, which indicates the impact of income on rent varies by race.
 
--   The Chinese group demonstrates the highest log_INCTOT coefficient, indicating a particularly strong positive association between income and rent within this demographic.
+  -   The Chinese group demonstrates the highest log_INCTOT coefficient, indicating a particularly strong positive association between income and rent within this demographic.
 
--   American Indian or Alaska Native, Other Asian or Pacific Islander, Other race, nec, Three or more major races, and White categories show a range of coefficients, suggesting varied levels of positive association.
+  -   American Indian or Alaska Native, Other Asian or Pacific Islander, Other race, nec, Three or more major races, and White categories show a range of coefficients, suggesting varied levels of positive association.
 
--   Black/African American and Two major races groups present with lower coefficients, hinting at a relatively weaker positive relationship.
+  -   Black/African American and Two major races groups present with lower coefficients, hinting at a relatively weaker positive relationship.
 
 ### Statistical Performance:
 
@@ -304,7 +273,7 @@ kable(models_summaries)
 
 -   For most racial groups, the p-values indicate statistical significance (p \< 0.05), especially pronounced for `Black/African American`, `Chinese`, `Other Asian or Pacific Islander`, and `White categories`, implying a strong relationship between income and rent.
 
--   The higher p-value for `American Indian or Alaska Native` suggests that the relationship between income and rent is **not statistically significant** for this group, based on the traditional alpha threshold.
+-   But the higher p-value for some groups suggests that the relationship between income and rent is **not statistically significant** .
 
 ### Model Discussion:
 
@@ -312,46 +281,16 @@ kable(models_summaries)
 
 -   Non-significance in certain racial categories may reflect data limitations or the presence of other variables not captured in the model, indicating areas where further research or data collection could be beneficial.
 
--   The model's overall robustness and the significance of its findings provide valuable insights, yet also suggest that an exploration of additional socio-economic factors and historical trends could contribute to a more nuanced understanding.
 
 ## 5. Enhanced Log-Log Regression Model with Interaction Terms 
 ### Model Overview
 
--  This model is built upon the solid foundation established in Section 3. This section explores nonlinearity further and addresses the potential skewness identified in the conclusions of Model 3.
+-  This model is built upon the foundation established in Section 3. This section explores nonlinearity further.
 
 ### Model Overview and Model Refinement:
 
 -   The interaction term `EMPSTAT * FTOTINC` has been introduced to investigate the suspected interaction effect between employment status and total family income.
-
--   Post inclusion, the p-value for `EMPSTATUnemployed:FTOTINC` is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-server <- function(input, output, session) {
-  output$modelTable <- renderDT({
-    req(models_by_year)
-    year_data <- models_by_year %>%
-      filter(YEAR == input$yearSlider)
-    year_data <- year_data %>%
-      mutate(
-        estimate = map_dbl(tidied, ~ .x$estimate[.x$term == "log_INCTOT"]),  
-        std_error = map_dbl(tidied, ~ .x$std.error[.x$term == "log_INCTOT"]),
-        statistic = map_dbl(tidied, ~ .x$statistic[.x$term == "log_INCTOT"]),
-        p_value = map_dbl(tidied, ~ .x$p.value[.x$term == "log_INCTOT"]) 
-      ) %>%
-      select(YEAR, estimate, std_error, statistic, p_value)  
-    datatable(year_data, 
-      options = list(
-        pageLength = 1,      
-        lengthMenu = c(1, 5, 10, 25, 50, 100),
-        autoWidth = TRUE
-      ),
-      rownames = FALSE
-    )
-  })
-}
-```
-
-
+- But the p-value for `EMPSTATUnemployed:FTOTINC` is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.
 
 ### Statistical Performance:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -361,7 +300,7 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RA
 glance_log_model_2022 <- glance(log_model_2022)
 kable(glance_log_model_2022)
 ```
--   All predictors show statistical significance, with the exception of certain categories within marital status and employment status, indicating robustness in the variable selection.
+-   All predictors show statistical significance, with the exception of certain categories within marital status and employment status.
 
 -   The integration of the interaction term retains the significance of other variables, with no detrimental impact on the model’s variables as reflected in their p-values.
 
@@ -420,60 +359,25 @@ models_by_year %>%
 
 -   Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.
 - The coefficient shows dropping down during the Covid-19 period.
+
 -   The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.
--   Coefficient estimates range within a tight interval, indicating a consistent strength of relationship across the dataset's timespan.
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-models_by_year <- data_twenty %>%
-  group_by(YEAR) %>%
-  nest() %>%
-  mutate(
-    model = map(data, ~ lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = .)),
-    tidied = map(model, tidy),
-    glance_data = map(model, glance)  # Ensure this line correctly creates glance_data
-  ) %>%
-  ungroup()
-
-if ("glance_data" %in% names(models_by_year)) {
-  # If glance_data exists, proceed with the visualization
-  r_squared_trends <- models_by_year %>%
-    select(YEAR, glance_data) %>%
-    unnest(cols = glance_data) %>%
-    ggplot(aes(x = as.numeric(YEAR), y = r.squared)) +
-    geom_line() +
-    geom_point() +
-    labs(title = "Trend of R-squared Over Years",
-         x = "Year",
-         y = "R-squared")
-
-  print(r_squared_trends)
-} else {
-  cat("Error: 'glance_data' column does not exist. Check model fitting and glance data generation steps.\n")
-}
-
-```
-
--   R-squared values demonstrate time-bound variability, implying shifts in the model's explanatory power from year to year.
--   A recent sharp decline in R-squared highlights a potential reduction in predictive accuracy or a substantial data structure change.
 
 ### Statistical Performance:
 
 [Click here to view the summary table for the model of each Year.] (https://yatingzhu.shinyapps.io/app3/)
 
--   All models are statistically validated, while reviewing each coefficient of each year through 'tidy' table, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .
+-   All models are statistically validated, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .
+
 -   R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.
--   Adjusted R-squared values, marginally lower than the R-squared, adhere to expectations, considering model complexity relative to data volume.
+
 -   P-values indicate consistent statistical significance for the model's predictors on an annual basis.
--   Log-likelihood, AIC, and BIC values increment over time, which may indicate an improving model fit or increasing data variability.
+
 -   The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.
 
 ## 2. Longitudinal Log-Log Regression Model by Race
 
 ### Model Overview:
-
 -   This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
--   Trends over time for each race were charted to illustrate these dynamics.
--   Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.
 
 ### Model Findings:
 [Click here to view the plot for the cofficients across Years for each race.](https://yatingzhu.shinyapps.io/app4/)
@@ -562,7 +466,6 @@ unique_races <- unique(log_inctot_p_values$RACE)
 
 **Whites**: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.
 
--   Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the 'Other race, nec' category often has lower coefficients, implying a weaker association with income.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 coefficients_long <- coefficients_wide %>%
@@ -633,41 +536,16 @@ models_by_race_year <- data_twenty_filtered_final %>%
 
 unique_races <- unique(models_by_race_year$RACE)
 
-
 ```
 - The p-value of 0 consistently across all races and years suggests that the models are statistically significant. This means the results are unlikely to have occurred by chance, and there is a statistically significant relationship between the dependent and independent variables in the models used.
 
-### Discussion of the topic: 
-- Race is really a point that needs to explore. Through the result and the visualization of the coefficient changes for each race, there is definitely different patterns showed.
 
 ## 3.Time series model
 
 ### Model Overview:
+*******Why use time series model here, how it improved upon the previos one;
 
 ### Model Findings:
-## log-log model
-```{r}
-library(tidyr)
-library(broom)
-library(dplyr)
-library(here)
-library(gt)
-library(purrr)
-data_path <- here("dataset", "data_twenty_clean.csv")
-data_path1 <- here("dataset", "latest_clean.csv")
-library(readr)
-data_twenty <- read_csv(data_path,show_col_types = FALSE) 
-data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
-library(ggplot2)
-library(knitr)
-library(lme4)
-library(broom.mixed)
-library(nlme)
-library(car)
-
-```
-
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
@@ -696,6 +574,7 @@ data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & dat
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty_clean, REML = FALSE)
+### add a table here for the conclsuion: broom:tidy 
 ```
 - The model suggests that a 10% increase in income is predicted to raise rent by an average of 16.09%, with all other variables held constant, indicating income's elasticity effect on rent.
 
@@ -704,46 +583,38 @@ model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST +
 glance_lm <- glance(model_with_income_log)
 kable(glance_lm, format = "pipe")
 ```
-- There are 31662 observations in the table, which generally is a large number which is good. 
-- Residual Standard Error (sigma): The residual standard error is 0.4329367, This value indicates there are deviation of the observed values from the fitted values. A lower residual standard error suggests a model with a good fit to the data.
-- Log-Likelihood (logLik): The log-likelihood of the model is -18433.34. Log-likelihood measures how well the model predicts the observed data; higher values (closer to zero) typically indicate a better model fit.
-- Overall statistics suggests there are limitations to the model, but it generally captures the overall trend which further suggests in the residual plot and qq plot.
+- Residual Standard Error (sigma): The residual standard error is 0.4329367, This value indicates there are deviation of the observed values from the fitted values. 
+
 
 ### Model discussion
 ## Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Calculate residuals and fitted values
 residuals_twenty <- resid(model_with_income_log)
 fitted_values_twenty <- fitted(model_with_income_log)
 
-# Create a residual plot
 plot(fitted_values_twenty, residuals_twenty, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
 - The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. However, this is common in non-transformed data and it is our one of the limitation in our model. 
+
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
 
 ## QQ plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(lattice)
-
-# Q-Q plot for normality
 qqmath(resid(model_with_income_log), distribution = qnorm,
        main = "Q-Q Plot for Model Residuals", 
        xlab = "Theoretical Quantiles", 
        ylab = "Sample Quantiles")
 
-# Residuals vs Fitted plot for homoscedasticity
 plot(residuals(model_with_income_log) ~ fitted(model_with_income_log))
 abline(h = 0, col = "red")
 qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
-
-
-
 ```
 - The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.
+
 - The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
+
 - The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
 
