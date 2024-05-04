@@ -4,6 +4,7 @@ description: "Here we provide a detailed analysis using more sophisticated stati
 toc: true
 draft: FALSE
 ---
+![](images/AnalysisPicture.png)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(broom)
@@ -535,15 +536,14 @@ unique_races <- unique(models_by_race_year$RACE)
 ```
 - The p-value of 0 consistently across all races and years suggests that the models are statistically significant. This means the results are unlikely to have occurred by chance, and there is a statistically significant relationship between the dependent and independent variables in the models used.
 
+
 ## 3.Time series model
 ### Model Overview:
-- Here we use time series random effect model to further analyze the relationship between rent and income. 
--Random Effects term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
-- The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.
+-  This time series model accounts for trends, and autocorrelation in data over time, which a simple regression model grouped by years might not capture by considering the time-dependent changes and patterns inherent in the data.
+
+- Random Effects term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
 
 ### Model Findings:
-#### log-log model
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty, REML = FALSE)
 ```
@@ -553,11 +553,12 @@ model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST +
 tidy_lm <- tidy(model_with_income_log)
 kable(tidy_lm, format = "pipe")
 ```
-- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other
-variables held constant, indicating income's elasticity effect on rent.
+
+- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical performance:
-- Lower standard errors indicate more precise estimates of the coefficients, and most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates. 
+- Most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates. 
+
 - Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. ROOMS and NFAMS have t-statistics of 76.24 and 35.64 respectively, indicating strong significance in predicting rent.
 
 ### Model discussion
@@ -573,20 +574,21 @@ plot(fitted_values_twenty, residuals_twenty,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
-- The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. 
-- This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
 
-#### QQ plot
+- The residual plot indicates potential heteroscedasticity, as there is a clear pattern where the residuals spread increasingly around the zero line and become more negative as the fitted values increase. This suggests that the variance of the residuals is not constant, which could impact the reliability of the model's predictions at higher income levels.
+
+- The pattern in this plot reflects the socio-economic dynamics of high-income individuals' housing decisions. 
+  - As income significantly increases, people tend to purchase rather than rent homes, affecting the relationship between income and rental expenditures. This creates a ceiling effect on rental payments, leading to the model’s residuals deviating negatively from the expected line at higher income levels. 
+  - Moreover, even the most expensive rental properties have a price cap, meaning that extremely wealthy individuals may rent homes within the same price range as those who are less affluent but still wealthy. This results in a scenario where, past a certain income threshold, further increases in income do not correspond to higher rents. 
+  - Combined, these factors explain why the model’s residuals show such deviations at the upper income levels.
+
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(lattice)
-# Residuals vs Fitted plot for homoscedasticity
-plot(residuals(model_with_income_log) ~ fitted(model_with_income_log))
-abline(h = 0, col = "red")
-qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
-
-
-
+qqmath(resid(model_with_income_log), distribution = qnorm,
+       main = "Q-Q Plot for Model Residuals", 
+       xlab = "Theoretical Quantiles", 
+       ylab = "Sample Quantiles")
 ```
-- The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.
-- The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
+- The points mostly follow the line in the center, indicating that residuals are generally well-modeled. But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
 

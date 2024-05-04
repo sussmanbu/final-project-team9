@@ -1,5 +1,5 @@
 ---
-title: "MA [46]15 Final Project - "
+title: "Decoding the Dynamics: An In-depth Analysis of the Relationship Between Income Levels and Rental Prices"
 listing:
   contents: "posts/*/*.qmd"
   sort: "date desc"
