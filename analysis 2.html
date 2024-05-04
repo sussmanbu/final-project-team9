@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -95,7 +95,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./big_picture.html"> 
-<span class="menu-text">Landlords Envy Him – The Budget Whisperer!</span></a>
+<span class="menu-text">The Price of Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./analysis.html" aria-current="page"> 
@@ -116,76 +116,7 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#research-question-and-motivation" id="toc-research-question-and-motivation" class="nav-link active" data-scroll-target="#research-question-and-motivation">Research Question and Motivation</a>
-  <ul class="collapse">
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  </ul></li>
-  <li><a href="#models-and-inferences-first-dataset" id="toc-models-and-inferences-first-dataset" class="nav-link" data-scroll-target="#models-and-inferences-first-dataset">Models and Inferences (First dataset)</a>
-  <ul class="collapse">
-  <li><a href="#outline-of-models-used-in-class-blogs" id="toc-outline-of-models-used-in-class-blogs" class="nav-link" data-scroll-target="#outline-of-models-used-in-class-blogs">Outline of models used in class blogs</a></li>
-  <li><a href="#multiple-linear-regression-model" id="toc-multiple-linear-regression-model" class="nav-link" data-scroll-target="#multiple-linear-regression-model">2. Multiple Linear Regression Model</a>
-  <ul class="collapse">
-  <li><a href="#model-overview" id="toc-model-overview" class="nav-link" data-scroll-target="#model-overview">Model Overview:</a></li>
-  <li><a href="#model-findings" id="toc-model-findings" class="nav-link" data-scroll-target="#model-findings">Model Findings:</a></li>
-  <li><a href="#statistical-performance" id="toc-statistical-performance" class="nav-link" data-scroll-target="#statistical-performance">Statistical Performance:</a></li>
-  <li><a href="#variable-selection-and-model-refinement" id="toc-variable-selection-and-model-refinement" class="nav-link" data-scroll-target="#variable-selection-and-model-refinement">Variable Selection and model refinement:</a></li>
-  <li><a href="#model-discussion" id="toc-model-discussion" class="nav-link" data-scroll-target="#model-discussion">Model Discussion :</a></li>
-  </ul></li>
-  <li><a href="#log-log-regression-model" id="toc-log-log-regression-model" class="nav-link" data-scroll-target="#log-log-regression-model">3. Log-Log Regression Model</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-1" id="toc-model-overview-1" class="nav-link" data-scroll-target="#model-overview-1">Model Overview:</a></li>
-  <li><a href="#model-findings-1" id="toc-model-findings-1" class="nav-link" data-scroll-target="#model-findings-1">Model Findings:</a></li>
-  <li><a href="#statistical-performance-1" id="toc-statistical-performance-1" class="nav-link" data-scroll-target="#statistical-performance-1">Statistical Performance:</a></li>
-  <li><a href="#model-discussion-1" id="toc-model-discussion-1" class="nav-link" data-scroll-target="#model-discussion-1">Model Discussion :</a></li>
-  </ul></li>
-  <li><a href="#log-log-regression-model-by-race" id="toc-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#log-log-regression-model-by-race">4. Log-Log Regression Model by Race</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-2" id="toc-model-overview-2" class="nav-link" data-scroll-target="#model-overview-2">Model Overview</a></li>
-  <li><a href="#model-findings-2" id="toc-model-findings-2" class="nav-link" data-scroll-target="#model-findings-2">Model Findings:</a></li>
-  <li><a href="#statistical-performance-2" id="toc-statistical-performance-2" class="nav-link" data-scroll-target="#statistical-performance-2">Statistical Performance:</a></li>
-  <li><a href="#model-discussion-2" id="toc-model-discussion-2" class="nav-link" data-scroll-target="#model-discussion-2">Model Discussion:</a></li>
-  </ul></li>
-  <li><a href="#enhanced-log-log-regression-model-with-interaction-terms" id="toc-enhanced-log-log-regression-model-with-interaction-terms" class="nav-link" data-scroll-target="#enhanced-log-log-regression-model-with-interaction-terms">5. Enhanced Log-Log Regression Model with Interaction Terms</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-3" id="toc-model-overview-3" class="nav-link" data-scroll-target="#model-overview-3">Model Overview</a></li>
-  <li><a href="#model-overview-and-model-refinement" id="toc-model-overview-and-model-refinement" class="nav-link" data-scroll-target="#model-overview-and-model-refinement">Model Overview and Model Refinement:</a></li>
-  <li><a href="#statistical-performance-3" id="toc-statistical-performance-3" class="nav-link" data-scroll-target="#statistical-performance-3">Statistical Performance:</a></li>
-  <li><a href="#model-discussion-3" id="toc-model-discussion-3" class="nav-link" data-scroll-target="#model-discussion-3">Model Discussion:</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#models-and-inferences-merged-dataset" id="toc-models-and-inferences-merged-dataset" class="nav-link" data-scroll-target="#models-and-inferences-merged-dataset">Models and Inferences (Merged dataset)</a>
-  <ul class="collapse">
-  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#log-log-regression-model-by-year" id="toc-log-log-regression-model-by-year" class="nav-link" data-scroll-target="#log-log-regression-model-by-year">1. Log-Log Regression Model by YEAR</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-4" id="toc-model-overview-4" class="nav-link" data-scroll-target="#model-overview-4">Model Overview:</a></li>
-  <li><a href="#model-findings-3" id="toc-model-findings-3" class="nav-link" data-scroll-target="#model-findings-3">Model Findings:</a></li>
-  <li><a href="#statistical-performance-4" id="toc-statistical-performance-4" class="nav-link" data-scroll-target="#statistical-performance-4">Statistical Performance:</a></li>
-  </ul></li>
-  <li><a href="#longitudinal-log-log-regression-model-by-race" id="toc-longitudinal-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#longitudinal-log-log-regression-model-by-race">2. Longitudinal Log-Log Regression Model by Race</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-5" id="toc-model-overview-5" class="nav-link" data-scroll-target="#model-overview-5">Model Overview:</a></li>
-  <li><a href="#model-findings-4" id="toc-model-findings-4" class="nav-link" data-scroll-target="#model-findings-4">Model Findings:</a></li>
-  <li><a href="#statistical-performance-5" id="toc-statistical-performance-5" class="nav-link" data-scroll-target="#statistical-performance-5">Statistical Performance:</a></li>
-  </ul></li>
-  <li><a href="#time-series-model" id="toc-time-series-model" class="nav-link" data-scroll-target="#time-series-model">3.Time series model</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-6" id="toc-model-overview-6" class="nav-link" data-scroll-target="#model-overview-6">Model Overview:</a></li>
-  <li><a href="#model-findings-5" id="toc-model-findings-5" class="nav-link" data-scroll-target="#model-findings-5">Model Findings:</a></li>
-  <li><a href="#regression-coefficients-table" id="toc-regression-coefficients-table" class="nav-link" data-scroll-target="#regression-coefficients-table">Regression Coefficients Table:</a></li>
-  <li><a href="#statistical-performance-6" id="toc-statistical-performance-6" class="nav-link" data-scroll-target="#statistical-performance-6">Statistical performance:</a></li>
-  <li><a href="#model-discussion-4" id="toc-model-discussion-4" class="nav-link" data-scroll-target="#model-discussion-4">Model discussion</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -228,41 +159,154 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>Temporal Analysis</strong>: Employing a time series regression model allows us to account for changes over time, providing a dynamic perspective on the income-rent relationship.</li>
 </ul>
 </section>
+<section id="key-questions" class="level2">
+<h2 class="anchored" data-anchor-id="key-questions">Key Questions</h2>
+<ul>
+<li>What is the quantitative impact of income changes on rental expenditures?</li>
+<li>How does the relationship between income and rent vary across different racial groups?</li>
+<li>Does the relationship between income and rent change over time?</li>
+</ul>
+</section>
 </section>
 <section id="models-and-inferences-first-dataset" class="level1">
 <h1>Models and Inferences (First dataset)</h1>
-<section id="outline-of-models-used-in-class-blogs" class="level2">
-<h2 class="anchored" data-anchor-id="outline-of-models-used-in-class-blogs">Outline of models used in class blogs</h2>
+<section id="outline" class="level2">
+<h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <ol type="1">
 <li>Simple Linear Regression Model (Detailed in Class Blog 4)</li>
+<li>Multiple Linear Regression Model (Detailed in Class Blog 4)</li>
+<li>Log-Log Regression Model</li>
+<li>Log-Log Regression Model with interaction terms</li>
 </ol>
+</section>
+<section id="simple-linear-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="simple-linear-regression-model">1. Simple Linear Regression Model</h2>
+<section id="model-overview" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview">Model Overview:</h3>
+<p>This model investigates the relationship between income (the predictor) and rent (the response), offering preliminary insights into whether they share a positive or negative correlation and assessing if it is worth to have further detailed analysis.</p>
+</section>
+<section id="model-findings" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings">Model Findings:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">1329.7165501</td>
+<td style="text-align: right;">15.8008996</td>
+<td style="text-align: right;">84.15448</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">0.0057046</td>
+<td style="text-align: right;">0.0002248</td>
+<td style="text-align: right;">25.38011</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ul>
-<li>Investigates the relationship between income (the predictor) and rent (the response), offering preliminary insights into whether they share a positive or negative correlation and assessing if it is worth to have further detailed analysis.</li>
+<li>The model suggests that an increase of $1,000 in income is associated with an average increase of approximately 5.7 dollars in the rent variable.</li>
 </ul>
-<ol start="2" type="1">
-<li><p>Multiple Linear Regression Model (Detailed in Class Blog 4)</p></li>
-<li><p>Log-Log Regression Model</p></li>
-<li><p>Log-Log Regression Model with interaction terms</p></li>
-</ol>
+</section>
+<section id="statistical-performance" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance">Statistical Performance:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.1108854</td>
+<td style="text-align: right;">0.1107132</td>
+<td style="text-align: right;">884.7833</td>
+<td style="text-align: right;">644.1498</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">-42390.52</td>
+<td style="text-align: right;">84787.04</td>
+<td style="text-align: right;">84806.69</td>
+<td style="text-align: right;">4043376235</td>
+<td style="text-align: right;">5165</td>
+<td style="text-align: right;">5167</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<ul>
+<li><p>The model’s R-squared and adjusted R-squared values are modest but acceptable for simple linear regression, justifying further exploration.</p></li>
+<li><p>A significant F-statistic and p_value confirm the model’s statistical relevance, despite a high sigma pointing to considerable unexplained variance.</p></li>
+</ul>
+</section>
+<section id="model-discussion" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion">Model Discussion:</h3>
+<ul>
+<li>The model offers an initial look at the income-rent relationship but is incomplete.</li>
+<li>Future analysis should incorporate more factors for greater accuracy.</li>
+</ul>
+</section>
 </section>
 <section id="multiple-linear-regression-model" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-linear-regression-model">2. Multiple Linear Regression Model</h2>
-<section id="model-overview" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview">Model Overview:</h3>
+<section id="model-overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-1">Model Overview:</h3>
 <ul>
 <li>This model enhances the simple linear regression by incorporating additional confounding variables to refine our analysis.</li>
 <li>This expanded model builds upon the initial simple linear regression framework.</li>
 </ul>
 </section>
-<section id="model-findings" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings">Model Findings:</h3>
+<section id="model-findings-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-1">Model Findings:</h3>
 <p><a href="https://yatingzhu.shinyapps.io/app1/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
 <ul>
 <li>A $1,000 increase in total income (INCTOT) is associated with an average increase of 5.2 in gross rent (RENTGRS), assuming other variables are constant.</li>
 </ul>
 </section>
-<section id="statistical-performance" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance">Statistical Performance:</h3>
+<section id="statistical-performance-1" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -316,8 +360,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.</p></li>
-<li><p>A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.</p></li>
+<li>The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.</li>
+<li>The adjusted R-squared value of 0.2807292 closely mirrors the R-squared value, suggesting that the additional predictors are effectively contributing valuable information.</li>
+<li>A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.</li>
 </ul>
 </section>
 <section id="variable-selection-and-model-refinement" class="level3">
@@ -487,45 +532,47 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
+<li>The selection and validation of control variables were systematically conducted.</li>
 <li>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value.</li>
 <li><code>Employment Status</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income</code> or <code>FTOTINC</code>. This interaction will be explored further.</li>
 </ul>
 </section>
-<section id="model-discussion" class="level3">
-<h3 class="anchored" data-anchor-id="model-discussion">Model Discussion :</h3>
+<section id="model-discussion-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-1">Model Discussion :</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <ul>
-<li><p>The plot indicates a potential non-linear relationship and heteroscedasticity, evident from the increase in variability with the size of the fitted values.</p></li>
-<li><p>Some points notably deviate from the main cluster, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points.</p></li>
+<li>The pattern in this plot suggests potential non-linear relationships and heteroscedasticity as the systematic pattern seen here where residuals create a fan-shaped spread.</li>
+<li>There are some points that stand out from the cloud of points, especially on the bottom left and the top right of the plot. These could be potential outliers or leverage points.</li>
+<li>Given the apparent increase in variability of residuals with the size of the fitted values and the non-linear pattern, applying a log transformation to the variable might help.</li>
 </ul>
 </section>
 </section>
 <section id="log-log-regression-model" class="level2">
 <h2 class="anchored" data-anchor-id="log-log-regression-model">3. Log-Log Regression Model</h2>
-<section id="model-overview-1" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview-1">Model Overview:</h3>
+<section id="model-overview-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-2">Model Overview:</h3>
 <ul>
-<li><p>Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.</p></li>
-<li><p>A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.</p></li>
+<li>Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.</li>
+<li>A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.</li>
 </ul>
 </section>
-<section id="model-findings-1" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings-1">Model Findings:</h3>
+<section id="model-findings-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-2">Model Findings:</h3>
 <p><a href="https://yatingzhu.shinyapps.io/app2/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
 <ul>
 <li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
 </ul>
 </section>
-<section id="statistical-performance-1" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
+<section id="statistical-performance-2" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-2">Statistical Performance:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -579,13 +626,13 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.</p></li>
-<li><p>A very low p-value signifies the statistical significance of the model’s predictors.</p></li>
-<li><p>The sigma value’s reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.</p></li>
+<li>An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.</li>
+<li>A very low p-value signifies the statistical significance of the model’s predictors.</li>
+<li>The sigma value’s reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.</li>
 </ul>
 </section>
-<section id="model-discussion-1" class="level3">
-<h3 class="anchored" data-anchor-id="model-discussion-1">Model Discussion :</h3>
+<section id="model-discussion-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-2">Model Discussion:</h3>
 <ol type="1">
 <li>Linearity and Homoscedasticity:</li>
 </ol>
@@ -593,15 +640,16 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <ul>
-<li><p>The residuals show no systematic pattern, indicating an effective capture of the relationship between predictors and response variable.</p></li>
-<li><p>While the spread is mostly consistent, some widening at the extremes suggests minor heteroscedasticity, typical in economic data involving higher income or rent brackets, but it does not significantly compromise the model’s validity. Residuals predominantly center around the zero line, indicating no model bias and reinforcing its accuracy.</p></li>
-<li><p>A few potential outliers, common in large economic datasets, do not notably affect the robust central trend captured by the model.</p></li>
+<li>The absence of a systematic pattern in the residuals indicates a proper capture of the relationship between the predictors and response variable in the log-transformed model.</li>
+<li>The spread of residuals is mostly consistent, though some widening at the extremes suggests minor heteroscedasticity. This is often a minor issue in economic data, reflecting the variability in higher income or rent brackets, and doesn’t significantly affect the model’s overall validity.</li>
+<li>Residuals predominantly centering around the zero line signify no model bias, reinforcing the model’s accuracy.</li>
+<li>A small number of potential outliers deviate from the main cluster, which is typical in large economic datasets and generally does not markedly impact the robust central trend captured by the model.</li>
 </ul>
 <ol start="2" type="1">
 <li>Normality of Residuals:</li>
@@ -610,13 +658,14 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <ul>
-<li>The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.</li>
+<li>The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends.</li>
+<li>These deviations, often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.</li>
 </ul>
 <ol start="3" type="1">
 <li>IID Errors:</li>
@@ -718,14 +767,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="log-log-regression-model-by-race" class="level2">
 <h2 class="anchored" data-anchor-id="log-log-regression-model-by-race">4. Log-Log Regression Model by Race</h2>
-<section id="model-overview-2" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview-2">Model Overview</h3>
+<section id="model-overview-3" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-3">Model Overview</h3>
 <ul>
-<li>This analysis applies a stratified Log-Log regression approach, segregating data by race . It builds upon the foundational understanding from Section 3.</li>
+<li>This analysis applies a stratified Log-Log regression approach, segregating data by race as detailed in Class Blog 6. It builds upon the strong foundational understanding from Section 3.</li>
 </ul>
 </section>
-<section id="model-findings-2" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings-2">Model Findings:</h3>
+<section id="model-findings-3" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-3">Model Findings:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -779,8 +828,8 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Black/African American and Two major races groups present with lower coefficients, hinting at a relatively weaker positive relationship.</p></li>
 </ul>
 </section>
-<section id="statistical-performance-2" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-2">Statistical Performance:</h3>
+<section id="statistical-performance-3" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-3">Statistical Performance:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -847,34 +896,35 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <ul>
 <li><p>For most racial groups, the p-values indicate statistical significance (p &lt; 0.05), especially pronounced for <code>Black/African American</code>, <code>Chinese</code>, <code>Other Asian or Pacific Islander</code>, and <code>White categories</code>, implying a strong relationship between income and rent.</p></li>
-<li><p>But the higher p-value for some groups suggests that the relationship between income and rent is <strong>not statistically significant</strong> .</p></li>
+<li><p>The higher p-value for <code>American Indian or Alaska Native</code> suggests that the relationship between income and rent is <strong>not statistically significant</strong> for this group, based on the traditional alpha threshold.</p></li>
 </ul>
 </section>
-<section id="model-discussion-2" class="level3">
-<h3 class="anchored" data-anchor-id="model-discussion-2">Model Discussion:</h3>
+<section id="model-discussion-3" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-3">Model Discussion:</h3>
 <ul>
 <li><p>The evident variability in log_INCTOT coefficients across races suggests that the relationship between income and rent is influenced by racial factors, pointing towards the complexity inherent in socio-economic dynamics.</p></li>
 <li><p>Non-significance in certain racial categories may reflect data limitations or the presence of other variables not captured in the model, indicating areas where further research or data collection could be beneficial.</p></li>
+<li><p>The model’s overall robustness and the significance of its findings provide valuable insights, yet also suggest that an exploration of additional socio-economic factors and historical trends could contribute to a more nuanced understanding.</p></li>
 </ul>
 </section>
 </section>
 <section id="enhanced-log-log-regression-model-with-interaction-terms" class="level2">
 <h2 class="anchored" data-anchor-id="enhanced-log-log-regression-model-with-interaction-terms">5. Enhanced Log-Log Regression Model with Interaction Terms</h2>
-<section id="model-overview-3" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview-3">Model Overview</h3>
+<section id="model-overview-4" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-4">Model Overview</h3>
 <ul>
-<li>This model is built upon the foundation established in Section 3. This section explores nonlinearity further.</li>
+<li>This model is built upon the solid foundation established in Section 3. This section explores nonlinearity further and addresses the potential skewness identified in the conclusions of Model 3.</li>
 </ul>
 </section>
 <section id="model-overview-and-model-refinement" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview-and-model-refinement">Model Overview and Model Refinement:</h3>
 <ul>
-<li>The interaction term <code>EMPSTAT * FTOTINC</code> has been introduced to investigate the suspected interaction effect between employment status and total family income.</li>
-<li>But the p-value for <code>EMPSTATUnemployed:FTOTINC</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.</li>
+<li><p>The interaction term <code>EMPSTAT * FTOTINC</code> has been introduced to investigate the suspected interaction effect between employment status and total family income.</p></li>
+<li><p>Post inclusion, the p-value for <code>EMPSTATUnemployed:FTOTINC</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.</p></li>
 </ul>
 </section>
-<section id="statistical-performance-3" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-3">Statistical Performance:</h3>
+<section id="statistical-performance-4" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-4">Statistical Performance:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <table class="table table-sm table-striped small">
@@ -928,12 +978,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>All predictors show statistical significance, with the exception of certain categories within marital status and employment status.</p></li>
+<li><p>All predictors show statistical significance, with the exception of certain categories within marital status and employment status, indicating robustness in the variable selection.</p></li>
 <li><p>The integration of the interaction term retains the significance of other variables, with no detrimental impact on the model’s variables as reflected in their p-values.</p></li>
 </ul>
 </section>
-<section id="model-discussion-3" class="level3">
-<h3 class="anchored" data-anchor-id="model-discussion-3">Model Discussion:</h3>
+<section id="model-discussion-4" class="level3">
+<h3 class="anchored" data-anchor-id="model-discussion-4">Model Discussion:</h3>
 <ul>
 <li>The residual plot indicates that the model without interaction terms performs better than the log-log regression with interaction terms. This residual plot does not show the performance as well as the section 3.</li>
 </ul>
@@ -941,7 +991,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -952,8 +1002,8 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="models-and-inferences-merged-dataset" class="level1">
 <h1>Models and Inferences (Merged dataset)</h1>
-<section id="outline" class="level2">
-<h2 class="anchored" data-anchor-id="outline">Outline</h2>
+<section id="outline-1" class="level2">
+<h2 class="anchored" data-anchor-id="outline-1">Outline</h2>
 <ol type="1">
 <li>Log-Log Regression Model by YEAR</li>
 <li>Longitudinal Log-Log Regression Model by Race</li>
@@ -962,50 +1012,68 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="log-log-regression-model-by-year" class="level2">
 <h2 class="anchored" data-anchor-id="log-log-regression-model-by-year">1. Log-Log Regression Model by YEAR</h2>
-<section id="model-overview-4" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview-4">Model Overview:</h3>
+<section id="model-overview-5" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-5">Model Overview:</h3>
 <ul>
 <li>This analysis implements the validated Log-Log regression approach on annual data segments to assess temporal trends and variations.</li>
 </ul>
 </section>
-<section id="model-findings-3" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings-3">Model Findings:</h3>
+<section id="model-findings-4" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-4">Model Findings:</h3>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <ul>
-<li><p>Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.</p></li>
-<li><p>The coefficient shows dropping down during the Covid-19 period.</p></li>
-<li><p>The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.</p></li>
+<li>Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.</li>
+<li>The coefficient shows dropping down during the Covid-19 period.</li>
+<li>The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.</li>
+<li>Coefficient estimates range within a tight interval, indicating a consistent strength of relationship across the dataset’s timespan.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>R-squared values demonstrate time-bound variability, implying shifts in the model’s explanatory power from year to year.</li>
+<li>A recent sharp decline in R-squared highlights a potential reduction in predictive accuracy or a substantial data structure change.</li>
 </ul>
 </section>
-<section id="statistical-performance-4" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-4">Statistical Performance:</h3>
+<section id="statistical-performance-5" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-5">Statistical Performance:</h3>
 <p>[Click here to view the summary table for the model of each Year.] (https://yatingzhu.shinyapps.io/app3/)</p>
 <ul>
-<li><p>All models are statistically validated, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .</p></li>
-<li><p>R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.</p></li>
-<li><p>P-values indicate consistent statistical significance for the model’s predictors on an annual basis.</p></li>
-<li><p>The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.</p></li>
+<li>All models are statistically validated, while reviewing each coefficient of each year through ‘tidy’ table, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .</li>
+<li>R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.</li>
+<li>Adjusted R-squared values, marginally lower than the R-squared, adhere to expectations, considering model complexity relative to data volume.</li>
+<li>P-values indicate consistent statistical significance for the model’s predictors on an annual basis.</li>
+<li>Log-likelihood, AIC, and BIC values increment over time, which may indicate an improving model fit or increasing data variability.</li>
+<li>The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.</li>
 </ul>
 </section>
 </section>
 <section id="longitudinal-log-log-regression-model-by-race" class="level2">
 <h2 class="anchored" data-anchor-id="longitudinal-log-log-regression-model-by-race">2. Longitudinal Log-Log Regression Model by Race</h2>
-<section id="model-overview-5" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview-5">Model Overview:</h3>
+<section id="model-overview-6" class="level3">
+<h3 class="anchored" data-anchor-id="model-overview-6">Model Overview:</h3>
 <ul>
 <li>This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.</li>
+<li>Trends over time for each race were charted to illustrate these dynamics.</li>
+<li>Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.</li>
 </ul>
 </section>
-<section id="model-findings-4" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings-4">Model Findings:</h3>
+<section id="model-findings-5" class="level3">
+<h3 class="anchored" data-anchor-id="model-findings-5">Model Findings:</h3>
 <p><a href="https://yatingzhu.shinyapps.io/app4/">Click here to view the plot for the cofficients across Years for each race.</a></p>
 <ul>
 <li>Specific Trends:</li>
@@ -1018,284 +1086,26 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Other race, nec</strong>: Shows a mix of positive, negative, and NA values, making a clear trend difficult to establish.</p>
 <p><strong>Two or more races</strong>: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association with income.</p>
 <p><strong>Whites</strong>: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.</p>
-</section>
-<section id="statistical-performance-5" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-5">Statistical Performance:</h3>
-<p><a href="https://yatingzhu.shinyapps.io/app5/">Click here to view the summary table of each race across Years.</a></p>
 <ul>
-<li>The p-value of 0 consistently across all races and years suggests that the models are statistically significant. This means the results are unlikely to have occurred by chance, and there is a statistically significant relationship between the dependent and independent variables in the models used.</li>
+<li>Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the ‘Other race, nec’ category often has lower coefficients, implying a weaker association with income.</li>
+</ul>
+</section>
+<section id="statistical-performance-6" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-6">Statistical Performance:</h3>
+<p><a href="https://yatingzhu.shinyapps.io/app5/">Click here to view the summary table of each race across Years.</a></p>
+</section>
+<section id="discussion-of-the-topic" class="level3">
+<h3 class="anchored" data-anchor-id="discussion-of-the-topic">Discussion of the topic:</h3>
+<ul>
+<li>Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed.</li>
 </ul>
 </section>
 </section>
 <section id="time-series-model" class="level2">
 <h2 class="anchored" data-anchor-id="time-series-model">3.Time series model</h2>
-<section id="model-overview-6" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview-6">Model Overview:</h3>
-<ul>
-<li>Here we use time series random effect model to further analyze the relationship between rent and income. -Random Effects term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model’s fixed effects.</li>
-<li>The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.</li>
-</ul>
-</section>
-<section id="model-findings-5" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings-5">Model Findings:</h3>
-<section id="log-log-model" class="level4">
-<h4 class="anchored" data-anchor-id="log-log-model">log-log model</h4>
-</section>
-</section>
-<section id="regression-coefficients-table" class="level3">
-<h3 class="anchored" data-anchor-id="regression-coefficients-table">Regression Coefficients Table:</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 18%">
-<col style="width: 37%">
-<col style="width: 11%">
-<col style="width: 10%">
-<col style="width: 12%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">effect</th>
-<th style="text-align: left;">group</th>
-<th style="text-align: left;">term</th>
-<th style="text-align: right;">estimate</th>
-<th style="text-align: right;">std.error</th>
-<th style="text-align: right;">statistic</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">4.6473187</td>
-<td style="text-align: right;">0.0722683</td>
-<td style="text-align: right;">64.3064481</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">log_INCTOT</td>
-<td style="text-align: right;">0.1466717</td>
-<td style="text-align: right;">0.0017573</td>
-<td style="text-align: right;">83.4655767</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">ROOMS</td>
-<td style="text-align: right;">0.0662534</td>
-<td style="text-align: right;">0.0008691</td>
-<td style="text-align: right;">76.2356703</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">NFAMS</td>
-<td style="text-align: right;">0.0876972</td>
-<td style="text-align: right;">0.0024604</td>
-<td style="text-align: right;">35.6427658</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">MARSTMarried, spouse absent</td>
-<td style="text-align: right;">0.1084348</td>
-<td style="text-align: right;">0.0107642</td>
-<td style="text-align: right;">10.0736180</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">MARSTMarried, spouse present</td>
-<td style="text-align: right;">0.1940211</td>
-<td style="text-align: right;">0.0049332</td>
-<td style="text-align: right;">39.3300138</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">MARSTNever married/single</td>
-<td style="text-align: right;">0.1507032</td>
-<td style="text-align: right;">0.0048136</td>
-<td style="text-align: right;">31.3079709</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">MARSTSeparated</td>
-<td style="text-align: right;">0.0140153</td>
-<td style="text-align: right;">0.0089928</td>
-<td style="text-align: right;">1.5585015</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">MARSTWidowed</td>
-<td style="text-align: right;">0.0171637</td>
-<td style="text-align: right;">0.0076327</td>
-<td style="text-align: right;">2.2486938</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACEBlack/African American</td>
-<td style="text-align: right;">0.2025752</td>
-<td style="text-align: right;">0.0157059</td>
-<td style="text-align: right;">12.8979976</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACEChinese</td>
-<td style="text-align: right;">0.3392542</td>
-<td style="text-align: right;">0.0210242</td>
-<td style="text-align: right;">16.1363309</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACEJapanese</td>
-<td style="text-align: right;">0.4122124</td>
-<td style="text-align: right;">0.0330440</td>
-<td style="text-align: right;">12.4746375</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACEOther Asian or Pacific Islander</td>
-<td style="text-align: right;">0.4046109</td>
-<td style="text-align: right;">0.0169256</td>
-<td style="text-align: right;">23.9051903</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACEOther race, nec</td>
-<td style="text-align: right;">0.2698439</td>
-<td style="text-align: right;">0.0163122</td>
-<td style="text-align: right;">16.5425061</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACEThree or more major races</td>
-<td style="text-align: right;">0.3714474</td>
-<td style="text-align: right;">0.0294801</td>
-<td style="text-align: right;">12.5999178</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACETwo major races</td>
-<td style="text-align: right;">0.3498633</td>
-<td style="text-align: right;">0.0171818</td>
-<td style="text-align: right;">20.3624349</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">RACEWhite</td>
-<td style="text-align: right;">0.2300570</td>
-<td style="text-align: right;">0.0152785</td>
-<td style="text-align: right;">15.0576130</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">EMPSTATNot in labour force</td>
-<td style="text-align: right;">-0.0888542</td>
-<td style="text-align: right;">0.0042660</td>
-<td style="text-align: right;">-20.8284874</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">fixed</td>
-<td style="text-align: left;">NA</td>
-<td style="text-align: left;">EMPSTATUnemployed</td>
-<td style="text-align: right;">0.0050312</td>
-<td style="text-align: right;">0.0075894</td>
-<td style="text-align: right;">0.6629276</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">ran_pars</td>
-<td style="text-align: left;">REGION_CLASSIFIED</td>
-<td style="text-align: left;">sd__(Intercept)</td>
-<td style="text-align: right;">0.1360942</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">ran_pars</td>
-<td style="text-align: left;">Residual</td>
-<td style="text-align: left;">sd__Observation</td>
-<td style="text-align: right;">0.4839304</td>
-<td style="text-align: right;">NA</td>
-<td style="text-align: right;">NA</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<ul>
-<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
-</ul>
-</section>
-<section id="statistical-performance-6" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-6">Statistical performance:</h3>
-<ul>
-<li>Lower standard errors indicate more precise estimates of the coefficients, and most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates.</li>
-<li>Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. ROOMS and NFAMS have t-statistics of 76.24 and 35.64 respectively, indicating strong significance in predicting rent.</li>
-</ul>
-</section>
-<section id="model-discussion-4" class="level3">
-<h3 class="anchored" data-anchor-id="model-discussion-4">Model discussion</h3>
-<section id="residual-plot" class="level4">
-<h4 class="anchored" data-anchor-id="residual-plot">Residual plot</h4>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li>The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4.</li>
-<li>This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model’s homoscedasticity.</li>
-</ul>
-</section>
-<section id="qq-plot" class="level4">
-<h4 class="anchored" data-anchor-id="qq-plot">QQ plot</h4>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-25-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  2873 24699</code></pre>
-</div>
-</div>
-<ul>
-<li>The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.</li>
-<li>The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.</li>
-</ul>
+<hr>
 
 
-</section>
-</section>
 </section>
 </section>
 
@@ -1381,7 +1191,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/final-project-team9\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
