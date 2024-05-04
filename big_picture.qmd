@@ -118,11 +118,7 @@ This deep dive into the numbers helps us understand the tricky balance between e
 
 ### Learn More Yourself
 
-You don’t have to take our word for it. Check out our interactive dashboard where you can dive into the numbers yourself. See how your city stacks up, and explore what these trends could mean for your own wallet.
 
-[Do you want to know what the most matching increase in renting expenditure for you? Click here!]()
-
-[Do you want to know what the predicted renting expenditure for you of your income? Click here for exploration!]()
 
 
 
