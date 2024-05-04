@@ -6,10 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Yating Zhu,Dingyu Guo">
-<meta name="dcterms.date" content="2024-03-03">
+<meta name="author" content="Daniel Sussman">
+<meta name="dcterms.date" content="2024-02-21">
+<meta name="description" content="This post details the steps you’ll take for your first team meeting.">
 
-<title>MA [46]15 Final Project by Team 9 - Class Blog 1</title>
+<title>MA [46]15 Final Project by Team 9 - First Team Meeting</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -88,7 +89,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../big_picture.html" rel="" target="">
- <span class="menu-text">The Price of Home</span></a>
+ <span class="menu-text">Big Picture</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../analysis.html" rel="" target="">
@@ -109,9 +110,13 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Class Blog 1</h1>
-            <p class="subtitle lead">Three datasets proposed for final project</p>
-                      </div>
+      <h1 class="title">First Team Meeting</h1>
+                  <div>
+        <div class="description">
+          <p>This post details the steps you’ll take for your first team meeting.</p>
+        </div>
+      </div>
+                </div>
   </div>
     
   
@@ -120,21 +125,21 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Yating Zhu,Dingyu Guo </p>
+               <p>Daniel Sussman </p>
             </div>
     </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 3, 2024</p>
+        <p class="date">February 21, 2024</p>
       </div>
     </div>
     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">March 3, 2024</p>
+        <p class="date-modified">February 21, 2024</p>
       </div>
     </div>
       
@@ -151,57 +156,26 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<section id="dataset-1-rent-analysis" class="level1">
-<h1>Dataset 1: Rent Analysis</h1>
-<section id="key-questions-we-want-to-explore" class="level2">
-<h2 class="anchored" data-anchor-id="key-questions-we-want-to-explore">Key Questions we want to explore</h2>
-<p>The primary objective is to explore the relationship between rent and personal total income. And other questions can also be answered like: Are there significant differences in rent burdens across different race groups or geographical locations? How do factors like age, employment status, and family size influence this relationship?</p>
-</section>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>The dataset under investigation is sourced from IPUMS USA, a reputable platform that aggregates data collected through the U.S. Census and American Community Surveys (ACS). Our dataset is particularly focused on the year 2022. This website also includes data from other years, facilitating for further time-series analysis if needed. The dataset is substantial, containing 1,000,000 rows and 26 columns. The data can be grouped by various categories for detailed analysis and identifying trends. This dataset contains both numerical and categorical variables. Numerical variables include age, poverty level, total personal income, number of family members in households, and family income, among others. Categorical variables encompass sex, marital status, employment status, elevator and flush toilet availability, race, etc. One of the main challenges anticipated with this dataset is the presence of missing values, which could complicate data cleaning processes and affect the data size and quality. However, given the dataset’s large size, it remains feasible to extract a substantial sample (over 10,000 records) for robust analysis.</p>
-</section>
-<section id="link" class="level2">
-<h2 class="anchored" data-anchor-id="link">Link</h2>
-<p><a href="https://usa.ipums.org/usa/index.shtml">IPUMS USA website</a></p>
-<p><a href="https://drive.google.com/file/d/1QKT4GWGYHTPB-t6anUsxq9LmeD2_OsPb/view?usp=sharing">A PDF containing screenshots of the selected variables on the IPUMS HEALTH SURVEY website</a></p>
-<p>*Through these variables names, look for the corresponding variable name in the first link and you see the specific description of each variable. But IPUMS cannot distribute users’ selected datasets’ information directly to others.</p>
-</section>
-</section>
-<section id="dataset-2-diabetes-problem" class="level1">
-<h1>Dataset 2: Diabetes Problem</h1>
-<section id="key-questions-we-want-to-explore-1" class="level2">
-<h2 class="anchored" data-anchor-id="key-questions-we-want-to-explore-1">Key Questions we want to explore</h2>
-<p>The main question we want to focus based on this dataset is the relationship between the age of diabetes diagnosis and personal income. And we can also explore other questions related to this topics like how socioeconomic status influences health outcomes, the patients’ current status and other related.</p>
-</section>
-<section id="introduction-1" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-1">Introduction</h2>
-<p>This dataset is derived from IPUMS Health Surveys. The sources are from the reputable institutions including The Eunice Kennedy Shriver National Institute of Child Health and Human Development, Stat/Transfer, State Health Access Data Assistance Center, and the University of Minnesota, underscoring its credibility. The primary data are derived from the National Health Interview Survey (NHIS) and the Medical Expenditure Panel Survey (MEPS), which collectively offer a rich and comprehensive dataset representative of the U.S. population. This dataset includes a wide range of variables, both numerical and categorical. Numerical variables cover aspects such as the age of diabetes diagnosis, household weight, family income, educational attainment, poverty level, enrollment fees or premiums for Medicaid plans and etc. Categorical variables include race, insurance coverage, diabetic pill consumption, types of diabetes and etc. The dataset’s size is large, containing over 10,000,000 columns and 24 rows. The dataset’s compatibility can allow us to use dplyr, forcats, lubridate and other skills as we learnt in this class to manipulate and visualize, which makes it an excellent resource for applying and expanding upon the analytical skills developed in class. However, several challenges are anticipated in working with this dataset. One issue is the data was not from these two years. This could limit the accuracy of attributing findings to current conditions. Additionally, there are soma self-reported answers in this dataset, which introduces potential biases. But wee think the large sample size may mitigate the impact of individual errors or biases. Technical challenges may arise during the data analysis, particularly in categorizing and analyzing diverse groups within the dataset.</p>
-</section>
-<section id="link-1" class="level2">
-<h2 class="anchored" data-anchor-id="link-1">Link</h2>
-<p><a href="https://healthsurveys.ipums.org/">IPUMS HEALTH SURVEY website</a></p>
-<p><a href="https://drive.google.com/file/d/1QKT4GWGYHTPB-t6anUsxq9LmeD2_OsPb/view?usp=sharing">A PDF containing screenshots of the selected variables on the IPUMS HEALTH SURVEY website</a></p>
-</section>
-</section>
-<section id="dataset-3-education" class="level1">
-<h1>Dataset 3: Education</h1>
-<section id="key-questions-we-want-to-explore-2" class="level2">
-<h2 class="anchored" data-anchor-id="key-questions-we-want-to-explore-2">Key Questions we want to explore</h2>
-<p>The main questions we aimed to address in this dataset involve predicting income levels based on the influence of education. Other variables like work class, and hours worked per week on income, and races can also be used to classify different groups and identify demographic patterns related to income disparities .</p>
-</section>
-<section id="introduction-2" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-2">Introduction</h2>
-<p>This dataset comes from 1994 Census bureau database, which is very reliable data source. It comprises 32,561 rows and 15 columns, and the columns represent various attributes such as age, work class, final weight (fnlwgt), education level, marital status, occupation, relationship, race, sex, capital gain, capital loss, hours per week worked, native country, and income. Challenges in analyzing this dataset may include handling missing data (especially in the ‘workclass’ and ‘occupation’ columns where “?” is noted) and how to classify and interpret this.</p>
-</section>
-<section id="link-2" class="level2">
-<h2 class="anchored" data-anchor-id="link-2">Link</h2>
-<p><a href="https://www.kaggle.com/datasets/uciml/adult-census-income">The Kaggle link</a></p>
-<p><a href="https://www.census.gov/en.html">The original dataset comes from the U.S. Census Bureau</a></p>
+<p><img src="a-business-team-giving-fist-bump-in-agreement.jpg" class="img-fluid"></p>
+<p>These are the steps that you will take today to get started on your project. Today, you will just be brainstorming, and then next week, you’ll get started on the main aspects of the project.</p>
+<ol type="1">
+<li>Start by introducing yourselves to each other. I also recommend creating a private channel on Microsoft Teams with all your team members. This will be a place that you can communicate and share ideas, code, problems, etc.</li>
+<li>Discuss what aspects of the project each of you are more or less excited about. These include
+<ol type="a">
+<li>Collecting, cleaning, and munging data ,</li>
+<li>Statistical Modeling,</li>
+<li>Visualization,</li>
+<li>Writing about analyses, and</li>
+<li>Managing and reviewing team work.</li>
+</ol></li>
+<li>Based on this, discuss where you feel your strengths and weaknesses might be.</li>
+<li>Next, start brainstorming questions you hope to answer as part of this project. This question should in some way be addressing issues around racial disparities. The questions you come up with should be at the level of the question we started with when exploring the HMDA data. (“Are there differences in the ease of securing a loan based on the race of the applicant?”) You’ll revise your questions a lot over the course of the project. Come up with a few questions that your group might be interested in exploring.</li>
+<li>Based on these questions, start looking around for data that might help you analyze this. If you are looking at U.S. based data, <a href="data.gov">data.gov</a> is a good source and if you are looking internationally, I recommend checking out the World Bank. Also, try Googling for data. Include “data set” or “dataset” in your query. You might even include “CSV” or some other format. Using “data” by itself in your query often doesn’t work too well. Spend some time searching for data and try to come up with at least three possible data sets. (For your first blog post, you’ll write short proposals about each of them that I’ll give feedback on.)</li>
+<li>Come up with a team name. Next week, I’ll provide the Github Classroom assignment that will be where you work on your final project and you’ll have to have your team name finalized by then. Your project will be hosted online at the website with a URL like <code>sussmanbu.github.io/ma4615-fa23-final-project-TEAMNAME</code>.</li>
+</ol>
+<p>Next time, you’ll get your final project website set up and write your first blog post.</p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
