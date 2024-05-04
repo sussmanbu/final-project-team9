@@ -32,6 +32,7 @@ data_2022 <- read_csv(data_path1,show_col_types = FALSE)
 # Introduction
 Imagine every year, as the calendar turns, you write a bigger check for your rent. You're not alone. Across the country, millions are penning this annual escalation into their ledgers. But there's another figure that's climbing too—your income. Let's explore this curious dance of numbers and what it means for the roof over your head.
 
+
 ## The Dance Begins: Rising Rent
 As the years roll by, the cost of renting a home has steadily increased. We've tracked this change using data from the IPUMS ACS, and the patterns are clear. The graph below is not just a line climbing a chart; it's a reflection of changing lives, of budgets adjusted, and of the increasing value we place on our homes.
 
@@ -92,6 +93,78 @@ ggplot(annual_median_income, aes(x = YEAR, y = MedianIncome)) +
     caption = "Data Source: IPUMS"
   )
 ```
+## Diversity in Housing Data: A Look at Racial Representation
+
+As we explore the dynamics of the housing market, it's essential to recognize the diversity within the data. This graph shows the distribution of different racial groups, reflecting the varying experiences across different communities.
+
+#### Distribution of Racial Groups
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data_path <- here("dataset", "latest.csv")
+library(readr)
+rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
+#RACE
+rent_data_clean <- rent_data_clean %>%
+  mutate(RACE = case_when(
+    RACE == "1" ~ "White",
+    RACE == "2" ~ "Black/African American",
+    RACE == "3" ~ "American Indian or Alaska Native",
+    RACE == "4" ~ "Chinese",
+    RACE == "5" ~ "Japanese",
+    RACE == "6" ~ "Other Asian or Pacific Islander",
+    RACE == "7" ~ "Other race, nec",
+    RACE == "8" ~ "Two major races",
+    RACE == "9" ~ "Three or more major races",
+    TRUE ~ as.character(RACE) 
+  ))
+
+abbreviation_map <- c(
+  "American Indian or Alaska Native" = "AI/AN",
+  "Black/African American" = "Black",
+  "Chinese" = "Chinese",
+  "Japanese" = "Japanese",
+  "Other Asian or Pacific Islander" = "Other Asian",
+  "Other race, nec" = "Other",
+  "Three or more major races" = "3+ Races",
+  "Two major races" = "Two Races",
+  "White" = "White"
+)
+
+race_counts <- rent_data_clean %>%
+  mutate(Abbr_RACE = abbreviation_map[RACE]) %>%
+  group_by(RACE, Abbr_RACE) %>%
+  summarise(Count = n(), .groups = "drop") %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  arrange(desc(Count))
+
+ggplot(race_counts, aes(x = factor(Abbr_RACE), y = Count, fill = factor(RACE))) +
+  geom_bar(stat = "identity", color = "#95A5A6") + 
+  geom_text(aes(label = sprintf("%1.1f%%", Percentage), y = Count + 50), 
+            vjust = -0.3, size = 3.5, color = "#34495E") + 
+  theme_minimal(base_size = 15) +  
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 15, face = "bold", color = "#34495E"), 
+    axis.title = element_text(size = 10, face = "bold", color = "#34495E"),  
+    axis.text = element_text(color = "#34495E"),  
+    axis.text.x = element_text(angle = 30, hjust = 1),  
+    panel.grid.major = element_line(color = "#ECF0F1", size = 0.2), 
+    panel.grid.minor = element_blank(),  
+    legend.position = "right",  
+    plot.margin = margin(5.5, 5.5, 5.5, 5.5, "mm") 
+  ) +
+  labs(
+    title = "Distribution of Racial Groups",
+    x = "Racial Group",
+    y = "Number of People",
+    caption = "Data Source: IPUMS"  
+  ) +
+  scale_fill_manual(
+    values = c("#FFB6C1", "#FFA07A", "#FFD700", "#98FB98", "#87CEFA", "#FF69B4", "#BA55D3", "#FFDAB9", "#40E0D0", "#F08080", "#E6E6FA", "#FFFFE0"),
+    name = "Racial Group"
+  )
+
+
+```
+
 
 ## Interactive Exploration
 While the national trends provide a broad picture, the real story unfolds at a more personal level. How does your city fare in this dance of rent and income? Dive into our interactive dashboard to explore detailed data for your area
