@@ -646,7 +646,6 @@ unique_races <- unique(models_by_race_year$RACE)
 - Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed.
 
 ## 3.Time series model
-<<<<<<< HEAD
 ### Model overview:
 - This model extended the 2022 dataset analysis to explore how the rent-income relationship have evolved other the past tenty years
 - We use random effect time series model which (1 | REGION_CLASSIFIED) term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
@@ -736,6 +735,3 @@ qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
 - The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
 - The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
 =======
-
->>>>>>> 48e394924c6c7a414a4e0e2a4b42f69a9df6f7b7
-------------------------------------------------------------------------
