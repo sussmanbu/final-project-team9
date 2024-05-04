@@ -170,6 +170,7 @@ abline(h = 0, col = "red")
 log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
 
 ```
+
 [Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.]( https://yatingzhu.shinyapps.io/app2/)
 
 - The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income's elasticity effect on rent.
@@ -640,6 +641,7 @@ unique_races <- unique(models_by_race_year$RACE)
 - Race is really a point that needs to explore. Through the result and the visualization of the coefficient changes for each race, there is definitely different patterns showed.
 
 ## 3.Time series model
+
 ### Model Overview:
 
 ### Model Findings:
