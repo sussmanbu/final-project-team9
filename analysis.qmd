@@ -654,6 +654,23 @@ unique_races <- unique(models_by_race_year$RACE)
 ### Model Findings:
 ## log-log model
 ```{r}
+library(tidyr)
+library(broom)
+library(dplyr)
+library(here)
+library(gt)
+library(purrr)
+data_path <- here("dataset", "data_twenty_clean.csv")
+data_path1 <- here("dataset", "latest_clean.csv")
+library(readr)
+data_twenty <- read_csv(data_path,show_col_types = FALSE) 
+data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
+library(ggplot2)
+library(knitr)
+library(lme4)
+library(broom.mixed)
+library(nlme)
+library(car)
 # Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
 
@@ -734,4 +751,4 @@ qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
 - The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.
 - The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
 - The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
-=======
+
