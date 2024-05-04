@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -106,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -129,7 +95,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./big_picture.html"> 
-<span class="menu-text">Landlords Envy Him – The Budget Whisperer!</span></a>
+<span class="menu-text">The Price of Home</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./analysis.html" aria-current="page"> 
@@ -150,94 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#research-question-and-motivation" id="toc-research-question-and-motivation" class="nav-link active" data-scroll-target="#research-question-and-motivation">Research Question and Motivation</a>
-  <ul class="collapse">
-  <li><a href="#motivation" id="toc-motivation" class="nav-link" data-scroll-target="#motivation">Motivation</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#key-questions" id="toc-key-questions" class="nav-link" data-scroll-target="#key-questions">Key Questions</a></li>
-  </ul></li>
-  <li><a href="#models-and-inferences-first-dataset" id="toc-models-and-inferences-first-dataset" class="nav-link" data-scroll-target="#models-and-inferences-first-dataset">Models and Inferences (First dataset)</a>
-  <ul class="collapse">
-  <li><a href="#outline" id="toc-outline" class="nav-link" data-scroll-target="#outline">Outline</a></li>
-  <li><a href="#simple-linear-regression-model" id="toc-simple-linear-regression-model" class="nav-link" data-scroll-target="#simple-linear-regression-model">1. Simple Linear Regression Model</a>
-  <ul class="collapse">
-  <li><a href="#model-overview" id="toc-model-overview" class="nav-link" data-scroll-target="#model-overview">Model Overview:</a></li>
-  <li><a href="#model-findings" id="toc-model-findings" class="nav-link" data-scroll-target="#model-findings">Model Findings:</a></li>
-  <li><a href="#statistical-performance" id="toc-statistical-performance" class="nav-link" data-scroll-target="#statistical-performance">Statistical Performance:</a></li>
-  <li><a href="#model-discussion" id="toc-model-discussion" class="nav-link" data-scroll-target="#model-discussion">Model Discussion:</a></li>
-  </ul></li>
-  <li><a href="#multiple-linear-regression-model" id="toc-multiple-linear-regression-model" class="nav-link" data-scroll-target="#multiple-linear-regression-model">2. Multiple Linear Regression Model</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-1" id="toc-model-overview-1" class="nav-link" data-scroll-target="#model-overview-1">Model Overview:</a></li>
-  <li><a href="#model-findings-1" id="toc-model-findings-1" class="nav-link" data-scroll-target="#model-findings-1">Model Findings:</a></li>
-  <li><a href="#statistical-performance-1" id="toc-statistical-performance-1" class="nav-link" data-scroll-target="#statistical-performance-1">Statistical Performance:</a></li>
-  <li><a href="#variable-selection-and-model-refinement" id="toc-variable-selection-and-model-refinement" class="nav-link" data-scroll-target="#variable-selection-and-model-refinement">Variable Selection and model refinement:</a></li>
-  <li><a href="#model-discussion-1" id="toc-model-discussion-1" class="nav-link" data-scroll-target="#model-discussion-1">Model Discussion :</a></li>
-  </ul></li>
-  <li><a href="#log-log-regression-model" id="toc-log-log-regression-model" class="nav-link" data-scroll-target="#log-log-regression-model">3. Log-Log Regression Model</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-2" id="toc-model-overview-2" class="nav-link" data-scroll-target="#model-overview-2">Model Overview:</a></li>
-  <li><a href="#model-findings-2" id="toc-model-findings-2" class="nav-link" data-scroll-target="#model-findings-2">Model Findings:</a></li>
-  <li><a href="#statistical-performance-2" id="toc-statistical-performance-2" class="nav-link" data-scroll-target="#statistical-performance-2">Statistical Performance:</a></li>
-  <li><a href="#model-discussion-2" id="toc-model-discussion-2" class="nav-link" data-scroll-target="#model-discussion-2">Model Discussion:</a></li>
-  </ul></li>
-  <li><a href="#log-log-regression-model-by-race" id="toc-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#log-log-regression-model-by-race">4. Log-Log Regression Model by Race</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-3" id="toc-model-overview-3" class="nav-link" data-scroll-target="#model-overview-3">Model Overview</a></li>
-  <li><a href="#model-findings-3" id="toc-model-findings-3" class="nav-link" data-scroll-target="#model-findings-3">Model Findings:</a></li>
-  <li><a href="#statistical-performance-3" id="toc-statistical-performance-3" class="nav-link" data-scroll-target="#statistical-performance-3">Statistical Performance:</a></li>
-  <li><a href="#model-discussion-3" id="toc-model-discussion-3" class="nav-link" data-scroll-target="#model-discussion-3">Model Discussion:</a></li>
-  </ul></li>
-  <li><a href="#enhanced-log-log-regression-model-with-interaction-terms" id="toc-enhanced-log-log-regression-model-with-interaction-terms" class="nav-link" data-scroll-target="#enhanced-log-log-regression-model-with-interaction-terms">5. Enhanced Log-Log Regression Model with Interaction Terms</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-4" id="toc-model-overview-4" class="nav-link" data-scroll-target="#model-overview-4">Model Overview</a></li>
-  <li><a href="#model-overview-and-model-refinement" id="toc-model-overview-and-model-refinement" class="nav-link" data-scroll-target="#model-overview-and-model-refinement">Model Overview and Model Refinement:</a></li>
-  <li><a href="#statistical-performance-4" id="toc-statistical-performance-4" class="nav-link" data-scroll-target="#statistical-performance-4">Statistical Performance:</a></li>
-  <li><a href="#model-discussion-4" id="toc-model-discussion-4" class="nav-link" data-scroll-target="#model-discussion-4">Model Discussion:</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#models-and-inferences-merged-dataset" id="toc-models-and-inferences-merged-dataset" class="nav-link" data-scroll-target="#models-and-inferences-merged-dataset">Models and Inferences (Merged dataset)</a>
-  <ul class="collapse">
-  <li><a href="#outline-1" id="toc-outline-1" class="nav-link" data-scroll-target="#outline-1">Outline</a></li>
-  <li><a href="#log-log-regression-model-by-year" id="toc-log-log-regression-model-by-year" class="nav-link" data-scroll-target="#log-log-regression-model-by-year">1. Log-Log Regression Model by YEAR</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-5" id="toc-model-overview-5" class="nav-link" data-scroll-target="#model-overview-5">Model Overview:</a></li>
-  <li><a href="#model-findings-4" id="toc-model-findings-4" class="nav-link" data-scroll-target="#model-findings-4">Model Findings:</a></li>
-  <li><a href="#statistical-performance-5" id="toc-statistical-performance-5" class="nav-link" data-scroll-target="#statistical-performance-5">Statistical Performance:</a></li>
-  </ul></li>
-  <li><a href="#longitudinal-log-log-regression-model-by-race" id="toc-longitudinal-log-log-regression-model-by-race" class="nav-link" data-scroll-target="#longitudinal-log-log-regression-model-by-race">2. Longitudinal Log-Log Regression Model by Race</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-6" id="toc-model-overview-6" class="nav-link" data-scroll-target="#model-overview-6">Model Overview:</a></li>
-  <li><a href="#model-findings-5" id="toc-model-findings-5" class="nav-link" data-scroll-target="#model-findings-5">Model Findings:</a></li>
-  <li><a href="#statistical-performance-6" id="toc-statistical-performance-6" class="nav-link" data-scroll-target="#statistical-performance-6">Statistical Performance:</a></li>
-  <li><a href="#discussion-of-the-topic" id="toc-discussion-of-the-topic" class="nav-link" data-scroll-target="#discussion-of-the-topic">Discussion of the topic:</a></li>
-  </ul></li>
-  <li><a href="#time-series-model" id="toc-time-series-model" class="nav-link" data-scroll-target="#time-series-model">3.Time series model</a>
-  <ul class="collapse">
-  <li><a href="#model-findings-6" id="toc-model-findings-6" class="nav-link" data-scroll-target="#model-findings-6">Model Findings:</a></li>
-  <li><a href="#statistical-performance-7" id="toc-statistical-performance-7" class="nav-link" data-scroll-target="#statistical-performance-7">Statistical Performance:</a></li>
-  </ul></li>
-  </ul></li>
-  <li><a href="#discussion-of-the-topic-1" id="toc-discussion-of-the-topic-1" class="nav-link" data-scroll-target="#discussion-of-the-topic-1">### Discussion of the topic:</a>
-  <ul class="collapse">
-  <li><a href="#model-overview-7" id="toc-model-overview-7" class="nav-link" data-scroll-target="#model-overview-7">Model overview:</a></li>
-  <li><a href="#model-findings-7" id="toc-model-findings-7" class="nav-link" data-scroll-target="#model-findings-7">Model Findings:</a></li>
-  <li><a href="#log-log-model" id="toc-log-log-model" class="nav-link" data-scroll-target="#log-log-model">log-log model</a>
-  <ul class="collapse">
-  <li><a href="#statistical-performance-8" id="toc-statistical-performance-8" class="nav-link" data-scroll-target="#statistical-performance-8">Statistical performance:</a></li>
-  <li><a href="#model-discussion-5" id="toc-model-discussion-5" class="nav-link" data-scroll-target="#model-discussion-5">Model discussion</a></li>
-  </ul></li>
-  <li><a href="#residual-plot" id="toc-residual-plot" class="nav-link" data-scroll-target="#residual-plot">Residual plot</a></li>
-  <li><a href="#qq-plot" id="toc-qq-plot" class="nav-link" data-scroll-target="#qq-plot">QQ plot</a></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -687,22 +566,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="model-findings-2" class="level3">
 <h3 class="anchored" data-anchor-id="model-findings-2">Model Findings:</h3>
-<p><a href="https://yatingzhu.shinyapps.io/app2/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a> &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD z` =======</p>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>48e394924c6c7a414a4e0e2a4b42f69a9df6f7b7 - The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income’s elasticity effect on rent.</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p><a href="https://yatingzhu.shinyapps.io/app2/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
+<ul>
+<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
+</ul>
 </section>
 <section id="statistical-performance-2" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-2">Statistical Performance:</h3>
@@ -1226,188 +1093,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="statistical-performance-6" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-6">Statistical Performance:</h3>
 <p><a href="https://yatingzhu.shinyapps.io/app5/">Click here to view the summary table of each race across Years.</a></p>
-<ul>
-<li>The p-value of 0 consistently across all races and years suggests that the models are statistically significant. This means the results are unlikely to have occurred by chance, and there is a statistically significant relationship between the dependent and independent variables in the models used.</li>
-</ul>
 </section>
 <section id="discussion-of-the-topic" class="level3">
 <h3 class="anchored" data-anchor-id="discussion-of-the-topic">Discussion of the topic:</h3>
 <ul>
-<li>Race is really a point that needs to explore. Through the result and the visualization of the coefficient changes for each race, there is definitely different patterns showed.</li>
+<li>Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed.</li>
 </ul>
 </section>
 </section>
 <section id="time-series-model" class="level2">
 <h2 class="anchored" data-anchor-id="time-series-model">3.Time series model</h2>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ### Model Overview:</p>
-<section id="model-findings-6" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings-6">Model Findings:</h3>
-</section>
-<section id="statistical-performance-7" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-7">Statistical Performance:</h3>
-</section>
-</section>
-</section>
-<section id="discussion-of-the-topic-1" class="level1">
-<h1>### Discussion of the topic:</h1>
-<section id="model-overview-7" class="level3">
-<h3 class="anchored" data-anchor-id="model-overview-7">Model overview:</h3>
-<ul>
-<li>This model extended the 2022 dataset analysis to explore how the rent-income relationship have evolved other the past tenty years</li>
-<li>We use random effect time series model which (1 | REGION_CLASSIFIED) term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model’s fixed effects.</li>
-<li>The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.</li>
-</ul>
-</section>
-<section id="model-findings-7" class="level3">
-<h3 class="anchored" data-anchor-id="model-findings-7">Model Findings:</h3>
-</section>
-<section id="log-log-model" class="level2">
-<h2 class="anchored" data-anchor-id="log-log-model">log-log model</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out non-positive values before log transformation</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_twenty <span class="ot">&lt;-</span> data_twenty[data_twenty<span class="sc">$</span>RENTGRS <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> data_twenty<span class="sc">$</span>INCTOT <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply log transformation</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>log_RENTGRS <span class="ot">&lt;-</span> <span class="fu">log</span>(data_twenty<span class="sc">$</span>RENTGRS)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>log_INCTOT <span class="ot">&lt;-</span> <span class="fu">log</span>(data_twenty<span class="sc">$</span>INCTOT)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating means and standard deviations for the log-transformed columns</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mean_log_RENTGRS <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_twenty<span class="sc">$</span>log_RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>sd_log_RENTGRS <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_twenty<span class="sc">$</span>log_RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>mean_log_INCTOT <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_twenty<span class="sc">$</span>log_INCTOT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>sd_log_INCTOT <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_twenty<span class="sc">$</span>log_INCTOT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining lower and upper bounds for both variables</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>lb_log_RENTGRS <span class="ot">&lt;-</span> mean_log_RENTGRS <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_RENTGRS</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>ub_log_RENTGRS <span class="ot">&lt;-</span> mean_log_RENTGRS <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_RENTGRS</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>lb_log_INCTOT <span class="ot">&lt;-</span> mean_log_INCTOT <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_INCTOT</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>ub_log_INCTOT <span class="ot">&lt;-</span> mean_log_INCTOT <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_INCTOT</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering out outliers</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>data_twenty_clean <span class="ot">&lt;-</span> data_twenty[data_twenty<span class="sc">$</span>log_RENTGRS <span class="sc">&gt;=</span> lb_log_RENTGRS <span class="sc">&amp;</span> data_twenty<span class="sc">$</span>log_RENTGRS <span class="sc">&lt;=</span> ub_log_RENTGRS <span class="sc">&amp;</span> </span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                             data_twenty<span class="sc">$</span>log_INCTOT <span class="sc">&gt;=</span> lb_log_INCTOT <span class="sc">&amp;</span> data_twenty<span class="sc">$</span>log_INCTOT <span class="sc">&lt;=</span> ub_log_INCTOT, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 16.09%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
-</ul>
-<section id="statistical-performance-8" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-8">Statistical performance:</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">nobs</th>
-<th style="text-align: right;">sigma</th>
-<th style="text-align: right;">logLik</th>
-<th style="text-align: right;">AIC</th>
-<th style="text-align: right;">BIC</th>
-<th style="text-align: right;">deviance</th>
-<th style="text-align: right;">df.residual</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">94520</td>
-<td style="text-align: right;">0.4839304</td>
-<td style="text-align: right;">-65529.1</td>
-<td style="text-align: right;">131100.2</td>
-<td style="text-align: right;">131298.8</td>
-<td style="text-align: right;">131058.2</td>
-<td style="text-align: right;">94499</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<ul>
-<li>There are 31662 observations in the table, which generally is a large number which is good.</li>
-<li>Residual Standard Error (sigma): The residual standard error is 0.4329367, This value indicates there are deviation of the observed values from the fitted values. A lower residual standard error suggests a model with a good fit to the data.</li>
-<li>Log-Likelihood (logLik): The log-likelihood of the model is -18433.34. Log-likelihood measures how well the model predicts the observed data; higher values (closer to zero) typically indicate a better model fit.</li>
-<li>Overall statistics suggests there are limitations to the model, but it generally captures the overall trend which further suggests in the residual plot and qq plot.</li>
-</ul>
-</section>
-<section id="model-discussion-5" class="level3">
-<h3 class="anchored" data-anchor-id="model-discussion-5">Model discussion</h3>
-</section>
-</section>
-<section id="residual-plot" class="level2">
-<h2 class="anchored" data-anchor-id="residual-plot">Residual plot</h2>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-27-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<ul>
-<li>The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. However, this is common in non-transformed data and it is our one of the limitation in our model.</li>
-<li>This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model’s homoscedasticity.</li>
-</ul>
-</section>
-<section id="qq-plot" class="level2">
-<h2 class="anchored" data-anchor-id="qq-plot">QQ plot</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Q-Q plot for normality</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqmath</span>(<span class="fu">resid</span>(model_with_income_log), <span class="at">distribution =</span> qnorm,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Q-Q Plot for Model Residuals"</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Theoretical Quantiles"</span>, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Sample Quantiles"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-28-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs Fitted plot for homoscedasticity</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(model_with_income_log) <span class="sc">~</span> <span class="fu">fitted</span>(model_with_income_log))</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-28-2.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(<span class="fu">resid</span>(model_with_income_log), <span class="at">main =</span> <span class="st">"Q-Q Plot for Model Residuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-28-3.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1]  2873 24699</code></pre>
-</div>
-</div>
-<ul>
-<li>The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.</li>
-<li>The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.</li>
-<li><h1 id="the-residuals-at-the-lower-and-upper-ends-of-the-distribution-deviate-from-the-line-which-indicates-that-the-distribution-of-residuals-has-heavier-tails-than-the-normal-distribution.-this-means-there-are-more-extreme-values-outliers-than-you-would-expect-if-the-residuals-were-perfectly-normally-distributed.">The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.</h1>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>f4b8d7617dd335bd88f7ff14da0f40baa12d128e</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote></li>
-</ul>
+<hr>
 
 
 </section>
@@ -1495,7 +1191,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/final-project-team9\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
