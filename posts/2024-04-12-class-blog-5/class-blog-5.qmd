@@ -243,7 +243,7 @@ models_by_year_3 <- models_by_year %>%
 
 - The deviance shows how much of the total variability is not explained by the model; the trends here are not immediately clear without further context.
 
-- he df.residual (degrees of freedom of residuals) decreases slightly over time, indicating that there might be more parameters in the model or less data available in later years.
+- The df.residual (degrees of freedom of residuals) decreases slightly over time, indicating that there might be more parameters in the model or less data available in later years.
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}

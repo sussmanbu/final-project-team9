@@ -55,14 +55,16 @@ Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest_cle
 | Fam_income        | Alternative variable for family income |
 
 ### Clean or recoding
-#### Raw processing
 
+#### Raw processing
 
 -   Dependent variable—**rent**— Exclude the records indicating a **rent of 0**.
 
     -   This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing.
-    
-- Variable **KITCHEN** has characteristic that over 95% of houses possess a kitchen, diminishing its analytical value. Therefore, should consider to exclude this variable while the modeling.
+
+-   Variable **KITCHEN** has characteristic that over 95% of houses possess a kitchen, diminishing its analytical value.
+    Therefore, should consider to exclude this variable while the modeling.
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(broom)
@@ -91,13 +93,12 @@ ggplot(kitchen_counts, aes(x = "", y = Count, fill = factor(KITCHEN))) +
   labs(title = "Pie Chart of Kitchen",fill = "Number of Kitchens")
 ```
 
-    
 -   Exclude data entries characterized by specific codes indicative of **missing or unknown values**, as well as those representing values deemed inappropriate for analytical purposes. Given the vast size of the original dataset, which includes millions of records, we opted to remove the rows with these missing values directly.This decision does not compromise our ability to conduct a thorough analysis, as the remaining dataset is still large and clean enough for reliable and robust research conclusions.Removed categories are summarized under the following table.
 
 ##### Table of Variables with Missing Value Codes for Each Category
 
 | Variable     | Description                   | Notes                                                        |
-|------------------|------------------|-------------------------------------|
+|--------------|-------------------------------|--------------------------------------------------------------|
 | **INCTOT**   | Total personal income         | Specific codes detailed below:                               |
 |              |                               | 0000001 = \$1 or break even (2000, 2005-onward ACS and PRCS) |
 |              |                               | 9999999 = N/A                                                |
@@ -124,7 +125,7 @@ ggplot(kitchen_counts, aes(x = "", y = Count, fill = factor(KITCHEN))) +
 ##### Table of Categorical Variables with Numerical Codes as Categories
 
 | Variable    | Description                    | Notes                                      |
-|-------------------|--------------------|----------------------------------|
+|-------------|--------------------------------|--------------------------------------------|
 | **INCTOT**  | Total personal income          | Specific codes detailed below:             |
 |             |                                | -009995 = -\$9,900 (1980)                  |
 |             |                                | -000001 = Net loss (1950)                  |
@@ -191,6 +192,7 @@ ggplot(rent_data_clean, aes(x = RENTGRS)) +
        y = "Count") +
   theme_minimal()
 ```
+
 ##### The log_RENTGRS plot
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -225,10 +227,10 @@ ggplot(data_2022, aes(x = log(INCTOT))) +
        x = "Log of Total Personal Income",
        y = "Frequency")
 ```
+
 The log transformation of both variables significantly reduced their skewness.
 
-
-- Exclude the **outliers** three standard deviations from the mean.
+-   Exclude the **outliers** three standard deviations from the mean.
 
 ##### The following plots shows the problem of outliers in our key predictor and response variable
 
@@ -243,11 +245,13 @@ ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_de
 
 ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha =.05) + scale_x_log10() + scale_y_log10()
 ```
-- The first density plot shows a wide spread with some points far from the main cluster, indicative of outliers. It proves there are a lot of outliers sparsely packed and are visible on the fringes of the plot.
 
-- The second plot indicates these outliers might possibly disproportionately affect the slope and intercept of our regression line as we fit in the regression models. 
+-   The first density plot shows a wide spread with some points far from the main cluster, indicative of outliers.
+    It proves there are a lot of outliers sparsely packed and are visible on the fringes of the plot.
 
-- After the consideration that the outliers do not reflect the typical relationship, we exclude all the outliers that are not within the three standard deviations' range. 
+-   The second plot indicates these outliers might possibly disproportionately affect the slope and intercept of our regression line as we fit in the regression models.
+
+-   After the consideration that the outliers do not reflect the typical relationship, we exclude all the outliers that are not within the three standard deviations' range.
 
 ##### The following tables shows what happened **after** exclude the outliers of our key predictor and response variable
 
@@ -258,22 +262,22 @@ ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha 
 
 ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
 ```
-- The density plot is to show a tighter concentration of data, with less dispersion.
 
-- The scatter plot present a clearer pattern and a trend with fewer extreme points that can distort the regression line.
+-   The density plot is to show a tighter concentration of data, with less dispersion.
 
+-   The scatter plot present a clearer pattern and a trend with fewer extreme points that can distort the regression line.
 
 ## Second Dataset (Merged YEAR of 2000 to 2022)
 
 Here is the link to our cleaned dataset [cleaned dataset.](./datasdata_twenty_clean.csv)
 
-- The dataset includes identical variables as the first dataset, with the exception of the "YEAR" variable, which spans from 2000 to 2022.
+-   The dataset includes identical variables as the first dataset, with the exception of the "YEAR" variable, which spans from 2000 to 2022.
 
-- The cleaning and processing of these datasets adhered to the same methodology utilized for the 2022 dataset, as outlined earlier.
+-   The cleaning and processing of these datasets adhered to the same methodology utilized for the 2022 dataset, as outlined earlier.
 
-- Given the extensive size of the census and ACS datasets, a 1% random sample was extracted for analysis.
+-   Given the extensive size of the census and ACS datasets, a 1% random sample was extracted for analysis.
 
-- The range of years provided was utilized to perform a time series regression analysis.
+-   The range of years provided was utilized to perform a time series regression analysis.
 
 ## Summary of numerical variables (2022)
 
@@ -287,6 +291,7 @@ data_path1 <- here("dataset", "latest_clean.csv")
 data_twenty <- read_csv(data_path,show_col_types = FALSE) 
 data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
 ```
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 summary_data <- data_2022 %>%
   summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
@@ -326,6 +331,7 @@ summary_data %>%
 ```
 
 ## Summary of categorical variables (2002)
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyr)
 library(purrr)
@@ -345,8 +351,8 @@ combined_summary_table <- bind_rows(category_summaries) %>%
 kable(combined_summary_table)
 ```
 
-
 ## Summary of numerical variables (2000-2022)
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 summary_data <- data_twenty %>%
   summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
@@ -386,6 +392,7 @@ summary_data %>%
 ```
 
 ## Summary of categorical variables (2000-2022)
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 categorical_vars <- c("KITCHEN", "MARST", "RACE", "EMPSTAT", "REGION_CLASSIFIED")
 
@@ -401,11 +408,3 @@ combined_summary_table <- bind_rows(category_summaries) %>%
 
 kable(combined_summary_table)
 ```
-
-
-
-
-
-
-
-
