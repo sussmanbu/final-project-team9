@@ -99,47 +99,7 @@ kable(glance_lm, format = "pipe")
 -   This expanded model builds upon the initial simple linear regression framework.
 
 ### Model Findings:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ui <- fluidPage(
-   titlePanel(tags$h1("Model Summary Table_MLR Model", style = "font-size: 18px;")),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("variable", "Select Variable:", choices = NULL),
-      hr(),
-      p("The analysis reveals that one thousand dollar increase in total income (INCTOT) is associated with an average increase of 5.5 in gross rent (RENTGRS), assuming other variables are constant.")
-    ),
-    mainPanel(
-      uiOutput("modelTable") 
-    )
-  )
-)
-
-server <- function(input, output, session) {
-  mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
-  tidy_mlr <- tidy(mlr_model)
-  observe({
-    updateSelectInput(session, "variable", 
-                      choices = tidy_mlr$term,
-                      selected = "INCTOT")  # Default to INCTOT
-  })
-
-  output$modelTable <- renderUI({
-    selected_var <- input$variable
-    if (is.null(selected_var)) {
-      selected_var <- "INCTOT"
-    }
-    selected_row <- tidy_mlr %>% filter(term == selected_var)
-    kable(selected_row, "html") %>%
-      kable_styling(bootstrap_options = "striped", full_width = FALSE) %>%
-      as.character() %>%
-      HTML()
-  })
-}
-
-shinyApp(ui = ui, server = server)
-
-```
+[Click the link to see the ](https://yatingzhu.shinyapps.io/app1/)
 
 ### Variable Selection and model refinement:
 
@@ -210,43 +170,9 @@ abline(h = 0, col = "red")
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
-ui <- fluidPage(
- titlePanel(tags$h1("Model Summary Table_log_log Model", style = "font-size: 18px;")),  
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("variable", "Select Variable:", choices = NULL),
-      hr(),
-      p("The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income's elasticity effect on rent.")
-    ),
-    mainPanel(
-      DTOutput("modelTable")
-    )
-  )
-)
 
-server <- function(input, output, session) {
-  data_2022$log_INCTOT <- log(data_2022$INCTOT + 1)  
-  data_2022$log_RENTGRS <- log(data_2022$RENTGRS + 1)  
-  log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
-  tidy_log_model_2022 <- tidy(log_model_2022)
-  observe({
-    vars <- tidy_log_model_2022$term
-    default_selection <- "log_INCTOT"
-    if (default_selection %in% vars) {
-      updateSelectInput(session, "variable", choices = vars, selected = default_selection)
-    } else {
-      updateSelectInput(session, "variable", choices = vars, selected = vars[1])
-    }
-  })
-  output$modelTable <- renderDT({
-    req(input$variable)  # Ensure that input$variable is reactive and triggers the rendering
-    selected_row <- tidy_log_model_2022 %>% filter(term == input$variable)
-    datatable(selected_row, options = list(pageLength = 5, autoWidth = TRUE))
-  })
-}
-shinyApp(ui = ui, server = server)
 ```
-
+[link to the finding]( https://yatingzhu.shinyapps.io/app2/)
 
 ### Statistical Performance:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -531,44 +457,7 @@ if ("glance_data" %in% names(models_by_year)) {
 
 ### Statistical Performance:
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ui <- fluidPage(
-  titlePanel("Model Summary Statistics by Year"),
-  sidebarLayout(
-    sidebarPanel(
-      # Ensure years are sorted in descending order
-      selectInput("year", "Choose a year:", choices = sort(unique(models_by_year$YEAR), decreasing = TRUE))
-    ),
-    mainPanel(
-      DTOutput("model_summary_table")  # Use DTOutput for data tables
-    )
-  )
-)
-
-server <- function(input, output) {
-  output$model_summary_table <- renderDT({
-    req(models_by_year) 
-    year_data <- models_by_year %>%
-      filter(YEAR == input$year)
-    year_data <- year_data %>%
-      select(YEAR, glance_data) %>%
-      unnest(cols = glance_data) %>%
-      arrange(YEAR) %>%
-      select(YEAR, r.squared, adj.r.squared, sigma, statistic, p.value, df, logLik, AIC, BIC, deviance, df.residual, nobs) 
-    datatable(year_data, 
-      options = list(
-        pageLength = 10,      
-        lengthMenu = c(5, 10, 25, 50, 100),
-        autoWidth = TRUE
-      ),
-      rownames = FALSE
-    )
-  })
-}
-
-shinyApp(ui = ui, server = server)
-```
-
+[Check out my Shiny app!] (https://yatingzhu.shinyapps.io/app3/)
 -   All models are statistically validated, while reviewing each coefficient of each year through 'tidy' table, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .
 -   R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.
 -   Adjusted R-squared values, marginally lower than the R-squared, adhere to expectations, considering model complexity relative to data volume.
@@ -585,6 +474,7 @@ shinyApp(ui = ui, server = server)
 -   Similar to the 2022 model, the coefficients were found to be statistically significant and the residual plots falling within an acceptable range.
 
 ### Model Findings:
+[Linked to model findings](https://yatingzhu.shinyapps.io/app3/)
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
@@ -650,32 +540,6 @@ log_inctot_p_values <- data_twenty %>%
   select(RACE, YEAR, term, estimate, p.value)
 
 unique_races <- unique(log_inctot_p_values$RACE)
-
-ui <- fluidPage(
-  titlePanel("INCTOT Coefficients Analysis by Race"),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("selected_race", "Choose a race:", choices = unique_races)
-    ),
-    mainPanel(
-      dataTableOutput("filtered_data")
-    )
-  )
-)
-
-server <- function(input, output) {
-  filtered_data <- reactive({
-    log_inctot_p_values %>%
-      filter(RACE == input$selected_race)
-  })
-  
-  output$filtered_data <- renderDataTable({
-    datatable(filtered_data(), options = list(pageLength = 10, autoWidth = TRUE))
-  })
-}
-
-shinyApp(ui = ui, server = server)
-
 ```
 
 -   Specific Trends:
@@ -695,6 +559,8 @@ shinyApp(ui = ui, server = server)
 **Two or more races**: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association with income.
 
 **Whites**: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.
+
+[Linked to model findings](https://yatingzhu.shinyapps.io/app4/)
 
 -   Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the 'Other race, nec' category often has lower coefficients, implying a weaker association with income.
 
@@ -724,39 +590,10 @@ coefficients_long <- coefficients_wide %>%
 
 unique_races <- unique(coefficients_long$RACE)
 
-ui <- fluidPage(
-  titlePanel("Income Coefficients by Race"),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("selected_race", "Choose a race:", choices = unique_races)
-    ),
-    mainPanel(
-      plotOutput("race_plot")
-    )
-  )
-)
-server <- function(input, output) {
-  selected_data <- reactive({
-    coefficients_long %>%
-      filter(RACE == input$selected_race)
-  })
-  
-  output$race_plot <- renderPlot({
-    data <- selected_data()  
-    ggplot(data, aes(x = as.factor(YEAR), y = log_INCTOT_coef)) +
-      geom_bar(stat = "identity", fill = "#2C3E50", width = 0.7) +
-      theme_minimal() +
-      theme(axis.text.x = element_text(angle = 45, vjust = 0.5, hjust=0.5), 
-            plot.title = element_text(hjust = 0.5, face = "bold")) +
-      labs(title = paste("Income Coefficient:", input$selected_race),
-           x = "Year",
-           y = "Coefficient")
-  })
-}
-shinyApp(ui = ui, server = server)
 ```
 
 ### Statistical Performance:
+[Linked to model findings](https://yatingzhu.shinyapps.io/app5/)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
 
@@ -796,30 +633,6 @@ models_by_race_year <- data_twenty_filtered_final %>%
 
 unique_races <- unique(models_by_race_year$RACE)
 
-ui <- fluidPage(
-  titlePanel("INCTOT Model Summaries by Race"),
-  sidebarLayout(
-    sidebarPanel(
-      selectInput("selected_race", "Choose a race:", choices = unique_races)
-    ),
-    mainPanel(
-      dataTableOutput("model_summary")
-    )
-  )
-)
-
-server <- function(input, output) {
-  filtered_data <- reactive({
-    models_by_race_year %>%
-      filter(RACE == input$selected_race)
-  })
-  
-  output$model_summary <- renderDataTable({
-    datatable(filtered_data(), options = list(pageLength = 10, autoWidth = TRUE))
-  })
-}
-
-shinyApp(ui = ui, server = server)
 
 ```
 

@@ -1,0 +1,10 @@
+name: shinny_app
+title:
+username: yatingzhu
+account: yatingzhu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 11930588
+bundleId: 8573714
+url: https://yatingzhu.shinyapps.io/shinny_app/
+version: 1
