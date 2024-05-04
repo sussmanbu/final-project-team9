@@ -643,7 +643,6 @@ unique_races <- unique(models_by_race_year$RACE)
 ### Model Overview:
 
 ### Model Findings:
-<<<<<<< HEAD
 ## log-log model
 ```{r}
 library(tidyr)
@@ -663,15 +662,16 @@ library(lme4)
 library(broom.mixed)
 library(nlme)
 library(car)
+
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
-=======
->>>>>>> b6cf28ff0f195e711ddd9bcf55e32ee81e6ea53a
+
 
 ### Statistical Performance:
-
-<<<<<<< HEAD
-
 # Calculating means and standard deviations for the log-transformed columns
 mean_log_RENTGRS <- mean(data_twenty$log_RENTGRS, na.rm = TRUE)
 sd_log_RENTGRS <- sd(data_twenty$log_RENTGRS, na.rm = TRUE)
@@ -724,7 +724,7 @@ abline(h = 0, col = "red")
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
 
 ## QQ plot
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(lattice)
 
 # Q-Q plot for normality
@@ -745,6 +745,3 @@ qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
 - The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
 - The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
 
-=======
-### Discussion of the topic:
->>>>>>> b6cf28ff0f195e711ddd9bcf55e32ee81e6ea53a
