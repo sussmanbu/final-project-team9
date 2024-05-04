@@ -1,11 +1,11 @@
 ---
 title: "Analysis"
 description: "Here we provide a detailed analysis using more sophisticated statistics techniques."
-format:
-  html:
-    widgets: true
+toc: true
+draft: FALSE
 
 ---
+
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -115,9 +115,6 @@ kable(glance_mlr)
 -   A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.
 
 ### Variable Selection and model refinement:
-
-
-
 -   A correlation matrix was used to identify control variables and to detect potential multi-collinearity issues.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -174,11 +171,7 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RA
 
 ```
 [Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.]( https://yatingzhu.shinyapps.io/app2/)
-<<<<<<< HEAD
-z`
-=======
 
->>>>>>> 48e394924c6c7a414a4e0e2a4b42f69a9df6f7b7
 - The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical Performance:
@@ -641,17 +634,16 @@ unique_races <- unique(models_by_race_year$RACE)
 
 
 ```
+- The p-value of 0 consistently across all races and years suggests that the models are statistically significant. This means the results are unlikely to have occurred by chance, and there is a statistically significant relationship between the dependent and independent variables in the models used.
 
 ### Discussion of the topic: 
-- Race is really a point that needs to explore. Thorugh the result and the visualization of the coefficient changes for each race, there is defintely different pattens showed.
+- Race is really a point that needs to explore. Through the result and the visualization of the coefficient changes for each race, there is definitely different patterns showed.
 
 ## 3.Time series model
-### Model overview:
-- This model extended the 2022 dataset analysis to explore how the rent-income relationship have evolved other the past tenty years
-- We use random effect time series model which (1 | REGION_CLASSIFIED) term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
-- The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.
+### Model Overview:
 
 ### Model Findings:
+<<<<<<< HEAD
 ## log-log model
 ```{r}
 library(tidyr)
@@ -673,11 +665,12 @@ library(nlme)
 library(car)
 # Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
+=======
+>>>>>>> b6cf28ff0f195e711ddd9bcf55e32ee81e6ea53a
 
-# Apply log transformation
-data_twenty$log_RENTGRS <- log(data_twenty$RENTGRS)
-data_twenty$log_INCTOT <- log(data_twenty$INCTOT)
+### Statistical Performance:
 
+<<<<<<< HEAD
 
 # Calculating means and standard deviations for the log-transformed columns
 mean_log_RENTGRS <- mean(data_twenty$log_RENTGRS, na.rm = TRUE)
@@ -752,3 +745,6 @@ qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
 - The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
 - The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
 
+=======
+### Discussion of the topic:
+>>>>>>> b6cf28ff0f195e711ddd9bcf55e32ee81e6ea53a
