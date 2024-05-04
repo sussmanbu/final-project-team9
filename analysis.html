@@ -300,11 +300,70 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="model-findings-1" class="level3">
 <h3 class="anchored" data-anchor-id="model-findings-1">Model Findings:</h3>
+<p><a href="https://yatingzhu.shinyapps.io/app1/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
+<ul>
+<li>A $1,000 increase in total income (INCTOT) is associated with an average increase of 5.2 in gross rent (RENTGRS), assuming other variables are constant.</li>
+</ul>
+</section>
+<section id="statistical-performance-1" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
 <div class="cell">
 <div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 8%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 2%">
+<col style="width: 9%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 4%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">df</th>
+<th style="text-align: right;">logLik</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+<th style="text-align: right;">deviance</th>
+<th style="text-align: right;">df.residual</th>
+<th style="text-align: right;">nobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0.2317473</td>
+<td style="text-align: right;">0.2284616</td>
+<td style="text-align: right;">824.1282</td>
+<td style="text-align: right;">70.53243</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">-42013.05</td>
+<td style="text-align: right;">84074.11</td>
+<td style="text-align: right;">84231.31</td>
+<td style="text-align: right;">3493739342</td>
+<td style="text-align: right;">5144</td>
+<td style="text-align: right;">5167</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
+<ul>
+<li>The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.</li>
+<li>The adjusted R-squared value of 0.2807292 closely mirrors the R-squared value, suggesting that the additional predictors are effectively contributing valuable information.</li>
+<li>A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.</li>
+</ul>
 </section>
 <section id="variable-selection-and-model-refinement" class="level3">
 <h3 class="anchored" data-anchor-id="variable-selection-and-model-refinement">Variable Selection and model refinement:</h3>
@@ -394,7 +453,6 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value. <code>Employment Status</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income</code> or <code>FTOTINC</code>. This interaction will be explored further.</li>
 <li>A review of multicollinearity prompted the removal of <code>FTOTINC</code> to prevent model overfitting.</li>
 </ul>
 <div class="cell">
@@ -474,71 +532,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The selection and validation of control variables were systematically conducted.</p></li>
-<li><p>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value.</p></li>
-<li><p><code>Employment Status</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income</code> or <code>FTOTINC</code>. This interaction will be explored further.</p></li>
-<li><p>A review of multicollinearity prompted the removal of <code>FTOTINC</code> to prevent model overfitting.</p></li>
-<li><p>The selection and validation of control variables were systematically conducted.</p></li>
-</ul>
-</section>
-<section id="statistical-performance-1" class="level3">
-<h3 class="anchored" data-anchor-id="statistical-performance-1">Statistical Performance:</h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="table table-sm table-striped small">
-<colgroup>
-<col style="width: 9%">
-<col style="width: 12%">
-<col style="width: 8%">
-<col style="width: 9%">
-<col style="width: 7%">
-<col style="width: 2%">
-<col style="width: 9%">
-<col style="width: 8%">
-<col style="width: 8%">
-<col style="width: 10%">
-<col style="width: 10%">
-<col style="width: 4%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">r.squared</th>
-<th style="text-align: right;">adj.r.squared</th>
-<th style="text-align: right;">sigma</th>
-<th style="text-align: right;">statistic</th>
-<th style="text-align: right;">p.value</th>
-<th style="text-align: right;">df</th>
-<th style="text-align: right;">logLik</th>
-<th style="text-align: right;">AIC</th>
-<th style="text-align: right;">BIC</th>
-<th style="text-align: right;">deviance</th>
-<th style="text-align: right;">df.residual</th>
-<th style="text-align: right;">nobs</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.2913653</td>
-<td style="text-align: right;">0.2880578</td>
-<td style="text-align: right;">791.6594</td>
-<td style="text-align: right;">88.09195</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">24</td>
-<td style="text-align: right;">-41804.36</td>
-<td style="text-align: right;">83660.72</td>
-<td style="text-align: right;">83831.02</td>
-<td style="text-align: right;">3222618011</td>
-<td style="text-align: right;">5142</td>
-<td style="text-align: right;">5167</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<ul>
-<li>The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.</li>
-<li>The adjusted R-squared value of 0.2807292 closely mirrors the R-squared value, suggesting that the additional predictors are effectively contributing valuable information.</li>
-<li>A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.</li>
+<li>The selection and validation of control variables were systematically conducted.</li>
+<li>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value.</li>
+<li><code>Employment Status</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income</code> or <code>FTOTINC</code>. This interaction will be explored further.</li>
 </ul>
 </section>
 <section id="model-discussion-1" class="level3">
@@ -547,7 +543,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -570,11 +566,10 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="model-findings-2" class="level3">
 <h3 class="anchored" data-anchor-id="model-findings-2">Model Findings:</h3>
-<div class="cell">
-<div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
-</div>
-</div>
+<p><a href="https://yatingzhu.shinyapps.io/app2/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
+<ul>
+<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
+</ul>
 </section>
 <section id="statistical-performance-2" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-2">Statistical Performance:</h3>
@@ -645,7 +640,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -663,7 +658,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -918,14 +913,14 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-overview-4" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview-4">Model Overview</h3>
 <ul>
-<li>This model is built upon the solid foundation established in Section 3. We’re now exploring nonlinearity further and addressing the potential skewness identified in the conclusions of Model 3.</li>
+<li>This model is built upon the solid foundation established in Section 3. This section explores nonlinearity further and addresses the potential skewness identified in the conclusions of Model 3.</li>
 </ul>
 </section>
 <section id="model-overview-and-model-refinement" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview-and-model-refinement">Model Overview and Model Refinement:</h3>
 <ul>
 <li><p>The interaction term <code>EMPSTAT * FTOTINC</code> has been introduced to investigate the suspected interaction effect between employment status and total family income.</p></li>
-<li><p>Post inclusion, the p-value for <code>EMPSTATUnemployed:FTOTINC</code> is slightly above 0.05, suggesting it has borderline statistical significance.</p></li>
+<li><p>Post inclusion, the p-value for <code>EMPSTATUnemployed:FTOTINC</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.</p></li>
 </ul>
 </section>
 <section id="statistical-performance-4" class="level3">
@@ -990,13 +985,13 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-discussion-4" class="level3">
 <h3 class="anchored" data-anchor-id="model-discussion-4">Model Discussion:</h3>
 <ul>
-<li>The residual plot indicates that the model without interaction terms performs better than the log-log regression with interaction terms. Even when the model includes interaction terms, the residuals should still be randomly dispersed around the zero line on the y-axis to meet the assumptions of homoscedasticity and no autocorrelation.</li>
+<li>The residual plot indicates that the model without interaction terms performs better than the log-log regression with interaction terms. This residual plot does not show the performance as well as the section 3.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1029,7 +1024,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1044,7 +1039,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1056,11 +1051,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="statistical-performance-5" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-5">Statistical Performance:</h3>
-<div class="cell">
-<div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
-</div>
-</div>
+<p>[Click here to view the summary table for the model of each Year.] (https://yatingzhu.shinyapps.io/app3/)</p>
 <ul>
 <li>All models are statistically validated, while reviewing each coefficient of each year through ‘tidy’ table, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .</li>
 <li>R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.</li>
@@ -1083,11 +1074,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="model-findings-5" class="level3">
 <h3 class="anchored" data-anchor-id="model-findings-5">Model Findings:</h3>
-<div class="cell">
-<div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
-</div>
-</div>
+<p><a href="https://yatingzhu.shinyapps.io/app4/">Click here to view the plot for the cofficients across Years for each race.</a></p>
 <ul>
 <li>Specific Trends:</li>
 </ul>
@@ -1102,19 +1089,10 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Race Comparisons: Certain racial categories, like those identifying as Chinese and Japanese, tend to have higher coefficients, suggesting a stronger relationship with income than other races in the dataset. Conversely, the ‘Other race, nec’ category often has lower coefficients, implying a weaker association with income.</li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
-</div>
-</div>
 </section>
 <section id="statistical-performance-6" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-6">Statistical Performance:</h3>
-<div class="cell">
-<div class="cell-output-display">
-<p></p><div style="width: 100% ; height: 400px ; text-align: center; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;" class="muted well">Shiny applications not supported in static R Markdown documents</div><p></p>
-</div>
-</div>
+<p><a href="https://yatingzhu.shinyapps.io/app5/">Click here to view the summary table of each race across Years.</a></p>
 </section>
 <section id="discussion-of-the-topic" class="level3">
 <h3 class="anchored" data-anchor-id="discussion-of-the-topic">Discussion of the topic:</h3>
