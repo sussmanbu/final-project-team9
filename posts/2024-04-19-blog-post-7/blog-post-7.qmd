@@ -136,8 +136,8 @@ kable(head(augment_lm), format = "pipe")
 ### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Calculate residuals and fitted values
-residuals_twenty <- resid(model_with_income_log)
-fitted_values_twenty <- fitted(model_with_income_log)
+residuals_twenty_1 <- resid(model_with_income_log)
+fitted_values_twenty_1 <- fitted(model_with_income_log)
 
 # Create a residual plot
 plot(fitted_values_twenty, residuals_twenty, 

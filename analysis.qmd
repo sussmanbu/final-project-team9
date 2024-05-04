@@ -174,7 +174,11 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RA
 
 ```
 [Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.]( https://yatingzhu.shinyapps.io/app2/)
+<<<<<<< HEAD
+z`
+=======
 
+>>>>>>> 48e394924c6c7a414a4e0e2a4b42f69a9df6f7b7
 - The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical Performance:
@@ -643,6 +647,7 @@ unique_races <- unique(models_by_race_year$RACE)
 - Race is really a point that needs to explore. Through the result and the visualization of the coefficient changes for each race, there is definitely different patterns showed.
 
 ## 3.Time series model
+<<<<<<< HEAD
 ### Model Overview:
 
 ### Model Findings:
@@ -650,3 +655,94 @@ unique_races <- unique(models_by_race_year$RACE)
 ### Statistical Performance:
 
 ### Discussion of the topic:
+=======
+### Model overview:
+- This model extended the 2022 dataset analysis to explore how the rent-income relationship have evolved other the past tenty years
+- We use random effect time series model which (1 | REGION_CLASSIFIED) term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
+- The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.
+
+### Model Findings:
+## log-log model
+```{r}
+# Filter out non-positive values before log transformation
+data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
+
+# Apply log transformation
+data_twenty$log_RENTGRS <- log(data_twenty$RENTGRS)
+data_twenty$log_INCTOT <- log(data_twenty$INCTOT)
+
+
+# Calculating means and standard deviations for the log-transformed columns
+mean_log_RENTGRS <- mean(data_twenty$log_RENTGRS, na.rm = TRUE)
+sd_log_RENTGRS <- sd(data_twenty$log_RENTGRS, na.rm = TRUE)
+mean_log_INCTOT <- mean(data_twenty$log_INCTOT, na.rm = TRUE)
+sd_log_INCTOT <- sd(data_twenty$log_INCTOT, na.rm = TRUE)
+
+
+# Defining lower and upper bounds for both variables
+lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
+ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
+lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
+ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
+
+# Filtering out outliers
+data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & data_twenty$log_RENTGRS <= ub_log_RENTGRS & 
+                             data_twenty$log_INCTOT >= lb_log_INCTOT & data_twenty$log_INCTOT <= ub_log_INCTOT, ]
+
+
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty_clean, REML = FALSE)
+```
+- The model suggests that a 10% increase in income is predicted to raise rent by an average of 16.09%, with all other variables held constant, indicating income's elasticity effect on rent.
+
+### Statistical performance:
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+glance_lm <- glance(model_with_income_log)
+kable(glance_lm, format = "pipe")
+```
+- There are 31662 observations in the table, which generally is a large number which is good. 
+- Residual Standard Error (sigma): The residual standard error is 0.4329367, This value indicates there are deviation of the observed values from the fitted values. A lower residual standard error suggests a model with a good fit to the data.
+- Log-Likelihood (logLik): The log-likelihood of the model is -18433.34. Log-likelihood measures how well the model predicts the observed data; higher values (closer to zero) typically indicate a better model fit.
+- Overall statistics suggests there are limitations to the model, but it generally captures the overall trend which further suggests in the residual plot and qq plot.
+
+### Model discussion
+## Residual plot
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Calculate residuals and fitted values
+residuals_twenty <- resid(model_with_income_log)
+fitted_values_twenty <- fitted(model_with_income_log)
+
+# Create a residual plot
+plot(fitted_values_twenty, residuals_twenty, 
+     xlab = "Fitted Values", ylab = "Residuals",
+     main = "Residual Plot", pch = 20)
+abline(h = 0, col = "red") 
+```
+- The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. However, this is common in non-transformed data and it is our one of the limitation in our model. 
+- This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
+
+## QQ plot
+```{r}
+library(lattice)
+
+# Q-Q plot for normality
+qqmath(resid(model_with_income_log), distribution = qnorm,
+       main = "Q-Q Plot for Model Residuals", 
+       xlab = "Theoretical Quantiles", 
+       ylab = "Sample Quantiles")
+
+# Residuals vs Fitted plot for homoscedasticity
+plot(residuals(model_with_income_log) ~ fitted(model_with_income_log))
+abline(h = 0, col = "red")
+qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
+
+
+
+```
+- The Q-Q plot we got for model residuals suggests similar issues with our residual plot, however, this is common and again one of our limitation of our model.
+- The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
+- The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
+=======
+>>>>>>> f4b8d7617dd335bd88f7ff14da0f40baa12d128e
