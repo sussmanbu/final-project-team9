@@ -543,9 +543,39 @@ unique_races <- unique(models_by_race_year$RACE)
 ## 3.Time series model
 
 ### Model Overview:
+<<<<<<< HEAD
 *******Why use time series model here, how it improved upon the previos one;
 
 ### Model Findings:
+=======
+- Here we use time series random effect model to further analyze the relationship between rent and income. 
+-Random Effects term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
+- The primary goal is to understand how changes in income (on a logarithmic scale) and other demographic and socio-economic factors affect the log-transformed rent prices, adjusting for regional variations.
+
+### Model Findings:
+#### log-log model
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyr)
+library(broom)
+library(dplyr)
+library(here)
+library(gt)
+library(purrr)
+data_path <- here("dataset", "data_twenty_clean.csv")
+data_path1 <- here("dataset", "latest_clean.csv")
+library(readr)
+data_twenty <- read_csv(data_path,show_col_types = FALSE) 
+data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
+library(ggplot2)
+library(knitr)
+library(lme4)
+library(broom.mixed)
+library(nlme)
+library(car)
+```
+
+
+>>>>>>> 5c8d869ac73f418ba2a662e1a710dd4aa7312d4b
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
@@ -582,10 +612,11 @@ model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST +
 tidy_lm <- tidy(model_with_income_log)
 kable(tidy_lm, format = "pipe")
 ```
-- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.66%, with all other
+- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other
 variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical performance:
+<<<<<<< HEAD
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 glance_lm <- glance(model_with_income_log)
 kable(glance_lm, format = "pipe")
@@ -598,9 +629,13 @@ kable(glance_lm, format = "pipe")
 - Residual Standard Error (sigma): The residual standard error is 0.4839304, This value indicates there are deviation of the observed values from the fitted values. A lower residual standard error suggests a model with a good fit to the data.
 - Overall statistics suggests there are limitations to the model, but it generally captures the overall trend which further suggests in the residual plot and qq plot.
 >>>>>>> 6e77506c9cc146911bce2b216819e0975cb5e29a
+=======
+- Lower standard errors indicate more precise estimates of the coefficients, and most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates. 
+- Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. ROOMS and NFAMS have t-statistics of 76.24 and 35.64 respectively, indicating strong significance in predicting rent.
+>>>>>>> 5c8d869ac73f418ba2a662e1a710dd4aa7312d4b
 
 ### Model discussion
-## Residual plot
+#### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 residuals_twenty <- resid(model_with_income_log)
 fitted_values_twenty <- fitted(model_with_income_log)
@@ -610,11 +645,15 @@ plot(fitted_values_twenty, residuals_twenty,
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
 ```
+<<<<<<< HEAD
 - The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. However, this is common in non-transformed data and it is our one of the limitation in our model. 
 
+=======
+- The residual plot seems to have certain problem with heteroscedasticity, which is pretty normal in our model since we encountered similar problem in blog post 4. 
+>>>>>>> 5c8d869ac73f418ba2a662e1a710dd4aa7312d4b
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
 
-## QQ plot
+#### QQ plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 plot(residuals(model_with_income_log) ~ fitted(model_with_income_log))
@@ -625,5 +664,8 @@ qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")
 
 - The Q-Q plot captures the overall trend and relevant factors, despite the presence of certain outliers.
 
+<<<<<<< HEAD
 - The residuals at the lower and upper ends of the distribution deviate from the line, which indicates that the distribution of residuals has heavier tails than the normal distribution. This means there are more extreme values (outliers) than you would expect if the residuals were perfectly normally distributed.
+=======
+>>>>>>> 5c8d869ac73f418ba2a662e1a710dd4aa7312d4b
 
