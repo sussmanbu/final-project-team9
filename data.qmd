@@ -408,3 +408,17 @@ combined_summary_table <- bind_rows(category_summaries) %>%
 
 kable(combined_summary_table)
 ```
+
+## Extra Library Used in Analysis 
+1. `purrr`: Used in preprocessing for regression analysis.
+2. `lme4`: Used in fitting and analyzing mixed-effects models, useful for regression models involving random effects.
+3. `broom.mixed`: Tidy outputs from mixed-effects models.
+4. `nlme`: Fit and compare Gaussian nonlinear mixed-effects models.
+5. `car`: Provides advanced data handling and visualization functions for regression models.
+6. `shiny`: Allows for building interactive web apps to display regression model analyses.
+7. `DT`: Useful for displaying regression model outputs interactively.
+8. `knitr`: Enables the regression model summaries in report formats.
+9. `kableExtra`: Enhances `knitr`'s `kable()` function, allowing for the creation of complex tables to present regression model summaries.
+10. `tigris`: Useful for downloading and using geographical data that can be incorporated into regression models analyzing spatial data.
+11. `sf`: Provides simple features access for manipulating, analyzing, and visualizing geographic data, important for spatial regression modeling.
+12. `leaflet`: Enables the creation of interactive maps to visually represent results from spatial regression analyses.
