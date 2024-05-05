@@ -4,10 +4,7 @@ description: Exploring the Tug-of-War Between Income and Rent in America
 toc: true
 draft: FALSE
 ---
-<<<<<<< HEAD
-=======
 ![](images/BigPicturePage.png)
->>>>>>> 1f18dd3a95c9377fa937b0088fd3d00042474cea
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
 library(DT)
@@ -23,6 +20,7 @@ library(knitr)
 library(lme4)
 library(broom.mixed)
 library(kableExtra)
+library(tidycensus)
 
 data_path <- here("dataset", "data_twenty_clean.csv")
 data_path1 <- here("dataset", "latest_clean.csv")
@@ -139,37 +137,57 @@ race_counts <- rent_data_clean %>%
   mutate(Percentage = Count / sum(Count) * 100) %>%
   arrange(desc(Count))
 
-ggplot(race_counts, aes(x = factor(Abbr_RACE), y = Count, fill = factor(RACE))) +
-  geom_bar(stat = "identity", color = "#95A5A6") + 
-  geom_text(aes(label = sprintf("%1.1f%%", Percentage), y = Count + 50), 
-            vjust = -0.3, size = 3.5, color = "#34495E") + 
-  theme_minimal(base_size = 15) +  
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 15, face = "bold", color = "#34495E"), 
-    axis.title = element_text(size = 10, face = "bold", color = "#34495E"),  
-    axis.text = element_text(color = "#34495E"),  
-    axis.text.x = element_text(angle = 30, hjust = 1),  
-    panel.grid.major = element_line(color = "#ECF0F1", size = 0.2), 
-    panel.grid.minor = element_blank(),  
-    legend.position = "right",  
-    plot.margin = margin(5.5, 5.5, 5.5, 5.5, "mm") 
-  ) +
-  labs(
-    title = "Distribution of Racial Groups",
-    x = "Racial Group",
-    y = "Number of People",
-    caption = "Data Source: IPUMS"  
-  ) +
-  scale_fill_manual(
-    values = c("#FFB6C1", "#FFA07A", "#FFD700", "#98FB98", "#87CEFA", "#FF69B4", "#BA55D3", "#FFDAB9", "#40E0D0", "#F08080", "#E6E6FA", "#FFFFE0"),
-    name = "Racial Group"
-  )
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+grouped_data <- data_2022 %>%
+  dplyr::group_by(REGION_CLASSIFIED, RACE) %>%
+  dplyr::summarise(RENTGRS_race = sum(RENTGRS), .groups = 'drop')
+
+total_rent_by_region <- data_2022 %>%
+  dplyr::group_by(REGION_CLASSIFIED) %>%
+  dplyr::summarise(RENTGRS_total = sum(RENTGRS), .groups = 'drop')
+
+merged_data <- merge(grouped_data, total_rent_by_region, by = "REGION_CLASSIFIED")
+
+
+merged_data$percentage <- (merged_data$RENTGRS_race / merged_data$RENTGRS_total) * 100
+
+p <- ggplot(merged_data, aes(x = REGION_CLASSIFIED, y = percentage, fill = RACE)) +
+  geom_bar(stat = "identity", position = "fill") +
+  theme_minimal() +
+  labs(title = "Percentage of Total Rent by Race in Each U.S. Region",
+       x = "Region",
+       y = "Percentage of Total Rent") +
+  scale_fill_brewer(palette = "Spectral") +
+  theme(legend.title = element_text(face = "bold"), 
+        legend.position = "right")
+print(p)
 
 
 ```
 
 
+
+
+
+
 ## Interactive Exploration
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+states <- tigris::states(cb = TRUE, class = "sf")
+
+rent_data <- get_acs(geography = "state", variables = "B25064_001", year = 2019, survey = "acs5")
+
+map_data <- left_join(states, rent_data, by = "GEOID")
+
+ggplot(data = map_data) +
+  geom_sf(aes(fill = estimate), color = "white") +
+  scale_fill_continuous(name = "Median Gross Rent", low = "lightblue", high = "darkblue") +
+  labs(title = "Median Gross Rent by State", subtitle = "Data from ACS 5-Year Estimates, 2019") +
+  coord_sf(xlim = c(-125, -66), ylim = c(25, 50), expand = FALSE) +  # Adjust limits for continental US
+  theme_minimal() +
+  theme(legend.position = "right")
+```
 While the national trends provide a broad picture, the real story unfolds at a more personal level. How does your city fare in this dance of rent and income? Dive into our interactive dashboard to explore detailed data for your area
 
 [Click the link here to find the city median rent of 2021 you live!](https://yatingzhu.shinyapps.io/app6/)

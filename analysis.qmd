@@ -355,6 +355,7 @@ models_by_year %>%
 ```
 
 -   Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.
+
 - The coefficient shows dropping down during the Covid-19 period.
 
 -   The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.
@@ -445,7 +446,6 @@ log_inctot_p_values <- data_twenty %>%
 unique_races <- unique(log_inctot_p_values$RACE)
 ```
 
--   Specific Trends:
 
 **Alaska Native**: Shows minor fluctuations around zero, with both positive and negative coefficients, indicating inconsistent trends over the years.
 
@@ -544,14 +544,12 @@ unique_races <- unique(models_by_race_year$RACE)
 - Random Effects term introduces a random intercept for different regions (REGION_CLASSIFIED), allowing the model to account for variations in rent prices that are region-specific but not explained by the model's fixed effects.
 
 ### Model Findings:
+
+[Click here to view the summary table, which includes estimates, standard errors and statistics for each coefficient.](https://yatingzhu.shinyapps.io/app7/)
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty, REML = FALSE)
-```
-
-### Regression Coefficients Table:
-```{r echo=FALSE, message=FALSE, warning=FALSE }
 tidy_lm <- tidy(model_with_income_log)
-kable(tidy_lm, format = "pipe")
 ```
 
 - The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other variables held constant, indicating income's elasticity effect on rent.
@@ -582,13 +580,32 @@ abline(h = 0, col = "red")
   - Moreover, even the most expensive rental properties have a price cap, meaning that extremely wealthy individuals may rent homes within the same price range as those who are less affluent but still wealthy. This results in a scenario where, past a certain income threshold, further increases in income do not correspond to higher rents. 
   - Combined, these factors explain why the model’s residuals show such deviations at the upper income levels.
 
-
+#### Q_Q plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(lattice)
-qqmath(resid(model_with_income_log), distribution = qnorm,
-       main = "Q-Q Plot for Model Residuals", 
-       xlab = "Theoretical Quantiles", 
-       ylab = "Sample Quantiles")
+residuals <- resid(model_with_income_log)
+
+qqnorm(residuals, main = "Normal Q-Q Plot",
+       xlab = "Theoretical Quantiles", ylab = "Sample Quantiles",
+       pch = 16, 
+       col = "black", 
+       cex = 0.6) 
+qqline(residuals, col = "blue", lwd = 2)  
+abline(h = seq(-3, 3, 1), col = "gray", lty = 2)  
+abline(v = seq(-3, 3, 1), col = "gray", lty = 2)
+
 ```
 - The points mostly follow the line in the center, indicating that residuals are generally well-modeled. But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
+
+# Conclusion 
+
+1. **Income and Rent Expenditure (2022):** Latest data indicates that a 10% increase in income is predicted to raise rent expenditure by approximately 13.34%, with other variables constant, showcasing the elastic nature of rent in response to changes in income.
+
+2. **Time Effect and Autocorrelation Considerations:** When accounting for temporal effects and autocorrelation, a 10% increase in income is expected to lead to a 14.67% rise in rent, affirming the pronounced elasticity of rent costs relative to income fluctuations.
+
+3. **Trends Over Years:** Analysis of yearly data reveals that coefficient estimates peaked notably between 2000 and 2020, followed by declines during the COVID-19 period, indicating cycles of increase and corrective adjustments in the relationship between income and rent.
+
+4. **Racial and Ethnic Differences:** The association between income and rent varies significantly among racial and ethnic groups. Particularly, Chinese and Japanese groups have displayed a consistently strong positive relationship with income in recent years, highlighting disparities in economic outcomes across different demographics.
+
+`The validity, limitations, and details of the models and statistical analysis used are thoroughly discussed in the respective sections above.`
+
 
