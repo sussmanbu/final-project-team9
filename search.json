@@ -427,6 +427,13 @@
     "text": "Zhu, Yating\nytzhu@bu.edu\nmy github link: https://github.com/yatingzhuzz?tab=repositories\nHello everyone! I’m Yating Zhu, majoring in Math and minoring in Economics. I am a junior. And I am from shanghai, chian. Nice to connect with you all!\n\n\nAbout this Template.\nThis is based off of the standard Quarto website template from RStudio (2023.09.0 Build 463)."
   },
   {
+    "objectID": "big_picture.html",
+    "href": "big_picture.html",
+    "title": "Landlords Envy Him – The Budget Whisperer!",
+    "section": "",
+    "text": "I apologize for the oversight. Let’s ensure all your content, including all code blocks, is included correctly. Here is the complete rearrangement with all sections and code blocks intact:"
+  },
+  {
     "objectID": "big_picture.html#the-dance-begins-rising-rent",
     "href": "big_picture.html#the-dance-begins-rising-rent",
     "title": "Landlords Envy Him – The Budget Whisperer!",
@@ -441,6 +448,13 @@
     "text": "A Sigh of Relief: Rising Income\nBut as rent demands more from our wallets, something else is happening. Our incomes are also on an upward trajectory. This next graph isn’t just about higher wages; it’s about the resilience and growth that have characterized our economy and personal financial stories.\n\nTrend of Median Personal Income Over the Years"
   },
   {
+    "objectID": "big_picture.html#interactive-exploration",
+    "href": "big_picture.html#interactive-exploration",
+    "title": "Landlords Envy Him – The Budget Whisperer!",
+    "section": "Interactive Exploration",
+    "text": "Interactive Exploration\nWhile the national trends provide a broad picture, the real story unfolds at a more personal level. How does your city fare in this dance of rent and income? Dive into our interactive dashboard to explore detailed data for your area. Click the link here to find the city median rent of 2021 you live!"
+  },
+  {
     "objectID": "big_picture.html#diversity-in-housing-data-a-look-at-racial-representation",
     "href": "big_picture.html#diversity-in-housing-data-a-look-at-racial-representation",
     "title": "Landlords Envy Him – The Budget Whisperer!",
@@ -448,17 +462,10 @@
     "text": "Diversity in Housing Data: A Look at Racial Representation\nAs we explore the dynamics of the housing market, it’s essential to recognize the diversity within the data. This graph shows the distribution of different racial groups, reflecting the varying experiences across different communities.\n\nDistribution of Racial Groups"
   },
   {
-    "objectID": "big_picture.html#interactive-exploration",
-    "href": "big_picture.html#interactive-exploration",
-    "title": "Landlords Envy Him – The Budget Whisperer!",
-    "section": "Interactive Exploration",
-    "text": "Interactive Exploration\n\n\n\n\n\n\n\n\n\nWhile the national trends provide a broad picture, the real story unfolds at a more personal level. How does your city fare in this dance of rent and income? Dive into our interactive dashboard to explore detailed data for your area\nClick the link here to find the city median rent of 2021 you live!"
-  },
-  {
     "objectID": "big_picture.html#bridging-the-graphs-analysis-and-insights",
     "href": "big_picture.html#bridging-the-graphs-analysis-and-insights",
     "title": "Landlords Envy Him – The Budget Whisperer!",
     "section": "Bridging the Graphs: Analysis and Insights",
-    "text": "Bridging the Graphs: Analysis and Insights\nWhile we’ve seen the upward trends in both rent and income through our graphs, let’s take a closer look at what these changes really mean. Our analysis goes beyond simple observation and digs into how these financial changes affect each other and what this might mean for you.\n\nUnderstanding the Model’s Message\nOur analysis used a special kind of mathematical model to predict how changes in income affect rent. Here’s what we found: if incomes go up by 10%, rent could increase by about 13.34% on average. This isn’t just a random guess; it’s a prediction backed by strong data, showing us how closely linked our earnings are to what we pay for housing.\n\n\nExplaining the Findings in Everyday Terms\n\nHow Rent Reacts to Income: The number 0.1334 from our model tells us that rent doesn’t just increase slightly when incomes go up; it jumps by a noticeable amount. Imagine getting a 100 dollar increase in your monthly pay; this model predicts that your rent could go up by about 13.34 dollar. So, as we earn more, we also tend to spend more on rent.\nConfidence in Our Model: The details behind these numbers are very reliable. The data tells us this isn’t just happening by chance—it’s a real pattern that we see repeatedly in the numbers.\n\n\n\nWrapping Up: What This Means for Us\nThis deep dive into the numbers helps us understand the tricky balance between earning more and the rising cost of living, especially when it comes to housing. It’s clear that as our incomes grow, so does the amount we have to pay in rent, often faster than we might hope. This can help everyone, from policymakers to renters, understand and plan better for the future.\n\n\nLearn More Yourself"
+    "text": "Bridging the Graphs: Analysis and Insights\nWhile we’ve seen the upward trends in both rent and income through our graphs, let’s take a closer look at what these changes really mean. Our analysis goes beyond simple observation and digs into how these financial changes affect each other and what this might mean for you.\n\nUnderstanding the Model’s Message\nOur analysis used a special kind of mathematical model to predict how changes in income affect rent. Here’s what we found: if incomes go up by 10%, rent could increase by about 13.34% on average. This isn’t just a random guess; it’s a prediction backed by strong data, showing us how closely linked our earnings are to what we pay for housing.\n\n\nExplaining the Findings in Everyday Terms\n\nHow Rent Reacts to Income: The number 0.1334 from our model tells us that rent doesn’t just increase slightly when incomes go up; it jumps by a noticeable amount. Imagine getting a 100 dollar increase in your monthly pay; this model predicts that your rent could go up by about 13.34 dollars. So, as we earn more, we also tend to spend more on rent.\nConfidence in Our Model: The details behind these numbers are very reliable. The data tells us this isn’t just happening by chance—it’s a real pattern that we see repeatedly in the numbers.\n\n\n\nWrapping Up: What This Means for Us\nAs we dive deeper into the dynamics of income and rent, we uncover some intriguing patterns. Here’s what our journey through the data has revealed, told as a story that unfolds over time and across different communities.\n\nThe Elastic Dance Between Income and Rent: Imagine getting a raise at work—let’s say your income goes up by 10%. Sounds great, right? But here’s the catch: as your wallet grows thicker, so does your rent bill. In fact, our data from 2022 shows that a 10% increase in income would typically lead to about a 13.34% increase in rent. It’s like a dance where one partner follows closely behind the other, never quite catching up but always in step.\nA Time-Travelling Twist: Now, let’s add a twist to our dance. Time itself plays a role in how income and rent interact. With every tick of the clock, as the days and months roll by, the dance gets more intense. Our analysis suggests that when we account for these temporal rhythms—what we call autocorrelation—a 10% hike in income might push rent up by about 14.67%. It’s a reminder that in the dance of economics, timing can amplify every move.\nA Historical Perspective: Looking back from the early 2000s to 2020, we see a pattern of rising and falling. It’s like watching the hills and valleys in a scenic landscape. Rent and income seemed to climb together until they reached a peak around 2020. Then came the pandemic, a sudden storm that flattened the hills somewhat, showing us how external shocks can impact our financial dance.\nDiversity in the Dance: Not everyone experiences this dance in the same way. Our exploration reveals that racial and ethnic backgrounds play a significant role in how people are affected. For instance, our Chinese and Japanese communities have shown a particularly strong link between rising incomes and increasing rents. This pattern highlights the diverse economic outcomes and challenges faced by different groups within our society.\n\nThis exploration into the numbers not only broadens our understanding but also brings us face to face with the complexities of economic life. It’s clear that as our incomes grow, so does the amount we allocate for rent, often at a pace that outstrips our earnings growth.\n\n\nLearn More Yourself"
   }
 ]
