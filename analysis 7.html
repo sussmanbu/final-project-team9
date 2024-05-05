@@ -988,7 +988,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="statistical-performance-4" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-4">Statistical Performance:</h3>
-<p><a href="https://yatingzhu.shinyapps.io/app3/">Click here to view the summary table for the model of each Year.</a></p>
+<p>[Click here to view the summary table for the model of each Year.] (https://yatingzhu.shinyapps.io/app3/)</p>
 <ul>
 <li><p>All models are statistically validated, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .</p></li>
 <li><p>R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.</p></li>
@@ -1184,7 +1184,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/final-project-team9\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
