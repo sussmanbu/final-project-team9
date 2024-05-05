@@ -216,8 +216,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ul>
-<li><strong>Relationship Exploration</strong>: Aimming for determining how changes in income levels affect rental spending. This includes examining whether the relationship is strictly linear or if there are nonlinear dynamics that better capture the fluctuations in rental expenditures as income varies.</li>
-<li><strong>Quantitative Analysis</strong>: The goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income.</li>
+<li><strong>Relationship Exploration</strong>: We aim to determine how changes in income levels affect rental spending. This includes examining whether the relationship is strictly linear or if there are nonlinear dynamics that better capture the fluctuations in rental expenditures as income varies.</li>
+<li><strong>Quantitative Analysis</strong>: Our goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income.</li>
 <li><strong>Demographic Variance</strong>: The study will also consider racial differences to identify how income’s impact on rent varies among different racial groups.</li>
 <li><strong>Temporal Analysis</strong>: Employing a time series regression model allows us to account for changes over time, providing a dynamic perspective on the income-rent relationship.</li>
 </ul>
@@ -238,7 +238,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-overview" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview">Model Overview:</h3>
 <ul>
-<li>This model builds upon the initial simple linear regression framework by incorporating additional confounding variables to refine our analysis.</li>
+<li>This model enhances the simple linear regression by incorporating additional confounding variables to refine our analysis.</li>
+<li>This expanded model builds upon the initial simple linear regression framework.</li>
 </ul>
 </section>
 <section id="model-findings" class="level3">
@@ -303,14 +304,14 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The R-squared value of 0.23 indicates that approximately <strong>23% of the variance in the dependent variable (gross rent) is accounted for by the model</strong>， which is considered acceptable in the context of social-economic studies.</p></li>
-<li><p>A F-statistic value of 70 and a p-value of 0 confirm the <strong>statistical significance</strong> of the model, suggesting that the regression results are highly unlikely to occur by chance.</p></li>
+<li><p>The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.</p></li>
+<li><p>A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.</p></li>
 </ul>
 </section>
 <section id="variable-selection-and-model-refinement" class="level3">
 <h3 class="anchored" data-anchor-id="variable-selection-and-model-refinement">Variable Selection and model refinement:</h3>
 <ul>
-<li>A <strong>correlation matrix</strong> was used to identify <code>control variables</code> and to detect potential<code>multi-collinearity issues</code>.</li>
+<li>A correlation matrix was used to identify control variables and to detect potential multi-collinearity issues.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -395,7 +396,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li>A review of multicollinearity prompted the removal of <code>FTOTINC</code>(family income) to prevent model overfitting.</li>
+<li>A review of multicollinearity prompted the removal of <code>FTOTINC</code> to prevent model overfitting.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -475,7 +476,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <ul>
 <li>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value.</li>
-<li><code>Employment Status (EMPSTAT)</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income (INCTOT)</code> or <code>Family_income(FTOTINC)</code>. This interaction will be explored further.</li>
+<li><code>Employment Status</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income</code> or <code>FTOTINC</code>. This interaction will be explored further.</li>
 </ul>
 </section>
 <section id="model-discussion" class="level3">
@@ -490,8 +491,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The plot indicates a potential <strong>non-linear relationship</strong> and <strong>heteroscedasticity</strong>, evident from the increase in variability with the size of the fitted values.</p></li>
-<li><p>Some points notably <strong>deviate from the main cluster</strong>, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points.</p></li>
+<li><p>The plot indicates a potential non-linear relationship and heteroscedasticity, evident from the increase in variability with the size of the fitted values.</p></li>
+<li><p>Some points notably deviate from the main cluster, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points.</p></li>
 </ul>
 </section>
 </section>
@@ -501,7 +502,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="model-overview-1">Model Overview:</h3>
 <ul>
 <li><p>Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.</p></li>
-<li><p>The outliers was excluded (three standard deviations away from the response and predictor variable) for cleansing.</p></li>
+<li><p>A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.</p></li>
 </ul>
 </section>
 <section id="model-findings-1" class="level3">
@@ -566,7 +567,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>An adjusted R-squared value of 0.27, while modest, is considered adequate within the complex realms of social science and economics.</p></li>
+<li><p>An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.</p></li>
 <li><p>A very low p-value signifies the statistical significance of the model’s predictors.</p></li>
 <li><p>The sigma value’s reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.</p></li>
 </ul>
@@ -586,9 +587,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The residuals, predominantly centered around the zero line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable.</p></li>
-<li><p>While the spread is generally consistent, minor widening at the extremes suggests typical heteroscedasticity in higher income or rent brackets.</p></li>
-<li><p>Nonetheless, a few potential outliers common in large economic datasets do not significantly affect the robustness of the central trend.</p></li>
+<li><p>The residuals show no systematic pattern, indicating an effective capture of the relationship between predictors and response variable.</p></li>
+<li><p>While the spread is mostly consistent, some widening at the extremes suggests minor heteroscedasticity, typical in economic data involving higher income or rent brackets, but it does not significantly compromise the model’s validity. Residuals predominantly center around the zero line, indicating no model bias and reinforcing its accuracy.</p></li>
+<li><p>A few potential outliers, common in large economic datasets, do not notably affect the robust central trend captured by the model.</p></li>
 </ul>
 <ol start="2" type="1">
 <li>Normality of Residuals:</li>
@@ -628,7 +629,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li>For Durbin-Watson Statistic, the result statistic value <strong>close to 2</strong> indicates no autocorrelation, implying that the <strong>errors are independent</strong>. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.</li>
+<li>For Durbin-Watson Statistic, the result statistic value close to 2 indicates no autocorrelation, implying that the errors are independent. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.</li>
 </ul>
 <ol start="4" type="1">
 <li>Multicollinearity:</li>
@@ -698,7 +699,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li>The adjusted GVIF values, being all near or <strong>below the threshold of 1.5</strong> after taking the root, demonstrate that the multicollinearity is likely <strong>not distorting</strong> the estimates in the regression model significantly.</li>
+<li>The adjusted GVIF values, being all near or below the threshold of 1.5 after taking the root, demonstrate that the multicollinearity is likely not distorting the estimates in the regression model significantly. This implies that each predictor variable is providing unique information that is not overly redundant with other variables in the model.</li>
 </ul>
 <p><strong>Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.</strong></p>
 </section>
@@ -714,8 +715,8 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-overview-and-model-refinement" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview-and-model-refinement">Model Overview and Model Refinement:</h3>
 <ul>
-<li><p>The interaction term <code>EMPSTAT * FTOTINC (employment status * family income)</code> has been introduced to investigate the suspected interaction effect.</p></li>
-<li><p>But the p-value for <code>EMPSTAT Unemployed:FTOTINC (umployment status * family income)</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term <strong>needs to have further consideration</strong>.</p></li>
+<li>The interaction term <code>EMPSTAT * FTOTINC</code> has been introduced to investigate the suspected interaction effect between employment status and total family income.</li>
+<li>But the p-value for <code>EMPSTATUnemployed:FTOTINC</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.</li>
 </ul>
 </section>
 <section id="statistical-performance-2" class="level3">
@@ -780,7 +781,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-discussion-2" class="level3">
 <h3 class="anchored" data-anchor-id="model-discussion-2">Model Discussion:</h3>
 <ul>
-<li>The residual plot indicates that the <strong>model without interaction terms performs better than the log-log regression with interaction terms</strong>. This residual plot does not show the performance as well as the section 3.</li>
+<li>The residual plot indicates that the model without interaction terms performs better than the log-log regression with interaction terms. This residual plot does not show the performance as well as the section 3.</li>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
@@ -818,14 +819,14 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="model-findings-2">Model Findings:</h3>
 <p><a href="https://yatingzhu.shinyapps.io/app7/">Click here to view the summary table, which includes estimates, standard errors and statistics for each coefficient.</a></p>
 <ul>
-<li>The model suggests that a <strong>10% increase in income is predicted to raise rent by an average of 14.12%</strong>, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
+<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
 </ul>
 </section>
 <section id="statistical-performance-3" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-3">Statistical performance:</h3>
 <ul>
 <li><p>Most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates.</p></li>
-<li><p>Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent.</p></li>
+<li><p>Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. ROOMS and NFAMS have t-statistics of 76.24 and 35.64 respectively, indicating strong significance in predicting rent.</p></li>
 </ul>
 </section>
 <section id="model-discussion-3" class="level3">
@@ -842,12 +843,12 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The residual plot indicates <strong>potential heteroscedasticity</strong>, as there is a clear pattern where the residuals spread increasingly around the zero line and become more negative as the fitted values increase. This suggests that the variance of the residuals is not constant, which could impact the reliability of the model’s predictions at higher income levels.</p></li>
-<li><p>But we consider the pattern in this plot reflects the socio-economic dynamics of high-income individuals’ housing decisions.</p>
+<li><p>The residual plot indicates potential heteroscedasticity, as there is a clear pattern where the residuals spread increasingly around the zero line and become more negative as the fitted values increase. This suggests that the variance of the residuals is not constant, which could impact the reliability of the model’s predictions at higher income levels.</p></li>
+<li><p>The pattern in this plot reflects the socio-economic dynamics of high-income individuals’ housing decisions.</p>
 <ul>
-<li><p>As income significantly increases, people tend to purchase rather than rent homes, affecting the relationship between income and rental expenditures. This creates a ceiling effect on rental payments, leading to the model’s residuals deviating negatively from the expected line at higher income levels.</p></li>
-<li><p>Moreover, even the most expensive rental properties have a price cap, meaning that extremely wealthy individuals may rent homes within the same price range as those who are less affluent but still wealthy. This results in a scenario where, past a certain income threshold, further increases in income do not correspond to higher rents.</p></li>
-<li><p>Combined, these factors explain why the model’s residuals show such deviations at the upper income levels.</p></li>
+<li>As income significantly increases, people tend to purchase rather than rent homes, affecting the relationship between income and rental expenditures. This creates a ceiling effect on rental payments, leading to the model’s residuals deviating negatively from the expected line at higher income levels.</li>
+<li>Moreover, even the most expensive rental properties have a price cap, meaning that extremely wealthy individuals may rent homes within the same price range as those who are less affluent but still wealthy. This results in a scenario where, past a certain income threshold, further increases in income do not correspond to higher rents.</li>
+<li>Combined, these factors explain why the model’s residuals show such deviations at the upper income levels.</li>
 </ul></li>
 </ul>
 </section>
@@ -863,8 +864,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The points mostly follow the line in the center, indicating that residuals are generally well-modeled.</p></li>
-<li><p>But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.</p></li>
+<li>The points mostly follow the line in the center, indicating that residuals are generally well-modeled. But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.</li>
 </ul>
 </section>
 </section>
@@ -1029,7 +1029,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/final-project-team9\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

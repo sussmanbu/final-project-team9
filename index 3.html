@@ -354,7 +354,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1711166400000" data-listing-file-modified-sort="1714920922369" data-listing-date-modified-sort="1711166400000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3214">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1711166400000" data-listing-file-modified-sort="1714858338416" data-listing-date-modified-sort="1711166400000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3214">
 <div class="thumbnail">
 <p><a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external"></a></p><a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -496,7 +496,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/final-project-team9\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
