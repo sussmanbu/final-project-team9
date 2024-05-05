@@ -11,8 +11,8 @@ library(broom.mixed)
 library(kableExtra)
 
 
-data_path <- "data_twenty_clean.csv"
-data_twenty  <- read_csv(data_path, show_col_types = FALSE) 
+
+data_twenty  <- readRDS("data_twenty_clean.rds") 
 
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)

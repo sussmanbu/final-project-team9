@@ -8,16 +8,14 @@ library(kableExtra)
 library(here)  # For resolving paths
 
 
-data_path <- "latest_clean.csv"  
-data_2022 <- read_csv(data_path, show_col_types = FALSE)
+data_2022 <- readRDS("latest.rds") 
 log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
 ui <- fluidPage(
   titlePanel(tags$h1("Model Summary Table_log_log Model", style = "font-size: 18px;")),  
   sidebarLayout(
     sidebarPanel(
       selectInput("variable", "Select Variable:", choices = NULL),
-      hr(),
-      p("The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income's elasticity effect on rent.")
+      hr()
     ),
     mainPanel(
       DTOutput("modelTable")

@@ -2,21 +2,18 @@ library(shiny)
 library(dplyr)
 library(readr)
 library(knitr)
-library(broom)  # For tidy() function
+library(broom)  
 library(kableExtra)
 library(here)
-data_path <- "latest_clean.csv"
-data_2022 <- read_csv(data_path, show_col_types = FALSE)
+data_2022 <- readRDS("latest.rds") 
 
 
-# Define the UI
 ui <- fluidPage(
   titlePanel("Model Summary Table_MLR Model"),
   sidebarLayout(
     sidebarPanel(
       selectInput("variable", "Select Variable:", choices = NULL),
-      hr(),
-      p("A $1,000 increase in total income (INCTOT) is associated with an average increase of 5.2 in gross rent (RENTGRS), assuming other variables are constant.")
+      hr()
     ),
     mainPanel(
       uiOutput("modelTable")
@@ -24,11 +21,7 @@ ui <- fluidPage(
   )
 )
 
-# Define the server logic
-server <- function(input, output, session) {  # Include session here
-  # Example to load data
-  data_path <- "latest_clean.csv"
-  data_2022 <- read_csv(data_path, show_col_types = FALSE)
+server <- function(input, output, session) {  
   
   mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
   tidy_mlr <- broom::tidy(mlr_model)
@@ -50,6 +43,5 @@ server <- function(input, output, session) {  # Include session here
   })
 }
 
-# Run the application
 shinyApp(ui = ui, server = server)
 

@@ -5,6 +5,6 @@ account: yatingzhu
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 11932006
-bundleId: 8574460
+bundleId: 8578343
 url: https://yatingzhu.shinyapps.io/app1/
 version: 1

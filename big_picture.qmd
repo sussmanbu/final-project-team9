@@ -4,6 +4,7 @@ description: Exploring the Tug-of-War Between Income and Rent in America
 toc: true
 draft: FALSE
 ---
+
 ![](images/BigPicturePage.png)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(shiny)
@@ -166,9 +167,6 @@ print(p)
 
 
 ```
-
-
-
 
 
 

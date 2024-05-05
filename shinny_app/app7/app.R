@@ -9,9 +9,8 @@ library(knitr)
 library(lme4)
 library(broom.mixed)
 library(kableExtra)
-
-data_path <- "data_twenty_clean.csv"
-data_twenty  <- read_csv(data_path, show_col_types = FALSE) 
+data_twenty <- readRDS("data_twenty_clean.rds") 
+ 
 
 model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST + RACE + EMPSTAT + (1 | REGION_CLASSIFIED), data = data_twenty, REML = FALSE)
 tidy_lm <- tidy(model_with_income_log)

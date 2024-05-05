@@ -11,8 +11,8 @@ library(broom.mixed)
 library(kableExtra)
 library(here)
 
-data_path <- "data_twenty_clean.csv"
-data_twenty <- read_csv(data_path, show_col_types = FALSE) 
+
+data_twenty <- readRDS("data_twenty_clean.rds") 
 
 models_by_year <- data_twenty %>%
   group_by(YEAR) %>%

@@ -21,12 +21,10 @@ library(broom.mixed)
 library(nlme)
 library(car)
 
-data_path <- here("dataset", "data_twenty_clean.csv")
-data_path1 <- here("dataset", "latest_clean.csv")
-
-data_twenty <- read_csv(data_path,show_col_types = FALSE) 
-data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
-
+data_path <- here("dataset", "data_twenty_clean.rds")
+data_path1 <- here("dataset", "latest.rds")
+data_twenty <- readRDS(data_path) 
+data_2022 <- readRDS(data_path1) 
 ```
 
 # Research Question and Motivation
@@ -37,8 +35,8 @@ The primary focus of this research is to investigate the relationship between in
 
 ## Objectives
 
--   **Relationship Exploration**: We aim to determine how changes in income levels affect rental spending. This includes examining whether the relationship is strictly linear or if there are nonlinear dynamics that better capture the fluctuations in rental expenditures as income varies.
--   **Quantitative Analysis**: Our goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income.
+-   **Relationship Exploration**: Aimming for determining how changes in income levels affect rental spending. This includes examining whether the relationship is strictly linear or if there are nonlinear dynamics that better capture the fluctuations in rental expenditures as income varies.
+-   **Quantitative Analysis**: The goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income.
 -   **Demographic Variance**: The study will also consider racial differences to identify how income's impact on rent varies among different racial groups.
 -   **Temporal Analysis**: Employing a time series regression model allows us to account for changes over time, providing a dynamic perspective on the income-rent relationship.
 
@@ -46,7 +44,6 @@ The primary focus of this research is to investigate the relationship between in
 # Models and Inferences (First dataset)
 
 ## Outline of models used in class blogs
-
 
 1.  Multiple Linear Regression Model (Detailed in Class Blog 4)
 
@@ -59,8 +56,8 @@ The primary focus of this research is to investigate the relationship between in
 
 ### Model Overview:
 
--   This model enhances the simple linear regression by incorporating additional confounding variables to refine our analysis.
--   This expanded model builds upon the initial simple linear regression framework.
+-   This model builds upon the initial simple linear regression framework by incorporating additional confounding variables to refine our analysis.
+
 
 ### Model Findings:
 
@@ -74,12 +71,12 @@ The primary focus of this research is to investigate the relationship between in
 glance_mlr=glance(mlr_model)
 kable(glance_mlr)
 ```
--   The R-squared value of 0.28 indicates that approximately 28% of the variance in the dependent variable (gross rent) is explained by the model, which is a considerable improvement compared to the simple linear regression.
+-   The R-squared value of 0.23 indicates that approximately **23% of the variance in the dependent variable (gross rent) is accounted for by the model**， which is considered acceptable in the context of social-economic studies.
 
--   A F-statistic value of 98.57 and a p-value of 0 confirm the statistical significance of the model, suggesting that the regression results are highly unlikely to occur by chance.
+-   A F-statistic value of 70 and a p-value of 0 confirm the **statistical significance** of the model, suggesting that the regression results are highly unlikely to occur by chance.
 
 ### Variable Selection and model refinement:
--   A correlation matrix was used to identify control variables and to detect potential multi-collinearity issues.
+-   A **correlation matrix** was used to identify `control variables` and to detect potential`multi-collinearity issues`.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_2022$KITCHEN <- as.factor(data_2022$KITCHEN)
@@ -90,7 +87,7 @@ data_2022$REGION_CLASSIFIED <- as.factor(data_2022$REGION_CLASSIFIED)
 cor_matrix <- cor(data_2022[, c("INCTOT", "ROOMS", "NFAMS", "AGE", "FTOTINC", "RENTGRS")])
 kable(cor_matrix, format = "pipe")
 ```
--   A review of multicollinearity prompted the removal of `FTOTINC` to prevent model overfitting.
+-   A review of multicollinearity prompted the removal of `FTOTINC`(family income) to prevent model overfitting.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 mlr_model <- lm(RENTGRS ~ INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + FTOTINC + REGION_CLASSIFIED, data = data_2022)
@@ -99,7 +96,7 @@ vif_values <- vif(mlr_model)
 kable(vif_values)
 ```
 -   After fitting the multiple linear regression (MLR) model, `Kitchen` was removed due to its statistical insignificance, indicated by a high p-value.
--   `Employment Status`, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like `Income` or `FTOTINC`. This interaction will be explored further.
+-   `Employment Status (EMPSTAT)`, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like `Income (INCTOT)` or `Family_income(FTOTINC)`. This interaction will be explored further.
 
 
 ### Model Discussion :
@@ -116,16 +113,16 @@ plot(fitted_values, residuals,
 
 abline(h = 0, col = "red")
 ```
-- The plot indicates a potential non-linear relationship and heteroscedasticity, evident from the increase in variability with the size of the fitted values.
+- The plot indicates a potential **non-linear relationship** and **heteroscedasticity**, evident from the increase in variability with the size of the fitted values.
 
-- Some points notably deviate from the main cluster, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points. 
+- Some points notably **deviate from the main cluster**, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points. 
 
 ## 2. Log-Log Regression Model
 
 ### Model Overview:
 -   Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.
 
--   A reanalysis was conducted post data cleansing to assess the impact of log-transformed variables.
+-   The outliers was excluded (three standard deviations away from the response and predictor variable) for cleansing.
 
 ### Model Findings:
 
@@ -142,7 +139,7 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RA
 glance_log=glance(log_model_2022)
 kable(glance_log)
 ```
--   An adjusted R-squared value of 0.223, while modest, is considered adequate within the complex realms of social science and economics.
+-   An adjusted R-squared value of 0.27, while modest, is considered adequate within the complex realms of social science and economics.
 
 -   A very low p-value signifies the statistical significance of the model’s predictors.
 
@@ -158,11 +155,11 @@ plot(fitted(log_model_2022), residuals(log_model_2022),
 abline(h = 0, col = "red")
 ```
 
-- The residuals show no systematic pattern, indicating an effective capture of the relationship between predictors and response variable. 
+- The residuals, predominantly centered around the zero line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable. 
 
-- While the spread is mostly consistent, some widening at the extremes suggests minor heteroscedasticity, typical in economic data involving higher income or rent brackets, but it does not significantly compromise the model's validity. Residuals predominantly center around the zero line, indicating no model bias and reinforcing its accuracy. 
+- While the spread is generally consistent, minor widening at the extremes suggests typical heteroscedasticity in higher income or rent brackets.
 
-- A few potential outliers, common in large economic datasets, do not notably affect the robust central trend captured by the model.
+- Nonetheless, a few potential outliers common in large economic datasets do not significantly affect the robustness of the central trend.
 
 2.  Normality of Residuals:
 
@@ -185,7 +182,7 @@ kable(tibble::as_tibble(list(
 )), caption = "Durbin-Watson Test Results")
 ```
 
--   For Durbin-Watson Statistic, the result statistic value close to 2 indicates no autocorrelation, implying that the errors are independent. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.
+-   For Durbin-Watson Statistic, the result statistic value **close to 2** indicates no autocorrelation, implying that the **errors are independent**. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.
 
 4.  Multicollinearity:
 
@@ -194,7 +191,7 @@ index=vif(log_model_2022)
 kable(index)
 ```
 
--   The adjusted GVIF values, being all near or below the threshold of 1.5 after taking the root, demonstrate that the multicollinearity is likely not distorting the estimates in the regression model significantly. This implies that each predictor variable is providing unique information that is not overly redundant with other variables in the model.
+-   The adjusted GVIF values, being all near or **below the threshold of 1.5** after taking the root, demonstrate that the multicollinearity is likely **not distorting** the estimates in the regression model significantly. 
 
 **Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.**
 
@@ -206,8 +203,9 @@ kable(index)
 
 ### Model Overview and Model Refinement:
 
--   The interaction term `EMPSTAT * FTOTINC` has been introduced to investigate the suspected interaction effect between employment status and total family income.
-- But the p-value for `EMPSTATUnemployed:FTOTINC` is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term needs to have further consideration.
+-   The interaction term `EMPSTAT * FTOTINC (employment status * family income)` has been introduced to investigate the suspected interaction effect.
+
+- But the p-value for `EMPSTAT Unemployed:FTOTINC (umployment status * family income)` is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term **needs to have further consideration**.
 
 ### Statistical Performance:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -223,7 +221,7 @@ kable(glance_log_model_2022)
 
 ### Model Discussion:
 
-- The residual plot indicates that the model without interaction terms performs better than the log-log regression with interaction terms. This residual plot does not show the performance as well as the section 3.
+- The residual plot indicates that the **model without interaction terms performs better than the log-log regression with interaction terms**. This residual plot does not show the performance as well as the section 3.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 residuals_2022 <- resid(log_model_2022)
@@ -261,12 +259,12 @@ model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST +
 tidy_lm <- tidy(model_with_income_log)
 ```
 
-- The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other variables held constant, indicating income's elasticity effect on rent.
+- The model suggests that a **10% increase in income is predicted to raise rent by an average of 14.12%**, with all other variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical performance:
 - Most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates. 
 
-- Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. ROOMS and NFAMS have t-statistics of 76.24 and 35.64 respectively, indicating strong significance in predicting rent.
+- Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. 
 
 ### Model discussion
 #### Residual plot
@@ -282,11 +280,13 @@ plot(fitted_values_twenty, residuals_twenty,
 abline(h = 0, col = "red") 
 ```
 
-- The residual plot indicates potential heteroscedasticity, as there is a clear pattern where the residuals spread increasingly around the zero line and become more negative as the fitted values increase. This suggests that the variance of the residuals is not constant, which could impact the reliability of the model's predictions at higher income levels.
+- The residual plot indicates **potential heteroscedasticity**, as there is a clear pattern where the residuals spread increasingly around the zero line and become more negative as the fitted values increase. This suggests that the variance of the residuals is not constant, which could impact the reliability of the model's predictions at higher income levels.
 
-- The pattern in this plot reflects the socio-economic dynamics of high-income individuals' housing decisions. 
+- But we consider the pattern in this plot reflects the socio-economic dynamics of high-income individuals' housing decisions. 
+
   - As income significantly increases, people tend to purchase rather than rent homes, affecting the relationship between income and rental expenditures. This creates a ceiling effect on rental payments, leading to the model’s residuals deviating negatively from the expected line at higher income levels. 
   - Moreover, even the most expensive rental properties have a price cap, meaning that extremely wealthy individuals may rent homes within the same price range as those who are less affluent but still wealthy. This results in a scenario where, past a certain income threshold, further increases in income do not correspond to higher rents. 
+  
   - Combined, these factors explain why the model’s residuals show such deviations at the upper income levels.
 
 #### Q_Q plot
@@ -303,7 +303,9 @@ abline(h = seq(-3, 3, 1), col = "gray", lty = 2)
 abline(v = seq(-3, 3, 1), col = "gray", lty = 2)
 
 ```
-- The points mostly follow the line in the center, indicating that residuals are generally well-modeled. But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
+- The points mostly follow the line in the center, indicating that residuals are generally well-modeled.
+
+- But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
 
 ## 2. Log-Log Regression Model by YEAR
 
@@ -334,16 +336,15 @@ models_by_year %>%
        y = "Coefficient Estimate")
 ```
 
--   Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.
+- Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.
 
 - The coefficient shows dropping down during the Covid-19 period.
 
--   The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.
+- The coefficient trend exhibits cyclicity with no monotonic progression, featuring multiple peaks and valleys, implying a potential cyclical influence on the income-rent relationship.
 
 ### Statistical Performance:
 
 [Click here to view the summary table for the model of each Year.](https://yatingzhu.shinyapps.io/app3/)
-
 
 -   All models are statistically validated, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .
 
