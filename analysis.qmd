@@ -47,17 +47,15 @@ The primary focus of this research is to investigate the relationship between in
 
 ## Outline of models used in class blogs
 
-1.  Simple Linear Regression Model (Detailed in Class Blog 4)
-- Investigates the relationship between income (the predictor) and rent (the response), offering preliminary insights into whether they share a positive or negative correlation and assessing if it is worth to have further detailed analysis.
 
-2.  Multiple Linear Regression Model (Detailed in Class Blog 4)
+1.  Multiple Linear Regression Model (Detailed in Class Blog 4)
 
-3.  Log-Log Regression Model
+2.  Log-Log Regression Model
 
-4.  Log-Log Regression Model with interaction terms
+3.  Log-Log Regression Model with interaction terms
 
 
-## 2. Multiple Linear Regression Model
+## 1. Multiple Linear Regression Model
 
 ### Model Overview:
 
@@ -122,7 +120,7 @@ abline(h = 0, col = "red")
 
 - Some points notably deviate from the main cluster, particularly in the bottom left and top right, suggesting they could be potential outliers or leverage points. 
 
-## 3. Log-Log Regression Model
+## 2. Log-Log Regression Model
 
 ### Model Overview:
 -   Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.
@@ -200,86 +198,8 @@ kable(index)
 
 **Upon reviewing these diagnostic measures, the model is deemed well-fitted, and the derived conclusions are robust and reliable.**
 
-## 4. Log-Log Regression Model by Race
 
-### Model Overview
-
--   This analysis applies a stratified Log-Log regression approach, segregating data by race . It builds upon the foundational understanding from Section 3.
-
-### Model Findings:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
-data_2022[categorical_vars] <- lapply(data_2022[categorical_vars], factor)
-categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
-data_2022[categorical_vars] <- lapply(data_2022[categorical_vars], factor)
-race_levels <- data_2022 %>%
-  group_by(RACE) %>%
-  summarize(across(all_of(categorical_vars), ~n_distinct(.))) %>%
-  ungroup()
-races_with_single_levels <- race_levels %>%
-  filter(if_any(everything(), ~.x == 1)) %>%
-  pull(RACE) 
-data_2022_filtered <- data_2022 %>%
-  filter(!RACE %in% races_with_single_levels)
-
-models_by_race <- data_2022_filtered%>%
-  group_by(RACE) %>%
-  do(
-    model = lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .)
-  )
-
-models_summaries <- models_by_race %>%
-  rowwise() %>%
-  do(
-    tidy_model = broom::tidy(.$model)
-  )
-unnested_models_summaries <- tidyr::unnest(models_summaries, tidy_model)
-
-inctot_coefficients_by_race <- models_by_race %>%
-  rowwise() %>%
-  summarize(
-    RACE = unique(RACE),
-    log_INCTOT_Coefficient = coef(model)["log_INCTOT"]
-  )
-kable(inctot_coefficients_by_race)
-```
-
--   The coefficient for log_INCTOT shows notable variation across racial categories, which indicates the impact of income on rent varies by race.
-
-  -   The Chinese group demonstrates the highest log_INCTOT coefficient, indicating a particularly strong positive association between income and rent within this demographic.
-
-  -   American Indian or Alaska Native, Other Asian or Pacific Islander, Other race, nec, Three or more major races, and White categories show a range of coefficients, suggesting varied levels of positive association.
-
-  -   Black/African American and Two major races groups present with lower coefficients, hinting at a relatively weaker positive relationship.
-
-### Statistical Performance:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-models_summaries <- data_2022_filtered %>%
-  group_by(RACE) %>%
-  do(
-    tidy_model = broom::tidy(lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .))
-  ) %>%
-  unnest(tidy_model) %>%
-  filter(term == "log_INCTOT") %>%
-  select(RACE, term, estimate, p.value) %>%
-  arrange(RACE)
-kable(models_summaries)
-```
-
--   For most racial groups, the p-values indicate statistical significance (p \< 0.05), especially pronounced for `Black/African American`, `Chinese`, `Other Asian or Pacific Islander`, and `White categories`, implying a strong relationship between income and rent.
-
--   But the higher p-value for some groups suggests that the relationship between income and rent is **not statistically significant** .
-
-### Model Discussion:
-
--   The evident variability in log_INCTOT coefficients across races suggests that the relationship between income and rent is influenced by racial factors, pointing towards the complexity inherent in socio-economic dynamics.
-
--   Non-significance in certain racial categories may reflect data limitations or the presence of other variables not captured in the model, indicating areas where further research or data collection could be beneficial.
-
-
-## 5. Enhanced Log-Log Regression Model with Interaction Terms 
+## 3. Enhanced Log-Log Regression Model with Interaction Terms 
 ### Model Overview
 
 -  This model is built upon the foundation established in Section 3. This section explores nonlinearity further.
@@ -315,7 +235,7 @@ plot(fitted_values_2022, residuals_2022,
 abline(h = 0, col = "red") 
 ```
 
-**Therefore, although this model's conclusions offer an extension to our understanding of the economic factors influencing rent prices in section 3, we still take the log_log model for further analysis.**
+**Therefore, although this model's conclusions offer an extension to our understanding of the economic factors influencing rent prices in section 3, we still take the log_log (Section 3) model for further analysis.**
 
 # Models and Inferences (Merged dataset)
 
