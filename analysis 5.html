@@ -178,11 +178,11 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#model-overview-6" id="toc-model-overview-6" class="nav-link" data-scroll-target="#model-overview-6">Model Overview:</a></li>
   <li><a href="#model-findings-5" id="toc-model-findings-5" class="nav-link" data-scroll-target="#model-findings-5">Model Findings:</a></li>
+  <li><a href="#regression-coefficients-table" id="toc-regression-coefficients-table" class="nav-link" data-scroll-target="#regression-coefficients-table">Regression Coefficients Table:</a></li>
   <li><a href="#statistical-performance-6" id="toc-statistical-performance-6" class="nav-link" data-scroll-target="#statistical-performance-6">Statistical performance:</a></li>
   <li><a href="#model-discussion-4" id="toc-model-discussion-4" class="nav-link" data-scroll-target="#model-discussion-4">Model discussion</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -1008,6 +1008,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-findings-4" class="level3">
 <h3 class="anchored" data-anchor-id="model-findings-4">Model Findings:</h3>
 <p><a href="https://yatingzhu.shinyapps.io/app4/">Click here to view the plot for the cofficients across Years for each race.</a></p>
+<ul>
+<li>Specific Trends:</li>
+</ul>
 <p><strong>Alaska Native</strong>: Shows minor fluctuations around zero, with both positive and negative coefficients, indicating inconsistent trends over the years.</p>
 <p><strong>American</strong>: This category has NA values, suggesting incomplete data, making it hard to discern a clear trend.</p>
 <p><strong>Chinese</strong>: Generally has higher positive coefficients compared to other groups, particularly noticeable in later years, indicating a strong positive association with income in those years.</p>
@@ -1036,7 +1039,203 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="model-findings-5" class="level3">
 <h3 class="anchored" data-anchor-id="model-findings-5">Model Findings:</h3>
-<p><a href="https://yatingzhu.shinyapps.io/app7/">Click here to view the summary table, which includes estimates, standard errors and statistics for each coefficient.</a></p>
+</section>
+<section id="regression-coefficients-table" class="level3">
+<h3 class="anchored" data-anchor-id="regression-coefficients-table">Regression Coefficients Table:</h3>
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 37%">
+<col style="width: 11%">
+<col style="width: 10%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">effect</th>
+<th style="text-align: left;">group</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">4.6845076</td>
+<td style="text-align: right;">0.0726495</td>
+<td style="text-align: right;">64.4809652</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">log_INCTOT</td>
+<td style="text-align: right;">0.1412056</td>
+<td style="text-align: right;">0.0017017</td>
+<td style="text-align: right;">82.9797701</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">ROOMS</td>
+<td style="text-align: right;">0.0675306</td>
+<td style="text-align: right;">0.0008770</td>
+<td style="text-align: right;">76.9991885</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">NFAMS</td>
+<td style="text-align: right;">0.0879355</td>
+<td style="text-align: right;">0.0024790</td>
+<td style="text-align: right;">35.4727484</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTMarried, spouse absent</td>
+<td style="text-align: right;">0.1137042</td>
+<td style="text-align: right;">0.0108560</td>
+<td style="text-align: right;">10.4738465</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTMarried, spouse present</td>
+<td style="text-align: right;">0.2008126</td>
+<td style="text-align: right;">0.0049848</td>
+<td style="text-align: right;">40.2851716</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTNever married/single</td>
+<td style="text-align: right;">0.1554150</td>
+<td style="text-align: right;">0.0048588</td>
+<td style="text-align: right;">31.9859774</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTSeparated</td>
+<td style="text-align: right;">0.0154544</td>
+<td style="text-align: right;">0.0090656</td>
+<td style="text-align: right;">1.7047337</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">MARSTWidowed</td>
+<td style="text-align: right;">0.0141450</td>
+<td style="text-align: right;">0.0076933</td>
+<td style="text-align: right;">1.8386152</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEBlack/African American</td>
+<td style="text-align: right;">0.2070645</td>
+<td style="text-align: right;">0.0158039</td>
+<td style="text-align: right;">13.1020768</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEChinese</td>
+<td style="text-align: right;">0.3488870</td>
+<td style="text-align: right;">0.0211866</td>
+<td style="text-align: right;">16.4673470</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEJapanese</td>
+<td style="text-align: right;">0.4204067</td>
+<td style="text-align: right;">0.0333443</td>
+<td style="text-align: right;">12.6080399</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEOther Asian or Pacific Islander</td>
+<td style="text-align: right;">0.4151111</td>
+<td style="text-align: right;">0.0170423</td>
+<td style="text-align: right;">24.3576609</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEOther race, nec</td>
+<td style="text-align: right;">0.2742583</td>
+<td style="text-align: right;">0.0164226</td>
+<td style="text-align: right;">16.7001026</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEThree or more major races</td>
+<td style="text-align: right;">0.3822999</td>
+<td style="text-align: right;">0.0297126</td>
+<td style="text-align: right;">12.8665736</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACETwo major races</td>
+<td style="text-align: right;">0.3578781</td>
+<td style="text-align: right;">0.0172967</td>
+<td style="text-align: right;">20.6905619</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">RACEWhite</td>
+<td style="text-align: right;">0.2391209</td>
+<td style="text-align: right;">0.0153737</td>
+<td style="text-align: right;">15.5538933</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">EMPSTATNot in labour force</td>
+<td style="text-align: right;">-0.0969419</td>
+<td style="text-align: right;">0.0042878</td>
+<td style="text-align: right;">-22.6086611</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">EMPSTATUnemployed</td>
+<td style="text-align: right;">0.0025772</td>
+<td style="text-align: right;">0.0076077</td>
+<td style="text-align: right;">0.3387572</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">ran_pars</td>
+<td style="text-align: left;">REGION_CLASSIFIED</td>
+<td style="text-align: left;">sd__(Intercept)</td>
+<td style="text-align: right;">0.1371566</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">ran_pars</td>
+<td style="text-align: left;">Residual</td>
+<td style="text-align: left;">sd__Observation</td>
+<td style="text-align: right;">0.4913850</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <ul>
 <li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 14.67%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
 </ul>
@@ -1056,7 +1255,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1070,14 +1269,11 @@ ul.task-list li input[type="checkbox"] {
 <li>Combined, these factors explain why the model’s residuals show such deviations at the upper income levels.</li>
 </ul></li>
 </ul>
-</section>
-<section id="q_q-plot" class="level4">
-<h4 class="anchored" data-anchor-id="q_q-plot">Q_Q plot</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1085,21 +1281,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>The points mostly follow the line in the center, indicating that residuals are generally well-modeled. But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.</li>
 </ul>
-</section>
-</section>
-</section>
-</section>
-<section id="conclusion" class="level1">
-<h1>Conclusion</h1>
-<ol type="1">
-<li><p><strong>Income and Rent Expenditure (2022):</strong> Latest data indicates that a 10% increase in income is predicted to raise rent expenditure by approximately 13.34%, with other variables constant, showcasing the elastic nature of rent in response to changes in income.</p></li>
-<li><p><strong>Time Effect and Autocorrelation Considerations:</strong> When accounting for temporal effects and autocorrelation, a 10% increase in income is expected to lead to a 14.67% rise in rent, affirming the pronounced elasticity of rent costs relative to income fluctuations.</p></li>
-<li><p><strong>Trends Over Years:</strong> Analysis of yearly data reveals that coefficient estimates peaked notably between 2000 and 2020, followed by declines during the COVID-19 period, indicating cycles of increase and corrective adjustments in the relationship between income and rent.</p></li>
-<li><p><strong>Racial and Ethnic Differences:</strong> The association between income and rent varies significantly among racial and ethnic groups. Particularly, Chinese and Japanese groups have displayed a consistently strong positive relationship with income in recent years, highlighting disparities in economic outcomes across different demographics.</p></li>
-</ol>
-<p><code>The validity, limitations, and details of the models and statistical analysis used are thoroughly discussed in the respective sections above.</code></p>
 
 
+</section>
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1184,7 +1370,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/sussmanbu\.github\.io\/final-project-team9\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
