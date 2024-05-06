@@ -22,40 +22,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -152,6 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Class blog 6</h1>
+            <p class="subtitle lead">Explore racial differences by utilizing both the 2022 dataset and the 22-year dataset to examine variations in the elasticity of rent expenditure.</p>
                       </div>
   </div>
     
@@ -204,9 +171,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Identifying and removing groups where any of the specified categorical variables have only one level within each racial category, potentially indicating insufficient variability for statistical analysis.</li>
 </ul>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] Japanese
-9 Levels: American Indian or Alaska Native Black/African American ... White</code></pre>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <ul>
@@ -691,79 +668,2312 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary libraries</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming 'data_twenty' is already loaded and contains the necessary variables</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert categorical variables to factors</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>categorical_vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"KITCHEN"</span>, <span class="st">"MARST"</span>, <span class="st">"EMPSTAT"</span>, <span class="st">"REGION_CLASSIFIED"</span>)</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>data_twenty[categorical_vars] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data_twenty[categorical_vars], factor)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify races with insufficient variability in any categorical variable</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>race_levels <span class="ot">&lt;-</span> data_twenty <span class="sc">%&gt;%</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RACE) <span class="sc">%&gt;%</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(categorical_vars), n_distinct), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> .x <span class="sc">&lt;=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `across()` in `filter()` was deprecated in dplyr 1.0.8.
-ℹ Please use `if_any()` or `if_all()` instead.</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: There was 1 warning in `filter()`.
-ℹ In argument: `across(everything(), ~.x &lt;= 1)`.
-Caused by warning in `Ops.factor()`:
-! '&lt;=' not meaningful for factors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out races with insufficient variability</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data_twenty_filtered <span class="ot">&lt;-</span> data_twenty <span class="sc">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>RACE <span class="sc">%in%</span> race_levels<span class="sc">$</span>RACE)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Check categorical variable levels within each RACE-YEAR group</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>race_year_levels <span class="ot">&lt;-</span> data_twenty_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RACE, YEAR) <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(categorical_vars), n_distinct), <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> .x <span class="sc">&lt;=</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: Using `across()` in `filter()` was deprecated in dplyr 1.0.8.
-ℹ Please use `if_any()` or `if_all()` instead.
-There was 1 warning in `filter()`. ℹ In argument: `across(everything(), ~.x &lt;=
-1)`. Caused by warning in `Ops.factor()`: ! '&lt;=' not meaningful for factors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove problematic RACE-YEAR groups</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data_twenty_filtered_final <span class="ot">&lt;-</span> data_twenty_filtered <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(race_year_levels, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"RACE"</span>, <span class="st">"YEAR"</span>))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit models and obtain summaries</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>models_by_race_year <span class="ot">&lt;-</span> data_twenty_filtered_final <span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(RACE, YEAR) <span class="sc">%&gt;%</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">model_glance =</span> <span class="fu">list</span>(<span class="fu">glance</span>(<span class="fu">lm</span>(log_RENTGRS <span class="sc">~</span> log_INCTOT <span class="sc">+</span> KITCHEN <span class="sc">+</span> ROOMS <span class="sc">+</span> NFAMS <span class="sc">+</span> AGE <span class="sc">+</span> MARST <span class="sc">+</span> EMPSTAT <span class="sc">+</span> REGION_CLASSIFIED, <span class="at">data =</span> .))),</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">'drop'</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(model_glance)</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Optionally, select specific columns if the glance output is too wide</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>models_by_race_year <span class="ot">&lt;-</span> models_by_race_year <span class="sc">%&gt;%</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(RACE, YEAR, r.squared, adj.r.squared, sigma, statistic, p.value, AIC, BIC)</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Output the models' glance summaries</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(models_by_race_year)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 207 × 9
-   RACE       YEAR r.squared adj.r.squared sigma statistic p.value    AIC    BIC
-   &lt;fct&gt;     &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
- 1 American…  2000     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 2 American…  2001     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 3 American…  2002     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 4 American…  2003     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 5 American…  2004     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 6 American…  2005     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 7 American…  2006     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 8 American…  2007     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
- 9 American…  2008     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
-10 American…  2009     0.253         0.253 0.493     2163.       0 1.36e5 1.36e5
-# ℹ 197 more rows</code></pre>
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 12%">
+<col style="width: 9%">
+<col style="width: 9%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 8%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">RACE</th>
+<th style="text-align: right;">YEAR</th>
+<th style="text-align: right;">r.squared</th>
+<th style="text-align: right;">adj.r.squared</th>
+<th style="text-align: right;">sigma</th>
+<th style="text-align: right;">statistic</th>
+<th style="text-align: right;">p.value</th>
+<th style="text-align: right;">AIC</th>
+<th style="text-align: right;">BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">American Indian or Alaska Native</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Black/African American</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Chinese</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Japanese</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other Asian or Pacific Islander</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Other race, nec</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Three or more major races</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Two major races</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2000</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2001</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2002</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2003</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2004</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2005</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2006</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2007</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2008</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2009</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2010</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2011</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2012</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2013</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2014</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2015</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2016</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2017</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2019</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2020</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2021</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">2022</td>
+<td style="text-align: right;">0.2533334</td>
+<td style="text-align: right;">0.2532163</td>
+<td style="text-align: right;">0.4931394</td>
+<td style="text-align: right;">2163.468</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">136238.8</td>
+<td style="text-align: right;">136399.7</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 

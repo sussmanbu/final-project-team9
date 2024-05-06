@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Yating Zhu, Dingyu Guo，Suh,Edwin,Jiho">
+<meta name="author" content="Yating Zhu, Dingyu Guo，Suh Edwin Jiho">
 <meta name="dcterms.date" content="2024-04-19">
 
 <title>MA [46]15 Final Project by Team 9 - Blog Post 7</title>
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -152,6 +118,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
       <h1 class="title">Blog Post 7</h1>
+            <p class="subtitle lead">Fit the time series regression, refine the original log-log model, and discuss the model’s validity and reliability.</p>
                       </div>
   </div>
     
@@ -161,7 +128,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Author</div>
       <div class="quarto-title-meta-contents">
-               <p>Yating Zhu, Dingyu Guo，Suh,Edwin,Jiho </p>
+               <p>Yating Zhu, Dingyu Guo，Suh Edwin Jiho </p>
             </div>
     </div>
       
@@ -193,15 +160,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>INCTOT <span class="ot">&lt;-</span> <span class="fu">scale</span>(data_twenty<span class="sc">$</span>INCTOT, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>ROOMS <span class="ot">&lt;-</span> <span class="fu">scale</span>(data_twenty<span class="sc">$</span>ROOMS, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>NFAMS <span class="ot">&lt;-</span> <span class="fu">scale</span>(data_twenty<span class="sc">$</span>NFAMS, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>AGE <span class="ot">&lt;-</span> <span class="fu">scale</span>(data_twenty<span class="sc">$</span>AGE, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>FTOTINC <span class="ot">&lt;-</span> <span class="fu">scale</span>(data_twenty<span class="sc">$</span>FTOTINC, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>model_with_income <span class="ot">&lt;-</span> <span class="fu">lmer</span>(RENTGRS <span class="sc">~</span> INCTOT <span class="sc">+</span> KITCHEN <span class="sc">+</span> ROOMS <span class="sc">+</span> NFAMS <span class="sc">+</span> AGE <span class="sc">+</span> MARST <span class="sc">+</span> RACE <span class="sc">+</span> EMPSTAT <span class="sc">+</span> FTOTINC <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> REGION_CLASSIFIED), <span class="at">data =</span> data_twenty, <span class="at">REML =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="regression-coefficients-table" class="level3">
 <h3 class="anchored" data-anchor-id="regression-coefficients-table">Regression Coefficients Table:</h3>
 <div class="cell">
@@ -736,15 +694,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>we observe income and family income stands out have higher multicollinearity index than others, therefore we decide to remove family income in our model.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate residuals and fitted values</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>residuals_twenty <span class="ot">&lt;-</span> <span class="fu">resid</span>(model_with_income)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>fitted_values_twenty <span class="ot">&lt;-</span> <span class="fu">fitted</span>(model_with_income)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a residual plot</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fitted_values_twenty, residuals_twenty, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Fitted Values"</span>, <span class="at">ylab =</span> <span class="st">"Residuals"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Residual Plot"</span>, <span class="at">pch =</span> <span class="dv">20</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -756,32 +705,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="log-log-model" class="level2">
 <h2 class="anchored" data-anchor-id="log-log-model">log-log model</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter out non-positive values before log transformation</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data_twenty <span class="ot">&lt;-</span> data_twenty[data_twenty<span class="sc">$</span>RENTGRS <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> data_twenty<span class="sc">$</span>INCTOT <span class="sc">&gt;</span> <span class="dv">0</span>, ]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply log transformation</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>log_RENTGRS <span class="ot">&lt;-</span> <span class="fu">log</span>(data_twenty<span class="sc">$</span>RENTGRS)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>data_twenty<span class="sc">$</span>log_INCTOT <span class="ot">&lt;-</span> <span class="fu">log</span>(data_twenty<span class="sc">$</span>INCTOT)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculating means and standard deviations for the log-transformed columns</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>mean_log_RENTGRS <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_twenty<span class="sc">$</span>log_RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>sd_log_RENTGRS <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_twenty<span class="sc">$</span>log_RENTGRS, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>mean_log_INCTOT <span class="ot">&lt;-</span> <span class="fu">mean</span>(data_twenty<span class="sc">$</span>log_INCTOT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>sd_log_INCTOT <span class="ot">&lt;-</span> <span class="fu">sd</span>(data_twenty<span class="sc">$</span>log_INCTOT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining lower and upper bounds for both variables</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>lb_log_RENTGRS <span class="ot">&lt;-</span> mean_log_RENTGRS <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_RENTGRS</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>ub_log_RENTGRS <span class="ot">&lt;-</span> mean_log_RENTGRS <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_RENTGRS</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>lb_log_INCTOT <span class="ot">&lt;-</span> mean_log_INCTOT <span class="sc">-</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_INCTOT</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ub_log_INCTOT <span class="ot">&lt;-</span> mean_log_INCTOT <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> sd_log_INCTOT</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtering out outliers</span></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>data_twenty_clean <span class="ot">&lt;-</span> data_twenty[data_twenty<span class="sc">$</span>log_RENTGRS <span class="sc">&gt;=</span> lb_log_RENTGRS <span class="sc">&amp;</span> data_twenty<span class="sc">$</span>log_RENTGRS <span class="sc">&lt;=</span> ub_log_RENTGRS <span class="sc">&amp;</span> </span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>                             data_twenty<span class="sc">$</span>log_INCTOT <span class="sc">&gt;=</span> lb_log_INCTOT <span class="sc">&amp;</span> data_twenty<span class="sc">$</span>log_INCTOT <span class="sc">&lt;=</span> ub_log_INCTOT, ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <section id="regression-coefficients-table-1" class="level3">
 <h3 class="anchored" data-anchor-id="regression-coefficients-table-1">Regression Coefficients Table:</h3>
 <div class="cell">
@@ -1216,13 +1139,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model’s homoscedasticity.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Q-Q plot for normality</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">qqmath</span>(<span class="fu">resid</span>(model_with_income_log), <span class="at">distribution =</span> qnorm,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">main =</span> <span class="st">"Q-Q Plot for Model Residuals"</span>, </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">xlab =</span> <span class="st">"Theoretical Quantiles"</span>, </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">ylab =</span> <span class="st">"Sample Quantiles"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1230,9 +1146,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Residuals vs Fitted plot for homoscedasticity</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="fu">residuals</span>(model_with_income_log) <span class="sc">~</span> <span class="fu">fitted</span>(model_with_income_log))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -1240,7 +1153,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqPlot</span>(<span class="fu">resid</span>(model_with_income_log), <span class="at">main =</span> <span class="st">"Q-Q Plot for Model Residuals"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">

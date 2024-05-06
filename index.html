@@ -211,7 +211,7 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1713499200000" data-listing-file-modified-sort="1714858411912" data-listing-date-modified-sort="1713499200000" data-listing-reading-time-sort="4" data-listing-word-count-sort="775">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1713499200000" data-listing-file-modified-sort="1715015828656" data-listing-date-modified-sort="1713499200000" data-listing-reading-time-sort="4" data-listing-word-count-sort="787">
 <div class="thumbnail">
 <p><a href="./posts/2024-04-19-blog-post-7/blog-post-7.html" class="no-external"></a></p><a href="./posts/2024-04-19-blog-post-7/blog-post-7.html" class="no-external">
 <p class="card-img-top"><img src="posts/2024-04-19-blog-post-7/blog-post-7_files/figure-html/unnamed-chunk-7-1.png"  class="thumbnail-image card-img"/></p>
@@ -222,13 +222,52 @@ window.Quarto = {
 <a href="./posts/2024-04-19-blog-post-7/blog-post-7.html" class="no-external">Blog Post 7</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/2024-04-19-blog-post-7/blog-post-7.html" class="no-external"></a>
+<a href="./posts/2024-04-19-blog-post-7/blog-post-7.html" class="no-external">Fit the time series regression, refine the original log-log model, and discuss the model’s validity and reliability.</a>
 </div>
 <div class="listing-description">
 <a href="./posts/2024-04-19-blog-post-7/blog-post-7.html" class="no-external">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1">data_twenty<span class="sc">$</span>INCTOT <span class="ot">&lt;-</span> <span class="fu">scale</span>(data_twenty<span class="sc">$</span>INCTOT, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-2">data_twenty<span class="sc">$</span>ROOMS <span class="ot">&lt;-</span> <span class="fu">scale</span>(data_twenty<span class="sc">$</span>ROOMS, <span class="at">center =</span> <span class="cn">TRUE</span>, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-3">data_twenty<span class="sc">$</span>NFAMS <span class="ot">&lt;-</span> <span class="fu">…</span><span class="sc"></span><span class="at"></span><span class="cn"></span><span class="at"></span><span class="cn"></span></span><span id="cb1-4"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="cn"></span><span class="at"></span><span class="cn"></span></span><span id="cb1-5"><span class="sc"></span><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="at"></span><span class="cn"></span><span class="at"></span><span class="cn"></span></span><span id="cb1-6"></span><span id="cb1-7"><span class="ot"></span><span class="fu"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="sc"></span><span class="dv"></span><span class="sc"></span><span class="at"></span><span class="at"></span><span class="cn"></span></span></code></pre></div></a>
+
+<div class="cell">
+<div class="cell-output-display">
+<table class="table table-sm table-striped small">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 18%">
+<col style="width: 37%">
+<col style="width: 12%">
+<col style="width: 10%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">effect</th>
+<th style="text-align: left;">group</th>
+<th style="text-align: left;">term</th>
+<th style="text-align: right;">estimate</th>
+<th style="text-align: right;">std.error</th>
+<th style="text-align: right;">statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">956.886972</td>
+<td style="text-align: right;">74.221928</td>
+<td style="text-align: right;">12.8922408</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">NA</td>
+<td style="text-align: left;">INCTOT</td>
+<td style="text-align: right;">34.208515</td>
+<td style="text-align: right;">2.642630</td>
+<td style="text-align: right;">12.9448733</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fixed</td>
+<td style="text-align: left;">…</td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="odd"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr><tr class="even"><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: left;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td><td style="text-align: right;"></td></tr></tbody></table></div></div></a>
 </div>
 </div>
 <div class="metadata">
@@ -242,7 +281,7 @@ Yating Zhu, Dingyu Guo，Suh Edwin Jiho
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1713326400000" data-listing-file-modified-sort="1714858401898" data-listing-date-modified-sort="1713326400000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1303">
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1713326400000" data-listing-file-modified-sort="1715015685778" data-listing-date-modified-sort="1713326400000" data-listing-reading-time-sort="7" data-listing-word-count-sort="1306">
 <div class="thumbnail">
 <p><a href="./posts/2024-04-17-class-blog-6/class-blog-6.html" class="no-external"></a></p><a href="./posts/2024-04-17-class-blog-6/class-blog-6.html" class="no-external">
 <p class="card-img-top"><img src="posts/2024-04-17-class-blog-6/class-blog-6_files/figure-html/unnamed-chunk-11-1.png"  class="thumbnail-image card-img"/></p>
@@ -253,7 +292,7 @@ Yating Zhu, Dingyu Guo，Suh Edwin Jiho
 <a href="./posts/2024-04-17-class-blog-6/class-blog-6.html" class="no-external">Class blog 6</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/2024-04-17-class-blog-6/class-blog-6.html" class="no-external"></a>
+<a href="./posts/2024-04-17-class-blog-6/class-blog-6.html" class="no-external">Explore racial differences by utilizing both the 2022 dataset and the 22-year dataset to examine variations in the elasticity of rent expenditure.</a>
 </div>
 <div class="listing-description">
 <a href="./posts/2024-04-17-class-blog-6/class-blog-6.html" class="no-external">Analysis to the table:</a>
@@ -270,7 +309,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1712894400000" data-listing-file-modified-sort="1714858387637" data-listing-date-modified-sort="1712894400000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1839">
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1712894400000" data-listing-file-modified-sort="1715015541662" data-listing-date-modified-sort="1712894400000" data-listing-reading-time-sort="10" data-listing-word-count-sort="1839">
 <div class="thumbnail">
 <p><a href="./posts/2024-04-12-class-blog-5/class-blog-5.html" class="no-external"></a></p><a href="./posts/2024-04-12-class-blog-5/class-blog-5.html" class="no-external">
 <p class="card-img-top"><img src="posts/2024-04-12-class-blog-5/class-blog-5_files/figure-html/unnamed-chunk-3-1.png"  class="thumbnail-image card-img"/></p>
@@ -281,7 +320,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 <a href="./posts/2024-04-12-class-blog-5/class-blog-5.html" class="no-external">Class blog 5</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/2024-04-12-class-blog-5/class-blog-5.html" class="no-external">Mergede dataset </a>
+<a href="./posts/2024-04-12-class-blog-5/class-blog-5.html" class="no-external">Merged dataset spanning from 2000 to 2022 to analyze trends over 22 years and examine changes in elasticity using the log-log model.</a>
 </div>
 <div class="listing-description">
 <a href="./posts/2024-04-12-class-blog-5/class-blog-5.html" class="no-external">Merging the dataset from 2000 to 2022, to get a further insight on the trend of the rent in these twenty years.</a>
@@ -298,7 +337,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1711771200000" data-listing-file-modified-sort="1714858378049" data-listing-date-modified-sort="1711771200000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2305">
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1711771200000" data-listing-file-modified-sort="1715015455887" data-listing-date-modified-sort="1711771200000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2308">
 <div class="thumbnail">
 <p><a href="./posts/2024-03-30-class-blog-4/class-blog-4.html" class="no-external"></a></p><a href="./posts/2024-03-30-class-blog-4/class-blog-4.html" class="no-external">
 <p class="card-img-top"><img src="posts/2024-03-30-class-blog-4/class-blog-4_files/figure-html/unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
@@ -309,7 +348,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 <a href="./posts/2024-03-30-class-blog-4/class-blog-4.html" class="no-external">Class blog 4</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/2024-03-30-class-blog-4/class-blog-4.html" class="no-external"></a>
+<a href="./posts/2024-03-30-class-blog-4/class-blog-4.html" class="no-external">Different models were applied to the dataset, including simple linear, multiple linear, log-log, and log-log with interaction, allowing for refined analysis and exploration of model fit.</a>
 </div>
 <div class="listing-description">
 <a href="./posts/2024-03-30-class-blog-4/class-blog-4.html" class="no-external">The horizontal axis represents the total income (INCTOT), which is the predictor.</a>
@@ -326,7 +365,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1711425600000" data-listing-file-modified-sort="1714858363185" data-listing-date-modified-sort="1711425600000" data-listing-reading-time-sort="27" data-listing-word-count-sort="5269">
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1711425600000" data-listing-file-modified-sort="1715015344795" data-listing-date-modified-sort="1711425600000" data-listing-reading-time-sort="27" data-listing-word-count-sort="5320">
 <div class="thumbnail">
 <p><a href="./posts/2024-03-26-class-blog3/class-blog3.html" class="no-external"></a></p><a href="./posts/2024-03-26-class-blog3/class-blog3.html" class="no-external">
 <p class="card-img-top"><img src="posts/2024-03-26-class-blog3/class-blog3_files/figure-html/unnamed-chunk-7-1.png"  class="thumbnail-image card-img"/></p>
@@ -337,7 +376,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 <a href="./posts/2024-03-26-class-blog3/class-blog3.html" class="no-external">Class blog3</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/2024-03-26-class-blog3/class-blog3.html" class="no-external">Dataset and Description 2</a>
+<a href="./posts/2024-03-26-class-blog3/class-blog3.html" class="no-external">Detailed exploration of all variables in our dataset, accompanied by a discussion and description of the dataset.</a>
 </div>
 <div class="listing-description">
 <a href="./posts/2024-03-26-class-blog3/class-blog3.html" class="no-external">Incorporating the principles of data equity into our research on income and rent using IPUMS data enhances the study’s integrity and societal impact. The application of…</a>
@@ -354,7 +393,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1711166400000" data-listing-file-modified-sort="1714920922369" data-listing-date-modified-sort="1711166400000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3214">
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1711166400000" data-listing-file-modified-sort="1715015110240" data-listing-date-modified-sort="1711166400000" data-listing-reading-time-sort="17" data-listing-word-count-sort="3223">
 <div class="thumbnail">
 <p><a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external"></a></p><a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external">
 <div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
@@ -365,7 +404,7 @@ Yating Zhu,Dingyu Guo,Suh Edwin Jiho
 <a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external">Class Blog 2</a>
 </h3>
 <div class="listing-subtitle">
-<a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external">Dataset and Description </a>
+<a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external">This page provides the cleaning code for our dataset and a description of the first dataset we used. We also explore the topic we intend to investigate on this page. </a>
 </div>
 <div class="listing-description">
 <a href="./posts/2024-03-23-class-blog-2/class-blog-2.html" class="no-external">Our research aims to utilize 2022 U.S. data to determine whether income influences Americans’ rental choices and to explore the impact of race, age, and other factors.</a>
