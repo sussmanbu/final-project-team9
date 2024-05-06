@@ -1,5 +1,6 @@
 ---
 title: "Blog Post 7"
+subtitle: "Fit the time series regression, refine the original log-log model, and discuss the model's validity and reliability."
 author: "Yating Zhu, Dingyu Guo，Suh Edwin Jiho"
 date: "2024-04-19"
 date-modified: "2024-04-19"

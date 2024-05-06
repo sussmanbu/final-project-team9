@@ -1,6 +1,6 @@
 ---
 title: "Class blog 5"
-subtitle: "Mergede dataset "
+subtitle: "Merged dataset spanning from 2000 to 2022 to analyze trends over 22 years and examine changes in elasticity using the log-log model."
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-04-12"
 date-modified: "2024-04-12"

@@ -1,6 +1,6 @@
 ---
 title: "Analysis"
-description: "Here we provide a detailed analysis using more sophisticated statistics techniques."
+description: "This page details the models we employed to explore the relationship between income and rent, along with discussions on the models' reliability and validity."
 toc: true
 draft: FALSE
 ---
@@ -47,9 +47,9 @@ The primary focus of this research is to investigate the relationship between in
 
 1.  Multiple Linear Regression Model (Detailed in Class Blog 4)
 
-2.  Log-Log Regression Model
+2.  Log-Log Regression Model (Detailed in Class blog 4)
 
-3.  Log-Log Regression Model with interaction terms
+3.  Log-Log Regression Model with interaction terms (Detailed in Class blog 4)
 
 
 ## 1. Multiple Linear Regression Model
@@ -239,9 +239,11 @@ abline(h = 0, col = "red")
 
 ## Outline
 
-1.  Log-Log Regression Model by YEAR
-2.  Longitudinal Log-Log Regression Model by Race
-3.  Time series model
+1.  Time series model (Detailed in Class blog 7)
+
+2.  Log-Log Regression Model by YEAR (Detailed in Class blog 5)
+
+3.  Longitudinal Log-Log Regression Model by Race (Detailed in Class blog 6)
 
 
 ## 1.Time series model

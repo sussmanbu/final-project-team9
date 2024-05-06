@@ -1,6 +1,6 @@
 ---
 title: "Class blog3"
-subtitle: "Dataset and Description 2"
+subtitle: "Detailed exploration of all variables in our dataset, accompanied by a discussion and description of the dataset."
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-03-26"
 date-modified: "2024-03-26"
@@ -70,7 +70,7 @@ The table below summarizes all variables that possess this characteristic:
 
 
 ## Data processing 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load the cleaned data in class_blog 2
 library(dplyr)
 library(forcats)
@@ -81,7 +81,7 @@ rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
 ```
 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #KITCHEN
 rent_data_clean <- rent_data_clean %>%
   mutate(KITCHEN = case_when(
@@ -95,7 +95,7 @@ rent_data_clean <- rent_data_clean %>%
   ))
 rent_data_clean$KITCHEN <- as.factor(rent_data_clean$KITCHEN)
 ```
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #MARST
 rent_data_clean <- rent_data_clean %>%
   mutate(MARST = case_when(
@@ -110,7 +110,7 @@ rent_data_clean <- rent_data_clean %>%
   ))
 rent_data_clean$MARST <- as.factor(rent_data_clean$MARST)
 ```
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #RACE
 rent_data_clean <- rent_data_clean %>%
   mutate(RACE = case_when(
@@ -127,7 +127,7 @@ rent_data_clean <- rent_data_clean %>%
   ))
 rent_data_clean$RACE <- as.factor(rent_data_clean$RACE)
 ```
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #EMPSTAT
 rent_data_clean <- rent_data_clean %>%
   mutate(EMPSTAT = case_when(
@@ -142,9 +142,10 @@ rent_data_clean$EMPSTAT <- as.factor(rent_data_clean$EMPSTAT)
 ```
 
 ## Summary of numerical variables we have right now 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(tidyr)
+library(kableExtra)
 summary_data <- rent_data_clean %>%
   summarise(across(c(RENTGRS, ROOMS, AGE, FTOTINC, POVERTY,INCTOT,NFAMS),
                    list(Mean = ~mean(.x),
@@ -158,11 +159,11 @@ summary_data <- rent_data_clean %>%
   separate(summary, into = c("variable", "statistic"), sep = "_") %>%
   pivot_wider(names_from = "statistic", values_from = "value") %>%
   select(variable, Mean, Median, Min, Max)
-print(summary_data)
+kable(summary_data)
 ```
 ## Plots about the variables 
 1. RENTGRS
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2) 
 # Histogram to show distribution of monthly gross rent
 ggplot(rent_data_clean, aes(x = RENTGRS)) +
@@ -177,7 +178,7 @@ There are a few bars past the $6000 mark, which could be considered outliers.
 There's a wide range of rents; however, the majority of the data points fall below $3000, suggesting that while there are rents across a wide range.
 
 2.INCTOT
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(rent_data_clean, aes(x = INCTOT)) +
   geom_histogram(bins = 100, fill = "blue", color = "black") +
   theme_minimal() +
@@ -188,7 +189,7 @@ ggplot(rent_data_clean, aes(x = INCTOT)) +
 The histogram shows a very high peak at the lower end of the income range, suggest a right-skewed distribution. This suggests that a significant portion of the population earns within this lower income bracket. But it is what I expected because it's the most common income range in the datasets and our dataset is from census. 
 
 3.FTOTINC  
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(rent_data_clean, aes(x = FTOTINC)) +
   geom_histogram(bins = 100, fill = "blue", color = "black") +
   theme_minimal() +
@@ -199,7 +200,7 @@ ggplot(rent_data_clean, aes(x = FTOTINC)) +
 Simliarly as the INCTOT, the histogram shows that the distribution of total family income is right-skewed, meaning most families have an income toward the lower end of the scale, with fewer families earning higher incomes. The tail might include outliers, which are families with significantly higher incomes than the typical family and the variance and standard deviation are likely to be large.
 
 4.NFAMS
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 nfams_counts <- rent_data_clean %>%
   group_by(NFAMS) %>%
   summarise(Count = n())
@@ -215,7 +216,7 @@ ggplot(nfams_counts, aes(x = factor(NFAMS), y = Count, fill = factor(NFAMS))) +
 The bar representing one family member is significantly taller than the others, indicating that single-person families are most common in this dataset. There is a rapid decrease in frequency as the number of family members increases. The families with a very large number of members are quite rare. This is what I expected and  aligns with my understanding to common demographic trends.
 
 5.Age
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 ggplot(rent_data_clean, aes(x = AGE)) +
   geom_histogram(bins = 30, fill = "cornflowerblue", color = "black") + 
   theme_minimal() +
@@ -226,7 +227,7 @@ ggplot(rent_data_clean, aes(x = AGE)) +
 
 
 6.POVERTY
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 p <- ggplot(rent_data_clean, aes(x = POVERTY)) +
   geom_histogram(binwidth = 5, fill = "darkgreen", color = "black") + 
   theme_minimal() +
@@ -246,7 +247,7 @@ print(p)
 This variable has both upper and lower bounds. Therefore, the histogram is characterized by notable concentrations, indicating significant proportions of individuals or families at both ends of the poverty spectrum. 
 
 7.EMPSTAT
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 empstat_counts <- rent_data_clean %>%
   count(EMPSTAT) %>%
   mutate(Percentage = n / sum(n) * 100)
@@ -258,7 +259,7 @@ ggplot(empstat_counts, aes(x = "", y = n, fill = EMPSTAT)) +
   labs(title = "Pie Chart of Employment Status", fill = "Employment Status")
 ```
 8. Kitchen
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 kitchen_counts <- rent_data_clean %>%
   group_by(KITCHEN) %>%
   summarise(Count = n()) %>%
@@ -271,7 +272,7 @@ ggplot(kitchen_counts, aes(x = "", y = Count, fill = factor(KITCHEN))) +
   labs(title = "Pie Chart of Kitchen",fill = "Number of Kitchens")
 ```
 9. ROOMS
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 rooms_counts <- rent_data_clean %>%
   group_by(ROOMS) %>%
   summarise(Count = n()) %>%
@@ -286,7 +287,7 @@ ggplot(rooms_counts, aes(x = factor(ROOMS), y = Count, fill = factor(ROOMS))) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
 10. RACE
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 race_counts <- rent_data_clean %>%
   group_by(RACE) %>%
   summarise(Count = n()) %>%
@@ -300,7 +301,7 @@ ggplot(race_counts, aes(x = factor(RACE), y = Count, fill = factor(RACE))) +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.5))
 ```
 11.MARST
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 marst_counts <- rent_data_clean %>%
   group_by(MARST) %>%
   summarise(Count = n()) %>%

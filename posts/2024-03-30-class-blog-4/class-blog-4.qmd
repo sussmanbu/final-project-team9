@@ -1,5 +1,6 @@
 ---
 title: "Class blog 4"
+subtitle: "Different models were applied to the dataset, including simple linear, multiple linear, log-log, and log-log with interaction, allowing for refined analysis and exploration of model fit."
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-03-30"
 date-modified: "2024-03-30"
@@ -298,7 +299,7 @@ kable(tidy_log_model_2022)
 
 
 ### Residual plot
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Calculate residuals and fitted values
 residuals_2022 <- resid(log_model_2022)
 fitted_values_2022 <- fitted(log_model_2022)

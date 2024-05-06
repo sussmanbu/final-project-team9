@@ -1,5 +1,6 @@
 ---
 title: "Class blog 6"
+subtitle: "Explore racial differences by utilizing both the 2022 dataset and the 22-year dataset to examine variations in the elasticity of rent expenditure."
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-04-17"
 date-modified: "2024-04-17"
@@ -32,6 +33,7 @@ if (length(levels(data_2022$RACE)) < 2) {
 ```
 - Identifying and removing groups where any of the specified categorical variables have only one level within each racial category, potentially indicating insufficient variability for statistical analysis.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(kableExtra)
 # Convert categorical variables to factors
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_2022[categorical_vars] <- lapply(data_2022[categorical_vars], factor)
@@ -54,7 +56,7 @@ races_with_single_levels <- race_levels %>%
 # Filter out the problematic RACE groups from the main dataset
 data_2022_filtered <- data_2022 %>%
   filter(!RACE %in% races_with_single_levels)
-print(races_with_single_levels)
+kable(races_with_single_levels)
 ```
 - Table shows the coefficient of each races to the key predictor  
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -270,7 +272,7 @@ models_by_race_year <- models_by_race_year %>%
   select(RACE, YEAR, r.squared, adj.r.squared, sigma, statistic, p.value, AIC, BIC)
 
 # Output the models' glance summaries
-print(models_by_race_year)
+kable(models_by_race_year)
 
 ```
 

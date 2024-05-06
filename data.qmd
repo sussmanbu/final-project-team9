@@ -1,6 +1,6 @@
 ---
 title: Data
-description: We describe the sources of our data and the cleaning process.
+description: Description of our two datasets' sources, along with data exploration and cleaning processes for our analysis.
 toc: true
 draft: false
 editor: 
@@ -8,6 +8,7 @@ editor:
     wrap: sentence
 ---
 ![](images/DataPageImage.png)
+
 # Describe where/how to find data
 
 Both our datasets comes from [IPUMS USA](https://usa.ipums.org/usa/index.shtml).
