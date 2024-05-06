@@ -14,7 +14,7 @@ states_geo <- states(cb = TRUE, year = 2019, class = "sf") %>%
   rename(state = NAME) %>%
   select(state, STATEFP) %>%
   distinct(STATEFP, .keep_all = TRUE) %>%
-  arrange(state)  # Sort the states alphabetically
+  arrange(state)  
 
 places_geo <- places(cb = TRUE, year = 2019, class = "sf") %>%
   st_transform(crs = 4326) %>%

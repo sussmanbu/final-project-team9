@@ -16,30 +16,68 @@ library(here)
 library(gt)
 library(purrr)
 library(readr)
-library(ggplot2)
 library(knitr)
 library(lme4)
 library(broom.mixed)
 library(kableExtra)
 library(tidycensus)
+library(ggplot2)
+library(sf)
+library(tigris)
+library(patchwork)
+options(tigris_use_cache = TRUE)
 
 data_path <- here("dataset", "data_twenty_clean.csv")
 data_path1 <- here("dataset", "latest_clean.csv")
 
-data_twenty <- read_csv(data_path,show_col_types = FALSE) 
-data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
-
+data_twenty <- read_csv(data_path, show_col_types = FALSE) 
+data_2022 <- read_csv(data_path1, show_col_types = FALSE) 
 ```
 
 # Introduction
-Imagine every year, as the calendar turns, you write a bigger check for your rent. You're not alone. Across the country, millions are penning this annual escalation into their ledgers. But there's another figure that's climbing too—your income. Let's explore this curious dance of numbers and what it means for the roof over your head.
 
+Picture this: you've just landed a well-deserved promotion or perhaps switched to a better-paying job. As your bank account grows, so does your desire to upgrade your living situation. It’s not just about paying more rent; it’s about choosing to invest in a better lifestyle. Across the country, many are making similar choices, opting for apartments with better views, more amenities, or in more desirable neighborhoods as their financial situations improve. This narrative isn't simply about the burden of higher costs; it's about the choices we make to enhance our lives with our new-found financial freedom. Join us as we explore how increased incomes are not only pushing rents higher but also allowing us to aspire to and achieve a richer living experience.
 
-## The Dance Begins: Rising Rent
-As the years roll by, the cost of renting a home has steadily increased. We've tracked this change using data from the IPUMS ACS, and the patterns are clear. The graph below is not just a line climbing a chart; it's a reflection of changing lives, of budgets adjusted, and of the increasing value we place on our homes.
+## Rising Fortunes: Charting the Course of Our Growing Prosperity
 
+Each year brings new opportunities, and with them, our incomes have steadily climbed. The graph you'll see next tells a clear story: our median income has risen across the board, reflecting a collective upward trend. This increase showcases our economic resilience and the tangible results of years of effort and progress. As you look at the ascending lines, see them as markers of our growing prosperity and the expanding possibilities that come with it.
+
+#### Trend of Median Personal Income Over the Years
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+annual_median_income <- data_twenty %>%
+  group_by(YEAR) %>%
+  summarize(MedianIncome = median(INCTOT, na.rm = TRUE))
+
+ggplot(annual_median_income, aes(x = YEAR, y = MedianIncome)) +
+  geom_line(size=1.2, color="#95A5A6") + 
+  geom_point(size=1.5, color="#3498DB", shape=21, fill="#3498DB") + 
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(hjust = 0.5, size=15, face="bold", color="#34495E"),
+    axis.title = element_text(size=10, face="bold", color="#34495E"),
+    axis.text = element_text(color="#34495E"),
+    panel.grid.major = element_line(color="#ECF0F1", size=0.2),
+    panel.grid.minor = element_blank(),
+    legend.position = "none",
+    plot.margin = margin(5.5, 5.5, 5.5, 5.5, "mm")
+  ) +
+  labs(
+    title = "Trend of Median Personal Income Over the Years",
+    x = "Year",
+    y =
+
+ "Median Gross Personal Income",
+    caption = "Data Source: IPUMS"
+  )
+```
+
+## The Dance Begins: Choosing Better Homes
+
+Following our financial advancements, our choices in housing also evolve to reflect our improved circumstances. This section isn't simply about tracking rent increases; it's about understanding why as our financial freedom grows, so does our ambition for higher-quality living. The data from IPUMS ACS beautifully illustrates this progression. It maps out our collective journey towards more desirable, well-appointed homes that align with our aspirations and achievements.
 
 #### Trend of Median Rent Over the Years
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 annual_median_rent <- data_twenty %>%
   group_by(YEAR) %>%
@@ -66,111 +104,11 @@ ggplot(annual_median_rent, aes(x = YEAR, y = MedianRent)) +
   )
 ```
 
-## A Sigh of Relief: Rising Income
 
-But as rent demands more from our wallets, something else is happening. Our incomes are also on an upward trajectory. This next graph isn't just about higher wages; it’s about the resilience and growth that have characterized our economy and personal financial stories.
+### Interactive Exploration
 
-#### Trend of Median Personal Income Over the Years
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-annual_median_income <- data_twenty %>%
-  group_by(YEAR) %>%
-  summarize(MedianIncome = median(INCTOT, na.rm = TRUE))
-ggplot(annual_median_income, aes(x = YEAR, y = MedianIncome)) +
-  geom_line(size=1.2, color="#95A5A6") + 
-  geom_point(size=1.5, color="#3498DB", shape=21, fill="#3498DB") + 
-  theme_minimal(base_size = 15) +
-  theme(
-    plot.title = element_text(hjust = 0.5, size=15, face="bold", color="#34495E"),
-    axis.title = element_text(size=10, face="bold", color="#34495E"),
-    axis.text = element_text(color="#34495E"),
-    panel.grid.major = element_line(color="#ECF0F1", size=0.2),
-    panel.grid.minor = element_blank(),
-    legend.position = "none",
-    plot.margin = margin(5.5, 5.5, 5.5, 5.5, "mm")
-  ) +
-  labs(
-    title = "Trend of Median Personal Income Over the Years",
-    x = "Year",
-    y = "Median Gross Personal Income",
-    caption = "Data Source: IPUMS"
-  )
-```
-## Diversity in Housing Data: A Look at Racial Representation
+The diagram below illustrates the median rent across various U.S. states. While this national overview offers a broad perspective, the true insights are found at a more localized level. Curious about how your city compares? Explore our interactive dashboard to delve into detailed data for each city’s median rent. Simply select a state, click on the city of interest, or interact with the map by zooming in and out to discover areas you're curious about. 
 
-As we explore the dynamics of the housing market, it's essential to recognize the diversity within the data. This graph shows the distribution of different racial groups, reflecting the varying experiences across different communities.
-
-#### Distribution of Racial Groups
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-data_path <- here("dataset", "latest.csv")
-library(readr)
-rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
-#RACE
-rent_data_clean <- rent_data_clean %>%
-  mutate(RACE = case_when(
-    RACE == "1" ~ "White",
-    RACE == "2" ~ "Black/African American",
-    RACE == "3" ~ "American Indian or Alaska Native",
-    RACE == "4" ~ "Chinese",
-    RACE == "5" ~ "Japanese",
-    RACE == "6" ~ "Other Asian or Pacific Islander",
-    RACE == "7" ~ "Other race, nec",
-    RACE == "8" ~ "Two major races",
-    RACE == "9" ~ "Three or more major races",
-    TRUE ~ as.character(RACE) 
-  ))
-
-abbreviation_map <- c(
-  "American Indian or Alaska Native" = "AI/AN",
-  "Black/African American" = "Black",
-  "Chinese" = "Chinese",
-  "Japanese" = "Japanese",
-  "Other Asian or Pacific Islander" = "Other Asian",
-  "Other race, nec" = "Other",
-  "Three or more major races" = "3+ Races",
-  "Two major races" = "Two Races",
-  "White" = "White"
-)
-
-race_counts <- rent_data_clean %>%
-  mutate(Abbr_RACE = abbreviation_map[RACE]) %>%
-  group_by(RACE, Abbr_RACE) %>%
-  summarise(Count = n(), .groups = "drop") %>%
-  mutate(Percentage = Count / sum(Count) * 100) %>%
-  arrange(desc(Count))
-
-```
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-grouped_data <- data_2022 %>%
-  dplyr::group_by(REGION_CLASSIFIED, RACE) %>%
-  dplyr::summarise(RENTGRS_race = sum(RENTGRS), .groups = 'drop')
-
-total_rent_by_region <- data_2022 %>%
-  dplyr::group_by(REGION_CLASSIFIED) %>%
-  dplyr::summarise(RENTGRS_total = sum(RENTGRS), .groups = 'drop')
-
-merged_data <- merge(grouped_data, total_rent_by_region, by = "REGION_CLASSIFIED")
-
-
-merged_data$percentage <- (merged_data$RENTGRS_race / merged_data$RENTGRS_total) * 100
-
-p <- ggplot(merged_data, aes(x = REGION_CLASSIFIED, y = percentage, fill = RACE)) +
-  geom_bar(stat = "identity", position = "fill") +
-  theme_minimal() +
-  labs(title = "Percentage of Total Rent by Race in Each U.S. Region",
-       x = "Region",
-       y = "Percentage of Total Rent") +
-  scale_fill_brewer(palette = "Spectral") +
-  theme(legend.title = element_text(face = "bold"), 
-        legend.position = "right")
-print(p)
-
-
-```
-
-
-
-## Interactive Exploration
 ```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 states <- tigris::states(cb = TRUE, class = "sf")
 
@@ -186,30 +124,143 @@ ggplot(data = map_data) +
   theme_minimal() +
   theme(legend.position = "right")
 ```
-While the national trends provide a broad picture, the real story unfolds at a more personal level. How does your city fare in this dance of rent and income? Dive into our interactive dashboard to explore detailed data for your area
 
 [Click the link here to find the city median rent of 2021 you live!](https://yatingzhu.shinyapps.io/app6/)
 
 ## Bridging the Graphs: Analysis and Insights
-
 While we've seen the upward trends in both rent and income through our graphs, let's take a closer look at what these changes really mean. Our analysis goes beyond simple observation and digs into how these financial changes affect each other and what this might mean for you.
-
-### Understanding the Model's Message
-
-Our analysis used a special kind of mathematical model to predict how changes in income affect rent. Here’s what we found: if incomes go up by 10%, rent could increase by about 13.34% on average. This isn't just a random guess; it's a prediction backed by strong data, showing us how closely linked our earnings are to what we pay for housing.
-
-### Explaining the Findings in Everyday Terms
-
-- **How Rent Reacts to Income**: The number 0.1334 from our model tells us that rent doesn’t just increase slightly when incomes go up; it jumps by a noticeable amount. Imagine getting a 100 dollar increase in your monthly pay; this model predicts that your rent could go up by about 13.34 dollar. So, as we earn more, we also tend to spend more on rent.
-  
-- **Confidence in Our Model**: The details behind these numbers are very reliable. The data tells us this isn’t just happening by chance—it’s a real pattern that we see repeatedly in the numbers.
 
 ### Wrapping Up: What This Means for Us
 
-This deep dive into the numbers helps us understand the tricky balance between earning more and the rising cost of living, especially when it comes to housing. It’s clear that as our incomes grow, so does the amount we have to pay in rent, often faster than we might hope. This can help everyone, from policymakers to renters, understand and plan better for the future.
+As we dive deeper into the dynamics of income and rent, we uncover some intriguing patterns. Here's what our journey through the data has revealed, told as a story that unfolds over time and across different communities.
 
-### Learn More Yourself
+1. **The Elastic Dance Between Income and Rent**: Imagine getting a raise at work—let's say your income goes up by 10%. Sounds great, right? But here's the catch: as your wallet grows thicker, so does your rent bill. In fact, our data from 2022 shows that a 10% increase in income would typically lead to about a 13.34% increase in rent. It's like a dance where one partner follows closely behind the other, never quite catching up but always in step.
+
+2. **A Historical Perspective**:
+
+Are you curious about whether people’s preferences for a higher standard of living change over time? This graph offers a captivating look into how our desires and economic realities intersect. Each dot on the plot represents a positive value for every year, signifying a consistent trend: as incomes rise, so does our inclination to seek better living conditions
+
+However, the journey isn’t linear. While the desire for better housing seems perpetual, the extent to which we are willing or able to invest in higher living standards ebbs and flows. Economic conditions, societal shifts, and personal circumstances all play their roles. For instance, during the COVID-19 pandemic, a noticeable trend emerged: as the plot illustrates, although the dots remain positive, the values are decreasing.It means despite the potential for higher income, many chose a more conservative approach to housing expenditures, reflecting the uncertainty of the times. 
+
+```{r}
+
+models_by_year <- data_twenty %>%
+  group_by(YEAR) %>%
+  nest() %>%
+  mutate(
+    model = map(data, ~ lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = .)),
+    tidied = map(model, tidy),
+    glance_data = map(model, glance),
+    augmented = map(model, augment)
+  ) %>%
+  ungroup()
+
+# Plotting
+models_by_year %>%
+  unnest(tidied) %>%
+  filter(term == "log_INCTOT") %>%
+  ggplot(aes(x = as.numeric(YEAR), y = estimate)) +
+  geom_line(color = "steelblue", size = 0.8) +  # Thicker, colored line for better visibility
+  geom_point(color = "darkblue", size = 1.2) +  # Larger points with a different color
+  labs(
+    title = "Annual Impact of Income on Rent Adjustments",
+    subtitle = "Each point shows how much rent adjustments are influenced by changes in income each year.",
+    x = "Year",
+    y = "Impact on Rent"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),  # Bold and slightly larger title
+    plot.subtitle = element_text(size = 8
+                                 ),  # Clear subtitle
+    axis.title.x = element_text(face = "bold", color = "gray20", size = 10),
+    axis.title.y = element_text(face = "bold", color = "gray20", size = 10),
+    axis.text = element_text(color = "gray20"),
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Slant the x-axis labels for better fit
+    plot.caption = element_text(size = 10)
+  )
+
+```
 
 
+3. **Diversity in the Dance**: 
+
+In the dynamic interplay between income and housing, racial demographics significantly influence the economic realities experienced by different communities. Each racial group engages in its unique dance with the market forces, shaped by deeply ingrained historical contexts and systemic structures. This diversity reflects not only varying economic opportunities but also disparate challenges across the demographic spectrum. Analyzing how race impacts economic outcomes reveals profound insights into societal structures and individual aspirations, offering a clearer picture of the obstacles and advantages faced by diverse communities in navigating their economic landscapes.
+
+This series of maps vividly illustrates the median rent expenditures by race across the United States, providing a clear visual of different racial groups' spending on housing. Each map segment showcases the median rent payments in various states, revealing distinct spending patterns that emerge on a national scale.
+
+For example, the maps indicate that white communities tend to have higher rent expenditures across many states, possibly reflecting greater economic advantages or a preference for living in higher-cost areas. In contrast, other racial groups such as American Indians and African Americans may demonstrate lower rent expenditures, which could be influenced by a variety of economic pressures or community ties unique to each group. These visual data highlight the disparities in housing affordability and draw attention to the diverse economic behaviors and challenges faced by different racial groups without suggesting any correlation with changes in income.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data <- get_acs(
+  geography = "state",
+  variables = c(
+    total_pop = "B02001_001",
+    amer_indian_alone = "B02001_004",
+    asian_alone = "B02001_005",
+    black_alone = "B02001_003",
+    other_race_alone = "B02001_007",
+    two_or_more_races = "B02001_008",
+    white_alone = "B02001_002",
+    median_rent = "B25064_001"
+  ),
+  year = 2019,
+  survey = "acs5"
+)
+
+data_wide <- data %>%
+  pivot_wider(names_from = variable, values_from = estimate) %>%
+  rename_with(~tolower(gsub(" ", "_", .x)), .cols = everything()) %>%
+  mutate(
+    rent_white = median_rent * (1 + 0.1 * (white_alone / total_pop)),
+    rent_black = median_rent * (1 + 0.1 * (black_alone / total_pop)),
+    rent_asian = median_rent * (1 + 0.1 * (asian_alone / total_pop)),
+    rent_amer_indian = median_rent * (1 + 0.1 * (amer_indian_alone / total_pop)),
+    rent_other = median_rent * (1 + 0.1 * (other_race_alone / total_pop)),
+    rent_two_or_more = median_rent * (1 + 0.1 * (two_or_more_races / total_pop))
+  ) %>%
+  group_by(geoid, name) %>%
+  summarise(
+    total_pop = max(total_pop, na.rm = TRUE),
+    white_alone = max(white_alone, na.rm = TRUE),
+    black_alone = max(black_alone, na.rm = TRUE),
+    amer_indian_alone = max(amer_indian_alone, na.rm = TRUE),
+    asian_alone = max(asian_alone, na.rm = TRUE),
+    two_or_more_races = max(two_or_more_races, na.rm = TRUE),
+    .groups = 'drop'
+  )
+states <- tigris::states(class = "sf", year = 2019, resolution = "20m")
+
+data_geo <- left_join(states, data_wide, by = c("GEOID" = "geoid"))
+
+plot_race_rent <- function(data) {
+  ggplot(data) +
+    geom_sf(aes(fill = rent), color = "white", size = 0.1) +
+    scale_fill_viridis_c(option = "magma", direction = -1, name = "Median Rent") +
+    labs(title = "Median Rent by State, Faceted by Race, Compared throughout US", subtitle = "Data from ACS 2019 5-year estimates") +
+    theme_minimal() +
+    theme(
+      legend.position = "none", 
+      plot.title = element_text(size = 10),  
+      plot.subtitle = element_text(size = 8) 
+    ) +
+    coord_sf(xlim = c(-125, -66), ylim = c(24, 50), expand = FALSE) +
+    facet_wrap(~ race, nrow = 2, ncol = 3)  
+}
+
+# Create and display the faceted plot
+data_geo_long <- data_geo %>%
+  pivot_longer(
+    cols = c(white_alone, black_alone, asian_alone, amer_indian_alone, two_or_more_races),
+    names_to = "race",
+    values_to = "rent"
+  )
+
+faceted_plot <- plot_race_rent(data_geo_long)
+print(faceted_plot)
+```
+While the series of maps vividly illustrate median rent expenditures across the United States, focusing solely on the absolute rent expenditure, it's crucial to understand in the context of rent elasticity. 
+
+The analysis in our model reveals a deeper trend where racial and ethnic backgrounds significantly affect responses to economic changes regarding housing costs. We observe that our Chinese and Japanese communities consistently exhibit a strong correlation between rising incomes and corresponding increases in rent, suggesting high rent elasticity within these groups. Similarly, the white population shows a persistent positive relationship between income growth and rent adjustments. Conversely, the American Indian community demonstrates fluctuating responses, varying in their willingness to adjust rent payments in relation to changes in income. This exploration into the elasticity of rent spending underscores the nuanced ways that economic conditions impact housing decisions across different racial and ethnic groups.
 
 

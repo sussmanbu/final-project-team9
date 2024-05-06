@@ -27,7 +27,7 @@ library(car)
 ```
 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_twenty$INCTOT <- scale(data_twenty$INCTOT, center = TRUE, scale = TRUE)
 data_twenty$ROOMS <- scale(data_twenty$ROOMS, center = TRUE, scale = TRUE)
 data_twenty$NFAMS <- scale(data_twenty$NFAMS, center = TRUE, scale = TRUE)
@@ -64,7 +64,7 @@ kable(vif_values)
 ```
 - we observe income and family income stands out have higher multicollinearity index than others, therefore we decide to remove family income in our model.
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Calculate residuals and fitted values
 residuals_twenty <- resid(model_with_income)
 fitted_values_twenty <- fitted(model_with_income)
@@ -80,7 +80,7 @@ abline(h = 0, col = "red")
 
 
 ## log-log model
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
 
@@ -149,7 +149,7 @@ abline(h = 0, col = "red")
 - This log-transformed model seems to perform better in terms of having residuals more consistently distributed around zero. This suggests that the log transformation helped to stabilize the variance of the residuals and improve the model's homoscedasticity.
 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(lattice)
 
 # Q-Q plot for normality

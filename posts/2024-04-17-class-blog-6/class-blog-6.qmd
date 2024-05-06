@@ -226,7 +226,7 @@ for (race in unique_races) {
 
 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load necessary libraries
 library(dplyr)
 library(broom)
