@@ -134,15 +134,16 @@ While we've seen the upward trends in both rent and income through our graphs, l
 
 As we dive deeper into the dynamics of income and rent, we uncover some intriguing patterns. Here's what our journey through the data has revealed, told as a story that unfolds over time and across different communities.
 
-1. **The Elastic Dance Between Income and Rent**: Imagine getting a raise at work—let's say your income goes up by 10%. Sounds great, right? But here's the catch: as your wallet grows thicker, so does your rent bill. In fact, our data from 2022 shows that a 10% increase in income would typically lead to about a 13.34% increase in rent. It's like a dance where one partner follows closely behind the other, never quite catching up but always in step.
+#### The Elastic Dance Between Income and Rent
+Imagine getting a raise at work—let's say your income goes up by 10%. Sounds great, right? But here's the catch: as your wallet grows thicker, so does your rent bill. In fact, our data from 2022 shows that a 10% increase in income would typically lead to about a 13.34% increase in rent. It's like a dance where one partner follows closely behind the other, never quite catching up but always in step.
 
-2. **A Historical Perspective**:
+#### A Historical Perspective
 
-Are you curious about whether people’s preferences for a higher standard of living change over time? This graph offers a captivating look into how our desires and economic realities intersect. Each dot on the plot represents a positive value for every year, signifying a consistent trend: as incomes rise, so does our inclination to seek better living conditions
+Are you curious about whether people’s preferences for a higher standard of living change over time? This graph offers a captivating look into how our desires and economic realities intersect. Each dot on the plot represents a positive value for every year, signifying a consistent trend: as incomes rise, so does our inclination to seek better living conditions.
 
 However, the journey isn’t linear. While the desire for better housing seems perpetual, the extent to which we are willing or able to invest in higher living standards ebbs and flows. Economic conditions, societal shifts, and personal circumstances all play their roles. For instance, during the COVID-19 pandemic, a noticeable trend emerged: as the plot illustrates, although the dots remain positive, the values are decreasing.It means despite the potential for higher income, many chose a more conservative approach to housing expenditures, reflecting the uncertainty of the times. 
 
-```{r}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 models_by_year <- data_twenty %>%
   group_by(YEAR) %>%
@@ -183,9 +184,8 @@ models_by_year %>%
 ```
 
 
-3. **Diversity in the Dance**: 
-
-In the dynamic interplay between income and housing, racial demographics significantly influence the economic realities experienced by different communities. Each racial group engages in its unique dance with the market forces, shaped by deeply ingrained historical contexts and systemic structures. This diversity reflects not only varying economic opportunities but also disparate challenges across the demographic spectrum. Analyzing how race impacts economic outcomes reveals profound insights into societal structures and individual aspirations, offering a clearer picture of the obstacles and advantages faced by diverse communities in navigating their economic landscapes.
+#### Diversity in the Dance
+Imagine we're navigating a landscape where income and housing intersect, with each racial group following its unique path. This dance, shaped by history and systemic forces, reveals stories of struggle and triumph. By understanding these narratives, we gain insight into the deep-seated structures that shape diverse economic experiences.
 
 This series of maps vividly illustrates the median rent expenditures by race across the United States, providing a clear visual of different racial groups' spending on housing. Each map segment showcases the median rent payments in various states, revealing distinct spending patterns that emerge on a national scale.
 
