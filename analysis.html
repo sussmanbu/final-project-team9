@@ -211,7 +211,8 @@ ul.task-list li input[type="checkbox"] {
 <h1>Research Question and Motivation</h1>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
-<p>The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time. Preliminary observations from diagrams comparing median rent and median income by state indicate that states with higher median incomes generally tend to have higher median rents. This pattern suggests a potential correlation between these two variables, reinforcing the importance of examining how these dynamics vary across different states and demographic groups to inform policy and economic decisions.</p>
+<p>The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time.</p>
+<p>Preliminary observations from diagrams comparing median rent and median income by state indicate that states with higher median incomes generally tend to have higher median rents. This pattern suggests a potential correlation between these two variables, reinforcing the importance of examining how these dynamics vary across different states and demographic groups to inform policy and economic decisions.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -226,7 +227,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <ul>
 <li><strong>Relationship Exploration</strong>: Aimming for determining how changes in income levels affect rental spending. This includes examining whether the relationship is strictly linear or if there are nonlinear dynamics that better capture the fluctuations in rental expenditures as income varies.</li>
-<li><strong>Quantitative Analysis</strong>: The goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income.</li>
+<li><strong>Quantitative Analysis</strong>: The goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income (elasticity).</li>
 <li><strong>Demographic Variance</strong>: The study will also consider racial differences to identify how income’s impact on rent varies among different racial groups.</li>
 <li><strong>Temporal Analysis</strong>: Employing a time series regression model allows us to account for changes over time, providing a dynamic perspective on the income-rent relationship.</li>
 </ul>
@@ -237,9 +238,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="outline-of-models-used-in-class-blogs" class="level2">
 <h2 class="anchored" data-anchor-id="outline-of-models-used-in-class-blogs">Outline of models used in class blogs</h2>
 <ol type="1">
-<li><p>Multiple Linear Regression Model (Detailed in Class Blog 4)</p></li>
-<li><p>Log-Log Regression Model (Detailed in Class blog 4)</p></li>
-<li><p>Log-Log Regression Model with interaction terms (Detailed in Class blog 4)</p></li>
+<li><p>Multiple Linear Regression Model <a href="https://sussmanbu.github.io/final-project-team9/posts/2024-03-30-class-blog-4/class-blog-4.html">(Detailed in Class Blog 4)</a></p></li>
+<li><p>Log-Log Regression Model<a href="https://sussmanbu.github.io/final-project-team9/posts/2024-03-30-class-blog-4/class-blog-4.html">(Detailed in Class blog 4)</a></p></li>
+<li><p>Log-Log Regression Model with interaction terms <a href="https://sussmanbu.github.io/final-project-team9/posts/2024-03-30-class-blog-4/class-blog-4.html">(Detailed in Class blog 4)</a></p></li>
 </ol>
 </section>
 <section id="multiple-linear-regression-model" class="level2">
@@ -312,7 +313,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>The R-squared value of 0.23 indicates that approximately <strong>23% of the variance in the dependent variable (gross rent) is accounted for by the model</strong>， which is considered acceptable in the context of social-economic studies.</p></li>
+<li><p>The R-squared value of 0.23 indicates that approximately <strong>23% of the variance in the dependent variable (gross rent) is accounted for by the model</strong>, which is considered acceptable in the context of social-economic studies.</p></li>
 <li><p>A F-statistic value of 70 and a p-value of 0 confirm the <strong>statistical significance</strong> of the model, suggesting that the regression results are highly unlikely to occur by chance.</p></li>
 </ul>
 </section>
@@ -483,8 +484,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value.</li>
-<li><code>Employment Status (EMPSTAT)</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income (INCTOT)</code> or <code>Family_income(FTOTINC)</code>. This interaction will be explored further.</li>
+<li><p>After fitting the multiple linear regression (MLR) model, <code>Kitchen</code> was removed due to its statistical insignificance, indicated by a high p-value.</p></li>
+<li><p><code>Employment Status (EMPSTAT)</code>, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like <code>Income (INCTOT)</code> or <code>Family_income(FTOTINC)</code>. This interaction will be explored further.</p></li>
 </ul>
 </section>
 <section id="model-discussion" class="level3">
@@ -508,16 +509,17 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="log-log-regression-model">2. Log-Log Regression Model</h2>
 <section id="model-overview-1" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview-1">Model Overview:</h3>
+<p>As the problems elaborated on the data page and the discussion in last section:</p>
 <ul>
-<li><p>Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.</p></li>
-<li><p>The outliers was excluded (three standard deviations away from the response and predictor variable) for cleansing.</p></li>
+<li><p>Predictor and response variables underwent log transformation to correct for right skewness.</p></li>
+<li><p>The outliers was excluded (three standard deviations away from the response and predictor variable).</p></li>
 </ul>
 </section>
 <section id="model-findings-1" class="level3">
 <h3 class="anchored" data-anchor-id="model-findings-1">Model Findings:</h3>
 <p><a href="https://yatingzhu.shinyapps.io/app2/">Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.</a></p>
 <ul>
-<li>The model suggests that a 10% increase in income is predicted to raise rent by an average of 1.334%, with all other variables held constant, indicating income’s elasticity effect on rent.</li>
+<li>The model suggests that a <strong>10% increase in income is predicted to raise rent by an average of 1.334% (defined as elasticity in economic terms)</strong>, with all other variables held constant, indicating the elasticity effect of income on rent.</li>
 </ul>
 </section>
 <section id="statistical-performance-1" class="level3">
@@ -592,21 +594,21 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ol type="1">
-<li>Linearity and Homoscedasticity:</li>
+<li><code>Linearity and Homoscedasticity</code>:</li>
 </ol>
 <ul>
-<li><p>The residuals, predominantly centered around the zero line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable.</p></li>
-<li><p>While the spread is generally consistent, minor widening at the extremes suggests typical heteroscedasticity in higher income or rent brackets.</p></li>
+<li><p>The residuals, predominantly <strong>centered around the zero</strong> line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable.</p></li>
+<li><p>While the spread is generally <strong>consistent</strong>, minor widening at the extremes suggests typical heteroscedasticity in higher income or rent brackets.</p></li>
 <li><p>Nonetheless, a few potential outliers common in large economic datasets do not significantly affect the robustness of the central trend.</p></li>
 </ul>
 <ol start="2" type="1">
-<li>Normality of Residuals:</li>
+<li><code>Normality of Residuals</code>:</li>
 </ol>
 <ul>
-<li>The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.</li>
+<li>The bulk of residuals <strong>align with</strong> the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.</li>
 </ul>
 <ol start="3" type="1">
-<li>IID Errors:</li>
+<li><code>IID Errors</code>:</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
@@ -631,7 +633,7 @@ ul.task-list li input[type="checkbox"] {
 <li>For Durbin-Watson Statistic, the result statistic value <strong>close to 2</strong> indicates no autocorrelation, implying that the <strong>errors are independent</strong>. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.</li>
 </ul>
 <ol start="4" type="1">
-<li>Multicollinearity:</li>
+<li><code>Multicollinearity</code>:</li>
 </ol>
 <div class="cell">
 <div class="cell-output-display">
@@ -714,8 +716,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-overview-and-model-refinement" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview-and-model-refinement">Model Overview and Model Refinement:</h3>
 <ul>
-<li><p>The interaction term <code>EMPSTAT * FTOTINC (employment status * family income)</code> has been introduced to investigate the suspected interaction effect.</p></li>
-<li><p>But the p-value for <code>EMPSTAT Unemployed:FTOTINC (umployment status * family income)</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term <strong>needs to have further consideration</strong>.</p></li>
+<li>The interaction term <code>EMPSTAT * FTOTINC (employment status * family income)</code> has been introduced to investigate the suspected interaction effect.</li>
 </ul>
 </section>
 <section id="statistical-performance-2" class="level3">
@@ -773,8 +774,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li><p>All predictors show statistical significance, with the exception of certain categories within marital status and employment status.</p></li>
-<li><p>The integration of the interaction term retains the significance of other variables, with no detrimental impact on the model’s variables as reflected in their p-values.</p></li>
+<li><p>Most predictors show statistical significance, in general, with no detrimental impact on the model’s other variables as reflected in their p-values.</p></li>
+<li><p>But the p-value for <code>EMPSTAT Unemployed:FTOTINC (umployment status * family income)</code> is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term <strong>needs to have further consideration</strong>.</p></li>
 </ul>
 </section>
 <section id="model-discussion-2" class="level3">
@@ -800,9 +801,9 @@ ul.task-list li input[type="checkbox"] {
 <section id="outline" class="level2">
 <h2 class="anchored" data-anchor-id="outline">Outline</h2>
 <ol type="1">
-<li><p>Time series model (Detailed in Class blog 7)</p></li>
-<li><p>Log-Log Regression Model by YEAR (Detailed in Class blog 5)</p></li>
-<li><p>Longitudinal Log-Log Regression Model by Race (Detailed in Class blog 6)</p></li>
+<li><p>Time series model <a href="https://sussmanbu.github.io/final-project-team9/posts/2024-04-19-blog-post-7/blog-post-7.html">(Detailed in Class blog 7)</a></p></li>
+<li><p>Log-Log Regression Model by YEAR <a href="https://sussmanbu.github.io/final-project-team9/posts/2024-04-12-class-blog-5/class-blog-5.html">(Detailed in Class blog 5)</a></p></li>
+<li><p>Longitudinal Log-Log Regression Model by Race <a href="https://sussmanbu.github.io/final-project-team9/posts/2024-04-17-class-blog-6/class-blog-6.html">(Detailed in Class blog 6)</a></p></li>
 </ol>
 </section>
 <section id="time-series-model" class="level2">
@@ -855,8 +856,9 @@ ul.task-list li input[type="checkbox"] {
 <h4 class="anchored" data-anchor-id="q_q-plot">Q_Q plot</h4>
 <ul>
 <li><p>The points mostly follow the line in the center, indicating that residuals are generally well-modeled.</p></li>
-<li><p>But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.</p></li>
+<li><p>But the <strong>tails</strong>, especially the upper right, <strong>deviate from the line</strong>, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.</p></li>
 </ul>
+<p>** Due to the limitations suggested, the log-log transformation is maintained superior. However, this model serves as a useful reference; the conclusions drawn closely align with those in Section 3, showing no significant deviation.**</p>
 </section>
 </section>
 </section>
@@ -891,7 +893,6 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>All models are statistically validated, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .</p></li>
 <li><p>R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.</p></li>
-<li><p>P-values indicate consistent statistical significance for the model’s predictors on an annual basis.</p></li>
 <li><p>The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.</p></li>
 </ul>
 </section>
@@ -913,7 +914,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <ul>
-<li>From the plot, we sampled 1000 individuals from each racial group in various regions to analyze their impact on rental expenditures. The visualization reveals significant variations in rental spending across races within each region, emphasizing disparities that are vital for guiding regional housing policies and economic strategies.</li>
+<li>From the plot, we sampled 1000 individuals from each racial group in various regions to analyze their impact on rental expenditures. The visualization reveals variations in rental spending across races within each region, emphasizing disparities that are vital for guiding regional housing policies and economic strategies.</li>
 </ul>
 </section>
 <section id="model-findings-4" class="level3">
@@ -921,12 +922,12 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://yatingzhu.shinyapps.io/app4/">Click here to view the plot for the cofficients across Years for each race.</a></p>
 <p><strong>Alaska Native</strong>: Shows minor fluctuations around zero, with both positive and negative coefficients, indicating inconsistent trends over the years.</p>
 <p><strong>American</strong>: This category has NA values, suggesting incomplete data, making it hard to discern a clear trend.</p>
-<p><strong>Chinese</strong>: Generally has higher positive coefficients compared to other groups, particularly noticeable in later years, indicating a strong positive association with income in those years.</p>
-<p><strong>Japanese</strong>: Has some missing values but otherwise presents mostly positive coefficients, with a notable spike in recent years.</p>
+<p><strong>Chinese</strong>: Generally has higher positive coefficients compared to other groups, particularly noticeable in later years, indicating a strong positive elasticity and association with income in those years.</p>
+<p><strong>Japanese</strong>: Has few missing values but otherwise presents mostly positive coefficients, with a notable spike in recent years.</p>
 <p><strong>Islander</strong>: Also features both positive and negative coefficients with considerable variability.</p>
 <p><strong>Other race, nec</strong>: Shows a mix of positive, negative, and NA values, making a clear trend difficult to establish.</p>
-<p><strong>Two or more races</strong>: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association with income.</p>
-<p><strong>Whites</strong>: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.</p>
+<p><strong>Two or more races</strong>: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association and elasticity with income.</p>
+<p><strong>Whites</strong>: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association and elasticity with income.</p>
 </section>
 <section id="statistical-performance-5" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-performance-5">Statistical Performance:</h3>
@@ -943,7 +944,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p><strong>Income and Rent Expenditure (2022):</strong> Latest data indicates that a 10% increase in income is predicted to raise rent expenditure by approximately 1.334%, with other variables constant, showcasing the elastic nature of rent in response to changes in income.</p></li>
 <li><p><strong>Time Effect and Autocorrelation Considerations:</strong> When accounting for temporal effects and autocorrelation, a 10% increase in income is expected to lead to a 1.467% rise in rent, affirming the pronounced elasticity of rent costs relative to income fluctuations.</p></li>
 <li><p><strong>Trends Over Years:</strong> Analysis of yearly data reveals that coefficient estimates peaked notably between 2000 and 2020, followed by declines during the COVID-19 period, indicating cycles of increase and corrective adjustments in the relationship between income and rent.</p></li>
-<li><p><strong>Racial and Ethnic Differences:</strong> The association between income and rent varies significantly among racial and ethnic groups. Particularly, Chinese and Japanese groups have displayed a consistently strong positive relationship with income in recent years, highlighting disparities in economic outcomes across different demographics.</p></li>
+<li><p><strong>Racial and Ethnic Differences:</strong> The association between income and rent varies significantly among racial and ethnic groups. For example, Chinese and White groups have displayed a consistently strong positive association and elasticity with income in recent years, highlighting disparities in economic outcomes across different demographics.</p></li>
 </ol>
 <p><code>The validity, limitations, and details of the models and statistical analysis used are thoroughly discussed in the respective sections above.</code></p>
 
