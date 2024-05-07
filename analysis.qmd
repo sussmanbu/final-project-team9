@@ -12,7 +12,9 @@ library(dplyr)
 library(here)
 library(gt)
 library(purrr)
-
+library(tidycensus)
+library(sf)
+library(viridis)
 library(readr)
 library(ggplot2)
 library(knitr)
@@ -31,7 +33,72 @@ data_2022 <- readRDS(data_path1)
 
 ## Motivation
 
-The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time.
+The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time. Preliminary observations from diagrams comparing median rent and median income by state indicate that states with higher median incomes generally tend to have higher median rents. This pattern suggests a potential correlation between these two variables, reinforcing the importance of examining how these dynamics vary across different states and demographic groups to inform policy and economic decisions.
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+
+library(patchwork)
+data <- get_acs(
+  geography = "state",
+  variables = c(
+    median_rent = "B25064_001",
+    median_income = "B19013_001"
+  ),
+  year = 2019,
+  survey = "acs5"
+)
+
+data_wide <- data %>%
+  pivot_wider(
+    names_from = variable, 
+    values_from = estimate, 
+    values_fn = list(estimate = max)  # Use max to ensure that we take the non-NA values if they exist
+  ) %>%
+  # Ensure all necessary columns are correctly named and handled
+  rename_with(~tolower(gsub(" ", "_", .x)), .cols = everything()) %>%
+  # Aggregate data if necessary (seems like you might be working with other demographic data as well)
+  group_by(geoid, name) %>%
+  summarise(
+    median_income = max(median_income, na.rm = TRUE),
+    median_rent = max(median_rent, na.rm = TRUE),
+    .groups = 'drop'  # Drop the grouping for further operations
+  )
+
+# Load state geometries
+states <- tigris::states(class = "sf", year = 2019, resolution = "20m")
+
+# Join ACS data with state geometries
+data_geo <- left_join(states, data_wide, by = c("GEOID" = "geoid"))
+
+# Function to create a plot for a given variable
+plot_data <- function(data, value_column, title) {
+  ggplot(data) +
+    geom_sf(aes(fill = !!sym(value_column)), color = "white", size = 0.1) +
+    scale_fill_viridis_c(option = "magma", direction = -1, name = title, guide = "none") +
+    labs(
+      title = title, 
+      subtitle = "Data from ACS 2019 5-year estimates"
+    ) +
+    theme_minimal() +
+    theme(
+      plot.title = element_text(size = 12),
+      plot.subtitle = element_text(size = 8),
+      legend.position = "none",
+      axis.title = element_text(size = 8),
+      axis.text = element_text(size = 8)
+    ) +
+    coord_sf(xlim = c(-125, -66), ylim = c(24, 50), expand = FALSE)
+}
+
+# Create plots for each variable
+plot_rent <- plot_data(data_geo, "median_rent", "Median Rent by State")
+plot_income <- plot_data(data_geo, "median_income", "Median Income by State")
+
+# Combine the plots using patchwork
+combined_plot <- plot_rent + plot_income + plot_layout(nrow = 1)
+print(combined_plot)
+```
 
 ## Objectives
 
@@ -146,14 +213,22 @@ kable(glance_log)
 -   The sigma value's reduction points to a more precise model, albeit comparisons with non-logarithmic models are not straightforward due to scale differences.
 
 ### Model Discussion :
-1.  Linearity and Homoscedasticity:
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
+# Set up a multi-panel layout with two columns
+par(mfrow = c(1, 2))
+
+# Plot the Residuals vs. Fitted Values plot
 plot(fitted(log_model_2022), residuals(log_model_2022),
      xlab = "Fitted values",
      ylab = "Residuals",
      main = "Residuals vs. Fitted Values")
 abline(h = 0, col = "red")
+
+# Q-Q plot of residuals
+qqnorm(residuals(log_model_2022))
+qqline(residuals(log_model_2022), col = "steelblue")
 ```
+1.  Linearity and Homoscedasticity:
 
 - The residuals, predominantly centered around the zero line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable. 
 
@@ -162,12 +237,6 @@ abline(h = 0, col = "red")
 - Nonetheless, a few potential outliers common in large economic datasets do not significantly affect the robustness of the central trend.
 
 2.  Normality of Residuals:
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Q-Q plot of residuals
-qqnorm(residuals(log_model_2022))
-qqline(residuals(log_model_2022), col = "steelblue")
-```
 
 -   The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.
 
@@ -269,18 +338,32 @@ tidy_lm <- tidy(model_with_income_log)
 - Also, a statistic value in log_INCTOT is 83.46, suggesting that income is a highly significant predictor of rent. 
 
 ### Model discussion
-#### Residual plot
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Calculate residuals and fitted values
-residuals_twenty <- resid(model_with_income_log)
-fitted_values_twenty <- fitted(model_with_income_log)
 
-# Create a residual plot
-plot(fitted_values_twenty, residuals_twenty, 
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=5}
+# Calculate residuals and fitted values
+residuals <- resid(model_with_income_log)
+fitted_values <- fitted(model_with_income_log)
+
+# Set up a multi-panel layout
+par(mfrow = c(1, 2))
+
+# Plot the Normal Q-Q Plot
+qqnorm(residuals, main = "Normal Q-Q Plot",
+       xlab = "Theoretical Quantiles", ylab = "Sample Quantiles",
+       pch = 16, col = "black", cex = 0.6) 
+qqline(residuals, col = "blue", lwd = 2)  
+abline(h = seq(-3, 3, 1), col = "gray", lty = 2)  
+abline(v = seq(-3, 3, 1), col = "gray", lty = 2)  
+
+# Plot the Residual Plot
+plot(residuals, fitted_values, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
 abline(h = 0, col = "red") 
+
 ```
+
+#### Residual plot
 
 - The residual plot indicates **potential heteroscedasticity**, as there is a clear pattern where the residuals spread increasingly around the zero line and become more negative as the fitted values increase. This suggests that the variance of the residuals is not constant, which could impact the reliability of the model's predictions at higher income levels.
 
@@ -292,19 +375,6 @@ abline(h = 0, col = "red")
   - Combined, these factors explain why the model’s residuals show such deviations at the upper income levels.
 
 #### Q_Q plot
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-residuals <- resid(model_with_income_log)
-
-qqnorm(residuals, main = "Normal Q-Q Plot",
-       xlab = "Theoretical Quantiles", ylab = "Sample Quantiles",
-       pch = 16, 
-       col = "black", 
-       cex = 0.6) 
-qqline(residuals, col = "blue", lwd = 2)  
-abline(h = seq(-3, 3, 1), col = "gray", lty = 2)  
-abline(v = seq(-3, 3, 1), col = "gray", lty = 2)
-
-```
 - The points mostly follow the line in the center, indicating that residuals are generally well-modeled.
 
 - But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
@@ -316,7 +386,9 @@ abline(v = seq(-3, 3, 1), col = "gray", lty = 2)
 -   This analysis implements the validated Log-Log regression approach on annual data segments to assess temporal trends and variations.
 
 ### Model Findings:
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+
 models_by_year <- data_twenty %>%
   group_by(YEAR) %>%
   nest() %>%
@@ -327,15 +399,30 @@ models_by_year <- data_twenty %>%
     augmented = map(model, augment)
   ) %>%
   ungroup()
+
 models_by_year %>%
   unnest(tidied) %>%
   filter(term == "log_INCTOT") %>%
   ggplot(aes(x = as.numeric(YEAR), y = estimate)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Trend of Coefficient for log_INCTOT Over Years",
-       x = "Year",
-       y = "Coefficient Estimate")
+  geom_line(color = "steelblue", size = 0.8) +  # Thicker, colored line for better visibility
+  geom_point(color = "darkblue", size = 1.2) +  # Larger points with a different color
+  labs(
+    title = "Annual Impact of Income on Rent Adjustments",
+    subtitle = "Each point shows how much rent adjustments are influenced by changes in income each year.",
+    x = "Year",
+    y = "Impact on Rent"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),  # Bold and slightly larger title
+    plot.subtitle = element_text(size = 8
+                                 ),  # Clear subtitle
+    axis.title.x = element_text(face = "bold", color = "gray20", size = 10),
+    axis.title.y = element_text(face = "bold", color = "gray20", size = 10),
+    axis.text = element_text(color = "gray20"),
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Slant the x-axis labels for better fit
+    plot.caption = element_text(size = 10)
+  )
 ```
 
 - Observations show peaks in coefficient estimates, notably after 2000 and before 2020, with subsequent troughs suggesting potential corrective periods.
@@ -359,11 +446,7 @@ models_by_year %>%
 ## 3. Longitudinal Log-Log Regression Model by Race
 
 ### Model Overview:
--   This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
-
-### Model Findings:
-[Click here to view the plot for the cofficients across Years for each race.](https://yatingzhu.shinyapps.io/app4/)
-
+-   This model extended the 2022 dataset analysis (some coefficients not statistically sigificant so dropped) to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
@@ -393,7 +476,46 @@ race_year_with_single_levels <- race_year_levels %>%
 
 data_twenty_filtered_final <- data_twenty_filtered %>%
   anti_join(race_year_with_single_levels, by = c("RACE", "YEAR"))
+```
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(viridis)
+
+sampled_data <- data_twenty_filtered_final %>%
+  group_by(REGION_CLASSIFIED, RACE) %>%
+  sample_n(size = 1000, replace = TRUE) %>%  
+  ungroup()
+
+rent_summary <- sampled_data %>%
+  group_by(REGION_CLASSIFIED, RACE) %>%
+  summarize(total_rent = sum(RENTGRS), .groups = 'drop')
+
+region_totals <- rent_summary %>%
+  group_by(REGION_CLASSIFIED) %>%
+  summarize(region_total_rent = sum(total_rent), .groups = 'drop')
+
+rent_summary <- rent_summary %>%
+  left_join(region_totals, by = "REGION_CLASSIFIED") %>%
+  mutate(percent = (total_rent / region_total_rent) * 100) %>%
+  arrange(REGION_CLASSIFIED, desc(percent))  
+
+ggplot(rent_summary, aes(x = REGION_CLASSIFIED, y = percent, fill = RACE)) +
+  geom_bar(stat = "identity", position = "stack") +
+  geom_text(aes(label = sprintf("%.1f%%", percent)), position = position_stack(vjust = 0.5), size = 2.5, color = "black") +
+  scale_fill_viridis_d(option = "magma", begin = 0.9, end = 0.3) +  # Invert colors for better visual representation
+  labs(title = "Percentage of Rental Expenditure (Sampled 1000 Data from each race)",
+       x = "Region",
+       y = "Percentage of Total Rent",
+       fill = "Race") +
+  theme_minimal()
+
+```
+- From the plot, we sampled 1000 individuals from each racial group in various regions to analyze their impact on rental expenditures. The visualization reveals significant variations in rental spending across races within each region, emphasizing disparities that are vital for guiding regional housing policies and economic strategies.
+
+### Model Findings:
+[Click here to view the plot for the cofficients across Years for each race.](https://yatingzhu.shinyapps.io/app4/)
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 models_by_race_year <- data_twenty_filtered_final %>%
   group_by(RACE, YEAR) %>%
   do(

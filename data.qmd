@@ -75,9 +75,11 @@ library(gt)
 library(purrr)
 data_path <- here("dataset", "data_twenty_clean.csv")
 data_path1 <- here("dataset", "latest_clean.csv")
+data_path_2 <- here("dataset", "latest.csv")
 library(readr)
 data_twenty <- read_csv(data_path,show_col_types = FALSE) 
 data_2022 <- read_csv(data_path1,show_col_types = FALSE) 
+rent_data_clean <- read_csv(data_path1,show_col_types = FALSE) 
 library(ggplot2)
 library(knitr)
 library(lme4)
@@ -175,59 +177,52 @@ ggplot(kitchen_counts, aes(x = "", y = Count, fill = factor(KITCHEN))) +
 
 -   The **logarithm of both INCTOT and RENTGRS** was computed due to their highly right-skewed distributions. Since applying the logarithmic transformation, we also excluded any records with **negative values** in these variables.
 
-##### The original RENTGRS plot
+#### RENTGRS (rent)
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=5}
+library(gridExtra)
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(dplyr)
-library(forcats)
-library(here)
-data_path <- here("dataset", "latest.csv")
-library(readr)
-rent_data_clean <- read_csv(data_path,show_col_types = FALSE)
-library(ggplot2) 
-# Histogram to show distribution of monthly gross rent
-ggplot(rent_data_clean, aes(x = RENTGRS)) +
+p1 <- ggplot(rent_data_clean, aes(x = RENTGRS)) +
   geom_histogram(binwidth = 100, fill = "lightblue", color = "blue") +
   labs(title = "Distribution of Monthly Gross Rent",
        x = "Monthly Gross Rent ($)",
        y = "Count") +
   theme_minimal()
-```
 
-##### The log_RENTGRS plot
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-data_path <- here("dataset", "latest_clean.csv")
-data_2022 <- read_csv(data_path,show_col_types = FALSE) 
-ggplot(data_2022, aes(x = log(RENTGRS))) +
+# The log_RENTGRS plot
+p2 <- ggplot(data_2022, aes(x = log(RENTGRS))) +
   geom_histogram(binwidth = 0.1, fill = "lightblue", color = "blue") + 
   labs(title = "Distribution of Log of Monthly Gross Rent",
        x = "Log of Monthly Gross Rent",
        y = "Count") +
   theme_minimal()
+
+# Arrange the plots side by side
+grid.arrange(p1, p2, ncol = 2)
 ```
 
-##### The original INCTOT plot
+##### INCTOT (income)
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=5}
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(rent_data_clean, aes(x = INCTOT)) +
+# The histogram of Total Personal Income
+p1 <- ggplot(rent_data_clean, aes(x = INCTOT)) +
   geom_histogram(bins = 100, fill = "lightblue", color = "blue") +
   theme_minimal() +
   labs(title = "Histogram of Total Personal Income",
        x = "Total Personal Income",
        y = "Frequency")
-```
 
-##### The log_INCTOT plot
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-ggplot(data_2022, aes(x = log(INCTOT))) +
+# The log_INCTOT plot
+p2 <- ggplot(data_2022, aes(x = log(INCTOT))) +
   geom_histogram(bins = 100, fill = "lightblue", color = "blue") + 
   theme_minimal() +
   labs(title = "Histogram of Log of Total Personal Income",
        x = "Log of Total Personal Income",
        y = "Frequency")
+
+# Arrange the plots side by side
+grid.arrange(p1, p2, ncol = 2)
 ```
+
 
 The log transformation of both variables significantly reduced their skewness.
 
@@ -235,16 +230,21 @@ The log transformation of both variables significantly reduced their skewness.
 
 ##### The following plots shows the problem of outliers in our key predictor and response variable
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-rent_data_clean <- rent_data_clean[rent_data_clean$RENTGRS > 0 & rent_data_clean$INCTOT > 0, ]
-rent_data_clean$log_RENTGRS <- log(rent_data_clean$RENTGRS)
-rent_data_clean$log_INCTOT <- log(rent_data_clean$INCTOT)
-enhanced_model_augmented <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = rent_data_clean)
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=4}
+data_path <- here("dataset", "latest.csv")
+rent <- read_csv(data_path,show_col_types = FALSE) 
+rent <- rent[rent$RENTGRS > 0 & rent$INCTOT > 0, ]
 
+# Apply log transformation
+rent$log_RENTGRS <- log(rent$RENTGRS)
+rent$log_INCTOT <- log(rent$INCTOT)
 
-ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+enhanced_model_augmented <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = rent)
 
-ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha =.05) + scale_x_log10() + scale_y_log10()
+p1=ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+
+p2=ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha =.05) + scale_x_log10() + scale_y_log10()
+grid.arrange(p1, p2, nrow = 1, widths = c(0.6, 0.4))
 ```
 
 -   The first density plot shows a wide spread with some points far from the main cluster, indicative of outliers.
@@ -256,13 +256,35 @@ ggplot(enhanced_model_augmented, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_po
 
 ##### The following tables shows what happened **after** exclude the outliers of our key predictor and response variable
 
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022)
 
-ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha =.05) + scale_x_log10() + scale_y_log10()
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=4}
+data_2022 <- data_2022[data_2022$RENTGRS > 0 & data_2022$INCTOT > 0, ]
 
-ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+data_2022$log_RENTGRS <- log(data_2022$RENTGRS)
+data_2022$log_INCTOT <- log(data_2022$INCTOT)
+
+
+mean_log_RENTGRS <- mean(data_2022$log_RENTGRS, na.rm = TRUE)
+sd_log_RENTGRS <- sd(data_2022$log_RENTGRS, na.rm = TRUE)
+mean_log_INCTOT <- mean(data_2022$log_INCTOT, na.rm = TRUE)
+sd_log_INCTOT <- sd(data_2022$log_INCTOT, na.rm = TRUE)
+
+lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
+ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
+lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
+ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
+data_2022_clean <- data_2022[data_2022$log_RENTGRS >= lb_log_RENTGRS & data_2022$log_RENTGRS <= ub_log_RENTGRS & 
+                             data_2022$log_INCTOT >= lb_log_INCTOT & data_2022$log_INCTOT <= ub_log_INCTOT, ]
+
+log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT + REGION_CLASSIFIED, data = data_2022_clean)
+
+
+p2=ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + geom_point(alpha =.05) + scale_x_log10() + scale_y_log10()
+
+p1=ggplot(log_model_2022, aes(x = log_INCTOT, y = log_RENTGRS)) + stat_density2d_filled() + scale_x_log10() + scale_y_log10()
+grid.arrange(p1, p2, nrow = 1, widths = c(0.6, 0.4))
 ```
+
 
 -   The density plot is to show a tighter concentration of data, with less dispersion.
 
