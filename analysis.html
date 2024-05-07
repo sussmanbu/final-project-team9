@@ -211,7 +211,16 @@ ul.task-list li input[type="checkbox"] {
 <h1>Research Question and Motivation</h1>
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
-<p>The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time.</p>
+<p>The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time. Preliminary observations from diagrams comparing median rent and median income by state indicate that states with higher median incomes generally tend to have higher median rents. This pattern suggests a potential correlation between these two variables, reinforcing the importance of examining how these dynamics vary across different states and demographic groups to inform policy and economic decisions.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
@@ -484,7 +493,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -573,18 +582,18 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="model-discussion-1" class="level3">
 <h3 class="anchored" data-anchor-id="model-discussion-1">Model Discussion :</h3>
-<ol type="1">
-<li>Linearity and Homoscedasticity:</li>
-</ol>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="1152"></p>
 </figure>
 </div>
 </div>
 </div>
+<ol type="1">
+<li>Linearity and Homoscedasticity:</li>
+</ol>
 <ul>
 <li><p>The residuals, predominantly centered around the zero line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable.</p></li>
 <li><p>While the spread is generally consistent, minor widening at the extremes suggests typical heteroscedasticity in higher income or rent brackets.</p></li>
@@ -593,15 +602,6 @@ ul.task-list li input[type="checkbox"] {
 <ol start="2" type="1">
 <li>Normality of Residuals:</li>
 </ol>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 <ul>
 <li>The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.</li>
 </ul>
@@ -830,17 +830,17 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="model-discussion-3" class="level3">
 <h3 class="anchored" data-anchor-id="model-discussion-3">Model discussion</h3>
-<section id="residual-plot" class="level4">
-<h4 class="anchored" data-anchor-id="residual-plot">Residual plot</h4>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
+<section id="residual-plot" class="level4">
+<h4 class="anchored" data-anchor-id="residual-plot">Residual plot</h4>
 <ul>
 <li><p>The residual plot indicates <strong>potential heteroscedasticity</strong>, as there is a clear pattern where the residuals spread increasingly around the zero line and become more negative as the fitted values increase. This suggests that the variance of the residuals is not constant, which could impact the reliability of the model’s predictions at higher income levels.</p></li>
 <li><p>But we consider the pattern in this plot reflects the socio-economic dynamics of high-income individuals’ housing decisions.</p>
@@ -853,15 +853,6 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="q_q-plot" class="level4">
 <h4 class="anchored" data-anchor-id="q_q-plot">Q_Q plot</h4>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
 <ul>
 <li><p>The points mostly follow the line in the center, indicating that residuals are generally well-modeled.</p></li>
 <li><p>But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.</p></li>
@@ -883,7 +874,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="analysis_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -910,7 +901,19 @@ ul.task-list li input[type="checkbox"] {
 <section id="model-overview-5" class="level3">
 <h3 class="anchored" data-anchor-id="model-overview-5">Model Overview:</h3>
 <ul>
-<li>This model extended the 2022 dataset analysis to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.</li>
+<li>This model extended the 2022 dataset analysis (some coefficients not statistically sigificant so dropped) to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="analysis_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>From the plot, we sampled 1000 individuals from each racial group in various regions to analyze their impact on rental expenditures. The visualization reveals significant variations in rental spending across races within each region, emphasizing disparities that are vital for guiding regional housing policies and economic strategies.</li>
 </ul>
 </section>
 <section id="model-findings-4" class="level3">
