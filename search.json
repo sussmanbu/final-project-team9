@@ -382,7 +382,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "This comes from the file about.qmd.\nThis is a website for the final project for MA[46]15 Data Science with R by Team 9. The members of this team are below."
+    "text": "This is a website for the final project for MA[46]15 Data Science with R by Team 9. The members of this team are below."
   },
   {
     "objectID": "about.html#guo-dingyu",
@@ -417,7 +417,7 @@
     "href": "about.html#zhu-yating",
     "title": "About",
     "section": "Zhu, Yating",
-    "text": "Zhu, Yating\nytzhu@bu.edu:My github link is: https://github.com/yatingzhuzz\nHello everyone! I’m Yating Zhu, majoring in Math and minoring in Economics. I am a junior. And I am from shanghai, China. Nice to connect with you all!\n\n\nAbout this Template.\nThis is based off of the standard Quarto website template from RStudio (2023.09.0 Build 463)."
+    "text": "Zhu, Yating\nytzhu@bu.edu:My github link is: https://github.com/yatingzhuzz\nHello everyone! I’m Yating Zhu, majoring in Math and minoring in Economics. I am a junior. And I am from shanghai, China. Nice to connect with you all!"
   },
   {
     "objectID": "big_picture.html#rising-fortunes-charting-the-course-of-our-growing-prosperity",
