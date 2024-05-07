@@ -15,10 +15,6 @@ about:
       href: https://github.com/sussmanbu/
 
 ---
-
-
-This comes from the file `about.qmd`.
-
 This is a website for the final project for MA[46]15 Data Science with R by Team 9.
 The members of this team are below.
 
@@ -49,8 +45,3 @@ ytzhu@bu.edu:[My github link is: https://github.com/yatingzhuzz](https://github.
 
 Hello everyone! I'm Yating Zhu, majoring in Math and minoring in Economics. I am a junior. And I am from shanghai, China. Nice to connect with you all!
 
-<!-- Please leave in the information below -->
-
-### About this Template.
-
-This is based off of the standard Quarto website template from RStudio (2023.09.0 Build 463).

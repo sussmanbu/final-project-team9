@@ -205,7 +205,7 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RA
 
 [Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.]( https://yatingzhu.shinyapps.io/app2/)
 
-- The model suggests that a **10% increase in income is predicted to raise rent by an average of 1.334% (defined as elasticity in economic terms)**, with all other variables held constant, indicating the elasticity effect of income on rent.
+- The model suggests that a **10% increase in income is predicted to raise rent by an average of 1.334% (defined as elasticity in economic terms)**, with all other variables held constant.
 
 ### Statistical Performance:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -334,7 +334,9 @@ model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST +
 tidy_lm <- tidy(model_with_income_log)
 ```
 
-- The model suggests that a **10% increase in income is predicted to raise rent by an average of 1.412%**, with all other variables held constant, indicating income's elasticity effect on rent.
+Income elasticity:
+
+- The model suggests that a **10% increase in income is predicted to raise rent by an average of 1.412%**, with all other variables held constant.
 
 ### Statistical performance:
 - Most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates. 
@@ -383,7 +385,7 @@ abline(h = 0, col = "red")
 
 - But the **tails**, especially the upper right, **deviate from the line**, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
 
-** Due to the limitations suggested, the log-log transformation is maintained superior. However, this model serves as a useful reference; the conclusions drawn closely align with those in Section 3, showing no significant deviation.**
+**Due to the limitations suggested, the log-log transformation is maintained superior. However, this model serves as a useful reference; the conclusions drawn closely align with those in Section 3, showing no significant deviation.**
 
 ## 2. Log-Log Regression Model by YEAR
 
@@ -450,7 +452,7 @@ models_by_year %>%
 ## 3. Longitudinal Log-Log Regression Model by Race
 
 ### Model Overview:
--   This model extended the 2022 dataset analysis (some coefficients not statistically sigificant so dropped) to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
+-   This model extended the 2022's one_year dataset analysis for race to explore how the rent-income relationship for each racial group has evolved from 2000 to 2022.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
@@ -653,7 +655,7 @@ unique_races <- unique(models_by_race_year$RACE)
 
 2. **Time Effect and Autocorrelation Considerations:** When accounting for temporal effects and autocorrelation, a 10% increase in income is expected to lead to a 1.467% rise in rent, affirming the pronounced elasticity of rent costs relative to income fluctuations.
 
-3. **Trends Over Years:** Analysis of yearly data reveals that coefficient estimates peaked notably between 2000 and 2020, followed by declines during the COVID-19 period, indicating cycles of increase and corrective adjustments in the relationship between income and rent.
+3. **Trends Over Years:** Analysis of yearly data reveals that coefficient estimates peaked notably between after 2000 and before 2020, followed by declines during the COVID-19 period, indicating cycles of increase and corrective adjustments in the relationship between income and rent.
 
 4. **Racial and Ethnic Differences:** The association between income and rent varies significantly among racial and ethnic groups. For example, Chinese and White groups have displayed a consistently strong positive association and elasticity with income in recent years, highlighting disparities in economic outcomes across different demographics.
 

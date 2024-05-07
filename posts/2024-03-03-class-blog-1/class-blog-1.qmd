@@ -1,5 +1,5 @@
 ---
-title: "Class Blog 1"
+title: "Class Blog 1: Proposal"
 subtitle: "Three datasets proposed for final project"
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-03-03"

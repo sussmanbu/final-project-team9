@@ -28,6 +28,7 @@ It makes the datasets on this website very appropriate for our research to strea
 ## First Dataset (YEAR of 2022)
 
 Here is the link to our cleaned dataset [cleaned dataset.](./dataset//latest_clean.csv)
+Here is the link to the class blog which includes the code for cleaning, recording, and processing the dataset. To replicate the process, [click this link](posts/2024-03-23-class-blog-2/class-blog-2.qmd)
 
 ### Table contains all the variables in the dataset
 

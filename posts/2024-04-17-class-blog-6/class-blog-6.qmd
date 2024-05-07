@@ -1,5 +1,5 @@
 ---
-title: "Class blog 6"
+title: "Class blog 6: RACE"
 subtitle: "Explore racial differences by utilizing both the 2022 dataset and the 22-year dataset to examine variations in the elasticity of rent expenditure."
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-04-17"

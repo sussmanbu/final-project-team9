@@ -1,5 +1,5 @@
 ---
-title: "Class blog 4"
+title: "Class blog 4: Models"
 subtitle: "Different models were applied to the dataset, including simple linear, multiple linear, log-log, and log-log with interaction, allowing for refined analysis and exploration of model fit."
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-03-30"

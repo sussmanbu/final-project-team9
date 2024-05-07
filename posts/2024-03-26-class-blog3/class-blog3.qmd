@@ -1,5 +1,5 @@
 ---
-title: "Class blog3"
+title: "Class blog3: Data exploration"
 subtitle: "Detailed exploration of all variables in our dataset, accompanied by a discussion and description of the dataset."
 author: "Yating Zhu,Dingyu Guo,Suh Edwin Jiho"
 date: "2024-03-26"
