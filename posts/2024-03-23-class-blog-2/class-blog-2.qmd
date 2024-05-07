@@ -74,8 +74,8 @@ library(dplyr)
 data_path <- here("dataset-ignore", "twok22_data.csv")
 library(readr)
 rent_data <- read_csv(data_path,show_col_types = FALSE)
-kable(head(rent_data))
-library(kableExtra)
+head = head(rent_data)
+kable(head)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Clean the data
@@ -86,7 +86,6 @@ library(readr)
 rent_data <- read_csv(data_path,show_col_types = FALSE)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-kable(rent_data)
 rent_data_clean <- rent_data %>%
   filter(RENTGRS != 0,
          !is.na(RENTGRS),
@@ -108,7 +107,5 @@ rent_data_clean$REGION_CLASSIFIED <- case_when(
 saveRDS(rent_data_clean, file = here("dataset", "latest.RData"))
 write_csv(rent_data_clean, file = here("dataset", "latest.csv"))
 ```
-
-
 
 We exclude data entries characterized by specific codes indicative of missing or unknown values, as well as those representing values deemed inappropriate for analytical purposes. Furthermore, for our dependent variable—rent—we exclude records indicating a rent of 0. This exclusion is based on the understanding that a 0 rent suggests the individual owns their home or lives in a situation not pertinent to our target research population, which is individuals who rent their housing. Given the original dataset comprises millions of samples, the exclusion of these data points still leaves us with the sufficiently cleaned large dataset for robust analysis.

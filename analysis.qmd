@@ -33,8 +33,9 @@ data_2022 <- readRDS(data_path1)
 
 ## Motivation
 
-The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time. Preliminary observations from diagrams comparing median rent and median income by state indicate that states with higher median incomes generally tend to have higher median rents. This pattern suggests a potential correlation between these two variables, reinforcing the importance of examining how these dynamics vary across different states and demographic groups to inform policy and economic decisions.
+The primary focus of this research is to investigate the relationship between individual income levels and rental expenditures. This analysis is motivated by the need to understand the financial burdens of rent relative to income and how this impacts different demographic groups over time. 
 
+Preliminary observations from diagrams comparing median rent and median income by state indicate that states with higher median incomes generally tend to have higher median rents. This pattern suggests a potential correlation between these two variables, reinforcing the importance of examining how these dynamics vary across different states and demographic groups to inform policy and economic decisions.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
 
@@ -103,7 +104,7 @@ print(combined_plot)
 ## Objectives
 
 -   **Relationship Exploration**: Aimming for determining how changes in income levels affect rental spending. This includes examining whether the relationship is strictly linear or if there are nonlinear dynamics that better capture the fluctuations in rental expenditures as income varies.
--   **Quantitative Analysis**: The goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income.
+-   **Quantitative Analysis**: The goal is to quantify the relationship precisely. For example, we seek to estimate the increase in rental expenditure for every thousand-dollar increase in income or the percentage change of rent expenditure for every one percent increase in income (elasticity).
 -   **Demographic Variance**: The study will also consider racial differences to identify how income's impact on rent varies among different racial groups.
 -   **Temporal Analysis**: Employing a time series regression model allows us to account for changes over time, providing a dynamic perspective on the income-rent relationship.
 
@@ -112,11 +113,13 @@ print(combined_plot)
 
 ## Outline of models used in class blogs
 
-1.  Multiple Linear Regression Model (Detailed in Class Blog 4)
+1.  Multiple Linear Regression Model [(Detailed in Class Blog 4)](https://sussmanbu.github.io/final-project-team9/posts/2024-03-30-class-blog-4/class-blog-4.html)
 
-2.  Log-Log Regression Model (Detailed in Class blog 4)
 
-3.  Log-Log Regression Model with interaction terms (Detailed in Class blog 4)
+2.  Log-Log Regression Model[(Detailed in Class blog 4)](https://sussmanbu.github.io/final-project-team9/posts/2024-03-30-class-blog-4/class-blog-4.html)
+
+
+3.  Log-Log Regression Model with interaction terms [(Detailed in Class blog 4)](https://sussmanbu.github.io/final-project-team9/posts/2024-03-30-class-blog-4/class-blog-4.html)
 
 
 ## 1. Multiple Linear Regression Model
@@ -138,7 +141,7 @@ print(combined_plot)
 glance_mlr=glance(mlr_model)
 kable(glance_mlr)
 ```
--   The R-squared value of 0.23 indicates that approximately **23% of the variance in the dependent variable (gross rent) is accounted for by the model**， which is considered acceptable in the context of social-economic studies.
+-   The R-squared value of 0.23 indicates that approximately **23% of the variance in the dependent variable (gross rent) is accounted for by the model**, which is considered acceptable in the context of social-economic studies.
 
 -   A F-statistic value of 70 and a p-value of 0 confirm the **statistical significance** of the model, suggesting that the regression results are highly unlikely to occur by chance.
 
@@ -163,6 +166,7 @@ vif_values <- vif(mlr_model)
 kable(vif_values)
 ```
 -   After fitting the multiple linear regression (MLR) model, `Kitchen` was removed due to its statistical insignificance, indicated by a high p-value.
+
 -   `Employment Status (EMPSTAT)`, although not as critical, also showed a non-significant p-value and is suspected to interact with variables like `Income (INCTOT)` or `Family_income(FTOTINC)`. This interaction will be explored further.
 
 
@@ -187,9 +191,11 @@ abline(h = 0, col = "red")
 ## 2. Log-Log Regression Model
 
 ### Model Overview:
--   Predictor and response variables underwent log transformation to correct for right skewness, as elaborated on the data page and the discussion in last section.
+As the problems elaborated on the data page and the discussion in last section:
 
--   The outliers was excluded (three standard deviations away from the response and predictor variable) for cleansing.
+-   Predictor and response variables underwent log transformation to correct for right skewness.
+
+-   The outliers was excluded (three standard deviations away from the response and predictor variable).
 
 ### Model Findings:
 
@@ -199,7 +205,7 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RA
 
 [Click here to view the summary table, which includes estimates, standard errors, statistics, and p-values for each coefficient.]( https://yatingzhu.shinyapps.io/app2/)
 
-- The model suggests that a 10% increase in income is predicted to raise rent by an average of 13.34%, with all other variables held constant, indicating income's elasticity effect on rent.
+- The model suggests that a **10% increase in income is predicted to raise rent by an average of 1.334% (defined as elasticity in economic terms)**, with all other variables held constant, indicating the elasticity effect of income on rent.
 
 ### Statistical Performance:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -228,19 +234,19 @@ abline(h = 0, col = "red")
 qqnorm(residuals(log_model_2022))
 qqline(residuals(log_model_2022), col = "steelblue")
 ```
-1.  Linearity and Homoscedasticity:
+1.  `Linearity and Homoscedasticity`:
 
-- The residuals, predominantly centered around the zero line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable. 
+- The residuals, predominantly **centered around the zero** line with no systematic pattern, indicate an effective model that captures the relationship between predictors and the response variable. 
 
-- While the spread is generally consistent, minor widening at the extremes suggests typical heteroscedasticity in higher income or rent brackets.
+- While the spread is generally **consistent**, minor widening at the extremes suggests typical heteroscedasticity in higher income or rent brackets.
 
 - Nonetheless, a few potential outliers common in large economic datasets do not significantly affect the robustness of the central trend.
 
-2.  Normality of Residuals:
+2.  `Normality of Residuals`:
 
--   The bulk of residuals align with the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.
+-   The bulk of residuals **align with** the normality line on the Q-Q plot, with slight deviations at both ends, which is often seen in economic data due to outliers, do not substantially affect the model’s predictive capability.
 
-3.  IID Errors:
+3.  `IID Errors`:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(lmtest)
@@ -253,7 +259,7 @@ kable(tibble::as_tibble(list(
 
 -   For Durbin-Watson Statistic, the result statistic value **close to 2** indicates no autocorrelation, implying that the **errors are independent**. And for a random scatter of residuals, without visible trends or cycles, supports the assumption of IID errors.
 
-4.  Multicollinearity:
+4.  `Multicollinearity`:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 index=vif(log_model_2022)
@@ -274,8 +280,6 @@ kable(index)
 
 -   The interaction term `EMPSTAT * FTOTINC (employment status * family income)` has been introduced to investigate the suspected interaction effect.
 
-- But the p-value for `EMPSTAT Unemployed:FTOTINC (umployment status * family income)` is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term **needs to have further consideration**.
-
 ### Statistical Performance:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_2022$FTOTINC = data_2022$FTOTINC - data_2022$INCTOT
@@ -284,9 +288,9 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + AGE + MARST + RA
 glance_log_model_2022 <- glance(log_model_2022)
 kable(glance_log_model_2022)
 ```
--   All predictors show statistical significance, with the exception of certain categories within marital status and employment status.
+-   Most predictors show statistical significance, in general, with no detrimental impact on the model’s other variables as reflected in their p-values. 
 
--   The integration of the interaction term retains the significance of other variables, with no detrimental impact on the model’s variables as reflected in their p-values.
+- But the p-value for `EMPSTAT Unemployed:FTOTINC (umployment status * family income)` is slightly above 0.05, suggesting it has borderline statistical significance. Therefore, adding interaction term **needs to have further consideration**.
 
 ### Model Discussion:
 
@@ -308,11 +312,11 @@ abline(h = 0, col = "red")
 
 ## Outline
 
-1.  Time series model (Detailed in Class blog 7)
+1.  Time series model [(Detailed in Class blog 7)](https://sussmanbu.github.io/final-project-team9/posts/2024-04-19-blog-post-7/blog-post-7.html)
 
-2.  Log-Log Regression Model by YEAR (Detailed in Class blog 5)
+2.  Log-Log Regression Model by YEAR [(Detailed in Class blog 5)](https://sussmanbu.github.io/final-project-team9/posts/2024-04-12-class-blog-5/class-blog-5.html)
 
-3.  Longitudinal Log-Log Regression Model by Race (Detailed in Class blog 6)
+3.  Longitudinal Log-Log Regression Model by Race [(Detailed in Class blog 6)](https://sussmanbu.github.io/final-project-team9/posts/2024-04-17-class-blog-6/class-blog-6.html)
 
 
 ## 1.Time series model
@@ -330,7 +334,7 @@ model_with_income_log <- lmer(log_RENTGRS ~ log_INCTOT + ROOMS + NFAMS + MARST +
 tidy_lm <- tidy(model_with_income_log)
 ```
 
-- The model suggests that a **10% increase in income is predicted to raise rent by an average of 14.12%**, with all other variables held constant, indicating income's elasticity effect on rent.
+- The model suggests that a **10% increase in income is predicted to raise rent by an average of 1.412%**, with all other variables held constant, indicating income's elasticity effect on rent.
 
 ### Statistical performance:
 - Most predictors have relatively low standard errors, suggesting a high degree of precision in the estimates. 
@@ -377,7 +381,9 @@ abline(h = 0, col = "red")
 #### Q_Q plot
 - The points mostly follow the line in the center, indicating that residuals are generally well-modeled.
 
-- But the tails, especially the upper right, deviate from the line, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
+- But the **tails**, especially the upper right, **deviate from the line**, suggesting the residuals have a distribution with more extreme values than a normal distribution would predict.
+
+** Due to the limitations suggested, the log-log transformation is maintained superior. However, this model serves as a useful reference; the conclusions drawn closely align with those in Section 3, showing no significant deviation.**
 
 ## 2. Log-Log Regression Model by YEAR
 
@@ -438,8 +444,6 @@ models_by_year %>%
 -   All models are statistically validated, there is a noticeable exception in the MARSTSeparated category for the year 2022 shows to be statistically insiginificant, but others are all good .
 
 -   R-squared values exhibit minor fluctuations over time, signifying a stable degree of explained variability in the response variable by the model.
-
--   P-values indicate consistent statistical significance for the model's predictors on an annual basis.
 
 -   The trends in model deviance require additional context for clear interpretation, while a gradual decrease in df.residual suggests either an increase in model parameters or variations in data availability over time.
 
@@ -510,7 +514,7 @@ ggplot(rent_summary, aes(x = REGION_CLASSIFIED, y = percent, fill = RACE)) +
   theme_minimal()
 
 ```
-- From the plot, we sampled 1000 individuals from each racial group in various regions to analyze their impact on rental expenditures. The visualization reveals significant variations in rental spending across races within each region, emphasizing disparities that are vital for guiding regional housing policies and economic strategies.
+- From the plot, we sampled 1000 individuals from each racial group in various regions to analyze their impact on rental expenditures. The visualization reveals variations in rental spending across races within each region, emphasizing disparities that are vital for guiding regional housing policies and economic strategies.
 
 ### Model Findings:
 [Click here to view the plot for the cofficients across Years for each race.](https://yatingzhu.shinyapps.io/app4/)
@@ -557,17 +561,17 @@ unique_races <- unique(log_inctot_p_values$RACE)
 
 **American**: This category has NA values, suggesting incomplete data, making it hard to discern a clear trend.
 
-**Chinese**: Generally has higher positive coefficients compared to other groups, particularly noticeable in later years, indicating a strong positive association with income in those years.
+**Chinese**: Generally has higher positive coefficients compared to other groups, particularly noticeable in later years, indicating a strong positive elasticity and association with income in those years.
 
-**Japanese**: Has some missing values but otherwise presents mostly positive coefficients, with a notable spike in recent years.
+**Japanese**: Has few missing values but otherwise presents mostly positive coefficients, with a notable spike in recent years.
 
 **Islander**: Also features both positive and negative coefficients with considerable variability.
 
 **Other race, nec**: Shows a mix of positive, negative, and NA values, making a clear trend difficult to establish.
 
-**Two or more races**: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association with income.
+**Two or more races**: This group generally has positive coefficients, with a few exceptions, suggesting a fairly consistent positive association and elasticity with income.
 
-**Whites**: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association with income.
+**Whites**: Present a range of coefficients, mostly positive with some fluctuations, but generally indicate a positive association and elasticity with income.
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -645,14 +649,16 @@ unique_races <- unique(models_by_race_year$RACE)
 
 # Conclusion 
 
-1. **Income and Rent Expenditure (2022):** Latest data indicates that a 10% increase in income is predicted to raise rent expenditure by approximately 13.34%, with other variables constant, showcasing the elastic nature of rent in response to changes in income.
+1. **Income and Rent Expenditure (2022):** Latest data indicates that a 10% increase in income is predicted to raise rent expenditure by approximately 1.334%, with other variables constant, showcasing the elastic nature of rent in response to changes in income.
 
-2. **Time Effect and Autocorrelation Considerations:** When accounting for temporal effects and autocorrelation, a 10% increase in income is expected to lead to a 14.67% rise in rent, affirming the pronounced elasticity of rent costs relative to income fluctuations.
+2. **Time Effect and Autocorrelation Considerations:** When accounting for temporal effects and autocorrelation, a 10% increase in income is expected to lead to a 1.467% rise in rent, affirming the pronounced elasticity of rent costs relative to income fluctuations.
 
 3. **Trends Over Years:** Analysis of yearly data reveals that coefficient estimates peaked notably between 2000 and 2020, followed by declines during the COVID-19 period, indicating cycles of increase and corrective adjustments in the relationship between income and rent.
 
-4. **Racial and Ethnic Differences:** The association between income and rent varies significantly among racial and ethnic groups. Particularly, Chinese and Japanese groups have displayed a consistently strong positive relationship with income in recent years, highlighting disparities in economic outcomes across different demographics.
+4. **Racial and Ethnic Differences:** The association between income and rent varies significantly among racial and ethnic groups. For example, Chinese and White groups have displayed a consistently strong positive association and elasticity with income in recent years, highlighting disparities in economic outcomes across different demographics.
 
 `The validity, limitations, and details of the models and statistical analysis used are thoroughly discussed in the respective sections above.`
+
+
 
 

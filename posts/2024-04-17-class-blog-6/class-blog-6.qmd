@@ -103,6 +103,7 @@ if (length(levels(data_twenty$RACE)) < 2) {
 
 - No need to drop because all has more than one level. 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(kableExtra)
 # Convert categorical variables to factors
 categorical_vars <- c("KITCHEN", "MARST", "EMPSTAT", "REGION_CLASSIFIED")
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
@@ -125,7 +126,7 @@ races_with_single_levels <- race_levels %>%
 # Filter out the problematic RACE groups from the main dataset
 data_twenty_filtered <- data_twenty %>%
   filter(!RACE %in% races_with_single_levels)
-print(races_with_single_levels)
+kable(races_with_single_levels)
 ```
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Convert categorical variables to factors again after subsetting just in case

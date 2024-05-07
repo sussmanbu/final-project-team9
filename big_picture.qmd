@@ -36,7 +36,7 @@ data_2022 <- read_csv(data_path1, show_col_types = FALSE)
 
 # Introduction
 
-Picture this: you've just landed a well-deserved promotion or perhaps switched to a better-paying job. As your bank account grows, so does your desire to upgrade your living situation. It’s not just about paying more rent; it’s about choosing to invest in a better lifestyle. Across the country, many are making similar choices, opting for apartments with better views, more amenities, or in more desirable neighborhoods as their financial situations improve. This narrative isn't simply about the burden of higher costs; it's about the choices we make to enhance our lives with our new-found financial freedom. Join us as we explore how increased incomes are not only pushing rents higher but also allowing us to aspire to and achieve a richer living experience.
+Picture this: you've just landed a well-deserved promotion or perhaps switched to a better-paying job. As your bank account grows, so does your desire to upgrade your living situation. It’s not just about paying more rent; it’s about choosing to invest in a better lifestyle. Across the country, many are making similar choices, opting for apartments with better views, more amenities, or in more desirable neighborhoods as their financial situations improve. This narrative isn't simply about the burden of higher costs; it's about the choices we make to enhance our lives with our new-found financial freedom. Join us as we explore a classic example of economic elasticity: What happens to your rent when your income doubles? We discovered that a 100% increase in income leads to a near 15% rise in rent!
 
 ## Rising Fortunes: Charting the Course of Our Growing Prosperity
 
@@ -135,7 +135,7 @@ While we've seen the upward trends in both rent and income through our graphs, l
 As we dive deeper into the dynamics of income and rent, we uncover some intriguing patterns. Here's what our journey through the data has revealed, told as a story that unfolds over time and across different communities.
 
 #### The Elastic Dance Between Income and Rent
-Imagine getting a raise at work—let's say your income goes up by 10%. Sounds great, right? But here's the catch: as your wallet grows thicker, so does your rent bill. In fact, our data from 2022 shows that a 10% increase in income would typically lead to about a 13.34% increase in rent. It's like a dance where one partner follows closely behind the other, never quite catching up but always in step.
+Imagine getting a raise at work—let's say your income goes up by 10%. Sounds great, right? But here's the catch: as your wallet grows thicker, so does your rent bill. In fact, our data from 2022 shows that a 10% increase in income would typically lead to about a 1.334% increase in rent. It's like a dance where one partner follows closely behind the other, never quite catching up but always in step.
 
 #### A Historical Perspective
 

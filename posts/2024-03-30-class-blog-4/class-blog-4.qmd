@@ -197,7 +197,9 @@ ggplot(data_2022, aes(x = log(INCTOT))) +
 ```
 
 ## Log-log model
-Based on the previous MLR model, 1. we have applied a logarithmic transformation to both the rent and income variables to mitigate skewness in their distributions. But the problem is the logarithmic transformation necessitates all data points to be positive. Consequently, this has led to the exclusion of certain data samples that contained negative values.
+Based on the previous MLR model, 
+
+1. we have applied a logarithmic transformation to both the rent and income variables to mitigate skewness in their distributions. But the problem is the logarithmic transformation necessitates all data points to be positive. Consequently, this has led to the exclusion of certain data samples that contained negative values.
 
 2. previous models indicated the presence of numerous outliers within our dataset. To address this, we have refined our dataset to include only those records where rent and income fall within three standard deviations from their respective sample means to minimize the impact of extreme values on the model's performance.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
@@ -237,7 +239,7 @@ log_model_2022 <- lm(log_RENTGRS ~ log_INCTOT  + ROOMS + NFAMS + AGE + MARST + R
 tidy_log_model_2022 <- tidy(log_model_2022)
 kable(tidy_log_model_2022)
 ```
--  The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 13.34% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
+-  The coefficient (elasticity) of 0.1334 means that a 10% increase in total income (INCTOT) is associated with an average 1.334% increase in rent gross (RENTGRS), given that other variables in the model are held constant.
 - The idea in the above conclusion that higher income leads to increased rent payments is plausible. As people earn more, they may choose to live in better accommodations or neighborhoods, which could result in higher rent expenses. And it is reliable that they only spend part of income increase on the rent. 
 
 

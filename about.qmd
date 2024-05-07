@@ -24,24 +24,29 @@ The members of this team are below.
 
 ## Guo, Dingyu
 kevguo@bu.edu,[My github link is: https://github.com/kevguo123](https://github.com/kevguo123)
+
 My name is Dingyu Guo, I'm a senior studnet major in Econ and Math. I'm from Beijing, China
 
 
 ## Suh, Edwin, Jiho
 esuh29@bu.edu,[My github link is: https://github.com/esuh29](https://github.com/esuh29)
+
 Hello, my name is Edwin Suh. I am currently a Senior studying Data Science.
 
 	
 ## Wang, Muxi
 mwang85@bu.edu,[My github link is: https://github.com/muxwang](https://github.com/muxwang)
+
 Hi, my name is Muxi Wang and I am a bioinformatics student at BU.
 
 ## Wei, Xin
 ricwei@bu.edu,[My github link is: https://github.com/X1nW](https://github.com/X1nW)
+
 My name is Xin Wei and I amd Data Science junior.
 	
 ## Zhu, Yating
 ytzhu@bu.edu:[My github link is: https://github.com/yatingzhuzz](https://github.com/yatingzhuzz)
+
 Hello everyone! I'm Yating Zhu, majoring in Math and minoring in Economics. I am a junior. And I am from shanghai, China. Nice to connect with you all!
 
 <!-- Please leave in the information below -->
