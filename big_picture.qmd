@@ -33,6 +33,7 @@ data_path1 <- here("dataset", "latest_clean.csv")
 data_twenty <- read_csv(data_path, show_col_types = FALSE) 
 data_2022 <- read_csv(data_path1, show_col_types = FALSE) 
 ```
+[Click here to watch a brief video overview of our project!](https://drive.google.com/file/d/1kDCkuSsnA0zlpNz1E3sZytzUpFR0QYg-/view?usp=sharing)
 
 # Introduction
 
@@ -277,5 +278,6 @@ print(faceted_plot)
 While the series of maps vividly illustrate median rent expenditures across the United States, focusing solely on the absolute rent expenditure, it's crucial to understand in the context of rent **elasticity**. 
 
 The `regression analysis in our model` reveals a deeper trend where racial and ethnic backgrounds significantly affect responses to economic changes regarding housing costs. We observe that our **Chinese and Japanese communities consistently exhibit a strong positive association and elasticity on rising incomes and the corresponding increases in rent**, suggesting high rent elasticity within these groups. Similarly, the **white population shows a persistent positive relationship between income growth and rent adjustments**. Conversely, the **American Indian community demonstrates fluctuating responses, varying in their willingness to adjust rent payments in relation to changes in income**. This exploration into the elasticity of rent spending underscores the nuanced ways that economic conditions impact housing decisions across different racial and ethnic groups.
+
 
 
