@@ -16,18 +16,18 @@ data_path <- here("dataset-ignore", "twenty_yr_data.csv")
 library(readr)
 twentyyr_data <- read_csv(data_path,show_col_types = FALSE)
 library(dplyr)
-set.seed(123) # Setting a seed for reproducibility
+set.seed(123) 
 twentyyr_data_clean <- sample_frac(twentyyr_data, 0.01)
 twentyyr_data_clean <- twentyyr_data_clean %>%
-  filter(RENTGRS != 0,  # Exclude entries with zero rent
-         !is.na(RENTGRS),  # Exclude NA values for rent
-         EMPSTAT %in% c("1", "2", "3"),  # Include only valid employment statuses
-         KITCHEN != "0",  # Exclude entries without a kitchen
-         ROOMS != "00",  # Exclude entries with invalid room counts
-         !INCTOT %in% c(1, 9999999, 9999998, -1),  # Exclude specific INCTOT values
-         !FTOTINC %in% c(9999998, 9999999),  # Exclude specific FTOTINC values
-         POVERTY != 0,  # Exclude invalid poverty codes
-         !REGION %in% c(91, 92, 97, 99))  # Exclude specific region/state codes
+  filter(RENTGRS != 0,  
+         !is.na(RENTGRS),  
+         EMPSTAT %in% c("1", "2", "3"), 
+         KITCHEN != "0", 
+         ROOMS != "00",  
+         !INCTOT %in% c(1, 9999999, 9999998, -1), 
+         !FTOTINC %in% c(9999998, 9999999),  
+         POVERTY != 0, 
+         !REGION %in% c(91, 92, 97, 99))  
 twentyyr_data_clean$REGION_CLASSIFIED <- case_when(
   twentyyr_data_clean$REGION %in% c(11, 12, 13) ~ "NORTHEAST",
   twentyyr_data_clean$REGION %in% c(21, 22, 23) ~ "MIDWEST",
@@ -173,26 +173,21 @@ ggplot(annual_median_income, aes(x = YEAR, y = MedianIncome)) +
 
 ## Group by YEAR, fit same log-log model like 2022 in class blog 4
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Filter out non-positive values before log transformation
 data_twenty_positive <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
 
-# Apply log transformation correctly
 data_twenty_positive$log_RENTGRS <- log(data_twenty_positive$RENTGRS)
 data_twenty_positive$log_INCTOT <- log(data_twenty_positive$INCTOT)
 
-# Calculating means and standard deviations for the log-transformed columns
 mean_log_RENTGRS <- mean(data_twenty_positive$log_RENTGRS, na.rm = TRUE)
 sd_log_RENTGRS <- sd(data_twenty_positive$log_RENTGRS, na.rm = TRUE)
 mean_log_INCTOT <- mean(data_twenty_positive$log_INCTOT, na.rm = TRUE)
 sd_log_INCTOT <- sd(data_twenty_positive$log_INCTOT, na.rm = TRUE)
 
-# Defining lower and upper bounds for both variables
 lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
 ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
 lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
 ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
 
-# Filter for normal range values
 data_clean <- data_twenty_positive %>%
   filter(log_RENTGRS >= lb_log_RENTGRS & log_RENTGRS <= ub_log_RENTGRS,
          log_INCTOT >= lb_log_INCTOT & log_INCTOT <= ub_log_INCTOT) %>%
@@ -270,7 +265,6 @@ models_by_year %>%
 - The range of the coefficient estimates is relatively tight, with the lowest around 0.12 and the highest just above 0.14.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Visualizing R-squared trends
 models_by_year %>%
   unnest(glance_data) %>%
   ggplot(aes(x = as.numeric(YEAR), y = r.squared)) +

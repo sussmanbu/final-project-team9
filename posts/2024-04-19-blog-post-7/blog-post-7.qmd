@@ -66,11 +66,9 @@ kable(vif_values)
 - we observe income and family income stands out have higher multicollinearity index than others, therefore we decide to remove family income in our model.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Calculate residuals and fitted values
 residuals_twenty <- resid(model_with_income)
 fitted_values_twenty <- fitted(model_with_income)
 
-# Create a residual plot
 plot(fitted_values_twenty, residuals_twenty, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
@@ -82,28 +80,21 @@ abline(h = 0, col = "red")
 
 ## log-log model
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Filter out non-positive values before log transformation
 data_twenty <- data_twenty[data_twenty$RENTGRS > 0 & data_twenty$INCTOT > 0, ]
 
-# Apply log transformation
 data_twenty$log_RENTGRS <- log(data_twenty$RENTGRS)
 data_twenty$log_INCTOT <- log(data_twenty$INCTOT)
 
-
-# Calculating means and standard deviations for the log-transformed columns
 mean_log_RENTGRS <- mean(data_twenty$log_RENTGRS, na.rm = TRUE)
 sd_log_RENTGRS <- sd(data_twenty$log_RENTGRS, na.rm = TRUE)
 mean_log_INCTOT <- mean(data_twenty$log_INCTOT, na.rm = TRUE)
 sd_log_INCTOT <- sd(data_twenty$log_INCTOT, na.rm = TRUE)
 
-
-# Defining lower and upper bounds for both variables
 lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
 ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
 lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
 ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
 
-# Filtering out outliers
 data_twenty_clean <- data_twenty[data_twenty$log_RENTGRS >= lb_log_RENTGRS & data_twenty$log_RENTGRS <= ub_log_RENTGRS & 
                              data_twenty$log_INCTOT >= lb_log_INCTOT & data_twenty$log_INCTOT <= ub_log_INCTOT, ]
 
@@ -136,11 +127,9 @@ kable(head(augment_lm), format = "pipe")
 
 ### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Calculate residuals and fitted values
 residuals_twenty_1 <- resid(model_with_income_log)
 fitted_values_twenty_1 <- fitted(model_with_income_log)
 
-# Create a residual plot
 plot(fitted_values_twenty, residuals_twenty, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
@@ -153,13 +142,11 @@ abline(h = 0, col = "red")
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(lattice)
 
-# Q-Q plot for normality
 qqmath(resid(model_with_income_log), distribution = qnorm,
        main = "Q-Q Plot for Model Residuals", 
        xlab = "Theoretical Quantiles", 
        ylab = "Sample Quantiles")
 
-# Residuals vs Fitted plot for homoscedasticity
 plot(residuals(model_with_income_log) ~ fitted(model_with_income_log))
 abline(h = 0, col = "red")
 qqPlot(resid(model_with_income_log), main = "Q-Q Plot for Model Residuals")

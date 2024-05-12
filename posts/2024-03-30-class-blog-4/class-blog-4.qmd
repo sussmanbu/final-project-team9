@@ -159,7 +159,6 @@ mlr_model <- lm(RENTGRS ~ INCTOT + ROOMS + NFAMS + AGE + MARST + RACE + EMPSTAT 
 ```
 ### Residual plot:
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Fit the model
 residuals <- resid(mlr_model)
 fitted_values <- fitted(mlr_model)
 
@@ -203,28 +202,23 @@ Based on the previous MLR model,
 
 2. previous models indicated the presence of numerous outliers within our dataset. To address this, we have refined our dataset to include only those records where rent and income fall within three standard deviations from their respective sample means to minimize the impact of extreme values on the model's performance.
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Filter out non-positive values before log transformation
 data_2022 <- data_2022[data_2022$RENTGRS > 0 & data_2022$INCTOT > 0, ]
 
-# Apply log transformation
 data_2022$log_RENTGRS <- log(data_2022$RENTGRS)
 data_2022$log_INCTOT <- log(data_2022$INCTOT)
 
 
-# Calculating means and standard deviations for the log-transformed columns
 mean_log_RENTGRS <- mean(data_2022$log_RENTGRS, na.rm = TRUE)
 sd_log_RENTGRS <- sd(data_2022$log_RENTGRS, na.rm = TRUE)
 mean_log_INCTOT <- mean(data_2022$log_INCTOT, na.rm = TRUE)
 sd_log_INCTOT <- sd(data_2022$log_INCTOT, na.rm = TRUE)
 
 
-# Defining lower and upper bounds for both variables
 lb_log_RENTGRS <- mean_log_RENTGRS - 3 * sd_log_RENTGRS
 ub_log_RENTGRS <- mean_log_RENTGRS + 3 * sd_log_RENTGRS
 lb_log_INCTOT <- mean_log_INCTOT - 3 * sd_log_INCTOT
 ub_log_INCTOT <- mean_log_INCTOT + 3 * sd_log_INCTOT
 
-# Filtering out outliers
 data_2022_clean <- data_2022[data_2022$log_RENTGRS >= lb_log_RENTGRS & data_2022$log_RENTGRS <= ub_log_RENTGRS & 
                              data_2022$log_INCTOT >= lb_log_INCTOT & data_2022$log_INCTOT <= ub_log_INCTOT, ]
 write_csv(data_2022_clean, file = here("dataset", "latest_clean.csv"))
@@ -263,11 +257,9 @@ kable(augmented_log_model_2022)
 
 ### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Calculate residuals and fitted values
 residuals_2022 <- resid(log_model_2022)
 fitted_values_2022 <- fitted(log_model_2022)
 
-# Create a residual plot
 plot(fitted_values_2022, residuals_2022, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
@@ -302,11 +294,9 @@ kable(tidy_log_model_2022)
 
 ### Residual plot
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Calculate residuals and fitted values
 residuals_2022 <- resid(log_model_2022)
 fitted_values_2022 <- fitted(log_model_2022)
 
-# Create a residual plot
 plot(fitted_values_2022, residuals_2022, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)

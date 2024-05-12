@@ -165,7 +165,6 @@ kable(summary_data)
 1. RENTGRS
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2) 
-# Histogram to show distribution of monthly gross rent
 ggplot(rent_data_clean, aes(x = RENTGRS)) +
   geom_histogram(binwidth = 100, fill = "blue", color = "black") +
   labs(title = "Distribution of Monthly Gross Rent",
