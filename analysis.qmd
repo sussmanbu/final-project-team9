@@ -54,25 +54,20 @@ data_wide <- data %>%
   pivot_wider(
     names_from = variable, 
     values_from = estimate, 
-    values_fn = list(estimate = max)  # Use max to ensure that we take the non-NA values if they exist
+    values_fn = list(estimate = max)  
   ) %>%
-  # Ensure all necessary columns are correctly named and handled
   rename_with(~tolower(gsub(" ", "_", .x)), .cols = everything()) %>%
-  # Aggregate data if necessary (seems like you might be working with other demographic data as well)
   group_by(geoid, name) %>%
   summarise(
     median_income = max(median_income, na.rm = TRUE),
     median_rent = max(median_rent, na.rm = TRUE),
-    .groups = 'drop'  # Drop the grouping for further operations
+    .groups = 'drop'  
   )
 
-# Load state geometries
 states <- tigris::states(class = "sf", year = 2019, resolution = "20m")
 
-# Join ACS data with state geometries
 data_geo <- left_join(states, data_wide, by = c("GEOID" = "geoid"))
 
-# Function to create a plot for a given variable
 plot_data <- function(data, value_column, title) {
   ggplot(data) +
     geom_sf(aes(fill = !!sym(value_column)), color = "white", size = 0.1) +
@@ -92,11 +87,9 @@ plot_data <- function(data, value_column, title) {
     coord_sf(xlim = c(-125, -66), ylim = c(24, 50), expand = FALSE)
 }
 
-# Create plots for each variable
 plot_rent <- plot_data(data_geo, "median_rent", "Median Rent by State")
 plot_income <- plot_data(data_geo, "median_income", "Median Income by State")
 
-# Combine the plots using patchwork
 combined_plot <- plot_rent + plot_income + plot_layout(nrow = 1)
 print(combined_plot)
 ```
@@ -172,7 +165,6 @@ kable(vif_values)
 
 ### Model Discussion :
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-# Fit the model
 residuals <- resid(mlr_model)
 fitted_values <- fitted(mlr_model)
 
@@ -220,17 +212,14 @@ kable(glance_log)
 
 ### Model Discussion :
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=12, fig.height=5}
-# Set up a multi-panel layout with two columns
 par(mfrow = c(1, 2))
 
-# Plot the Residuals vs. Fitted Values plot
 plot(fitted(log_model_2022), residuals(log_model_2022),
      xlab = "Fitted values",
      ylab = "Residuals",
      main = "Residuals vs. Fitted Values")
 abline(h = 0, col = "red")
 
-# Q-Q plot of residuals
 qqnorm(residuals(log_model_2022))
 qqline(residuals(log_model_2022), col = "steelblue")
 ```
@@ -346,14 +335,11 @@ Income elasticity:
 ### Model discussion
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, fig.width=10, fig.height=5}
-# Calculate residuals and fitted values
 residuals <- resid(model_with_income_log)
 fitted_values <- fitted(model_with_income_log)
 
-# Set up a multi-panel layout
 par(mfrow = c(1, 2))
 
-# Plot the Normal Q-Q Plot
 qqnorm(residuals, main = "Normal Q-Q Plot",
        xlab = "Theoretical Quantiles", ylab = "Sample Quantiles",
        pch = 16, col = "black", cex = 0.6) 
@@ -361,7 +347,6 @@ qqline(residuals, col = "blue", lwd = 2)
 abline(h = seq(-3, 3, 1), col = "gray", lty = 2)  
 abline(v = seq(-3, 3, 1), col = "gray", lty = 2)  
 
-# Plot the Residual Plot
 plot(residuals, fitted_values, 
      xlab = "Fitted Values", ylab = "Residuals",
      main = "Residual Plot", pch = 20)
@@ -539,16 +524,16 @@ coefficients_wide <- models_with_coef %>%
 
 log_inctot_p_values <- data_twenty %>%
   group_by(RACE, YEAR) %>%
-  filter(if_all(c(KITCHEN, ROOMS, NFAMS, AGE, MARST, EMPSTAT, REGION_CLASSIFIED), ~n_distinct(.) > 1)) %>% # Ensure factors have more than one level
+  filter(if_all(c(KITCHEN, ROOMS, NFAMS, AGE, MARST, EMPSTAT, REGION_CLASSIFIED), ~n_distinct(.) > 1)) %>% 
   do({
     safely_result = tryCatch({
       tidy(lm(log_RENTGRS ~ log_INCTOT + KITCHEN + ROOMS + NFAMS + AGE + MARST + EMPSTAT + REGION_CLASSIFIED, data = .))
-    }, error = function(e) return(NULL))  # Handle any errors in lm
+    }, error = function(e) return(NULL))  
     
     if (!is.null(safely_result)) {
       safely_result
     } else {
-      data.frame(YEAR = first(.$YEAR), RACE = first(.$RACE), term = NA, estimate = NA, p.value = NA)  # Placeholder for error groups
+      data.frame(YEAR = first(.$YEAR), RACE = first(.$RACE), term = NA, estimate = NA, p.value = NA) 
     }
   }) %>%
   ungroup() %>%
@@ -609,7 +594,7 @@ unique_races <- unique(coefficients_long$RACE)
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data_twenty[categorical_vars] <- lapply(data_twenty[categorical_vars], factor)
 
-# Filter out races with insufficient factor levels
+
 race_levels <- data_twenty %>%
   group_by(RACE) %>%
   summarize(across(all_of(categorical_vars), ~n_distinct(.))) %>%
